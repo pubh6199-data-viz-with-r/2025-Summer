@@ -1,0 +1,78 @@
+---
+title: Final Presentation
+toc: true
+toc-location: right
+execute:
+  echo: false
+  warning: false
+  message: false
+params:
+  number: 4
+  weight: '6%'
+  purpose: 'purpose'
+---
+
+```{r}
+#| label: setup
+
+source(here::here("_common.R"))
+
+rubric <- read_csv(here::here('rubrics', '4-final-presentation.csv'))
+maxPoints <- rubric %>%
+    filter(rating == "Excellent") %>%
+    summarise(max = sum(maxPoints)) %>%
+    pull(max)
+```
+
+```{r child = here::here("fragments", "project.qmd")}
+```
+
+Make a slideshow presentation of your findings in your final report. You may do one of the following: 
+
+- Create a video recording of your presentation and publish it on the web (e.g. via Youtube, Vimeo, etc.).
+- Present your presentation live in class.
+
+We will watch all the presentations together during the period scheduled for the exam (December 13, 2023).
+
+Below is a list of specific items your presentation should include.
+
+## 1. Format
+
+- Your presentation should be no longer than 10 minutes in length (it can be shorter though).
+- Each team member must present at least one slide.
+- You may use as many slides as you feel helps you communicate your ideas, but keep the 10 minute limit in mind (1-2 slides / min is a good guideline).
+- Your title slide should include the project title, team member names, and the presentation date.
+- All slides should be numbered in the bottom-left or bottom-right corners.
+
+## 2. Recording strategies
+
+If you choose to record your presentation, I recommend using Zoom. Have someone share their screen showing the slides and talk over the slides while recording the call.
+
+Another option is to use a screen recording program, such as Quicktime (mac only), to record a screen recording on someone talking over the slides, though this may be challenging if not all teammates can be in the same room.
+
+## 3. Content
+
+Your slides do not need to include the detailed code used to conduct your analysis - that should be accessible from your report. Rather, the purpose of your presentation is to present the "big picture" overview of your project. You should discuss:
+
+1. What you studied and why it matters (i.e. your research question).
+2. What data you used (describe your sources)
+3. What you found (show polished charts, discuss key results).
+4. Any conclusions or new hypotheses you learned from your analyses.
+
+## 4. Publish 
+
+If you recorded a video, publish your video recording on the web (e.g. via Youtube, Vimeo, etc.), then **send a link to the published video in a DM to Professor Helveston on slack.**
+
+Only one team member needs to publish the video.
+
+## 5. Submit
+
+Create a zip file of your slides as a pdf / pptx / qmd (whatever you used to make your slides) and submit it on the corresponding assignment submission on Blackboard. **Only one person from your team should submit.**
+
+## Grading Rubric
+
+### `r maxPoints` Total Points {.unnumbered}
+
+```{r}
+make_rubric(rubric)
+```

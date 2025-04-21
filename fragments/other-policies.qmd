@@ -1,0 +1,66 @@
+## Children in class
+
+<!-- Policy copied from Andrew Heiss's class -->
+<!-- https://evalsp20.classes.andrewheiss.com/syllabus/ -->
+
+I applaud all of you who attend school with children! It is difficult to balance academic, work, and family commitments, and I want you to succeed. Here are my policies regarding children in class:
+
+1. All breastfeeding babies are welcome in class as often as necessary.
+2. Non-nursing babies and older children are welcome whenever alternate arrangements cannot be made. As a parent of young children, I understand that babysitters fall through, partners have conflicting schedules, children get sick, and other issues arise that leave parents with few other options.
+3. In cases where children come to class, I invite parents/caregivers to sit close to the door so as to more easily excuse yourself to attend to your child's needs. Non-parents in the class: please reserve seats near the door for your parenting classmates.
+4. All students are expected to join with me in creating a welcoming environment that is respectful of your classmates who bring children to class.
+
+I understand that sleep deprivation and exhaustion are among the most difficult aspects of parenting young children. The struggle of balancing school, work, childcare, and graduate school is tiring, and I will do my best to accommodate any such issues while maintaining the same high expectations for all students enrolled in the class. Please do not hesitate to contact me with any questions or concerns.
+
+## Lauren's Promise
+
+<!-- Policy copied from Andrew Heiss's class -->
+<!-- https://evalsp20.classes.andrewheiss.com/syllabus/ -->
+
+**I will listen and believe you if someone is threatening you.**
+
+Lauren McCluskey, a 21-year-old honors student athlete, [was murdered on October 22, 2018 by a man she briefly dated on the University of Utah campus](https://www.sltrib.com/opinion/commentary/2019/02/10/commentary-failing-lauren/). We must all take action to ensure that this never happens again.
+
+If you are in immediate danger, call 911 or GWU police at 202-994-6111 (GWPD).
+
+If you are experiencing sexual assault, domestic violence, or stalking, if you report it to me I will listen and connect you to resources or call GWU's [Counseling and Psychological Services](https://healthcenter.gwu.edu/counseling-and-psychological-services) (202-994-5300).
+
+Any form of sexual harassment or violence will not be excused or tolerated at GWU. GWU has instituted procedures to respond to violations of these laws and standards, programs aimed at the prevention of such conduct, and intervention on behalf of the victims. GWU Police officers will treat victims of sexual assault, domestic violence, and stalking with respect and dignity. Advocates on campus and in the community can help with victims' physical and emotional health, reporting options, and academic concerns.
+
+## Use of Course Materials
+
+All course materials available on the course website are developed open source - you are welcome to post and share them following the licensing guidelines listed in the [license](LICENSE.qmd) page.
+
+However, all **solutions** to assignments and quizzes are proprietary. Don't post them online or try to sell them - this is a violation of the [student code of conduct](https://studentconduct.gwu.edu/code-student-conduct) and it is also a violation of the class cheating policy.
+
+## Recording in Class
+
+You are free to record class periods (audio and / or video) for your own personal study use and only for your personal study use. If you do record a class period, you are prohibited from posting or sharing the content online or with others.
+
+## What To Do if the Instructor Does Not Arrive
+
+Wait **20 minutes**, after that you're free to leave. One member of the class should be selected to notify the EMSE Department of the Instructor's absence by calling the EMSE Department 202-994-4892 on next business day.
+
+# University Policies
+
+## University Policy on Religious Holidays
+
+In accordance with University Policy, students should notify faculty during the first week of the semester of their intention to be absent from class on their day(s) of religious observance. Official university policy here: https://students.gwu.edu/accommodations-religious-holidays
+
+- Students should notify faculty during the first week of the semester of their intention to be absent from class on their day(s) of religious observance.
+- Faculty should extend to these students the courtesy of absence without penalty on such occasions, including permission to make up examinations.
+- Faculty who intend to observe a religious holiday should arrange at the beginning of the semester to reschedule missed classes or to make other provisions for their course-related activities.
+
+## Support for Students Outside the Classroom
+
+**Disability Support Services (DSS)**:
+Any student who may need an accommodation based on the potential impact of a disability should contact the Disability Support Services office at 202-994-8250 in the Rome Hall, Suite 102, to establish eligibility and to coordinate reasonable accommodations. For additional information please refer to: https://disabilitysupport.gwu.edu/
+
+**Mental Health Services (202-994-5300)**:
+The University's Mental Health Services offers 24/7 assistance and referral to address students' personal, social, career, and study skills problems. Services for students include: crisis and emergency mental health consultations confidential assessment, counseling services (individual and small group), and referrals. https://healthcenter.gwu.edu/counseling-and-psychological-services
+
+## Academic Integrity Code
+
+Academic dishonesty is defined as cheating of any kind, including misrepresenting one's own work, taking credit for the work of others without crediting them and without appropriate authorization, and the fabrication of information. For the remainder of the code, see: https://studentconduct.gwu.edu/code-academic-integrity
+
+In addition to the formal code of academic integrity, the instructor expects that students will treat this course with the level of professionalism required in the workplace. Remember that real firms are sponsoring student projects throughout the semester; in a workplace setting, these firms would be paying clients for the analyses being conducted. This course prepares students to succeed in the workplace, and maintaining a high degree of professionalism is expected.

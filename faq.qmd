@@ -1,0 +1,73 @@
+---
+title: "Frequenly Asked Questions"
+toc: true
+toc-title: FAQ
+toc-location: right
+---
+
+# CLASS STUFF
+
+## How do I make a zip file for my homework?
+
+[**Mac**](https://www.youtube.com/watch?v=62tw3wZvQxs&t=23s)
+
+[**Windows**](https://youtu.be/E5qBvtxmBC4?si=Rekeo5C4RHTQd87G&t=30)
+
+## Where can I see my grades?
+
+[box.com](https://box.com/)
+
+I do **not** use Blackboard for showing your grades, so please ignore anything you see there. Instead, I create a unique folder for each of you on box.com. The folder will be named `netID-eda`. For example, my netID is `jph`, so my folder would be `jph-eda`.
+
+If you log into box.com using your GW email, you should be able to find this folder. All of your graded feedback will be in that folder. You will see a pdf of feedback for each assignment as well as two CSV files: one that displays your grade for each assignment, and another that shows your current total grade in the class.
+
+## When can I expect to see a grade for my assignment?
+
+I try to grade all assignments by the start of the next class from when they are due. Some weeks it can take me another whole week to grade something, so at most you can expect to see a grade **one week after submitting it**.
+
+## How can I submit my homework late?
+
+See the class [late policy](/syllabus.html#late-policy) for details. That said, if you've completed an assignment but it's now late, please do go ahead and submit it. Better to get some credit for it than none.
+
+If you're submitting late, please **send your submission to Professor Helveston in slack - don't submit on Blackboard**. The Blackboard submission window will probably close anyway, and also Professor Helveston downloads all the submissions when they are due, so late submissions often get missed.
+
+# R / RSTUDIO STUFF
+
+## My R / RStudio is totally [FUBAR](https://en.wikipedia.org/wiki/List_of_military_slang_terms#FUBAR), what should I do? 
+
+If you want to get back up to speed quickly, you can open a cloud version of RStudio on the web at [https://posit.cloud/plans/free](https://posit.cloud/plans/free). This is by far the easiest and fastest thing to do. 
+
+You can try to troubleshoot, but often the next easiest thing to do is just re-install R and RStudio. Be careful to save your work first!
+
+## RStudio won't let me save my file
+
+Most often times this occurs for one of two reasons:
+
+1. You may have opened the .R file instead of the .RProj file, in which case RStudio opens, but it may not be "looking" at the correct folder where your .R file lives. As a result, it can't find it on your computer and can't save it. In this case, copy all of the text in your .R file, then re-open RStudio by double clicking on the .RProj file, then open the .R file from inside RStudio and paste your code into the .R file.
+2. If you're on a windows computer, you may have opened RStudio from _inside the zip file_. As a result, you can't save any files because everything is still zipped up. You have to go back and extract the files from the zip file before you can save anything. In this case, copy all of the text in your .R file, then quit RStudio, go unzip the folder, re-open RStudio by double clicking on the .RProj file, then open the .R file from inside RStudio and paste your code into the .R file.
+
+## I'm trying to read / write some data using `here()` and it says the path doesn't exist.
+
+Have you double-checked that the file name you defined is the same as the data file name? For example, if there is a folder called "data" and inside it a data file called "some_data.csv", then your path should be `here('data', 'some_data.csv')`.
+
+If the file names look correct, then see the two issues in the [above question](#rstudio-wont-let-me-save-my-file)
+
+## I keep seeing a `+` sign in the console...
+
+If you start a command but don't complete it, R will show a `+` sign because it's waiting for you to finish it. Here's an example:
+
+```{r, eval=FALSE}
+5 +
+```
+
+If you press enter, R will show a `+` sign, and each time you press enter you'll get more `+` signs. This is because R wants you to "finish" the command (it expects another number).
+
+The easiest way to get out of this is to press the "Escape" key. Do that, and you'll get back to the `>` R console.
+
+
+## I got this error message
+
+> `could not find function "functionName"`
+
+- Did you load the package that contains `functionName`?
+- Did you spell `functionName` correctly?

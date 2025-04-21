@@ -1,0 +1,12 @@
+---
+title: "Exploring Data"
+params:
+  class: "4-exploring-data"
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r child = here::here("fragments", "class.qmd")}
+```

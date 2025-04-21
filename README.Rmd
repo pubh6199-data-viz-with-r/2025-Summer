@@ -1,0 +1,27 @@
+---
+output:
+  github_document:
+    html_preview: false
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+## EMSE 4572 / 6572: Exploratory Data Analysis (Fall 2024) <a href='https://github.com/emse-eda-gwu/2024-Fall'><img src='images/logo.png' align="right" height="139"/></a>
+
+<!-- badges: start -->
+[![License: CC-BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA-lightgrey)](https://creativecommons.org/licenses/by-sa/4.0/)
+<!-- badges: end -->
+
+### Description
+
+```{r child = here::here("fragments", "description.qmd")}
+```
+
+For more details, please see the [course
+website](https://eda.seas.gwu.edu/2024-Fall/).
+
+### Acknowledgments
+
+This course was inspired by many other courses / resources that cover
+similar material - see the course [about
+page](https://eda.seas.gwu.edu/2024-Fall/about.html) for more details.

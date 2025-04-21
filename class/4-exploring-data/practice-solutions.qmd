@@ -1,0 +1,251 @@
+---
+title: "Exploring Data"
+subtitle: "EMSE 4572/6572: Exploratory Data Analysis"
+format: html
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.path = "figs/",
+    fig.width = 7.252,
+    fig.height = 4,
+    comment = "#>",
+    fig.retina = 3
+)
+
+# install.packages('HistData')
+# install.packages('palmerpenguins')
+# install.packages('GGally')
+
+# Load packages
+library(HistData)
+library(GGally)
+library(palmerpenguins)
+library(tidyverse)
+library(here)
+
+# Set the global ggplot theme
+theme_set(theme_bw(base_size = 20)) # Set theme for all ggplots
+
+# Read in data
+milk_production <- read_csv(here('data', 'milk_production.csv'))
+lotr_words <- read_csv(here('data', 'lotr_words.csv'))
+marathon <- read_csv(here('data', 'marathon.csv'))
+wildlife_impacts <- read_csv(here('data', 'wildlife_impacts.csv'))
+faithful <- read_csv(here('data', 'faithful.csv'))
+candy_rankings <- read_csv(here('data', 'candy_rankings.csv'))
+msleep <- read_csv(here('data', 'msleep.csv'))
+```
+
+
+
+# Practice with summary measurements
+
+1) Read in the following data sets:
+
+- milk_production.csv
+- lotr_words.csv
+
+ 2) For each variable in each data set, if possible, summarize its
+
+- Centrality
+- Variability
+
+```{r}
+# milk_production:
+milk_production %>%
+    summarise(
+        mean   = mean(milk_produced),
+        median = median(milk_produced),
+        range  = max(milk_produced) - min(milk_produced),
+        sd     = sd(milk_produced),
+        IQR    = IQR(milk_produced)) %>%
+    # Convert to millions units so easier to compare
+    mutate(mean = mean / 10^6, median = median / 10^6)
+
+# Summarize for each region
+milk_production %>%
+    group_by(region) %>%
+    summarise(
+        mean   = mean(milk_produced),
+        median = median(milk_produced),
+        range  = max(milk_produced) - min(milk_produced),
+        sd     = sd(milk_produced),
+        IQR    = IQR(milk_produced)) %>%
+    # Convert to millions units so easier to compare
+    mutate(mean = mean / 10^6, median = median / 10^6)
+
+# lotr_words
+lotr_words %>%
+    summarise(
+        mean   = mean(Female),
+        median = median(Female),
+        range  = max(Female) - min(Female),
+        sd     = sd(Female),
+        IQR    = IQR(Female))
+
+# You can also just use the summary() function
+summary(milk_production$milk_produced)
+summary(milk_production$year)
+summary(milk_production)
+
+summary(lotr_words$Female)
+summary(lotr_words$Male)
+```
+
+
+
+# Practice with visual summaries
+
+1) Read in the following data sets:
+
+- faithful.csv
+- marathon.csv
+
+2) Summarize the following variables using an appropriate chart (bar chart, histogram, and / or boxplot):
+
+- faithful: eruptions
+- faithful: waiting
+- marathon: Age
+- marathon: State
+- marathon: Country
+- marathon: `Official Time`
+
+```{r}
+# faithful:
+ggplot(faithful) +
+    geom_histogram(aes(x = eruptions))
+
+ggplot(faithful) +
+    geom_boxplot(aes(y = eruptions))
+
+ggplot(faithful) +
+    geom_histogram(aes(x = waiting))
+
+# marathon
+ggplot(marathon) +
+    geom_histogram(aes(x = Age))
+
+ggplot(marathon) +
+    geom_boxplot(aes(y = Age))
+
+marathon %>%
+    filter(Overall < 50) %>%
+    count(State) %>%
+    ggplot() +
+    geom_col(aes(x = n, y = reorder(State, n)))
+
+marathon %>%
+    filter(Overall < 50) %>%
+    count(Country) %>%
+    ggplot() +
+    geom_col(aes(x = n, y = reorder(Country, n)))
+
+ggplot(marathon) +
+    geom_histogram(aes(x = `Official Time`))
+
+ggplot(marathon) +
+    geom_boxplot(aes(y = `Official Time`))
+```
+
+
+
+# Correlation
+
+Using the `penguins` data frame:
+
+1. Find the two variables with the largest correlation in absolute value (i.e. closest to -1 or 1).
+
+2. Create a scatter plot of those two variables.
+
+3. Add an annotation for the Pearson correlation coefficient.
+
+```{r}
+penguins %>%
+    ggcorr(label = TRUE)
+
+corr <- cor(
+    penguins$flipper_length_mm, penguins$body_mass_g,
+    use = "complete.obs")
+
+corLab <- paste("r = ", round(corr, 2))
+
+penguins %>%
+    ggplot() +
+    geom_point(
+        aes(
+            x = flipper_length_mm,
+            y = body_mass_g),
+        alpha = 0.7
+    ) +
+    annotate(
+        geom = 'text',
+        x = 175, y = 6000,
+        label = corLab,
+        hjust = 0, size = 5) +
+    theme_classic(base_size = 18) +
+    labs(
+        x = "Flipper length (mm)",
+        y = "Body mass (g)"
+    )
+```
+
+
+
+
+# Practice doing EDA
+
+1) Read in the candy_rankings.csv data sets
+
+2) Preview the data, note the data types and what each variable is.
+
+3) Visualize (at least) three _relationships_ between two variables (guided by a question) using an appropriate chart:
+
+- Bar chart
+- Scatterplot
+- Boxplot
+
+```{r}
+# candy_rankings
+candy_rankings %>%
+  ggplot() +
+  geom_boxplot(aes(x = fruity, y = winpercent))
+
+candy_rankings %>%
+  ggplot() +
+  geom_boxplot(aes(x = chocolate, y = winpercent))
+
+candy_rankings %>%
+    ggplot() +
+    geom_histogram(aes(x = winpercent, fill = chocolate), alpha = 0.3)
+# Looks like people rate candy with chocolate much higher!
+
+# Reeses at the top!
+candy_rankings %>%
+  ggplot() +
+  geom_col(
+      aes(
+          x = winpercent, 
+          y = reorder(competitorname, winpercent)
+      )
+  )
+
+# No correlation between sugar and winning
+candy_rankings %>%
+  ggplot() +
+  geom_point(aes(x = pricepercent, y = sugarpercent))
+
+candy_rankings %>%
+  ggplot() +
+  geom_point(aes(x = winpercent, y = sugarpercent))
+
+# Interesting...seems people aren't that sensitive to price
+candy_rankings %>%
+  ggplot() +
+  geom_point(aes(x = winpercent, y = pricepercent))
+```

@@ -1,0 +1,18 @@
+```{r}
+#| include: false
+
+source(here::here("_common.R"))
+
+due <- get_schedule() %>%
+  filter(n_mini == params$number) %>%
+  pull(due_mini) %>%
+  paste0(" by 11:59pm")
+```
+
+> **Due**: `r due`
+>
+> **Weight**: This assignment is worth `r params$weight` of your final grade.
+>
+> **Purpose**: `r params$purpose`
+>
+> **Assessment**: Your submission will be assessed using the [rubric](#grading-rubric) at the bottom of this page.

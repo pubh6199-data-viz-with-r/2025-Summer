@@ -1,0 +1,34 @@
+# EMSE 4572 / 6572<br>Exploratory Data Analysis<br>Fall 2024
+
+::: {.grid}
+
+::: {.g-col-3}
+
+<img src="images/logo.png" width="200">
+
+:::
+
+::: {.g-col-9}
+
+**Department**: [Engineering Management and Systems Engineering](https://www.emse.seas.gwu.edu/) @ [GWU](https://www.gwu.edu/)
+
+**Credits**: 3
+
+**Description**:
+
+```{r child = here::here("fragments", "description.qmd")}
+```
+
+**Learning Objectives**:
+
+```{r child = here::here("fragments", "learning-objectives.qmd")}
+```
+
+**Prerequisites**:
+
+```{r child = here::here("fragments", "prerequisites.qmd")}
+```
+
+:::
+
+:::

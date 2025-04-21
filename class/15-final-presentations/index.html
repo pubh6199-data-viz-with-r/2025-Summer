@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Final Presentations</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="John Paul Helveston" />
+    <meta name="date" content="2024-12-11" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view/tile-view.js"></script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <script src="libs/clipboard/clipboard.min.js"></script>
+    <link href="libs/shareon/shareon.min.css" rel="stylesheet" />
+    <script src="libs/shareon/shareon.min.js"></script>
+    <link href="libs/xaringanExtra-shareagain/shareagain.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-shareagain/shareagain.js"></script>
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <meta name="description" content="EMSE 4572 / 6572: Exploratory Data Analysis"/>
+    <meta name="generator" content="xaringan and remark.js"/>
+    <meta name="github-repo" content="emse-eda-gwu/2023-Fall"/>
+    <meta name="twitter:title" content="Final Presentations"/>
+    <meta name="twitter:description" content="EMSE 4572 / 6572: Exploratory Data Analysis"/>
+    <meta name="twitter:url" content="https://eda.seas.gwu.edu/2023-Fall/"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:creator" content="@johnhelveston"/>
+    <meta name="twitter:site" content="@johnhelveston"/>
+    <meta property="og:title" content="Final Presentations"/>
+    <meta property="og:description" content="EMSE 4572 / 6572: Exploratory Data Analysis"/>
+    <meta property="og:url" content="https://eda.seas.gwu.edu/2023-Fall/"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="article:author" content="John Paul Helveston"/>
+    <link rel="stylesheet" href="css/lexis.css" type="text/css" />
+    <link rel="stylesheet" href="css/lexis-fonts.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+class: middle, inverse
+
+.leftcol30[
+
+&lt;center&gt;
+&lt;img src="https://eda.seas.gwu.edu/images/logo.png" width=250&gt;
+&lt;/center&gt;
+
+]
+
+.rightcol70[
+
+# Week 15: .fancy[Final Presentations]
+
+### <svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M243.4 2.6l-224 96c-14 6-21.8 21-18.7 35.8S16.8 160 32 160v8c0 13.3 10.7 24 24 24H456c13.3 0 24-10.7 24-24v-8c15.2 0 28.3-10.7 31.3-25.6s-4.8-29.9-18.7-35.8l-224-96c-8-3.4-17.2-3.4-25.2 0zM128 224H64V420.3c-.6 .3-1.2 .7-1.8 1.1l-48 32c-11.7 7.8-17 22.4-12.9 35.9S17.9 512 32 512H480c14.1 0 26.5-9.2 30.6-22.7s-1.1-28.1-12.9-35.9l-48-32c-.6-.4-1.2-.7-1.8-1.1V224H384V416H344V224H280V416H232V224H168V416H128V224zM256 64a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg> EMSE 4572 / 6572: Exploratory Data Analysis
+### <svg aria-hidden="true" role="img" viewBox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z"/></svg> John Paul Helveston
+### <svg aria-hidden="true" role="img" viewBox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z"/></svg> December 11, 2024
+
+]
+
+---
+
+class: center, middle
+
+# [Air Sciencia: Evaluating Airline Performance](https://youtu.be/XbTvNAiVCGc)
+
+## by Sasha Green, Arman Naseh, Jake Anszelowicz, and Amine Louri
+
+---
+
+class: center, middle
+
+# [Evolving Trends in Cyber Events:&lt;br&gt;Insights from a Decade of Data](https://www.canva.com/design/DAGYPOA5cNQ/5mCLl8Ph1XLqyW3ZObjqMw/view?utm_content=DAGYPOA5cNQ&amp;amp;utm_campaign=designshare&amp;amp;utm_medium=link2&amp;amp;utm_source=uniquelinks&amp;amp;utlId=h553d00ae54)
+
+## by Annie Goodman and Etiene Effiong
+
+---
+
+class: center, middle
+
+# Changes in the European Energy Market due the Russia-Ukraine War
+
+## by Gavin Ulrich and Byeonghun Kwon
+
+---
+
+class: center, middle
+
+# Assessing EV accessibility and affordability in the United States
+
+## by Daniel Fisher and Zain Hoda
+
+---
+
+class: center, middle
+
+# Global Energy Analysis: How do countries achieve economic growth while maintaining low energy intensity?
+
+## by Angel Ho and Easha Rajalaxmi Vivesh
+
+---
+
+class: center, middle
+
+# Understanding Movie Performance Through Data: Financial Trends, Ratings, and Profitability from TMDB and Rotten Tomatoes
+
+## by Ibrahim Ahmed and Paul Asamoah Boadu
+
+---
+
+class: center, middle
+
+# Cracking The NCAA Team Rankings Code: The Attributes of the Best NCAA Football Playoff Teams Over a Decade
+
+## by Kyla Rounsoville, Maddie Wilson, and Alana Lee
+
+---
+
+class: center, middle
+
+# Understanding Traffic Crashes in New York City
+
+## by Ali Irtaza and Tarun Kumanduri
+
+---
+
+class: center, middle
+
+# [Analyzing Olympic Success: Analyzing the Correlation Between Medal Count and Socioeconomic Factors](https://docs.google.com/presentation/d/16FkGQOGbbsJWybBEhIBIxmaLkjNrXmvraF9JIaTTyXM/edit#slide=id.g2d6a80122c9_0_354)
+
+## by Hannah Hodge, Sandy Alksninis, Jedidiah Bechtel, and Aedan Bayhan
+
+---
+
+class: center, middle
+
+# [Shark Incidents in California](https://vimeo.com/1038058323?share=copy#t=0)
+
+## by Luis Bracho, Diego Farah, and Diego Paredes
+
+---
+
+class: center, middle
+
+# [Car Bloat in the United States: Do Americans have an obsession with big vehicles?](https://vimeo.com/1038262009)
+
+## by Ifeoluwa Olaniyan and Emmanuel Agbeko
+
+---
+
+class: center, middle, inverse 
+
+# 🎉 Awards Ceremony 🎉
+
+---
+
+class: center, middle, inverse
+
+# ✨ The Nominees for the **Shiny** Award 
+
+---
+
+class: center, middle 
+
+# **Shiny Nominee**: Global Energy Analysis
+
+&lt;center&gt;
+&lt;img src="images/global-energy-analysis.png" width=900&gt;
+&lt;/center&gt;
+
+---
+
+class: center, middle 
+
+# **Shiny Nominee**: Cyber Events
+
+&lt;center&gt;
+&lt;img src="images/cyber-events.png" width=700&gt;
+&lt;/center&gt;
+
+---
+
+class: center, middle 
+
+# **Shiny Nominee**: NYC Trafic Crashes
+
+&lt;center&gt;
+&lt;img src="images/nyc-traffic-crashes.png" width=1100&gt;
+&lt;/center&gt;
+
+---
+
+class: center, middle 
+
+# **Shiny Nominee**: Shark Attacks
+
+&lt;center&gt;
+&lt;img src="images/shark-attacks.png" width=1000&gt;
+&lt;/center&gt;
+
+---
+
+class: center, middle, inverse
+
+# ✨ The **Shiny** Award goes to...🥁
+
+---
+
+class: center, middle, inverse
+
+# 🎉🎉🎉
+
+.leftcol[
+
+## [Evolving Trends in Cyber Events: Insights from a Decade of Data](https://eda.seas.gwu.edu/showcase/2024-Fall/cyber-events.html)
+
+#### by Annie Goodman and Etiene Effiong
+
+]
+
+.rightcol[
+
+&lt;center&gt;
+&lt;img src="images/cyber-events.png" width=100%&gt;
+&lt;/center&gt;
+
+]
+
+---
+
+# 🗑️ The Nominees for the **Janitor** award are:
+
+--
+
+.cols3[
+
+### Car Bloat in the United States: Do Americans have an obsession with big vehicles?
+
+#### by Ifeoluwa Olaniyan and Emmanuel Agbeko
+
+]
+
+--
+
+.cols3[
+
+### Cracking The NCAA Team Rankings Code: The Attributes of the Best NCAA Football Playoff Teams Over a Decade
+
+#### by Kyla Rounsoville, Maddie Wilson, and Alana Lee
+
+]
+
+--
+
+.cols3[
+
+### Assessing EV accessibility and affordability in the United States
+
+#### by Daniel Fisher and Zain Hoda
+
+]
+
+---
+
+class: center, middle, inverse
+
+# 🗑️ The **Janitor** award goes to...🥁
+
+---
+
+class: center, middle, inverse
+
+# 🎉🎉🎉
+
+## Cracking The NCAA Team Rankings Code: The Attributes of the Best NCAA Football Playoff Teams Over a Decade
+
+### by Kyla Rounsoville, Maddie Wilson, and Alana Lee
+
+---
+
+class: center, middle, inverse
+
+## Fill out course evals: https://gwu.smartevals.com/
+
+### (please be specific!)
+
+&lt;center&gt;
+&lt;img src="https://media.tenor.com/images/76f5c6f0db05171eef3ee586eba77410/tenor.gif" width=600&gt;
+&lt;/center&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

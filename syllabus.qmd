@@ -1,0 +1,311 @@
+---
+title: Syllabus
+toc: true
+toc-location: right
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+source("_common.R")
+```
+
+# Course Information
+
+<div style="width:600px">
+Instructor | Course
+---|---
+<i class="bi-person-fill"></i> John Paul Helveston | <i class="bi-calendar-fill"></i> {{< var weekday >}}
+<i class="bi-building-fill"></i> Science & Engineering Hall, 2830 | <i class="bi-geo-alt-fill"></i> [{{< var room >}}]({{< var room_url >}})
+<i class="bi-telephone-fill"></i> +1 (202) 994-7173 | <i class="bi-calendar-week-fill"></i> {{< var dates >}}
+<i class="bi-envelope-fill"></i> [{{< var email >}}](mailto:{{< var email >}}) | <i class="bi-clock-fill"></i> {{< var time >}}
+<i class="fa fa-brands fa-bluesky"></i> [\@jhelvy.bsky.social]({{< var bluesky >}}) | <i class="bi-slack"></i> [Slack]({{< var slack >}}){target="_blank"}
+</div>
+
+## Course Description
+
+```{r child = here::here("fragments", "description.qmd")}
+```
+
+## Prerequisites
+
+```{r child = here::here("fragments", "prerequisites.qmd")}
+```
+
+# Learning Objectives
+
+```{r child = here::here("fragments", "learning-objectives.qmd")}
+```
+
+## Pep Talk!
+
+```{r child = here::here("fragments", "pep-talk.qmd")}
+```
+
+# Required Texts & Materials
+
+All texts and software for this course is freely available on the web. This includes:
+
+## Software
+
+Go to the Course [Software page](software.qmd) for detailed instructions on how to install the software we'll be using. Here's a quick list:
+
+- R (version 4.1.0 or later), which can be downloaded from [The Comprehensive R Archive Network (CRAN)](https://cloud.r-project.org)
+- RStudio (Desktop Version), a free IDE for R, which can be downloaded from [RStudio](https://rstudio.com/products/rstudio/download/)
+- We'll be using [Slack]({{< var slack >}}){target="_blank"} for most communication.
+
+## Texts
+
+Each week students will be responsible for completing assigned readings, most of which will come from these three books, which are available both free online and for purchase via the following links:
+
+- Helveston, John Paul and Nurullaeva, Lola. "Yet Another R Dataviz Book" [[free online](https://yardbook.jhelvy.com/)]
+- Healy, Kieran. "Data Visualization: A practical introduction" [[free online](http://socviz.co/)], [[buy on amazon](https://www.amazon.com/Data-Visualization-Introduction-Kieran-Healy/dp/0691181624)]
+- Grolemund, Garrett and Wickham, Hadley. "R for Data Science" [[free online](https://r4ds.had.co.nz/)], [[buy on amazon](https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399)]
+- Wilke, Claus O. "Fundamentals of Data Visualization" [[free online](https://clauswilke.com/dataviz/)], [[buy on amazon](https://www.amazon.com/Fundamentals-Data-Visualization-Informative-Compelling/dp/1492031089)]
+
+# Assignments
+
+## Participation & Attendance
+
+**Attendance will be taken** and will be part of your participation grade.
+
+In-person attendance is critical as we will spend a lot of time working on problems and writing code during class. You should plan to attend class in person each week. 
+
+**There will be no option for remote attendance (e.g. zoom)**, and class sessions will not be recorded. If you have any questions or need special accommodations, send me a message on slack and we can discuss. If you must miss class for an excused absence (e.g. medical issue), please message Professor Helveston and get notes from your fellows classmates.
+
+Multiple absences, inappropriate or unprofessional behavior during class (such as monopolizing discussions or being rude or disruptive), not participating in classroom exercises, and not being prepared for class will result in a poor score for attendance and participation.
+
+## Quizzes
+
+Quizzes will be given about once every other week immediately at the beginning of class (check the [schedule](schedule.html)). Make up quizzes will not be available if you miss it (except for excused absences). Please show up on time to class each week to ensure that you do not miss a quiz. Quizzes will cover material presented in previous classes and assignments during the weeks since the most-recent quiz.
+
+Quizzes are **short** (10 minutes) and are designed to test for fluency and to demonstrate where additional study is needed. **Quizzes are low-stakes** - your worst one is dropped, and the rest count for a small portion of your final grade. If you do poorly on one or two, use that as feedback on where you need additional improvement.
+
+> **Why quiz at all?** Research shows that giving small quizzes throughout a class can dramatically help with *retention*. It's a phenomenon known as the "retrieval effect" - basically, you have to _practice_ remembering things, otherwise your brain won't remember them. The phenomenon and research on it is explained in detail in the book ["Make It Stick: The Science of Successful Learning,"](https://www.hup.harvard.edu/catalog.php?isbn=9780674729018) by Brown, Roediger, and McDaniel.
+
+## Homework
+
+Students will be responsible for two types of assignments throughout the semester:
+
+- **Weekly Assignments**: Each week, students will be assigned specific readings and exercises to prepare for the next class period. Students will need to submit responses that include a thoughtful reflection on these concepts each week.
+- **Mini Projects**: There will be three mini projects throughout the semester designed to provide hands-on experience with the material covered in class by working with and exploring real data sets and / or creating visualizations. While students may work with their peers on these assignments, each student must submit their own work. Credit for each assignment will be allocated according to a rubric provided in the assignment description.
+
+## Final Project
+
+Throughout the semester, students will work in teams of 2-3 students towards a final project of an exploratory data analysis. At the end of the semester, each student will submit a report of their analysis in the form of an html web page and create a 5 to 10-minute video presentation of their results. To make the overall project more manageable, it will be broken down into several separate "milestone" deliverables due throughout the semester, including a proposal, progress report, presentation video, and final report.
+
+View the [final project overview](project/0-overview.qmd) page for more details.
+
+## Final Interview
+
+Rather than have a final exam, each student will have a [10-minute interview](/class/interviews.html) by the instructor. The interview will be focused on the final project the student worked and will contain questions related to concepts covered during the course. Students will be provided a list of questions and the grading rubric ahead of the interview.
+
+# Grading
+
+## Category Breakdown
+
+Final grades will be calculated as follows:
+
+<div style="width:650px">
+
+Item                           | Weight | Notes
+-------------------------------|--------|-------------------------------------
+Participation / Attendance | 5%     | (Yes, I take attendance)
+Reflections           | 12 %   | Weekly assignment, lowest dropped)
+Quizzes                        | 10 %    | 5 quizzes, lowest dropped
+Mini Project 1                 | 10 %    | Individual assignments
+Mini Project 2                 | 10 %    |
+Mini Project 3                 | 10 %    |
+Final Project: Proposal        | 6 %    | Teams of 2-3 students
+Final Project: Progress Report | 6 %   |
+Final Project: Report          | 15 %   |
+Final Project: Presentation    | 6 %    |
+Final Interview                | 10 %   | Individual interview
+
+</div>
+
+Here's a visual breakdown by category:
+
+```{r}
+#| label: grade-breakdown
+#| fig.height: 3
+#| fig.align: left
+
+library(viridis)
+library(ggrepel)
+
+df <- data.frame(
+    category = c(
+      'Participation', 'Weekly HW', 'Quizzes', 'Mini Projects', 
+      'Final Project',  'Interview'
+    ),
+    percent = c(5, 12, 10, 30, 33, 10)) %>%
+    arrange(desc(percent)) %>%
+    mutate(
+      cumpercent = cumsum(percent),
+      label_x = cumpercent - (percent / 2),
+      category = fct_reorder(category, percent))
+
+ggplot(df) +
+    geom_col(
+      aes(y = "", x = percent, fill = category),
+      width = 1.1, alpha = 0.8
+    ) +
+    geom_label(
+      data = filter(df, category %in% c(
+      'Mini Projects', 'Final Project')),
+      aes(y = "", x = label_x, label = category)
+    ) +
+    geom_label_repel(
+      data = filter(df, category %in% c(
+        'Participation', 'Quizzes', 'Interview', 'Weekly HW')
+      ),
+      aes(y = "", x = label_x, label = category),
+      direction = 'y', label.padding = 0.25, segment.size = 0
+    ) +
+    scale_x_continuous(expand = expansion(mult = c(0, 0.05))) +
+    scale_fill_viridis(discrete = TRUE) +
+    theme_minimal_vgrid() +
+    theme(legend.position = 'none') +
+    labs(x = 'Percent of final grade', y = NULL)
+```
+
+## Grading Scale
+
+<div style="width:400px">
+Grade  | Range       | Grade | Range
+-------|-------------|-------|------------
+A      | 94 - 100%   | C     | 74 - 76.99%
+A-     | 90 - 93.99% | C-    | 70 - 73.99%
+B+     | 87 - 89.99% | D+    | 67 - 69.99%
+B      | 84 - 86.99% | D     | 64 - 66.99%
+B-     | 80 - 83.99% | D-    | 60 - 63.99%
+C+     | 77 - 79.99% | F     | < 60%
+</div>
+
+The course instructors may choose to change the scales at their discretion. You are guaranteed that your letter grade will never become worse as a result of changing scales.
+
+## Rounding
+
+**I do not round final grades**. Rather, I grade generously throughout the semester. For example, if you give a quiz your best shot and completely fail it, you will likely get a 50% instead of a 0%. The 50% is for trying (if you simply don't take it, you'll get a 0%). As a result, I will not modify or round your final score, even if you're very close to a different letter grade (e.g., a 93.98 is an "A-" and will not be rounded up to an "A").
+
+# Getting Help
+
+This class can be challenging - **do not suffer in silence!** We have lots of ways to get help.
+
+## Slack
+
+All course communication will be managed through [Slack]({{< var slack >}}){target="_blank"}. A link to sign up for the course slack page can be found on the one (and only) announcement on Blackboard.
+
+**You can use Slack to**:
+
+- Ask general questions.
+- Ask for help with an assignment.
+- Send direct, private messages to each other or the instructors (just like email...but better!)
+
+> **Asking for help on Slack**: You can post questions on slack and receive quick responses. This also enables other students to see answers to common questions. Be specific - if your code has an error you don't understand, **include the code and the error message** in your question.
+
+## AMA Hours
+
+I will hold regular "Ask Me Anything" hours each week. The specific hours will be posted on the course slack. During this period, you can come to my office (SEH 2830) and ask me anything. And I mean anything. Most of the time you may just have a question related to class, but I am also happy to discuss anything else with you regarding life, important decisions, career, art, music, dance, etc.
+
+If the AMA hours don't work with your schedule, you can always schedule a zoom call with me using [this link](https://jhelvy.appointlet.com/b/professor-helveston). I'm available most days of the week.
+
+## Tutoring hours
+
+Your class tutors will each hold a dedicated period of time each week for zoom tutoring hours. Please don't make your tutors sit and do emails for two hours - come by and ask for help!
+
+## Library Services
+
+While the University Library is not a stand in for TAs, you can schedule a consultation for general help with Coding, Programming, Data, Statistical, and GIS. See more at https://academiccommons.gwu.edu/writing-research-help
+
+# Course Policies
+
+## tl;dr
+
+- BE NICE
+- BE ON TIME
+- BE HONEST
+- DON'T CHEAT
+- SERIOUSLY: DON'T CHEAT
+
+## Late Policy
+
+Each students is allowed **3** late homework submission days - use them however you want, no questions asked. These are meant to cover illness, family emergencies, and religious holidays.
+
+Beyond those, assignments are due by 11:59pm on the assigned due date unless specified otherwise. Assignments submitted up to 24 hours past this deadline will be graded to a max of 50% of the available points. Assignments submitted beyond 24 hours past the deadline will not be graded and will be assigned a 0.
+
+If you need a special accommodation such as due to an illness, family emergency, or religious holidays, contact the instructor ahead of time.
+
+## Use of chatGPT and other AI tools
+
+Large language models (LLMs) are capable of producing exact solutions to some of the coding problems assigned in this class...sometimes. More often then not though, they produce code that contains errors or poor coding practices, and they often use different approaches then what is taught in class, which can be confusing.
+
+With this in mind, the use of AI tools is in general permitted, but with caveats. If you do AI tools on assignments in this class, you must include the prompt(s) you used as well as any changes made to get better results to receive full credit. I want to see how you are using them. **Be transparent** - that is all I ask.
+
+For writing assistance, LLMs are again permitted, but again I want to see how you used them. If you used an LLM to help you with any of the writing portions of your assignments, include a section called "Use of AI on this assignment" and describe which tool(s) we used and how they were used.
+
+Your goal in using tools like ChatGPT should be to see them as an assistant - a tool to help you accomplish the task - rather than as a solutions manual. Take the time to work through the code / text these tools generate and ensure that what they provide is accurate, and if not make the corrections to fix their mistakes.
+
+> Curious how LLMs actually work? Check out [this article](https://www.understandingai.org/p/large-language-models-explained-with), which provides a simplified description of how they work (which itself is still quite complicated).
+
+## Cheating
+
+Cheating results in a penalty on the first offense, and failing the course on the second offense. Cheating on assignments can include:
+
+- Copying or stealing any amount of code from someone currently in the class or someone who has taken the class before.
+- NOTE: Copying is never okay, whether the code is provided electronically, visually, audibly, or on paper. Even if you work together on an assignment, **write your own code**.
+- Providing code you have written for an assignment to anyone else in the class.
+- Putting code solutions from the course assignments online.
+- Receiving code-level assistance from any person not associated with the course.
+- Getting someone else to write the assignment code for you.
+- Asking questions about the assignments on any online services outside of the course office hours / Slack.
+
+Cheating on quizzes, assignments, or the final project can include:
+
+- Referring to any external resources while completing the assignment (phones, notes, etc.).
+- Copying part of an answer off of another student's paper, even if it is very small.
+- Using solutions provided by students who previously took the course.
+
+### Penalties
+
+Violations will be reported to the [Office of Student Rights & Responsibilities](https://studentconduct.gwu.edu/charging-academic-integrity-violations). Penalties are decided by the course instructors, and can vary based on the severity of the offense. Possible penalties include:
+
+- Receiving a 0 on the assignment/quiz in question.
+- Receiving a full letter grade deduction in the course.
+- Automatically failing the course.
+
+Depending on the student's prior academic history, violations may also be accompanied by a letter to the Dean of Student Affairs, again at the instructors' discretion. This can lead to university-level penalties, such as being suspended or expelled.
+
+### Grace Period
+
+College is a time when you do a lot of learning. Sometimes, you might make bad decisions or mistakes. The most important thing for you to do is to learn from your mistakes, to constantly grow, and become a better person.
+
+Sometimes, students panic and copy code right before the deadline, then regret what they did afterwards. Therefore, you may rescind any homework submission for up to 24 hours after the deadline with no questions asked. Simply email the course instructors asking to delete the submission in question, and we will do so. Deleted submissions will not be considered during plagiarism detection, though of course they will also not be graded. However, it will always be better to get a 0 (or partial credit) on an assignment than to get a cheating violation!
+
+```{r child = here::here("fragments", "other-policies.qmd")}
+```
+
+# Super Heros
+
+::: {.grid}
+
+::: {.g-col-4}
+
+<img src="images/prof_x.gif" width=100%>
+
+:::
+
+::: {.g-col-8}
+
+Once you have read this entire syllabus and viewed the [course schedule](schedule.qmd), post a picture of your favorite super hero in the welcome channel on Slack.
+
+For real.
+
+Brownie points if it's animated.
+
+:::
+
+:::

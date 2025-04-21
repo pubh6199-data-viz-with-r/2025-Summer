@@ -1,0 +1,193 @@
+---
+title: "Example Analyses"
+toc: true
+toc-location: right
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+As inspiration for your final projects, check out these prior exploratory data analyses.
+
+
+# Previous course showcases
+
+[View here](https://eda.seas.gwu.edu/showcase.html)
+
+# Other exploratory analyses
+
+Some of these go into further detail than we will cover in this class, but hopefully they will inspire you as you prepare for your own project:
+
+::: {.grid}
+
+::: {.g-col-4}
+
+<img src="https://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1523346530/tidyverse5_batf3k.png" width=100%>
+
+:::
+
+::: {.g-col-8}
+
+### [Survivors of the Titantic](https://www.datacamp.com/community/tutorials/tidyverse-tutorial-r)
+
+A great overview of getting started with the tidyverse.
+
+:::
+
+:::
+
+
+
+
+::: {.grid}
+
+::: {.g-col-4}
+
+<img src="images/usain-bolt.png" width=80%>
+
+:::
+
+::: {.g-col-8}
+
+### [Is Usain Bolt really the fastest man on earth?](https://www.r-bloggers.com/2019/05/fun-with-statistics-is-usain-bolt-really-the-fastest-man-on-earth/)
+
+by [Anindya Mozumdar](https://radmuzom.com/about/). This analysis uses some statistical modeling (which won't cover), but the use of visualizations alone are effective for addressing the research questions posed.
+
+:::
+
+:::
+
+
+
+::: {.grid}
+
+::: {.g-col-4}
+
+<img src="images/hamilton.png" width=100%>
+
+:::
+
+::: {.g-col-8}
+
+### [F1 racing data analysis](https://www.kaggle.com/jonathanbouchet/f1-data-analysis)
+
+by Jonathan Bouchet. This is an extensive exploratory data analysis of a variety of data on races, drivers, and constructors across the history of [Formula 1](https://www.formula1.com/) racing. This would probably be overkill for a course project, but sections of it (e.g. section 3 on the races, or sections 4 and 5 together on the drivers and constructors) would make a nice project. It involves mutliple data sets, some not-so-simple data cleaning, and a wide variety of nice visualizations.
+
+
+:::
+
+:::
+
+
+::: {.grid}
+
+::: {.g-col-4}
+
+<img src="images/hurricane-intensity.png" width=100%>
+
+:::
+
+::: {.g-col-8}
+
+### [Increasing Intensity of Strong Atlantic Hurricanes](http://myweb.fsu.edu/jelsner/stronger-hur.html)
+
+by James B. Elsner. This is a short analysis with the goal of validating the predictions of [this study](https://www.nature.com/articles/nature07234) published in Nature in 2008, which predicted that Atlantic tropical cyclones would continue to get stronger on average over time. While this analysis is too short to be considered adequate for a final project, it is still a good example of good data source documentation and one effective visualization. An expanded inquiry into the questions addressed here would make a good course project.
+
+:::
+
+:::
+
+::: {.grid}
+
+::: {.g-col-4}
+
+<img src="images/charting-death.png" width=100%>
+
+:::
+
+::: {.g-col-8}
+
+### [Death: Reality vs Reported](https://owenshen24.github.io/charting-death/)
+
+by Owen Shen. This is an interesting original analysis in which the author collected the data himself. The analysis compares whether the proportion of actual causes of death is consistent with the proportion of death causes that the media reports. This analysis also uses some interactive graphics so that the reader can view different versions of the same plot, such as scrolling through the plot over time.
+
+:::
+
+:::
+
+::: {.grid}
+
+::: {.g-col-4}
+
+<img src="https://miro.medium.com/max/700/1*C9VQfd5qtQGAn0Zyb5Mlxg.png" width=100%>
+
+:::
+
+::: {.g-col-8}
+
+### [Are first babies more likely to be late?](https://towardsdatascience.com/are-first-babies-more-likely-to-be-late-1b099b5796b6)
+
+by Allen Downey. This is another relatively short analysis, but the author does a good job of documenting his data sources, stating the assumptions he makes, and also describes what data were dropped from the analysis (i.e. babies born via C-section).
+
+:::
+
+:::
+
+# Historically significant analyses
+
+Exploratory data analysis has been around for a _very_ long time. Here are some of the most historically famous.
+
+::: {.grid}
+
+::: {.g-col-4}
+
+<img src="https://miro.medium.com/max/700/1*7mBUob3XlFjBOzxic3M7wQ.png" width=100%>
+
+:::
+
+::: {.g-col-8}
+
+### [W.E.B. Du Bois' "The Exhibit of American Negroes"](https://medium.com/nightingale/w-e-b-du-bois-staggering-data-visualizations-are-as-powerful-today-as-they-were-in-1900-64752c472ae4)
+
+In 1900, W.E.B. Du Bois presented "The Exhibit of American Negroes" at the Exposition Universelle in Paris. Du Bois described the exhibition as _"Thirty-two charts, 500 photographs, and numerous maps and plans form the basis of this exhibit. The charts are in two sets, one illustrating conditions in the entire United States and the other conditions in the typical State of Georgia."_ The charts in his exhibition are staggeringly powerful. This six-part series published in [_Nightingale_](https://medium.com/nightingale) displays and discusses many of his impressive visualizations. You can also purchase a book on the portraits on [Amazon](https://www.amazon.com/W-Boiss-Data-Portraits-Visualizing/dp/1616897066/).
+
+:::
+
+:::
+
+::: {.grid}
+
+::: {.g-col-4}
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Minard.png/1920px-Minard.png" width=100%>
+
+:::
+
+::: {.g-col-8}
+
+### [Minard's Napoleon March Map](https://en.wikipedia.org/wiki/Charles_Joseph_Minard#The_map_of_Napoleon's_Russian_campaign)
+
+The "Napoleon March Map" by [Charles Joseph Minard](https://en.wikipedia.org/wiki/Charles_Joseph_Minard) is widely viewed as one of the greatest data visualizations of all time. The chart depicts Napoleon's disastrous campaign to conquer Moscow. Having started with around 470,000 soldiers, he returned with just 10,000. The width of the line represents the total number of soldiers and the color represents the direction (yellow for towards Moscow, black for the return trip).
+
+:::
+
+:::
+
+::: {.grid}
+
+::: {.g-col-4}
+
+<img src="https://cdns.tblsft.com/sites/default/files/pages/3_nightingale-mortality.jpg" width=100%>
+
+:::
+
+::: {.g-col-8}
+
+### [Tableau's Top 10 GOAT Data Visualizations](https://www.tableau.com/learn/articles/best-beautiful-data-visualization-examples)
+
+It's hard to say which data visualizations are the "Greatest Of All Time," but Tableau put together a pretty excellent collection for their top 10 list.
+
+:::
+
+:::

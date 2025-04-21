@@ -1,0 +1,16 @@
+---
+title: "Final Analysis Workshop"
+params:
+  class: "12-workshop-final-analysis"
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+# Follow your plan!
+
+# Work on stuff!
+
+# Ask for help!
+

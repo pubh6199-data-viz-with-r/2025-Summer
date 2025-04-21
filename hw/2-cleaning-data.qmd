@@ -1,0 +1,46 @@
+---
+title: "Cleaning Data"
+params:
+  number: 2
+  purpose: 'The purpose of this assignment is learn some techniques for dealing with messy data. Most of the time, the raw data you get is in the wrong format and variables are not properly coded, so you will need to "clean" the data before starting any analysis. Other times the data will be split into two or more data sets, and you will need to "join" them together into a single data frame.'
+---
+
+```{r child = here::here("fragments", "hw.qmd")}
+```
+
+# 1. Get Organized
+
+Follow these instructions:
+
+1. Download and edit [this template](`r url_template`).
+2. Unzip the template folder. **Make sure you actually unzip it**! (in Windows, right-click it and use "extract all")
+3. Open the .Rproj file to open RStudio.
+4. Inside RStudio, open the ``r hw_file`` file, take notes, and write some example code as you go through the readings / exercises below.
+
+# 2. Read & Practice
+
+- [Stat 545 chapter 15 on joining two tables](https://stat545.com/join-cheatsheet.html)
+- [Tips for Cleaning Messy Data in R](https://rfortherestofus.com/2019/12/how-to-clean-messy-data-in-r/)
+- Alison Hill had an excellent free course on DataCamp called [Working with Data in the Tidyverse](https://learn.datacamp.com/courses/working-with-data-in-the-tidyverse), but it was unfortunately archived. The content she covered though was made available as a single webpage version that is archived [here](https://web.archive.org/web/20221103133358/https://rpubs.com/cliex159/864632). The whole course is quite useful for learning some data cleaning skills. In particular, I suggest going through parts 2 ("Tame your data") and 4 ("Transform your data") to be best-prepared for dealing with messy real-world data.
+- **Use AI to Practice Joining Data**: Open [ChatGPT](https://chat.openai.com/), [Claude](https://claude.ai/), or whatever AI tools you prefer and start a chat to practice the concept of joins. Ask the AI questions about what it gives you to make sure you understand the concept. Are you certain the AI is giving you good code? Play around with it and see if chatting with the AI is helpful. Include the link to your chat in your submission if you have one. Here is an example prompt (feel free to experiment with other prompts):
+
+> `I'm practicing the concept of joining data frames in R. Provide me an example of two datasets that have a common column and then show me R code for how to join them using the tidyverse. Afterwards, show several more slightly more complicated examples where the column names don't align, etc. In each case, explain your reasoning first, then show me the code.`
+
+# 3. Reflect
+
+Reflect on what you've learned while going through these readings and exercises. Is there anything that jumped out at you? Anything you found particularly interesting or confusing? Write at least a paragraph in your ``r hw_file`` file, and include at least one question. The teaching team will review the questions we get and will try to answer them either in Slack or in class.
+
+Some thoughts you may want to try in your reflection:
+
+- "I used to think ______, now I think ______ 🤔"
+- Discuss some of the key insights or things you found interesting in the readings or recent class periods.
+- Write about the messiest data you've seen.
+- Connect the course content to your own work or project you're working on.
+
+# 4. Submit
+
+To submit your assignment, follow these instructions:
+
+1. Render your .qmd file by either clicking the "Render" button in RStudio or running the command ``r paste0('quarto::quarto_render("', hw_file, '")')`` command.
+2. Open the rendered html file and make sure it looks good! Is all the formatting as you expected? 
+3. Create a zip file of all the files in your R project folder for this assignment and submit it on the corresponding assignment submission on Blackboard.

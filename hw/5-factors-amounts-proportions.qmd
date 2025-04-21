@@ -1,0 +1,66 @@
+---
+title: "Factors, Amounts, & Proportions"
+params:
+  number: 5
+  purpose: 'learn some of the technical details of how to write code to create "good" information visualizations that follow the design principles we discussed last week. We will focus on graphing **amounts** and **proportions**.'
+---
+
+```{r child = here::here("fragments", "hw.qmd")}
+```
+
+# 1. Get Organized
+
+Follow these instructions:
+
+1. Download and edit [this template](`r url_template`).
+2. Unzip the template folder. **Make sure you actually unzip it**! (in Windows, right-click it and use "extract all")
+3. Open the .Rproj file to open RStudio.
+4. Inside RStudio, open the ``r hw_file`` file, take notes, and write some example code as you go through the readings / exercises below.
+
+# 2. Readings
+
+The readings listed below are broken into two groups:
+
+1. Design principles
+2. Coding techniques to implement those principles
+
+## Design principles
+
+The design principles discussed in the following readings repeat many of the concepts we saw last week, except focused on the particular subset of charts for this week:
+
+- Wilke: [6 - Visualizing amounts](https://clauswilke.com/dataviz/visualizing-amounts.html)
+- Wilke: [10 - Visualizing proportions](https://clauswilke.com/dataviz/visualizing-proportions.html)
+- [Square pie chart beats out the rest in perception study](https://eagereyes.org/blog/2016/a-reanalysis-of-a-study-about-square-pie-charts-from-2009)
+- [When Are 100% Stacked Bar Graphs Useful?](https://www.perceptualedge.com/blog/?p=2239)
+
+## Coding techniques
+
+The readings below discuss two important components that we will run into a lot in making charts: **factors & facets**. Factors are categorical variables, but dealing with them in R can be somewhat messy. Fortunately, we have the [forcats](https://forcats.tidyverse.org/) package to help us tackle these! Facets, on the other hand, are rather straight forward to implement and offer a handy technique for creating charts when you have many different variables to consider at once.
+
+- R4DS: [15 - Factors](https://r4ds.had.co.nz/factors.html)
+- R4DS: [3.5 - Facets](https://r4ds.had.co.nz/data-visualisation.html#facets)
+
+# 3. Practice Coding
+
+To get a little extra practice developing better charts with ggplot2, go to the "Finding Data" page and on the [Packages](../finding-data.html#packages) section choose a package that you find interesting. Install the package, then in a code chunk load the package with `library(packageName)`. You can examine the data sets loaded with the package using `data(package = "packageName")`. Choose a data frame then make a plot illustrating a relationship in the data. Try to manipulate the factors of a categorical variable in the data. Below your code chunk with your visualization, explain in a few sentences what the chart you made shows.
+
+# 4. Reflect
+
+Reflect on what you've learned while going through these readings and exercises. Is there anything that jumped out at you? Anything you found particularly interesting or confusing?
+
+Write at least a paragraph in your ``r hw_file`` file, and include at least one question. The teaching team will review the questions we get and will try to answer them either in Slack or in class.
+
+Some thoughts you may want to try in your reflection:
+
+- Write about one of the best (or worst) data visualizations you've seen.
+- "I used to think ______, now I think ______ 🤔"
+- Discuss some of the key insights or things you found interesting in the readings or recent class periods.
+- Connect the course content to your own work or project you're working on.
+
+# 5. Submit
+
+To submit your assignment, follow these instructions:
+
+1. Render your .qmd file by either clicking the "Render" button in RStudio or running the command ``r paste0('quarto::quarto_render("', hw_file, '")')`` command.
+2. Open the rendered html file and make sure it looks good! Is all the formatting as you expected?
+3. Create a zip file of all the files in your R project folder for this assignment and submit it on the corresponding assignment submission on Blackboard.

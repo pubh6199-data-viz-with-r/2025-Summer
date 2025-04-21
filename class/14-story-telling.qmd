@@ -1,0 +1,12 @@
+---
+title: "Story Telling"
+params:
+  class: "14-story-telling"
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r child = here::here("fragments", "class.qmd")}
+```

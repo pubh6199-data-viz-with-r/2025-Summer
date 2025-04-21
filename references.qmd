@@ -1,0 +1,108 @@
+---
+title: "References"
+toc: true
+toc-location: right
+---
+
+# Programming
+
+## General Programming in R
+
+- Grolemund, Garrett. "Hands-On Programming with R"
+[[free online](https://rstudio-education.github.io/hopr/)],
+[[buy on amazon](https://www.amazon.com/gp/product/1449359019/)]
+- Peng, Roger D. "R Programming for Data Science"
+[[online - pay what you want](https://leanpub.com/rprogramming)]
+
+## Data Analysis in R
+
+- Grolemund, Garrett and Wickham, Hadley. "R for Data Science"
+[[free online](https://r4ds.had.co.nz/)],
+[[buy on amazon](https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399)]
+- Peng, Roger D. "Exploratory Data Analysis with R"
+[[online - pay what you want](https://leanpub.com/exdata)]
+- [16 HOWTO's](https://bookdown.org/lyzhang10/lzhang_r_tips_book/), by Lingyun Zhang
+
+## RStudio "Cheatsheets"
+
+- [All cheatsheets](https://www.rstudio.com/resources/cheatsheets/)
+- [Data wrangling with the `dplyr` library](https://resources.rstudio.com/the-essentials-of-data-science/data-transformation)
+- [Data visualization with the `ggplot2` library](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+- [RMarkdown](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
+
+
+
+# Visualizing Data
+
+## Principles of data visualization
+
+- Healy, Kieran. "Data Visualization: A practical introduction"
+[[free online](http://socviz.co/)],
+[[buy on amazon](https://www.amazon.com/Data-Visualization-Introduction-Kieran-Healy/dp/0691181624)]
+- Wilke, Claus O. "Fundamentals of Data Visualization"
+[[free online](https://serialmentor.com/dataviz/)],
+[[buy on amazon](https://www.amazon.com/Fundamentals-Data-Visualization-Informative-Compelling/dp/1492031089)]
+- Video: [How Humans See Data](https://youtu.be/fSgEeI2Xpdc), by John Rauser. This is probably the best overviews I've seen on how to exploit the psychology of how our brains interpret images to make effective visualizations.
+
+## Choosing the right chart
+
+You will want to choose different chart types depending on the relationship or message you want to convey. Fortunately, we live in the future and awesome people have created wonderful tools to help you find the most appropriate graph for your data. Take a look through some of these resources - these will come in handy when you start working on your final project:
+
+- <i class="fas fa-file-pdf"></i> [Stephen Few's Graph Selection Matrix](content/graph-selection-matrix.pdf)
+- [The Data Visualisation Catalogue](https://datavizcatalogue.com/)
+- [Data-to-Viz](https://www.data-to-viz.com/)
+- [R Graph Gallery](http://r-graph-gallery.com/)
+- [Visual Vocabulary](https://gramener.github.io/visual-vocabulary-vega/)
+- [The Data Viz Project](https://datavizproject.com/)
+
+## Making plots with **ggplot2**
+
+- [The R Graph Catalog](http://shinyapps.stat.ubc.ca/r-graph-catalog/): 124 examples (with code) for making common ggplots.
+- [The ggplot2 Extensions gallery](http://www.ggplot2-exts.org/gallery/): 64 registered libraries that extend the functionality of ggplot2.
+- [Top 50 `ggplot2` visualizations](http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html)
+- [R Cookbook for `ggplot2`](http://www.cookbook-r.com/Graphs/)
+- [RStudio `ggplot2` Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+- [Tidyverse `ggplot2` reference guide](https://ggplot2.tidyverse.org/reference/)
+- [ggThemeAssist](https://github.com/calligross/ggthemeassist): Package for customizing plot themes and layout
+- [16 HOWTO's](https://bookdown.org/lyzhang10/lzhang_r_tips_book/how-to-plot-data.html), by Lingyun Zhang - super useful for making specific types of charts
+
+## Polishing **ggplot2** plots
+
+- [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/index.html)
+- [Follow good design rules](https://www.data-to-viz.com/caveats.html)
+
+## Choosing colors
+
+- [Color wheel tool](https://www.sessions.edu/color-calculator/)
+- [ggplot2 book chapter 12](https://ggplot2-book.org/scales.html#scale-colour)
+- [R graph gallery](http://r-graph-gallery.com/ggplot2-color)
+- [Coolors.co](https://coolors.co/) - super nice color palette generator
+
+## Animating **ggplot2** plots
+
+- [How to create animations in R with gganimate](https://anderfernandez.com/en/blog/how-to-create-animations-in-r-with-gganimate/)
+- [Animate your ggplots with gganimate](https://gganimate.com/articles/gganimate.html)
+- [How to make a bar chart race](https://towardsdatascience.com/create-animated-bar-charts-using-r-31d09e5841da)
+
+
+
+# Other
+
+## Helpful Tutorials
+
+- [RStudio Primers](https://rstudio.cloud/learn/primers)
+- [Tidyverse in R](https://www.datacamp.com/community/tutorials/tidyverse-tutorial-r)
+- [Transitioning from Excel to R](https://trendct.org/2015/06/12/r-for-beginners-how-to-transition-from-excel-to-r/)
+
+## Inspiration
+
+- [An Incomplete List of Females in Data Visualization](https://stephanieevergreen.com/females-in-dataviz/), by Stephanie Evergreen
+- [The Links Between Open Science and Star Wars](https://medium.com/read-write-participate/open-science-and-star-wars-2577b8081e8f)
+
+## When all else fails...
+
+You will inevitably run into problems; things won't work the way you expect, and you'll get lots of confusing error messages. When this happens, many turn to the following tried and true problem-solving approaches:
+
+![](images/oreilly_googling.jpg){ width=250 }
+![](images/oreilly_trying_stuff.jpeg){ width=250 }
+![](images/oreilly_changing_stuff.jpg){ width=250 }

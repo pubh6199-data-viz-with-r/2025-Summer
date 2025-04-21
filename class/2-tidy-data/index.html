@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Tidy Data</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="John Paul Helveston" />
+    <meta name="date" content="2024-09-04" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view/tile-view.js"></script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <script src="libs/clipboard/clipboard.min.js"></script>
+    <link href="libs/shareon/shareon.min.css" rel="stylesheet" />
+    <script src="libs/shareon/shareon.min.js"></script>
+    <link href="libs/xaringanExtra-shareagain/shareagain.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-shareagain/shareagain.js"></script>
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <meta name="description" content="EMSE 4572/6572: Exploratory Data Analysis"/>
+    <meta name="generator" content="xaringan and remark.js"/>
+    <meta name="github-repo" content="emse-eda-gwu/2023-Fall"/>
+    <meta name="twitter:title" content="Tidy Data"/>
+    <meta name="twitter:description" content="EMSE 4572/6572: Exploratory Data Analysis"/>
+    <meta name="twitter:url" content="https://eda.seas.gwu.edu/2023-Fall/"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:creator" content="@johnhelveston"/>
+    <meta name="twitter:site" content="@johnhelveston"/>
+    <meta property="og:title" content="Tidy Data"/>
+    <meta property="og:description" content="EMSE 4572/6572: Exploratory Data Analysis"/>
+    <meta property="og:url" content="https://eda.seas.gwu.edu/2023-Fall/"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="article:author" content="John Paul Helveston"/>
+    <link href="libs/countdown/countdown.css" rel="stylesheet" />
+    <script src="libs/countdown/countdown.js"></script>
+    <link rel="stylesheet" href="css/lexis.css" type="text/css" />
+    <link rel="stylesheet" href="css/lexis-fonts.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+class: middle, inverse
+
+.leftcol30[
+
+&lt;center&gt;
+&lt;img src="https://eda.seas.gwu.edu/images/logo.png" width=250&gt;
+&lt;/center&gt;
+
+]
+
+.rightcol70[
+
+# Week 2: .fancy[Tidy Data]
+
+### <svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M243.4 2.6l-224 96c-14 6-21.8 21-18.7 35.8S16.8 160 32 160v8c0 13.3 10.7 24 24 24H456c13.3 0 24-10.7 24-24v-8c15.2 0 28.3-10.7 31.3-25.6s-4.8-29.9-18.7-35.8l-224-96c-8-3.4-17.2-3.4-25.2 0zM128 224H64V420.3c-.6 .3-1.2 .7-1.8 1.1l-48 32c-11.7 7.8-17 22.4-12.9 35.9S17.9 512 32 512H480c14.1 0 26.5-9.2 30.6-22.7s-1.1-28.1-12.9-35.9l-48-32c-.6-.4-1.2-.7-1.8-1.1V224H384V416H344V224H280V416H232V224H168V416H128V224zM256 64a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg> EMSE 4572/6572: Exploratory Data Analysis
+### <svg aria-hidden="true" role="img" viewBox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z"/></svg> John Paul Helveston
+### <svg aria-hidden="true" role="img" viewBox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z"/></svg> September 04, 2024
+
+]
+
+
+
+---
+
+
+
+class: inverse, middle
+
+# Week 2: .fancy[Tidy Data]
+
+## 1. Tidy Data
+## 2. Tidy Data Wrangling
+
+## BREAK
+
+## 3. Tidy Data Visualization
+## 4. Data Provenance &amp; Curation
+## 5. Writing a Research Question
+
+---
+
+
+
+class: inverse, middle
+
+# Week 2: .fancy[Tidy Data]
+
+## 1. .orange[Tidy Data]
+## 2. Tidy Data Wrangling
+
+## BREAK
+
+## 3. Tidy Data Visualization
+## 4. Data Provenance &amp; Curation
+## 5. Writing a Research Question
+
+---
+
+## .center[Federal R&amp;D Spending by Department]
+
+
+```
+#&gt; # A tibble: 6 × 15
+#&gt;    year   DHS   DOC   DOD   DOE   DOT   EPA   HHS Interior  NASA   NIH   NSF Other  USDA    VA
+#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1  1976     0   819 35696 10882  1142   968  9226     1152 12513  8025  2372  1191  1837   404
+#&gt; 2  1977     0   837 37967 13741  1095   966  9507     1082 12553  8214  2395  1280  1796   374
+#&gt; 3  1978     0   871 37022 15663  1156  1175 10533     1125 12516  8802  2446  1237  1962   356
+#&gt; 4  1979     0   952 37174 15612  1004  1102 10127     1176 13079  9243  2404  2321  2054   353
+#&gt; 5  1980     0   945 37005 15226  1048   903 10045     1082 13837  9093  2407  2468  1887   359
+#&gt; 6  1981     0   829 41737 14798   978   901  9644      990 13276  8580  2300  1925  1964   382
+```
+
+---
+
+## .center[Federal R&amp;D Spending by Department]
+
+.leftcol60[.code70[
+
+# "Wide" format
+
+
+```
+#&gt; # A tibble: 6 × 15
+#&gt;    year   DHS   DOC   DOD   DOE   DOT   EPA   HHS Interior  NASA   NIH   NSF Other  USDA    VA
+#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1  1976     0   819 35696 10882  1142   968  9226     1152 12513  8025  2372  1191  1837   404
+#&gt; 2  1977     0   837 37967 13741  1095   966  9507     1082 12553  8214  2395  1280  1796   374
+#&gt; 3  1978     0   871 37022 15663  1156  1175 10533     1125 12516  8802  2446  1237  1962   356
+#&gt; 4  1979     0   952 37174 15612  1004  1102 10127     1176 13079  9243  2404  2321  2054   353
+#&gt; 5  1980     0   945 37005 15226  1048   903 10045     1082 13837  9093  2407  2468  1887   359
+#&gt; 6  1981     0   829 41737 14798   978   901  9644      990 13276  8580  2300  1925  1964   382
+```
+
+]]
+
+--
+
+.rightcol40[.code70[
+
+# "Long" format
+
+
+```
+#&gt; # A tibble: 6 × 3
+#&gt;   department  year rd_budget_mil
+#&gt;   &lt;chr&gt;      &lt;dbl&gt;         &lt;dbl&gt;
+#&gt; 1 DOD         1976         35696
+#&gt; 2 NASA        1976         12513
+#&gt; 3 DOE         1976         10882
+#&gt; 4 HHS         1976          9226
+#&gt; 5 NIH         1976          8025
+#&gt; 6 NSF         1976          2372
+```
+
+]]
+
+---
+
+## .center[Federal R&amp;D Spending by Department]
+
+.leftcol60[.code70[
+
+# "Wide" format
+
+
+```
+#&gt; # A tibble: 6 × 15
+#&gt;    year   DHS   DOC   DOD   DOE   DOT   EPA   HHS Interior  NASA   NIH   NSF Other  USDA    VA
+#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1  1976     0   819 35696 10882  1142   968  9226     1152 12513  8025  2372  1191  1837   404
+#&gt; 2  1977     0   837 37967 13741  1095   966  9507     1082 12553  8214  2395  1280  1796   374
+#&gt; 3  1978     0   871 37022 15663  1156  1175 10533     1125 12516  8802  2446  1237  1962   356
+#&gt; 4  1979     0   952 37174 15612  1004  1102 10127     1176 13079  9243  2404  2321  2054   353
+#&gt; 5  1980     0   945 37005 15226  1048   903 10045     1082 13837  9093  2407  2468  1887   359
+#&gt; 6  1981     0   829 41737 14798   978   901  9644      990 13276  8580  2300  1925  1964   382
+```
+
+```
+#&gt; [1] 42 15
+```
+
+]]
+
+.rightcol40[.code70[
+
+# "Long" format
+
+
+```
+#&gt; # A tibble: 6 × 3
+#&gt;   department  year rd_budget_mil
+#&gt;   &lt;chr&gt;      &lt;dbl&gt;         &lt;dbl&gt;
+#&gt; 1 DOD         1976         35696
+#&gt; 2 NASA        1976         12513
+#&gt; 3 DOE         1976         10882
+#&gt; 4 HHS         1976          9226
+#&gt; 5 NIH         1976          8025
+#&gt; 6 NSF         1976          2372
+```
+
+```
+#&gt; [1] 588   3
+```
+
+]]
+
+---
+
+# .center[Tidy data = "Long" format]
+
+- Each **variable** has its own **column**
+- Each **observation** has its own **row**
+
+&lt;center&gt;
+&lt;img src="images/tidy-data.png" width = "1000"&gt;
+&lt;/center&gt;
+
+---
+
+.leftcol[
+
+# Tidy data 
+
+- Each **variable** has its own **column**
+- Each **observation** has its own **row**
+
+]
+
+.rightcol[
+
+
+```
+#&gt; # A tibble: 6 × 3
+#&gt;   department  year rd_budget_mil
+#&gt;   &lt;chr&gt;      &lt;dbl&gt;         &lt;dbl&gt;
+#&gt; 1 DOD         1976         35696
+#&gt; 2 NASA        1976         12513
+#&gt; 3 DOE         1976         10882
+#&gt; 4 HHS         1976          9226
+#&gt; 5 NIH         1976          8025
+#&gt; 6 NSF         1976          2372
+```
+
+]
+
+&lt;center&gt;
+&lt;img src="images/tidy-data.png" width = "1000"&gt;
+&lt;/center&gt;
+
+---
+
+.leftcol40[.code70[
+
+# "Long" format
+
+
+```
+#&gt; # A tibble: 6 × 3
+#&gt;   department  year rd_budget_mil
+#&gt;   &lt;chr&gt;      &lt;dbl&gt;         &lt;dbl&gt;
+#&gt; 1 DOD         1976         35696
+#&gt; 2 NASA        1976         12513
+#&gt; 3 DOE         1976         10882
+#&gt; 4 HHS         1976          9226
+#&gt; 5 NIH         1976          8025
+#&gt; 6 NSF         1976          2372
+```
+
+]]
+
+.rightcol60[.code70[
+
+# "Wide" format
+
+
+```
+#&gt; # A tibble: 6 × 15
+#&gt;    year   DHS   DOC   DOD   DOE   DOT   EPA   HHS Interior  NASA   NIH   NSF Other  USDA    VA
+#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1  1976     0   819 35696 10882  1142   968  9226     1152 12513  8025  2372  1191  1837   404
+#&gt; 2  1977     0   837 37967 13741  1095   966  9507     1082 12553  8214  2395  1280  1796   374
+#&gt; 3  1978     0   871 37022 15663  1156  1175 10533     1125 12516  8802  2446  1237  1962   356
+#&gt; 4  1979     0   952 37174 15612  1004  1102 10127     1176 13079  9243  2404  2321  2054   353
+#&gt; 5  1980     0   945 37005 15226  1048   903 10045     1082 13837  9093  2407  2468  1887   359
+#&gt; 6  1981     0   829 41737 14798   978   901  9644      990 13276  8580  2300  1925  1964   382
+```
+
+]]
+
+---
+
+# .center[**Do the names describe the values?**]
+
+.leftcol40[.code70[
+
+## **Yes**: "Long" format
+
+
+```
+#&gt; # A tibble: 6 × 3
+#&gt;   department  year rd_budget_mil
+#&gt;   &lt;chr&gt;      &lt;dbl&gt;         &lt;dbl&gt;
+#&gt; 1 DOD         1976         35696
+#&gt; 2 NASA        1976         12513
+#&gt; 3 DOE         1976         10882
+#&gt; 4 HHS         1976          9226
+#&gt; 5 NIH         1976          8025
+#&gt; 6 NSF         1976          2372
+```
+
+]]
+
+.rightcol60[.code70[
+
+## **No**: "Wide" format
+
+
+```
+#&gt; # A tibble: 6 × 8
+#&gt;    year   DHS   DOC   DOD   DOE   DOT   EPA   HHS
+#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1  1976     0   819 35696 10882  1142   968  9226
+#&gt; 2  1977     0   837 37967 13741  1095   966  9507
+#&gt; 3  1978     0   871 37022 15663  1156  1175 10533
+#&gt; 4  1979     0   952 37174 15612  1004  1102 10127
+#&gt; 5  1980     0   945 37005 15226  1048   903 10045
+#&gt; 6  1981     0   829 41737 14798   978   901  9644
+```
+
+]]
+
+---
+
+# **Quick practice 1**: "long" or "wide" format? 
+
+**Description**: Tuberculosis cases in various countries
+
+.code100[
+
+```
+#&gt; # A tibble: 6 × 4
+#&gt;   country      year  cases population
+#&gt;   &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;
+#&gt; 1 Afghanistan  1999    745   19987071
+#&gt; 2 Afghanistan  2000   2666   20595360
+#&gt; 3 Brazil       1999  37737  172006362
+#&gt; 4 Brazil       2000  80488  174504898
+#&gt; 5 China        1999 212258 1272915272
+#&gt; 6 China        2000 213766 1280428583
+```
+]
+
+---
+
+# **Quick practice 2**: "long" or "wide" format? 
+
+**Description**: Word counts in LOTR trilogy
+
+.code90[
+
+```
+#&gt; # A tibble: 9 × 4
+#&gt;   Film                       Race   Female  Male
+#&gt;   &lt;chr&gt;                      &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1 The Fellowship Of The Ring Elf      1229   971
+#&gt; 2 The Fellowship Of The Ring Hobbit     14  3644
+#&gt; 3 The Fellowship Of The Ring Man         0  1995
+#&gt; 4 The Return Of The King     Elf       183   510
+#&gt; 5 The Return Of The King     Hobbit      2  2673
+#&gt; 6 The Return Of The King     Man       268  2459
+#&gt; 7 The Two Towers             Elf       331   513
+#&gt; 8 The Two Towers             Hobbit      0  2463
+#&gt; 9 The Two Towers             Man       401  3589
+```
+]
+
+---
+
+# **Quick practice 3**: "long" or "wide" format? 
+
+**Description**: Word counts in LOTR trilogy
+
+
+```
+#&gt; # A tibble: 15 × 4
+#&gt;    Film                       Race   Gender Word_Count
+#&gt;    &lt;chr&gt;                      &lt;chr&gt;  &lt;chr&gt;       &lt;dbl&gt;
+#&gt;  1 The Fellowship Of The Ring Elf    Female       1229
+#&gt;  2 The Fellowship Of The Ring Elf    Male          971
+#&gt;  3 The Fellowship Of The Ring Hobbit Female         14
+#&gt;  4 The Fellowship Of The Ring Hobbit Male         3644
+#&gt;  5 The Fellowship Of The Ring Man    Female          0
+#&gt;  6 The Fellowship Of The Ring Man    Male         1995
+#&gt;  7 The Return Of The King     Elf    Female        183
+#&gt;  8 The Return Of The King     Elf    Male          510
+#&gt;  9 The Return Of The King     Hobbit Female          2
+#&gt; 10 The Return Of The King     Hobbit Male         2673
+#&gt; 11 The Return Of The King     Man    Female        268
+#&gt; 12 The Return Of The King     Man    Male         2459
+#&gt; 13 The Two Towers             Elf    Female        331
+#&gt; 14 The Two Towers             Elf    Male          513
+#&gt; 15 The Two Towers             Hobbit Female          0
+```
+
+---
+
+class: inverse, center, middle
+
+# Reshaping data with
+
+## `pivot_longer()` and `pivot_wider()`
+
+---
+
+background-color: #fff
+
+.leftcol40[
+
+# Reshaping data 
+
+## `pivot_longer()`&lt;br&gt;`pivot_wider()`
+
+]
+
+.rightcol60[
+
+&lt;center&gt;
+&lt;img src="images/tidyr-pivoting.gif" width=530&gt;
+&lt;/center&gt;
+
+]
+
+---
+
+## .center[From "long" to "wide" with `pivot_wider()`]
+
+&lt;center&gt;
+&lt;img src="images/tidy-wider.png" width=600&gt;
+&lt;/center&gt;
+
+---
+
+## .center[From "long" to "wide" with `pivot_wider()`]
+
+.leftcol45[
+
+
+``` r
+head(fed_spend_long)
+```
+
+```
+#&gt; # A tibble: 6 × 3
+#&gt;   department  year rd_budget_mil
+#&gt;   &lt;chr&gt;      &lt;dbl&gt;         &lt;dbl&gt;
+#&gt; 1 DOD         1976         35696
+#&gt; 2 NASA        1976         12513
+#&gt; 3 DOE         1976         10882
+#&gt; 4 HHS         1976          9226
+#&gt; 5 NIH         1976          8025
+#&gt; 6 NSF         1976          2372
+```
+
+]
+
+.rightcol55[
+
+
+``` r
+fed_spend_wide &lt;- fed_spend_long %&gt;%
+    pivot_wider(
+*       names_from = department,
+*       values_from = rd_budget_mil)
+
+head(fed_spend_wide)
+```
+
+```
+#&gt; # A tibble: 6 × 15
+#&gt;    year   DOD  NASA   DOE   HHS   NIH   NSF  USDA Interior   DOT   EPA   DOC   DHS    VA Other
+#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1  1976 35696 12513 10882  9226  8025  2372  1837     1152  1142   968   819     0   404  1191
+#&gt; 2  1977 37967 12553 13741  9507  8214  2395  1796     1082  1095   966   837     0   374  1280
+#&gt; 3  1978 37022 12516 15663 10533  8802  2446  1962     1125  1156  1175   871     0   356  1237
+#&gt; 4  1979 37174 13079 15612 10127  9243  2404  2054     1176  1004  1102   952     0   353  2321
+#&gt; 5  1980 37005 13837 15226 10045  9093  2407  1887     1082  1048   903   945     0   359  2468
+#&gt; 6  1981 41737 13276 14798  9644  8580  2300  1964      990   978   901   829     0   382  1925
+```
+
+]
+
+---
+
+## .center[From "wide" to "long" with `pivot_longer()`]
+
+&lt;center&gt;
+&lt;img src="images/tidy-longer.png" width=600&gt;
+&lt;/center&gt;
+
+---
+
+## .center[From "wide" to "long" with `pivot_longer()`]
+
+.leftcol45[
+
+
+``` r
+head(fed_spend_wide)
+```
+
+```
+#&gt; # A tibble: 6 × 15
+#&gt;    year   DOD  NASA   DOE   HHS   NIH   NSF  USDA Interior   DOT   EPA   DOC   DHS    VA Other
+#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1  1976 35696 12513 10882  9226  8025  2372  1837     1152  1142   968   819     0   404  1191
+#&gt; 2  1977 37967 12553 13741  9507  8214  2395  1796     1082  1095   966   837     0   374  1280
+#&gt; 3  1978 37022 12516 15663 10533  8802  2446  1962     1125  1156  1175   871     0   356  1237
+#&gt; 4  1979 37174 13079 15612 10127  9243  2404  2054     1176  1004  1102   952     0   353  2321
+#&gt; 5  1980 37005 13837 15226 10045  9093  2407  1887     1082  1048   903   945     0   359  2468
+#&gt; 6  1981 41737 13276 14798  9644  8580  2300  1964      990   978   901   829     0   382  1925
+```
+
+]
+
+.rightcol55[
+
+
+``` r
+fed_spend_long &lt;- fed_spend_wide %&gt;%
+    pivot_longer( 
+*       names_to = "department",
+*       values_to = "rd_budget_mil",
+*       cols = DOD:Other)
+
+head(fed_spend_long)
+```
+
+```
+#&gt; # A tibble: 6 × 3
+#&gt;    year department rd_budget_mil
+#&gt;   &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt;
+#&gt; 1  1976 DOD                35696
+#&gt; 2  1976 NASA               12513
+#&gt; 3  1976 DOE                10882
+#&gt; 4  1976 HHS                 9226
+#&gt; 5  1976 NIH                 8025
+#&gt; 6  1976 NSF                 2372
+```
+
+]
+
+---
+
+## Can also set `cols` by selecting which columns _not_ to use
+
+.leftcol45[
+
+
+``` r
+names(fed_spend_wide)
+```
+
+```
+#&gt;  [1] "year"     "DOD"      "NASA"     "DOE"      "HHS"      "NIH"      "NSF"      "USDA"     "Interior" "DOT"      "EPA"      "DOC"      "DHS"      "VA"       "Other"
+```
+
+]
+
+.rightcol55[
+
+
+``` r
+fed_spend_long &lt;- fed_spend_wide %&gt;%
+    pivot_longer(
+        names_to = "department", 
+        values_to = "rd_budget_mil",
+*       cols = -year)
+
+head(fed_spend_long)
+```
+
+```
+#&gt; # A tibble: 6 × 3
+#&gt;    year department rd_budget_mil
+#&gt;   &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt;
+#&gt; 1  1976 DOD                35696
+#&gt; 2  1976 NASA               12513
+#&gt; 3  1976 DOE                10882
+#&gt; 4  1976 HHS                 9226
+#&gt; 5  1976 NIH                 8025
+#&gt; 6  1976 NSF                 2372
+```
+
+]
+
+---
+
+class: inverse
+
+<div class="countdown" id="timer_3d9b79a3" data-warn-when="15" data-update-every="1" tabindex="0" style="top:0;right:0;font-size:2em;">
+<div class="countdown-controls"><button class="countdown-bump-down">&minus;</button><button class="countdown-bump-up">&plus;</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+# Your turn: Reshaping Data
+
+Open the `practice.qmd` file. 
+
+Run the code chunk to read in the following two data files:
+
+- `pv_cell_production.xlsx`: Data on solar photovoltaic cell production by country
+- `milk_production.csv`: Data on milk production by state
+
+Now modify the format of each:
+
+- If the data are in "wide" format, convert it to "long" with `pivot_longer()`
+- If the data are in "long" format, convert it to "wide" with `pivot_wider()`
+
+---
+
+
+
+class: inverse, middle
+
+# Week 2: .fancy[Tidy Data]
+
+## 1. Tidy Data
+## 2. .orange[Tidy Data Wrangling]
+
+## BREAK
+
+## 3. Tidy Data Visualization
+## 4. Data Provenance &amp; Curation
+## 5. Writing a Research Question
+
+---
+
+class: center, middle, inverse
+
+# Why do we need tidy data?
+
+(a quick explanation with cute graphics, by [Allison Horst](https://github.com/allisonhorst/stats-illustrations))
+
+---
+
+class: center
+background-image: url("images/horst_tidydata_1.jpg")
+background-size: contain
+
+---
+
+class: center
+background-image: url("images/horst_tidydata_2.jpg")
+background-size: contain
+
+---
+
+class: center
+background-image: url("images/horst_tidydata_3.jpg")
+background-size: contain
+
+---
+
+# Tidy data wrangling
+
+Compute the total R&amp;D spending in each year
+
+
+``` r
+head(fed_spend_wide)
+```
+
+```
+#&gt; # A tibble: 6 × 15
+#&gt;    year   DOD  NASA   DOE   HHS   NIH   NSF  USDA Interior   DOT   EPA   DOC   DHS    VA Other
+#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1  1976 35696 12513 10882  9226  8025  2372  1837     1152  1142   968   819     0   404  1191
+#&gt; 2  1977 37967 12553 13741  9507  8214  2395  1796     1082  1095   966   837     0   374  1280
+#&gt; 3  1978 37022 12516 15663 10533  8802  2446  1962     1125  1156  1175   871     0   356  1237
+#&gt; 4  1979 37174 13079 15612 10127  9243  2404  2054     1176  1004  1102   952     0   353  2321
+#&gt; 5  1980 37005 13837 15226 10045  9093  2407  1887     1082  1048   903   945     0   359  2468
+#&gt; 6  1981 41737 13276 14798  9644  8580  2300  1964      990   978   901   829     0   382  1925
+```
+
+---
+
+# Tidy data wrangling
+
+Compute the total R&amp;D spending in each year
+
+**Approach 1**: Create new `total` by adding each variable
+
+
+``` r
+fed_spend_wide %&gt;%
+  mutate(total = DHS + DOC + DOD + DOE + DOT + EPA + HHS + Interior + NASA + NIH + NSF + Other + USDA + VA) %&gt;%
+  select(year, total)
+```
+
+```
+#&gt; # A tibble: 42 × 2
+#&gt;     year  total
+#&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+#&gt;  1  1976  86227
+#&gt;  2  1977  91807
+#&gt;  3  1978  94864
+#&gt;  4  1979  96601
+#&gt;  5  1980  96305
+#&gt;  6  1981  98304
+#&gt;  7  1982  95448
+#&gt;  8  1983  95010
+#&gt;  9  1984 105371
+#&gt; 10  1985 114818
+#&gt; # ℹ 32 more rows
+```
+
+---
+
+# Tidy data wrangling
+
+Compute the total R&amp;D spending by department in each year
+
+**Approach 2**: Reshape first, then summarise
+
+.leftcol[
+
+
+``` r
+fed_spend_long &lt;- fed_spend_wide %&gt;%
+    pivot_longer(
+        names_to = "department", 
+        values_to = "rd_budget_mil",
+        cols = -year) 
+
+head(fed_spend_long)
+```
+
+```
+#&gt; # A tibble: 6 × 3
+#&gt;    year department rd_budget_mil
+#&gt;   &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt;
+#&gt; 1  1976 DOD                35696
+#&gt; 2  1976 NASA               12513
+#&gt; 3  1976 DOE                10882
+#&gt; 4  1976 HHS                 9226
+#&gt; 5  1976 NIH                 8025
+#&gt; 6  1976 NSF                 2372
+```
+
+]
+
+--
+
+.rightcol[
+
+
+``` r
+fed_spend_long %&gt;%
+    group_by(year) %&gt;%
+    summarise(total = sum(rd_budget_mil))
+```
+
+```
+#&gt; # A tibble: 42 × 2
+#&gt;     year  total
+#&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+#&gt;  1  1976  86227
+#&gt;  2  1977  91807
+#&gt;  3  1978  94864
+#&gt;  4  1979  96601
+#&gt;  5  1980  96305
+#&gt;  6  1981  98304
+#&gt;  7  1982  95448
+#&gt;  8  1983  95010
+#&gt;  9  1984 105371
+#&gt; 10  1985 114818
+#&gt; # ℹ 32 more rows
+```
+
+]
+
+---
+
+# Tidy data wrangling
+
+Compute the total R&amp;D spending by department in each year
+
+**Approach 2**: Reshape first, then summarise
+
+.leftcol[
+
+
+``` r
+total &lt;- fed_spend_wide %&gt;%
+    pivot_longer(
+        names_to = "department", 
+        values_to = "rd_budget_mil",
+        cols = -year) %&gt;% 
+    group_by(year) %&gt;%
+    summarise(total = sum(rd_budget_mil))
+```
+
+]
+
+.rightcol[
+
+
+``` r
+head(total)
+```
+
+```
+#&gt; # A tibble: 6 × 2
+#&gt;    year total
+#&gt;   &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1  1976 86227
+#&gt; 2  1977 91807
+#&gt; 3  1978 94864
+#&gt; 4  1979 96601
+#&gt; 5  1980 96305
+#&gt; 6  1981 98304
+```
+
+]
+
+---
+
+class: inverse
+
+<div class="countdown" id="timer_82840346" data-warn-when="15" data-update-every="1" tabindex="0" style="top:0;right:0;font-size:2em;">
+<div class="countdown-controls"><button class="countdown-bump-down">&minus;</button><button class="countdown-bump-up">&plus;</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+# Your turn: Tidy Data Wrangling
+
+Open the `practice.qmd` file. 
+
+Run the code chunk to read in the following two data files:
+
+- `gapminder.csv`: Life expectancy in different countries over time
+- `gdp.csv`: GDP of different countries over time
+
+Now convert the data into a tidy (long) structure, then create the following summary data frames:
+
+- Mean life expectancy in each year.
+- Mean GDP in each year.
+
+---
+
+class: inverse, center
+
+# .fancy[Break]
+
+<div class="countdown" id="timer_6ca1bd74" data-warn-when="30" data-update-every="1" tabindex="0" style="top:1;right:0;bottom:0;left:0;margin:5%;font-size:8em;">
+<div class="countdown-controls"><button class="countdown-bump-down">&minus;</button><button class="countdown-bump-up">&plus;</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+---
+
+
+
+class: inverse, middle
+
+# Week 2: .fancy[Tidy Data]
+
+## 1. Tidy Data
+## 2. Tidy Data Wrangling
+
+## BREAK
+
+## 3. .orange[Tidy Data Visualization]
+## 4. Data Provenance &amp; Curation
+## 5. Writing a Research Question
+
+---
+
+# Tidy data vizualization
+
+Make a bar chart of total R&amp;D spending by agency
+
+.leftcol55[
+
+
+``` r
+head(fed_spend_wide)
+```
+
+```
+#&gt; # A tibble: 6 × 15
+#&gt;    year   DOD  NASA   DOE   HHS   NIH   NSF  USDA Interior   DOT   EPA   DOC   DHS    VA Other
+#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1  1976 35696 12513 10882  9226  8025  2372  1837     1152  1142   968   819     0   404  1191
+#&gt; 2  1977 37967 12553 13741  9507  8214  2395  1796     1082  1095   966   837     0   374  1280
+#&gt; 3  1978 37022 12516 15663 10533  8802  2446  1962     1125  1156  1175   871     0   356  1237
+#&gt; 4  1979 37174 13079 15612 10127  9243  2404  2054     1176  1004  1102   952     0   353  2321
+#&gt; 5  1980 37005 13837 15226 10045  9093  2407  1887     1082  1048   903   945     0   359  2468
+#&gt; 6  1981 41737 13276 14798  9644  8580  2300  1964      990   978   901   829     0   382  1925
+```
+
+]
+
+.rightcol45[
+
+&lt;img src="figs/fed-spend-bars-1.png" width="522.144" /&gt;
+
+]
+
+---
+
+# Tidy data vizualization
+
+Make a bar chart of total R&amp;D spending by agency
+
+.leftcol55[
+
+
+``` r
+ggplot(fed_spend_wide) +
+* geom_col(aes(x = rd_budget_mil, y = department)) +
+  theme_bw() +
+  labs(
+      x = "R&amp;D Spending ($Millions)",
+      y = "Federal Agency"
+  )
+```
+
+```
+#&gt; Error in `geom_col()`:
+#&gt; ! Problem while computing aesthetics.
+#&gt; ℹ Error occurred in the 1st layer.
+#&gt; Caused by error:
+#&gt; ! object 'rd_budget_mil' not found
+```
+
+]
+
+.rightcol45[
+
+&lt;img src="figs/unnamed-chunk-37-1.png" width="522.144" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# Tidy data vizualization
+
+Make a bar chart of total R&amp;D spending by agency
+
+.leftcol55[
+
+
+``` r
+fed_spend_wide %&gt;%
+* pivot_longer(
+*   names_to = "department",
+*   values_to = "rd_budget_mil",
+*   cols = -year
+  ) %&gt;%
+  ggplot() +
+  geom_col(aes(x = rd_budget_mil, y = department)) +
+  theme_bw() +
+  labs(
+    x = "R&amp;D Spending ($Millions)",
+    y = "Federal Agency"
+  )
+```
+
+]
+
+.rightcol45[
+
+&lt;img src="figs/unnamed-chunk-39-1.png" width="522.144" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+class: inverse
+
+<div class="countdown" id="timer_877c3d32" data-warn-when="15" data-update-every="1" tabindex="0" style="top:0;right:0;font-size:2em;">
+<div class="countdown-controls"><button class="countdown-bump-down">&minus;</button><button class="countdown-bump-up">&plus;</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+# Your turn: Tidy Data Visualization
+
+Run the code chunk to read in the two data files, then convert the data into a tidy (long) structure to create the following charts:
+
+.leftcol[
+
+&lt;img src="figs/unnamed-chunk-41-1.png" width="522.144" /&gt;
+
+]
+
+.rightcol[
+
+&lt;img src="figs/unnamed-chunk-42-1.png" width="522.144" /&gt;
+
+]
+
+---
+
+
+
+class: inverse, middle
+
+# Week 2: .fancy[Tidy Data]
+
+## 1. Tidy Data
+## 2. Tidy Data Wrangling
+
+## BREAK
+
+## 3. Tidy Data Visualization
+## 4. .orange[Data Provenance &amp; Curation]
+## 5. Writing a Research Question
+
+---
+
+### Data provenance - It matters where you get your data
+
+--
+
+**Validity**:
+
+- Is this data trustworthy? Is it authentic?
+- Where did the data come from?
+- How has the data been changed / managed over time?
+- Is the data complete?
+
+--
+
+**Comprehension**:
+
+- Is this data accurate?
+- Can you explain your results?
+- Is this the right data to answer your question?
+
+--
+
+**Reproducibility**:
+
+- I should be able to fully replicate your results from your raw data and code.
+
+---
+
+## <svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg> **Document your source like a museum curator**
+
+**Example**: View `README.md` file in the `data` folder
+
+--
+
+Whenever you download data, you should **at a minimum** record the following:
+
+  - The name of the file you are describing.
+  - The date you downloaded it.
+  - The original name of the downloaded file (in case you renamed it).
+  - The url to the site you downloaded it from.
+  - The source of the _original_ data (sometimes different from the site you downloaded it from).
+  - A short description of the data, maybe how they were collected (if available).
+  - A dictionary for the data (e.g. a simple markdown table describing each variable).
+
+---
+
+class: inverse
+
+<div class="countdown" id="timer_486e22bb" data-warn-when="15" data-update-every="1" tabindex="0" style="top:0;right:0;font-size:2em;">
+<div class="countdown-controls"><button class="countdown-bump-down">&minus;</button><button class="countdown-bump-up">&plus;</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+# Your turn
+
+Documentation in the "data/README.md" file is missing for the following data sets:
+
+- wildlife_impacts.csv: [source](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-07-23)
+- north_america_bear_killings.txt: [source](https://data.world/makeovermonday/2019w21)
+- uspto_clean_energy_patents.xlsx: [source](https://www.nsf.gov/statistics/2018/nsb20181/report/sections/industry-technology-and-the-global-marketplace/global-trends-in-sustainable-energy-research-and-technologies)
+
+Go to the above sites and add the following information to the "data/README.md" file:
+
+- The name of the downloaded file.
+- The web address to the site you downloaded the data from.
+- The source of the _original_ data (if different from the website).
+- A short description of the data and how they were collected.
+- A dictionary for the data (hint: the site might already have this!).
+
+---
+
+
+
+class: inverse, middle
+
+# Week 2: .fancy[Tidy Data]
+
+## 1. Tidy Data
+## 2. Tidy Data Wrangling
+
+## BREAK
+
+## 3. Tidy Data Visualization
+## 4. Data Provenance &amp; Curation
+## 5. .orange[Writing a Research Question]
+
+---
+
+# Writing a research question
+
+Follow [these guidelines](https://writingcenter.gmu.edu/guides/how-to-write-a-research-question) - your question should be:
+
+--
+
+- **Clear**: your audience can easily understand its purpose without additional explanation.
+
+--
+
+- **Focused**: it is narrow enough that it can be addressed thoroughly with the data available and within the limits of the final project report.
+
+--
+
+- **Concise**: it is expressed in the fewest possible words.
+
+--
+
+- **Complex**: it is not answerable with a simple "yes" or "no," but rather requires synthesis and analysis of data.
+
+--
+
+- **Arguable**: its potential answers are open to debate rather than accepted facts (do others care about it?)
+
+---
+
+# Writing a research question
+
+--
+
+**Bad question: Why are social networking sites harmful?**
+
+- Unclear: it does not specify _which_ social networking sites or state what harm is being caused; assumes that "harm" exists.
+
+--
+
+**Improved question: How are online users experiencing or addressing privacy issues on social networking sites such as Facebook and Twitter?**
+
+- Specifies the sites (Facebook and Twitter), type of harm (privacy issues), and who is harmed (online users).
+
+---
+
+# Writing a research question
+
+**Example from previous classes**: 
+
+- [Genders in the Workforce](https://eda.seas.gwu.edu/showcase/2021-Spring/gender_pay_gap.html): How has the US gender wage gap changed over time for different occupations and age groups?
+- [NFL Suspensions](https://eda.seas.gwu.edu/showcase/2021-Spring/nfl_suspensions.html): What factors contribute to the severity of disciplinary actions towards NFL players from 2002-2014?
+
+**Other good examples**: See the [Example Projects](https://eda.seas.gwu.edu/2024-Fall/project/examples.html) page
+
+---
+
+class: inverse, middle, center
+
+# Use [this link](https://docs.google.com/spreadsheets/d/15pn9VNtYBG3XF-1OhvdKLMoNj4hOTXCGf4U1KNx0Tco/edit?usp=sharing) to form teams
+
+---
+
+.leftcol[
+
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/car-size.png" width=100%&gt;
+&lt;/center&gt;
+
+]
+
+.rightcol[
+
+&lt;br&gt;
+
+## Project idea: car bloat
+
+#### Data: Webscraped from [Car and Driver](https://www.caranddriver.com/)
+
+Summary: 
+
+- [This tweet thread](https://x.com/curious_founder/status/1830623332892299510?t=keukWxtrhC-CMEeHAwbOtg&amp;s=19)
+- [This youtube video](https://youtu.be/C5q_l8SXar0?si=fXvDE3NQVnemcm_y)
+
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

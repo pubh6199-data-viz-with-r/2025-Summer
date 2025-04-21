@@ -1,0 +1,12 @@
+---
+title: "Cleaning Data"
+params:
+  class: "3-cleaning-data"
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r child = here::here("fragments", "class.qmd")}
+```

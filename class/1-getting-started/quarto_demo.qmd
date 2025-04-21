@@ -1,0 +1,56 @@
+---
+title: "quarto_demo"
+format: html
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+## Make a plot
+
+```{r}
+#| message: false
+
+library(tidyverse)
+library(palmerpenguins)
+
+penguins %>% 
+    ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
+    geom_point(
+        aes(color = species, shape = species),
+        size = 3, alpha = 0.8) +
+    scale_color_manual(values = c("darkorange","purple","cyan4")) +
+    labs(
+        title = "Penguin size, Palmer Station LTER",
+        subtitle = "Flipper length and body mass for Adelie, Chinstrap and Gentoo Penguins",
+        x = "Flipper length (mm)",
+        y = "Body mass (g)",
+        color = "Penguin species",
+        shape = "Penguin species"
+    ) +
+    theme(
+        legend.position = c(0.2, 0.7),
+        plot.title.position = "plot",
+        plot.caption = element_text(hjust = 0, face= "italic"),
+        plot.caption.position = "plot"
+    )
+```

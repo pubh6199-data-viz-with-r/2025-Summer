@@ -1,0 +1,63 @@
+---
+title: "Trends"
+params:
+  number: 7
+  purpose: 'The purpose of this assignment is to learn some of the technical details of how to create charts that highlight **trends**, which inherently involve changes in values over time.'
+---
+
+```{r child = here::here("fragments", "hw.qmd")}
+```
+
+# 1. Get Organized
+
+Follow these instructions:
+
+1. Download and edit [this template](`r url_template`).
+2. Unzip the template folder. **Make sure you actually unzip it**! (in Windows, right-click it and use "extract all")
+3. Open the .Rproj file to open RStudio.
+4. Inside RStudio, open the ``r hw_file`` file, take notes, and write some example code as you go through the readings / exercises below.
+
+# 2. Readings
+
+Most of the readings this week have code in them that illustrate how to create each chart type, and I encourage you to try and reproduce the examples provided in R yourself.
+
+- Wilke: [13 - Visualizing time series](https://clauswilke.com/dataviz/time-series.html)
+- Wilke: [14 - Visualizing trends](https://clauswilke.com/dataviz/visualizing-trends.html)
+
+Some examples of visualizations we'll explore in class:
+
+- The "bar chart race": [Changes in how couples meet over time](https://flowingdata.com/2019/03/15/shifts-in-how-couples-meet-online-takes-the-top-spot/)
+- The heatmap: [How common is your birthday?](https://www.vizwiz.com/2012/05/how-common-is-your-birthday-find-out.html)
+- [Time-Series Heatmaps](https://towardsdatascience.com/time-series-calendar-heatmaps-9f576578fcfe)
+
+Optional:
+
+- [The Sankey diagrams (a.k.a. flow chart)](https://www.data-to-viz.com/graph/sankey.html)
+- Video: [The fallen of WWII](http://www.fallen.io/ww2/)
+
+# 3. Video
+
+This video by Hans Rosling is a great summary of his larger [TED talk](https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen) on the "gapminder" project he started showing life expectancy and GDP over time. This is an excellent example of using an _animated_ chart to tell a much richer story than a static chart.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jbkSRLYSojo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+# 4. Reflect
+
+Reflect on what you've learned while going through these readings and exercises. Is there anything that jumped out at you? Anything you found particularly interesting or confusing?
+
+Write at least a paragraph in your ``r hw_file`` file, and include at least one question. The teaching team will review the questions we get and will try to answer them either in Slack or in class.
+
+Some thoughts you may want to try in your reflection:
+
+- Write about an interesting data visualization about trends you've seen.
+- "I used to think ______, now I think ______ 🤔"
+- Discuss some of the key insights or things you found interesting in the readings or recent class periods.
+- Connect the course content to your own work or project you're working on.
+
+# 5. Submit
+
+To submit your assignment, follow these instructions:
+
+1. Render your .qmd file by either clicking the "Render" button in RStudio or running the command ``r paste0('quarto::quarto_render("', hw_file, '")')`` command.
+2. Open the rendered html file and make sure it looks good! Is all the formatting as you expected?
+3. Create a zip file of all the files in your R project folder for this assignment and submit it on the corresponding assignment submission on Blackboard.

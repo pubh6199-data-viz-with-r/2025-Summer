@@ -1,0 +1,104 @@
+---
+title: Final Report
+toc: true
+toc-location: right
+execute:
+  echo: false
+  warning: false
+  message: false
+params:
+  number: 3
+  weight: '15%'
+  purpose: 'purpose'
+---
+
+```{r}
+#| label: setup
+
+source(here::here("_common.R"))
+
+rubric <- read_csv(here::here('rubrics', '3-final-report.csv'))
+maxPoints <- rubric %>%
+    filter(rating == "Excellent") %>%
+    summarise(max = sum(maxPoints)) %>%
+    pull(max)
+```
+
+```{r child = here::here("fragments", "project.qmd")}
+```
+
+Your final report should be a fully reproducible html webpage. It should include text, data, code, and plots. Your report should be written in a narrative format (i.e. using coherent paragraphs rather than a series of bullet points). You may use headings where appropriate to break up your report into sections. There is no length requirement - your report should be sufficiently detailed to address the requirements listed below and sufficiently concise such that it is expressed in the fewest necessary words. It is also perfectly acceptable for large portions of your final report to be identical to sections in your progress report, albeit all results should be "polished" and publication ready. Below is a list of specific items your report should include.
+
+## 1. Get organized
+
+1. Download and unzip [this template](../templates/project-template.zip) for your proposal report. Open the `project.Rproj` file and write your progress report in the `report.qmd` file. The template comes with some text and code explaining how to use it - **you should delete the template code and text as it is only for explanatory purposes**. Be sure to adjust the content in the YAML:
+
+    - Write your project title in the `title` field (and provide a subtitle if you wish, or delete the `subtitle` field).
+    - In the `author` field, list the names of all teammates, e.g. `author: Luke Skywalker, Leia Organa, and Han Solo`.
+
+2. Put the data you are working with for your project in the appropriate folders. Even if you are reading in data directly from a website (e.g. `data <- read_csv("www.somewhere.com/data.csv)`), be sure to download a local copy of the data and put it in the appropriate data folder.
+
+3. At the bottom of your report, add an Appendix section that includes data dictionaries for the key data sets used in your analysis as well as a copy of all of the code used in your report, which can be automatically generated with a single chunk like this:
+
+````markdown
+`r ''````{r ref.label=knitr::all_labels()}
+#| echo: true
+#| eval: false
+```
+````
+
+## 2. Introduction
+
+Write an introduction section to describe the topic of your project to a general audience. Address a motivation for why the research question(s) you address in your project are interesting or important (why should the reader care about this?), and summarize key findings from your analyses.
+
+## 3. State your research question(s)
+
+Clearly state your research question(s). You may want to write one more general question and then list several sub-questions that address more specific points. You should follow [these guidelines](https://writingcenter.gmu.edu/guides/how-to-write-a-research-question).
+
+## 4. Discuss your data sources
+
+Discuss the data source(s) you are using for your analysis. For each data source:
+
+- Describe it and include urls or references to the original sources as well as links to any pre-processed or formatted data you are using. These are not always the same. For example, in the [Mini Project 2 assignment](../mini/2-exploring-data.html), the original source was the [Transit Costs Project](https://transitcosts.com/) whereas the data file used was posted on [this GitHub repo](https://github.com/rfordatascience/tidytuesday/tree/master/data/2021/2021-01-05).
+- Discuss details about how/when/where/why the data were collected. Do not make statements about whether you feel the data is "valid" but rather describe as much detail as you can about the data and let the readers make that assessment for themselves. Be sure to include:
+
+    - Is the data you are using from the _original_ source, or has it been pre-processed?
+    - How was the original data collected and by whom?
+    - Are there perhaps any missing data that might not have been observed?
+    - Are there any potential biases in the data?
+
+- Finally, provide a data dictionary for each data file you are using in an appendix at the end of your report. The dictionary should contain a table of each variable name along with a brief description of the variable.
+
+## 5. Describe your results with text and charts
+
+- Your analysis must include at **least three polished charts / animations**, though you can of course include more. Alternatively, you can build an interactive shiny app with at least two dynamic charts. If you build a shiny app, include a link to your app and screenshots of key charts from your app in your final report.
+- Display polished charts that either support or oppose your research question(s) or illustrate what else you might need to address your research question(s). It's possible that your data / analyses only lead to another, more detailed question that you're unable to fully address with the data you have - that's okay! But we can still learn something along the way.
+- Your charts should be "polished" with appropriate labels / annotations and follow the design principles we have covered in class.
+- The chart types used should highlight the main point(s) you want to make or clearly show the relationship you want to emphasize. That is, make sure to use chart types that effectively communicate key insights.
+- Around your charts, write narrative text explaining what the chart shows and its significance towards addressing your research question(s). This should read as a continuous story rather than as a reply to each of the requirements described here.
+
+## 6. Conclusions
+
+Summarize in a paragraph or two your main findings from your analysis. What have we learned, and what else could we do next to go further on this topic? Are there other data sources that would really help extend your analyses?
+
+## 7. Attribution
+
+Include a short description of the specific contributions of each team member in your team. If all members contributed equally, you can just put the single sentence "All members contributed equally". Team members who do not make meaningful contributions to their projects will not receive the same grade as that of their team mates.
+
+## 8. Render and submit
+
+Click the "Render" button to compile your `.qmd` file into a html web page. Then open the `report.html` file in a web browser and proofread your report.
+
+Does all of the formatting look correct? **Make sure there are no errors in the rendered file before submitting it.**
+
+Once you've proofread your report, create a zip file of all the files in your R project folder for this assignment and submit it on the corresponding assignment submission on Blackboard.
+
+**Only one person from your team should submit.**
+
+## Grading Rubric
+
+### `r maxPoints` Total Points {.unnumbered}
+
+```{r}
+make_rubric(rubric)
+```

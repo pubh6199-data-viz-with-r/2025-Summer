@@ -1,0 +1,56 @@
+---
+title: "Maps"
+params:
+  number: 9
+  purpose: 'The purpose of this assignment is to learn some techniques for creating a special type of chart: maps. We will look at different types of maps and how to work with different types of geospatial data.'
+---
+
+```{r child = here::here("fragments", "hw.qmd")}
+```
+
+# 1. Get Organized
+
+Follow these instructions:
+
+1. Download and edit [this template](`r url_template`).
+2. Unzip the template folder. **Make sure you actually unzip it**! (in Windows, right-click it and use "extract all")
+3. Open the .Rproj file to open RStudio.
+4. Inside RStudio, open the ``r hw_file`` file, take notes, and write some example code as you go through the readings / exercises below.
+
+# 2. Video
+
+Watch [this video](https://www.youtube.com/watch?v=kIID5FDi2JQ) on map projections:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kIID5FDi2JQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+# 3. Readings
+
+This week we'll learn about maps and geospatial data. Maps are a unique type of data viz, and often times they are inappropriately or inaccurately used. These readings will help you learn best practices when visualizing geospatial data:
+
+- Wilke: [15 - Visualizing geospatial data](https://clauswilke.com/dataviz/geospatial-data.html)
+- [XKCD: Map projections](https://xkcd.com/977/)
+- Healy: [7 - Draw maps](http://socviz.co/maps.html#maps)
+- Drawing beautiful maps: Parts [one](https://www.r-spatial.org/r/2018/10/25/ggplot2-sf.html), [two](https://www.r-spatial.org/r/2018/10/25/ggplot2-sf-2.html), & [three](https://www.r-spatial.org/r/2018/10/25/ggplot2-sf-3.html)
+
+# 4. Reflect
+
+> **This week, include in your reflection an image or link to a recent map you've seen (or one you thought was super interesting)**
+
+Reflect on what you've learned while going through these readings and exercises. Is there anything that jumped out at you? Anything you found particularly interesting or confusing?
+
+Write at least a paragraph in your ``r hw_file`` file, and include at least one question. The teaching team will review the questions we get and will try to answer them either in Slack or in class.
+
+Some thoughts you may want to try in your reflection:
+
+- Write about an interesting data visualization about trends you've seen.
+- "I used to think ______, now I think ______ 🤔"
+- Discuss some of the key insights or things you found interesting in the readings or recent class periods.
+- Connect the course content to your own work or project you're working on.
+
+# 5. Submit
+
+To submit your assignment, follow these instructions:
+
+1. Render your .qmd file by either clicking the "Render" button in RStudio or running the command ``r paste0('quarto::quarto_render("', hw_file, '")')`` command.
+2. Open the rendered html file and make sure it looks good! Is all the formatting as you expected?
+3. Create a zip file of all the files in your R project folder for this assignment and submit it on the corresponding assignment submission on Blackboard.
