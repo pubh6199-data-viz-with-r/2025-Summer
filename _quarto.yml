@@ -8,20 +8,6 @@ project:
     - "*.qmd"
     - "!fragments/"
     - "!1-getting-started/"
-    - "!2-tidy-data/"
-    - "!3-cleaning-data/"
-    - "!4-exploring-data/"
-    - "!5-workshop-proposals/"
-    - "!6-visualizing-information/"
-    - "!7-factors-amounts-proportions/"
-    - "!8-comparisons/"
-    - "!9-trends/"
-    - "!10-polishing-charts/"
-    - "!11-maps/"
-    - "!12-workshop-final-analysis/"
-    - "!13-interactivity/"
-    - "!14-story-telling"
-    - "!15-final-presentations/"
   resources:
     - "class/"
     - "rubrics/"
@@ -32,25 +18,20 @@ project:
     - "templates/"
 
 website:
-  title: EMSE 4572 / 6572
+  title: "PUBH 6199: Visualizing Data with R"
   image: images/logo.png
-  site-url: https://eda.seas.gwu.edu/2024-Fall/
+  site-url: https://pubh6199-data-viz-with-r.github.io/2025-Summer
   favicon: images/favicon.ico
-  repo-url: https://github.com/emse-eda-gwu/2024-Fall
+  repo-url: https://github.com/pubh6199-data-viz-with-r/2025-Summer
   repo-actions: [edit, issue]
-  description: 'Course website for Fall 2024 semester of the EMSE course "Exploratory Data Analysis" at GWU'
+  description: 'Course website for PUBH 6199: Visualizing Data with R at George Washington University, offered in Summer 2025.'
   search: true
   open-graph:
     locale: es_ES
-    site-name: https://eda.seas.gwu.edu/
-  twitter-card:
-    creator: "@johnhelveston"
-    site: "@johnhelveston"
-    image: "images/logo-square.png"
-    card-style: summary
+    site-name: https://pubh6199-data-viz-with-r.github.io/
   sidebar:
     style: "docked"
-    background: "dark"
+    background: "primary"
     collapse-level: 1
     search: true
     contents:
@@ -63,30 +44,6 @@ website:
       - text: Schedule
         icon: table
         href: schedule.qmd
-      - section: Mini Projects
-        icon: pencil-square
-        contents:
-          - text: "1: Data Cleaning"
-            href: mini/1-data-cleaning.qmd
-          - text: "2: Exploring Data"
-            href: mini/2-exploring-data.qmd
-          - text: "3: Re-design" 
-            href: mini/3-redesign.qmd
-      - section: Final Project
-        icon: pencil-square
-        contents:
-          - text: Overview
-            href: project/0-overview.qmd
-          - text: Proposal
-            href: project/1-proposal.qmd
-          - text: Progress Report 
-            href: project/2-progress-report.qmd
-          - text: Final Report
-            href: project/3-final-report.qmd
-          - text: Final Presentation
-            href: project/4-presentation.qmd
-          - text: Examples
-            href: project/examples.qmd
       - text: Software
         icon: download
         href: software.qmd
@@ -101,13 +58,13 @@ website:
         href: references.qmd
       - text: Project Showcase
         icon: bar-chart-line-fill
-        href: https://eda.seas.gwu.edu/showcase.html#fall-2024
+        href: https://pubh6199-data-viz-with-r.github.io/showcase.html#summer-2025
       - text: Slack
         icon: slack
-        href: https://emse-eda-f24.slack.com
-      - text: "Schedule a call w/Prof. Helveston"
+        href: https://pubh6199datav-7n52652.slack.com
+      - text: "Schedule a call w/Prof. Hu"
         icon: clock-fill
-        href: https://jhelvy.appointlet.com/b/professor-helveston
+        href: https://calendly.com/xindi-hu/
       - section: Other
         icon: question-circle-fill
         contents:
@@ -119,17 +76,18 @@ website:
             href: LICENSE.qmd
           - text: Contact
             icon: envelope-fill
-            href: mailto:jph@gwu.edu
+            href: mailto:xindi.hu@gwu.edu
           - text: Source files
             icon: github
-            href: https://github.com/emse-eda-gwu/2024-Fall
+            href: https://github.com/pubh6199-data-viz-with-r/2025-Summer
   page-footer:
+    left: "© 2025 Dr. Xindi Hu"
     center:
-      - text: "© 2024 John Paul Helveston {{< fa creative-commons-sa >}} <a href='LICENSE.html'><i class='fab fa-creative-commons'></i><i class='fab fa-creative-commons-by'></i><i class='fab fa-creative-commons-sa'></i></a><br><i class='far fa-calendar-alt'></i> {{< var weekday >}} | <i class='far fa-clock'></i> {{< var time >}} | <a href='{{< var room_url >}}'><i class='fa fa-map-marker-alt'></i> {{< var room >}}</a><br><a href='https://www.jhelvy.com'><i class='fas fa-user'></i> Dr. John Paul Helveston</a> | <a href='mailto:{{< var email >}}'><i class='fas fa-envelope'></i> {{< var email >}}</a> | <a href='{{< var repo >}}'><i class='fab fa-github'></i></a>"
-
+      - text: "<a href='https://pubh6199-data-viz-with-r.github.io/LICENSE.html'>LICENSE: CC-BY-SA <i class='fab fa-creative-commons'></i><i class='fab fa-creative-commons-by'></i><i class='fab fa-creative-commons-sa'></i></a>"
+    right: "GWU Milken Institute SPH"
 format:
   html:
-    theme: minty
+    theme: flatly
     css: styles.css
     anchor-sections: true
     smooth-scroll: true
@@ -137,6 +95,5 @@ format:
     link-external-icon: false
     # This is to include fontawesome icons
     include-in-header: "_includes/header.html"
-
 filters:
     - schedule.lua

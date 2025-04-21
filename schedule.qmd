@@ -1,5 +1,5 @@
 ---
-title: Schedule
+title: Schedule (to be updated)
 toc: false
 execute:
   echo: false
@@ -42,7 +42,3 @@ done <- schedule %>%
 
 done
 ```
-
-<center>
-[Final Interviews](./class/interviews.html) will be held virtually December 09-10 (sign up [here](https://calendar.app.google/21TiEPKvCF5A5AgY9))
-</center>

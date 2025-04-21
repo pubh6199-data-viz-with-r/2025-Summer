@@ -2,13 +2,13 @@
 
 > **You should install and set everything here _before_ the first day of class.**
 
-1. Sign up for [Slack]({{< var slack >}}). You should have been sent a link to join in the course intro email. If not, email Professor Helveston for an invite link. I recommend using your `@gwu.edu` email to sign up, but if you use another email for another Slack then use that.
+1. Sign up for [Slack]({{< var slack >}}). You should have been sent a link to join in the course intro email. If not, email Professor Hu for an invite link. I recommend using your `@gwu.edu` email to sign up, but if you use another email for another Slack then use that.
 
 2. Install the Slack app on your phone and **Turn notifications on!**. I'll send all course communication via Slack, so please make sure your notifications are on so you don't miss anything. 
 
 3. Install the latest version of R and RStudio:
 
-- [Download and install R](https://cloud.r-project.org) (version 4.0.2 or higher)
+- [Download and install R](https://cloud.r-project.org) (version 4.4.2 or higher)
 - [Download and install RStudio](https://rstudio.com/products/rstudio/download/) (Desktop version)
 
 4. If you have a Mac, install [XQuartz](https://www.xquartz.org/). This is needed for making some figures and is only for Mac (if you're on Windows or Linux, skip this step).

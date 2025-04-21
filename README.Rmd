@@ -6,7 +6,7 @@ output:
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-## EMSE 4572 / 6572: Exploratory Data Analysis (Fall 2024) <a href='https://github.com/emse-eda-gwu/2024-Fall'><img src='images/logo.png' align="right" height="139"/></a>
+## PUBH 6199: Visualizing Data with R (Summer 2025) <a href='https://pubh6199-data-viz-with-r.github.io/2025-Summer'><img src='images/logo.png' align="right" height="139"/></a>
 
 <!-- badges: start -->
 [![License: CC-BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA-lightgrey)](https://creativecommons.org/licenses/by-sa/4.0/)
@@ -18,10 +18,10 @@ output:
 ```
 
 For more details, please see the [course
-website](https://eda.seas.gwu.edu/2024-Fall/).
+website](https://pubh6199-data-viz-with-r.github.io/2025-Summer).
 
 ### Acknowledgments
 
 This course was inspired by many other courses / resources that cover
 similar material - see the course [about
-page](https://eda.seas.gwu.edu/2024-Fall/about.html) for more details.
+page](https://pubh6199-data-viz-with-r.github.io/2025-Summer/about.html) for more details.

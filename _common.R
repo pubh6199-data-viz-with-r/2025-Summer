@@ -78,7 +78,7 @@ get_schedule <- function() {
     
     # Get raw schedule
 
-    df <- read_csv(here::here('schedule.csv'))
+    df <- read_csv(here::here('schedule.csv')) # Silas TO-DO, update the schedule.csv based on syllabus
 
     # Quiz vars
 

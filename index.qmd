@@ -1,18 +1,12 @@
-# EMSE 4572 / 6572<br>Exploratory Data Analysis<br>Fall 2024
+# PUBH 6199: Visualizing Data with R (Summer 2025)
 
 ::: {.grid}
 
-::: {.g-col-3}
-
-<img src="images/logo.png" width="200">
-
-:::
-
 ::: {.g-col-9}
 
-**Department**: [Engineering Management and Systems Engineering](https://www.emse.seas.gwu.edu/) @ [GWU](https://www.gwu.edu/)
+**Department**: [Environmental and Occupational Health](https://publichealth.gwu.edu/departments/environmental-and-occupational-health) @ [GWU](https://www.gwu.edu/)
 
-**Credits**: 3
+**Credits**: 2
 
 **Description**:
 
@@ -30,5 +24,9 @@
 ```
 
 :::
+::: {.g-col-3}
 
+<img src="images/logo.png" width="200">
+
+:::
 :::
