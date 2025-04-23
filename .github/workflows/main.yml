@@ -1,7 +1,7 @@
 name: Render and Deploy Quarto Site
 on:
   push:
-    branches: main
+    branches: [main]
 
 jobs:
   build:
