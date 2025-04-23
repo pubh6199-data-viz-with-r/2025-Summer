@@ -18,8 +18,10 @@ jobs:
       - name: Install R packages
         run: |
           install.packages(c(
-            "tidyverse", "here", "gsheet", "kableExtra", "cowplot", "ggrepel", "viridis", "rmarkdown", "knitr"
+            "tidyverse", "here", "gsheet", "kableExtra", "cowplot", "ggrepel", 
+            "viridis", "rmarkdown", "knitr", "remotes"
           ))
+          remotes::install_github("gadenbuie/xaringanExtra")
         shell: Rscript {0}
 
       - name: Render site
