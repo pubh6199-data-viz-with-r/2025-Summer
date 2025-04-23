@@ -41,24 +41,24 @@ website:
       - text: Syllabus
         icon: map-fill
         href: syllabus.qmd
-      - text: Schedule
-        icon: table
-        href: schedule.qmd
+    #  - text: Schedule
+    #   icon: table
+    #   href: schedule.qmd
       - text: Software
         icon: download
         href: software.qmd
       - text: FAQ
         icon: question-square-fill
         href: faq.qmd
-      - text: Finding Data
-        icon: database-fill
-        href: finding-data.qmd
-      - text: References
-        icon: bookmark-fill
-        href: references.qmd
-      - text: Project Showcase
-        icon: bar-chart-line-fill
-        href: https://pubh6199-data-viz-with-r.github.io/showcase.html#summer-2025
+    #  - text: Finding Data
+    #    icon: database-fill
+    #    href: finding-data.qmd
+    #  - text: References
+    #    icon: bookmark-fill
+    #    href: references.qmd
+    #  - text: Project Showcase
+    #    icon: bar-chart-line-fill
+    #    href: https://pubh6199-data-viz-with-r.github.io/showcase.html#summer-2025
       - text: Slack
         icon: slack
         href: https://pubh6199datav-7n52652.slack.com

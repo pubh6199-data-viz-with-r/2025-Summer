@@ -21,7 +21,7 @@ Instructor | TA| Course
 <i class="bi-building-fill"></i> Milken Institute SPH, #423 | <i class="bi-building-fill"></i> TBD | <i class="bi-geo-alt-fill"></i> [{{< var room >}}]({{< var room_url >}})
 <i class="bi-telephone-fill"></i> +1 (202) 994-7766 | <i class="bi-telephone-fill"></i> NA | <i class="bi-calendar-week-fill"></i> {{< var dates >}}
 <i class="bi-envelope-fill"></i> [{{< var email >}}](mailto:{{< var email >}}) | <i class="bi-envelope-fill"></i> [{{< var ta-email >}}](mailto:{{< var ta-email >}}) |<i class="bi-slack"></i> [Slack]({{< var slack >}}){target="_blank"}| 
-
+Office Hour: M 4-5PM ET | Office Hour: W 2-3PM ET| /
 </div>
 
 ## Course Description
