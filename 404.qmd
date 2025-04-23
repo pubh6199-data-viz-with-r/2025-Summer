@@ -1,32 +1,14 @@
 ---
+title: "Page Not Found"
+format: html
 execute: 
-  echo: false
-  message: false
-  warning: false
+  eval: false
 ---
 
-```{r setup}
-source("_common.R")
-```
+# 😕 Oops!
 
-:::float-left
+We can't find the page you were looking for.
 
-<br>
-<center>
-<img src="images/404-hippo.png" width=350>
-</center>
+Use the navigation bar above to return to the main site, or [go to the homepage](https://github.com/pubh6199-data-viz-with-r/2025-Summer).
 
-# Whoops!
-
-### The requested page does not exist 😔
-
-<br>
-
-```{r}
-icon_link(
-    text = "Return to home",
-    url  = "https://eda.seas.gwu.edu/2024-Fall/"
-)
-```
-
-:::
+If you believe this is a broken link from the course site, please report it to [Dr. Xindi Hu](mailto:xindi.hu@gwu.edu).
