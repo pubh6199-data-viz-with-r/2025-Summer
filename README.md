@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-## EMSE 4572 / 6572: Exploratory Data Analysis (Fall 2024) <a href='https://github.com/emse-eda-gwu/2024-Fall'><img src='images/logo.png' align="right" height="139"/></a>
+## PUBH 6199: Visualizing Data with R (Summer 2025) <a href='https://pubh6199-data-viz-with-r.github.io/2025-Summer'><img src='images/logo.png' align="right" height="139"/></a>
 
 <!-- badges: start -->
 
@@ -11,28 +11,19 @@
 
 ### Description
 
-This course provides students with a foundation in exploring data using
-the [R programming language](https://www.r-project.org/). Students will
-learn how to source, manage, transform, and explore a wide variety of
-data types. Students will also master the fundamental concepts for
-visualizing and communicating information contained in raw data,
-including the human psychology of visual information processing. All
-analyses will be conducted to support reproducibility from raw data to
-results using [Quarto](https://quarto.org/) (which is built on the ideas
-of [RMarkdown](https://bookdown.org/yihui/rmarkdown/)). Teaching will
-involve interactive lectures with plenty of class time spent working on
-examples and coding. Students will be assessed through in-class quizzes,
-reading reflections, and exploratory projects. Throughout the semester,
-students will work on a research project of their own design to
-demonstrate mastery of the course’s topics. At the end of the semester,
-students will submit a final, reproducible report of their project along
-with a 10-minute video presentation of their findings.
+This course will equip students with the skills and knowledge to create
+impactful and responsible data visualizations using the R programming
+language. At the end of this class, students will gain proficiency in
+both fundamental (e.g. bar chart, bubble chart, choropleth maps) as well
+as advanced graph types (e.g. Sankey diagram, heatmap, parallel
+coordinates plot, faceted graphs) and know how to create them using R.
 
 For more details, please see the [course
-website](https://eda.seas.gwu.edu/2024-Fall/).
+website](https://pubh6199-data-viz-with-r.github.io/2025-Summer).
 
 ### Acknowledgments
 
 This course was inspired by many other courses / resources that cover
 similar material - see the course [about
-page](https://eda.seas.gwu.edu/2024-Fall/about.html) for more details.
+page](https://pubh6199-data-viz-with-r.github.io/2025-Summer/about.html)
+for more details.
