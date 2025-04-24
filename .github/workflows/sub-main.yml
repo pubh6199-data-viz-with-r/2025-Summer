@@ -6,7 +6,9 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # ✅ more stable and faster than macOS
+    runs-on: ubuntu-latest
+    env:
+      R_LIBS_USER: ~/.local/R/library
 
     steps:
       - uses: actions/checkout@v3
@@ -19,13 +21,23 @@ jobs:
 
       - uses: quarto-dev/quarto-actions/setup@v2
 
-      # ✅ Install system dependencies before R packages
+      - name: Create R library path
+        run: mkdir -p ~/.local/R/library
+
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libgit2-dev libxml2-dev libcurl4-openssl-dev
+          sudo apt-get install -y \
+            libgit2-dev \
+            libxml2-dev \
+            libcurl4-openssl-dev \
+            libharfbuzz-dev \
+            libfribidi-dev \
+            libfreetype6-dev \
+            libpng-dev \
+            libtiff5-dev \
+            libjpeg-dev
 
-      # ✅ Pre-query dependencies to support caching
       - name: Query R dependencies
         run: |
           options(download.file.method = "libcurl")
@@ -34,7 +46,6 @@ jobs:
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
         shell: Rscript {0}
 
-      # ✅ Cache R packages
       - name: Cache R packages
         uses: actions/cache@v3
         with:
@@ -42,10 +53,9 @@ jobs:
           key: ubuntu-r-4.4-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ubuntu-r-4.4-
 
-      # ✅ Install CRAN + GitHub packages
       - name: Install R packages
         env:
-          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}  # ✅ This fixes remotes::install_github()
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         run: |
           options(repos = "https://cran.rstudio.com")
           install.packages(c(
@@ -55,11 +65,15 @@ jobs:
           remotes::install_github("gadenbuie/xaringanExtra")
         shell: Rscript {0}
 
-      # ✅ Render the Quarto site
+      - name: Confirm tidyverse is installed
+        run: |
+          library(tidyverse)
+          sessionInfo()
+        shell: Rscript {0}
+
       - name: Render Quarto site
         run: quarto render
 
-      # ✅ Deploy to GitHub Pages (creates gh-pages branch if needed)
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
