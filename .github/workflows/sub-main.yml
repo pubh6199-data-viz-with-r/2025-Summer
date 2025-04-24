@@ -44,6 +44,8 @@ jobs:
 
       # ✅ Install CRAN + GitHub packages
       - name: Install R packages
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}  # ✅ This fixes remotes::install_github()
         run: |
           options(repos = "https://cran.rstudio.com")
           install.packages(c(
