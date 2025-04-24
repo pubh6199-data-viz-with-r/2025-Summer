@@ -1,17 +1,13 @@
-week,date,quiz,quiz_content,theme,n_class,stub_class,name_class,description_class,n_assign,name_assign,stub_assign,due_assign,n_mini,stub_mini,name_mini,due_mini,n_project,stub_project,name_project,due_project
-1,2024/08/28,,,Cleaning,1,getting-started,Getting Started,Class orientation; workflow; Quarto; importing data; data wrangling & plotting refresher,1,,tidy-data,2024/09/02,,,,,,,,
-2,2024/09/04,,,Cleaning,2,tidy-data,Tidy Data,Tidy data; reshaping data; data provenance; writing a research question,2,,cleaning-data,2024/09/09,,,,,,,,
-3,2024/09/11,1,Weeks 1 - 2,Cleaning,3,cleaning-data,Cleaning Data,Joins; changing data types; dealing with messy Excel files,3,,exploring-data,2024/09/16,1,data-cleaning,Data Cleaning,2024/09/24,1,proposal,Proposal,2024/09/22
-4,2024/09/18,,,Exploring,4,exploring-data,Exploring Data,Data types & scales; centrality & variability; correlation,,<b>Finish Proposals and<br>Mini Project 1!</b>,,,,,,,,,,
-5,2024/09/25,,,,5,workshop-proposals,Project Workshop,Team meetings to discuss proposal feedback,4,,visualizing-information,2024/09/30,,,,,,,,
-6,2024/10/02,2,Week 4,Visualizing,6,visualizing-information,Visualizing Information,"Psychology of graphical perception; preattentive attributes; ugly, bad, & wrong charts; chart design best practices",5,,factors-amounts-proportions,2024/10/07,2,exploring-data,Exploring Data,2024/10/15,,,,
-7,2024/10/09,,,Visualizing,7,factors-amounts-proportions,"Factors, Amounts, & Proportions","Manipulating factors; plotting amounts with bars, dots, and lollipops; parts of whole",6,,comparisons,2024/10/14,,,,,,,,
-8,2024/10/16,,,Visualizing,8,comparisons,Comparisons,Facets; reference lines; dumbbells; slopes; distributions,7,,trends,2024/10/21,,,,,2,progress-report,Progress Report,2024/10/27
-9,2024/10/23,3,Weeks 7 - 8,Visualizing,9,trends,Trends,Line charts; heat maps; animation,8,,polishing-charts,2024/10/28,,,,,,,,
-10,2024/10/30,,,Visualizing,10,polishing-charts,Polishing Charts,Colors; annotations; scales; themes; multi-panel figures,9,,maps,2024/11/04,,,,,,,,
-11,2024/11/06,,,Visualizing,11,maps,Maps,Maps in ggplot; mapping data to maps; projections,10,,project-workshop,2024/11/11,3,redesign,Re-design,2024/11/19,,,,
-12,2024/11/13,4,Weeks 9 - 10,Visualizing,12,workshop-final-analysis,In-Class Project Workshop,Full day dedicated to making progress towards final analyses,11,,interactivity,2024/11/18,,,,,,,,
-13,2024/11/20,5,Weeks 6 - 12,,13,interactivity,Interactivity,Plotly; interactive tables; shiny apps,12,,story-telling,2024/12/02,,,,,3,final-report,Final Report,2024/12/08
-14,2024/11/27,,,,,,Thanksgiving - no class,,,,,,,,,,,,,
-15,2024/12/04,,,Communicating,14,story-telling,Story Telling,Telling stories; slide design; giving a talk,,,,,,,,,4,presentation,Presentation,2024/12/10
-16,2024/12/11,,,Communicating,15,final-presentations,Final Presentations,In-class presentation showcase w/Q&A,,,,,,,,,,,,
+week,date,theme,n_class,stub_class,name_class,description_class,n_assign,name_assign,stub_assign,due_assign,n_lab,stub_lab,due_lab
+1,5/20/25,Cleaning,1,course-introduction,Course Introduction,course objectives; evaluation criteria; ggplot2,1,,hw1,5/26/25,,,
+1,5/22/25,Cleaning,2,data-wrangling,Data Wrangling,code version control; clean data; tidyverse,,,,,1,lab1,5/26/25
+2,5/27/25,Desining,3,visual-vocabulary,Visual Vocabulary,graphical integrity; choose chart type; design considerations,2,,hw2,6/2/25,,,
+2,5/29/25,Designing,4,fundamental-chart,Fundamental Chart Types,basic chart; trend over time; distribution; relationships,,,,,2,lab2,6/2/25
+3,6/3/25,Real-world,5,case-study,Case Study,practical real world applications,3,Project brainstorm,hw3,6/9/25,,,
+3,6/5/25,Designing,6,specialized-chart,Specialized Chart Types,"faceted plot; sankey diagram, parallel coordinates, dos and donts",,,,,3,lab3,6/9/25
+4,6/10/25,Interactive,7,r-shiny,Introdcution to R Shiny,R shiny; interactive data visualization,4,,hw4,6/16/25,,,
+4,6/12/25,Project,8,final-project-plan,Final Project - Plan,public data repository; form teams; sketch,,Project prototype,,,4,lab4,6/16/25
+5,6/17/25,Designing,9,maps,Maps,choropleth map; point map; heat map; design decisions,5,,hw5,6/23/25,,,
+5,6/19/25,Real-world,10,recreate-viz,Recreate Visualization from Public Source,research reproducibility; tidycensus,,,,,5,lab5,6/23/25
+6,6/24/25,Project,11,final-project-prototype,Final Project - Prototype,1-on-1 feedback; progress update,,,,,,,
+6,6/26/25,Project,12,final-project-present,Final Project - Present,final project presentation; peer feedback,6,Final project,final project,6/26/25,,,

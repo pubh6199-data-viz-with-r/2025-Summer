@@ -41,9 +41,9 @@ website:
       - text: Syllabus
         icon: map-fill
         href: syllabus.qmd
-    #  - text: Schedule
-    #   icon: table
-    #   href: schedule.qmd
+      - text: Schedule
+        icon: table
+        href: schedule.qmd
       - text: Software
         icon: download
         href: software.qmd

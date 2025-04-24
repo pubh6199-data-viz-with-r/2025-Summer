@@ -1,5 +1,5 @@
 ---
-title: Schedule (to be updated)
+title: Schedule
 toc: false
 execute:
   echo: false
@@ -20,25 +20,21 @@ schedule <- get_schedule()
 names(schedule) <- str_to_title(names(schedule))
 done <- schedule %>%
   rename(
-      `Mini Projects` = Mini,
-      `Final Projects` = Project,
-      `Weekly HW` = Assign
+      `Assignment` = Assign
   ) %>%
   select(
-      Week, Date = Date_md, Quiz, Class, `Weekly HW`, `Mini Projects`,
-      `Final Projects`
+      Week, Date = Date_md, Class, Assignment, Lab
   ) %>%
   kable(format = 'html', escape = FALSE,
-        align = c('c', 'c', 'c', 'l', 'l', 'l', 'l')) %>%
-  kable_styling(full_width = F, bootstrap_options = c("striped", "hover")) %>%
-  column_spec(column = 4, width = '19em') 
+        align = c('c', 'c', 'c', 'l', 'l')) %>%
+  kable_styling(full_width = F, bootstrap_options = c("striped", "hover")) 
 
 # Add highlighting based on current week if we're still in the semester
-# highlight <- which(Sys.Date() > (schedule$Date))
-# if (Sys.Date() <= ymd("2024-12-13")) {
-#   done <- done %>%
-#     row_spec(highlight, background = "#C6C6C6")
-# }
+highlight <- which(Sys.Date() > (schedule$Date_md))
+if (Sys.Date() <= lubridate::ymd("2025-06-27")) {
+     done <- done %>%
+     row_spec(highlight, background = "#C6C6C6")
+}
 
 done
 ```

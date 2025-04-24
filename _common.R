@@ -23,10 +23,6 @@ knitr::opts_chunk$set(
     fig.path   = "figs/"
 )
 
-# The icon_link() function is in {distilltools}, but I've modified this
-# one to include  a custom class to be able to have more control over the
-# CSS and an optional target argument
-
 make_rubric <- function(rubric) {
   rubric %>%
     mutate(description = paste0("<b>", points, '</b><br>', description)) %>%
@@ -78,18 +74,7 @@ get_schedule <- function() {
     
     # Get raw schedule
 
-    df <- read_csv(here::here('schedule.csv')) # Silas TO-DO, update the schedule.csv based on syllabus
-
-    # Quiz vars
-
-    quiz <- df %>%
-        mutate(
-            quiz = ifelse(
-                is.na(quiz),
-                "",
-                paste0('Quiz ', quiz, ":<br><em>", quiz_content, "</em>"))
-        ) %>%
-        select(week, ends_with('quiz'))
+    df <- read_csv(here::here('schedule.csv')) 
 
     # Class vars
 
@@ -112,8 +97,9 @@ get_schedule <- function() {
     # Weekly assignment vars
 
     assignments <- df %>%
+        filter(!is.na(n_assign)) %>%
         mutate(
-            due_assign = format(due_assign, format = "%b %d"),
+            due_assign = lubridate::mdy(due_assign),
             assign = ifelse(
                 is.na(due_assign),
                 name_assign,
@@ -123,45 +109,31 @@ get_schedule <- function() {
         ) %>%
         select(week, ends_with('assign'))
     
-    # Mini project vars
 
-    mini <- df %>%
+    # Weekly lab vars
+    
+    labs <- df %>%
+        filter(!is.na(n_lab)) %>%
         mutate(
-            due_mini = format(due_mini, format = "%b %d"),
-            mini = ifelse(
-                is.na(due_mini),
-                "",
+            due_lab = lubridate::mdy(due_lab),
+            lab = ifelse(
+                is.na(due_lab),
+                stub_lab,
                 paste0(
-                    '<a href="mini/', n_mini, "-", stub_mini, '.html"><b>',
-                    name_mini, "</b></a><br>Due: ", due_mini))
+                    '<a href="lab/', n_lab, "-", stub_lab, '.html"><b>Lab ',
+                    n_lab, "</b></a><br>Due: ", due_lab))
         ) %>%
-        select(week, ends_with('mini'))
-
-    # Final project vars
-
-    project <- df %>%
-        mutate(
-            due_project = format(due_project, format = "%b %d"),
-            project = ifelse(
-                is.na(due_project),
-                "",
-                paste0(
-                    '<a href="project/', n_project, "-", stub_project, '.html"><b>',
-                    name_project, "</b></a><br>Due: ", due_project))
-        ) %>%
-        select(week, ends_with('project'))
-
+        select(week, ends_with('lab'))
+    
     
     # Final schedule data frame
 
     schedule <- df %>% 
-        select(week, date, theme) %>% 
-        mutate(date_md = format(date, format = "%b %d")) %>% 
-        left_join(class, by = "week") %>% 
-        left_join(quiz, by = "week") %>%
-        left_join(assignments, by = "week") %>% 
-        left_join(mini, by = "week") %>% 
-        left_join(project, by = "week") %>%
+        select(week, date, theme, n_class, n_assign, n_lab) %>% 
+        mutate(date_md = lubridate::mdy(date)) %>% 
+        left_join(class, by = c("week", "n_class")) %>% 
+        left_join(assignments, by = c("week", "n_assign")) %>%
+        left_join(labs, by = c("week", "n_lab")) %>%
         ungroup()
     
     return(schedule)
