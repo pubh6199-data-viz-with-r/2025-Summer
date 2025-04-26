@@ -17,6 +17,4 @@
 
 6. Sign up for [Posit Cloud](https://posit.cloud/plans/free)^["Posit" is the company that makes "RStudio", the software we'll use to work with R.] (the free version). It's basically the same thing as RStudio, but accessible via a web browser. If things aren't working on your computer, this is a great backup to quickly get back to working in RStudio.
 
-7. You'll need to install some R packages in RStudio that we will use throughout the semester. To do so, open RStudio then copy-paste [this code](./content/packages.R) into the console and press Return. This will install all the packages listed in the file.
-
 That's it - you're all set for class!
