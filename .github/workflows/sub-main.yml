@@ -1,3 +1,4 @@
+
 name: Render and Deploy Quarto Site
 
 on:
@@ -44,6 +45,34 @@ jobs:
             any::ggplot2
             any::ggrepel
             any::plotly
+            any::cowplot
+            any::here
+            any::htmltools
+            any::kableExtra
+            any::knitr
+            any::lubridate
+            any::tidyverse
+            any::rmarkdown
+            any::ggplot2
+            any::leaflet
+            any::shiny
+            any::renderthis
+            any::tools
+            any::zip
+            any::countdown
+            any::fontawesome
+            any::ggrepel
+            any::janitor
+            any::metathis
+            any::readxl
+            any::remotes
+            any::gsheet
+            any::quarto
+            any::rvest
+            any::viridis
+            any::xaringanExtra
+            any::renv
+
 
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
