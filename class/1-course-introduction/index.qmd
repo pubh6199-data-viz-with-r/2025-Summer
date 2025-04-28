@@ -17,11 +17,11 @@ resources:
 ---
 
 ## Outline for today
-
--   **Who?**
--   How?
--   What?
--   Why?
+- <span style="font-weight: bold; color: orange">Who?</span>
+- How?
+- What?
+- Why?
+- Introduction to {ggplot2}
 
 ## Meet your instructor {.smaller}
 
@@ -52,11 +52,11 @@ MPH Candidate, Environmental Health Science and Policy
 ## About you {.center .middle}
 
 ## Outline for today
-
--   Who?
--   **How?**
--   What?
--   Why?
+- Who?
+- <span style="font-weight: bold; color: orange">How?</span>
+- What?
+- Why?
+- Introduction to {ggplot2}
 
 ## PUBH 6199 Goals
 
@@ -143,12 +143,37 @@ MPH Candidate, Environmental Health Science and Policy
     -   Please allow 24 hrs for slack/email response
     -   Replies in the after hours (after 6pm ET) and over the weekends are not guaranteed
 
-## Outline for today
+## Class Mascot {.fit-text .smaller}
 
--   Who?
--   How?
--   **What?**
--   Why?
+::: {.column width="60%"}
+<br>
+<br>
+
+### Rubber Duck Debugging 🐤
+
+::: {.center}
+
+**Explain your problem out loud — as if you're talking to a rubber duck.**
+
+- Slows down your thinking
+- Reveals skipped steps
+- Helps you find mistakes
+- Works even without another person!
+
+:::
+:::
+
+::: {.column width="40%"}
+![](images/mascot.png){height="550"}
+:::
+
+
+## Outline for today
+- Who?
+- How?
+- <span style="font-weight: bold; color: orange">What?</span>
+- Why?
+- Introduction to {ggplot2}
 
 ## What is data visualization?
 
@@ -289,17 +314,38 @@ Source: [Jonathan Schwabish](https://policyviz.com/2022/02/01/the-data-visualiza
 :::
 
 ## Outline for today
+- Who?
+- How?
+- What?
+- <span style="font-weight: bold; color: orange">Why?</span>
+- Introduction to {ggplot2}
 
--   Who?
--   How?
--   What?
--   **Why?**
+## {background-image="images/in-class-activity.png"}
 
-## In-Class Activity: {.center .middle background-image="images/in-class-activity.png" style="text-align: center"}
+::: {.v-center-container style="text-align: center;"}
+<br>
+<br>
+<br>
+In-Class Activity:
 
-::: {style="text-align: center"}
 In small group of 2, discuss your favorite example of data visualization, why do you like it? what functionality does that data visualization serve?
 :::
+
+```{r}
+countdown::countdown(
+  minutes = 5,
+  bottom = 0,
+  # Fanfare when it's over
+  play_sound = TRUE,
+  color_border              = "#FFFFFF",
+  color_text                = "#7aa81e",
+  color_running_background  = "#7aa81e",
+  color_running_text        = "#FFFFFF",
+  color_finished_background = "#ffa07a",
+  color_finished_text       = "#FFFFFF",
+  font_size = "2em",
+  )
+```
 
 ## Why do we visualize data?
 
@@ -313,7 +359,7 @@ To reveal patterns that are hard to see in raw numbers...
 ![](images/anscombe-3.png){.fragment}
 :::
 
-## To communicate complex ideas quickly...{.smaller}
+## To communicate complex ideas quickly...{style="font-size: 70%"}
 
 
 | Income Group | Males: Under 65 | Males: 65 or Over | Females: Under 65 | Females: 65 or Over |
@@ -326,23 +372,98 @@ To reveal patterns that are hard to see in raw numbers...
 **Is the effect of age on cholesterol levels the same for all subgroups defined by sex and income?**
 :::
 
-## To communicate complex ideas quickly...
+## To communicate complex ideas quickly...{style="font-size: 70%"}
 
-![](images/cholesterol-example.png){style="width: 100%; display: block; margin: auto;"}
+![](images/cholesterol-example.png){style="width: 50%; display: block; margin: auto;"}
+
+::: {style="text-align: center"}
 Source: [SM Kosslyn: Clear and to the point](https://psycnet.apa.org/record/2007-12573-000)
+:::
 
-## To explore and generate new questions
+## To explore and generate new questions {style="font-size: 70%"}
 
+::: {style="font-size: 70%"}
 > "Exploratory Data Analysis, or EDA, is a process to use visualization and transformation to explore your data in a systemic way. EDA is not a formal process with a strict set of rules. More than anything, EDA is a state of mind. During the initial phases of EDA you should feel free to investigate every idea that occurs to you. Some of these ideas will pan out, and some will be dead ends. As your exploration continues, you will home in on a few particularly productive areas that you’ll eventually write up and communicate to others."
+:::
 
 ::: {style="text-align: right"}
 -from [R for Data Science](https://r4ds.had.co.nz/exploratory-data-analysis.html)
 :::
 
+. . .
 
-## To tell a story and evoke emotions
+:::: columns
+
+::: {.column width="33%"}
+
+```{r}
+#| eval: true
+#| echo: false
+#| fig-align: "center"
+#| out-width: "100%"
+knitr::include_graphics("images/diamond-hist.png")
+```
+
+```{r}
+#| eval: false
+#| echo: true
+ggplot(diamonds, aes(x = carat)) +
+  geom_histogram(binwidth = 0.5)
+```
+:::
+
+::: {.column width="33%"}
+
+```{r}
+#| eval: true
+#| echo: false
+#| fig-align: "center"
+#| out-width: "100%"
+knitr::include_graphics("images/cars-boxplot.png")
+```
+
+```{r}
+#| eval: false
+#| echo: true
+ggplot(mpg, aes(x = fct_reorder(class, hwy, median), y = hwy)) +
+  geom_boxplot()
+```
+:::
+
+::: {.column width="33%"}
+
+```{r}
+#| eval: true
+#| echo: false
+#| fig-align: "center"
+#| out-width: "100%"
+knitr::include_graphics("images/diamonds-freqplot.png")
+```
+
+```{r}
+#| eval: false
+#| echo: true
+ggplot(diamonds, aes(x = price, y = after_stat(density))) + 
+  geom_freqpoly(aes(color = cut), binwidth = 500, linewidth = 0.75)
+```
+:::
+
+::::
+
+## To tell a story and evoke emotions {style="font-size: 70%"}
+
+![](images/climate-stripes.jpg)
+
+::: {style="text-align: right; font-size: 70%;"}
+Source: Ed Hawkins, [Climate Stripes](https://showyourstripes.info/)
+:::
 
 ## Why R? {.smaller}
+
+::: {.column width="50%"}
+
+<br>
+<br>
 
 ::: incremental
 -   Open-source and free
@@ -351,514 +472,49 @@ Source: [SM Kosslyn: Clear and to the point](https://psycnet.apa.org/record/2007
 -   Data analysis and visualization in one language
 -   Large open-source community and ecosystem
 :::
-
-## Pretty Code {auto-animate="true"}
-
--   Over 20 syntax highlighting themes available
--   Default theme optimized for accessibility
-
-``` r
-# Define a server for the Shiny app
-function(input, output) {
-  
-  # Fill in the spot we created for a plot
-  output$phonePlot <- renderPlot({
-    # Render a barplot
-  })
-}
-```
-
-::: footer
-Learn more: [Syntax Highlighting](https://{{< meta prerelease-subdomain >}}quarto.org/docs/output-formats/html-code.html#highlighting)
 :::
 
-## Code Animations {auto-animate="true"}
+:::{ .column width="50%"}
+![](images/r-encouragement.png){height="70%"}
 
--   Over 20 syntax highlighting themes available
--   Default theme optimized for accessibility
-
-``` r
-# Define a server for the Shiny app
-function(input, output) {
-  
-  # Fill in the spot we created for a plot
-  output$phonePlot <- renderPlot({
-    # Render a barplot
-    barplot(WorldPhones[,input$region]*1000, 
-            main=input$region,
-            ylab="Number of Telephones",
-            xlab="Year")
-  })
-}
-```
-
-::: footer
-Learn more: [Code Animations](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/advanced.html#code-animations)
+::: {style="text-align: right; font-size: 70%;"}
+Art by [Allison Horst](https://allisonhorst.com/everything-else)
 :::
 
-## Line Highlighting
-
--   Highlight specific lines for emphasis
--   Incrementally highlight additional lines
-
-``` {.python code-line-numbers="4-5|7|10"}
-import numpy as np
-import matplotlib.pyplot as plt
-
-r = np.arange(0, 2, 0.01)
-theta = 2 * np.pi * r
-fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
-ax.plot(theta, r)
-ax.set_rticks([0.5, 1, 1.5, 2])
-ax.grid(True)
-plt.show()
-```
-
-::: footer
-Learn more: [Line Highlighting](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/#line-highlighting)
 :::
 
-## Executable Code
+##  {#end-break data-menu-title="# End / Break #" background="#033C5A"}
+<br>
+<br>
+<br>
+<br>
+
+<div class="page-center vertical-center">
+<p class="custom-subtitle bottombr">{{< fa mug-hot title="a mug with steam rising out the top" >}} Take a Break</p>
+<p class="caption-text">*~ This is the end of part 1 ~*</p>
+</div>
 
 ```{r}
-#| echo: true
-#| fig-width: 10
-#| fig-height: 4.5
-library(ggplot2)
-ggplot(mtcars, aes(hp, mpg, color = am)) +
-  geom_point() +
-  geom_smooth(formula = y ~ x, method = "loess")
+countdown::countdown(
+  minutes = 5,
+  # left = 0, right = 0,
+  # Fanfare when it's over
+  play_sound = TRUE,
+  color_border              = "#FFFFFF",
+  color_text                = "#7aa81e",
+  color_running_background  = "#7aa81e",
+  color_running_text        = "#FFFFFF",
+  color_finished_background = "#ffa07a",
+  color_finished_text       = "#FFFFFF",
+  font_size = "2em",
+  )
 ```
 
-::: footer
-Learn more: [Executable Code](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/#executable-code)
-:::
+## Outline for today
+- Who?
+- How?
+- What?
+- Why?
+- <span style="font-weight: bold; color: orange">Introduction to {ggplot2}</span>
 
-## LaTeX Equations
 
-[MathJax](https://www.mathjax.org/) rendering of equations to HTML
-
-::::: columns
-::: {.column width="40%"}
-``` tex
-\begin{gather*}
-a_1=b_1+c_1\\
-a_2=b_2+c_2-d_2+e_2
-\end{gather*}
-
-\begin{align}
-a_{11}& =b_{11}&
-  a_{12}& =b_{12}\\
-a_{21}& =b_{21}&
-  a_{22}& =b_{22}+c_{22}
-\end{align}
-```
-:::
-
-::: {.column width="60%"}
-\begin{gather*}
-a_1=b_1+c_1\\
-a_2=b_2+c_2-d_2+e_2
-\end{gather*} \begin{align}
-a_{11}& =b_{11}&
-  a_{12}& =b_{12}\\
-a_{21}& =b_{21}&
-  a_{22}& =b_{22}+c_{22}
-\end{align}
-:::
-:::::
-
-::: footer
-Learn more: [LaTeX Equations](https://{{< meta prerelease-subdomain >}}quarto.org/docs/authoring/markdown-basics.html#equations)
-:::
-
-## Column Layout {.smaller}
-
-Arrange content into columns of varying widths:
-
-:::::: columns
-::: {.column width="35%"}
-#### Motor Trend Car Road Tests
-
-The data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles.
-:::
-
-::: {.column width="3%"}
-:::
-
-::: {.column width="62%"}
-```{r}
-knitr::kable(head(mtcars)[,c("mpg",	"cyl", "disp", "hp", "wt")])
-```
-:::
-::::::
-
-::: footer
-Learn more: [Multiple Columns](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/#multiple-columns)
-:::
-
-## Incremental Lists
-
-Lists can optionally be displayed incrementally:
-
-::: incremental
--   First item
--   Second item
--   Third item
-:::
-
-. . .
-
-<br/> Insert pauses to make other types of content display incrementally.
-
-::: footer
-Learn more: [Incremental Lists](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/#incremental-lists)
-:::
-
-## Fragments
-
-Incremental text display and animation with fragments:
-
-<br/>
-
-::: {.fragment .fade-in}
-Fade in
-:::
-
-::: {.fragment .fade-up}
-Slide up while fading in
-:::
-
-::: {.fragment .fade-left}
-Slide left while fading in
-:::
-
-::: {.fragment .fade-in-then-semi-out}
-Fade in then semi out
-:::
-
-. . .
-
-::: {.fragment .strike}
-Strike
-:::
-
-::: {.fragment .highlight-red}
-Highlight red
-:::
-
-::: footer
-Learn more: [Fragments](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/advanced.html#fragments)
-:::
-
-## Slide Backgrounds {background="#43464B"}
-
-Set the `background` attribute on a slide to change the background color (all CSS color formats are supported).
-
-Different background transitions are available via the `background-transition` option.
-
-::: footer
-Learn more: [Slide Backgrounds](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/#color-backgrounds)
-:::
-
-## Media Backgrounds {background="#43464B" background-image="images/milky-way.jpeg"}
-
-You can also use the following as a slide background:
-
--   An image: `background-image`
-
--   A video: `background-video`
-
--   An iframe: `background-iframe`
-
-::: footer
-Learn more: [Media Backgrounds](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/#image-backgrounds)
-:::
-
-## Absolute Position
-
-Position images or other elements at precise locations
-
-![](mini/images/kitten-400-350.jpeg){.absolute top="170" left="30" width="400" height="400"}
-
-![](mini/images/kitten-450-250.jpeg){.absolute .fragment top="150" right="80" width="450"}
-
-![](mini/images/kitten-300-200.jpeg){.absolute .fragment bottom="110" right="130" width="300"}
-
-::: footer
-Learn more: [Absolute Position](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/advanced.html#absolute-position)
-:::
-
-## Auto-Animate {auto-animate="true" auto-animate-easing="ease-in-out"}
-
-Automatically animate matching elements across slides with Auto-Animate.
-
-:::::: r-hstack
-::: {data-id="box1" auto-animate-delay="0" style="background: #2780e3; width: 200px; height: 150px; margin: 10px;"}
-:::
-
-::: {data-id="box2" auto-animate-delay="0.1" style="background: #3fb618; width: 200px; height: 150px; margin: 10px;"}
-:::
-
-::: {data-id="box3" auto-animate-delay="0.2" style="background: #e83e8c; width: 200px; height: 150px; margin: 10px;"}
-:::
-::::::
-
-::: footer
-Learn more: [Auto-Animate](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/advanced.html#auto-animate)
-:::
-
-## Auto-Animate {auto-animate="true" auto-animate-easing="ease-in-out"}
-
-Automatically animate matching elements across slides with Auto-Animate.
-
-:::::: r-stack
-::: {data-id="box1" style="background: #2780e3; width: 350px; height: 350px; border-radius: 200px;"}
-:::
-
-::: {data-id="box2" style="background: #3fb618; width: 250px; height: 250px; border-radius: 200px;"}
-:::
-
-::: {data-id="box3" style="background: #e83e8c; width: 150px; height: 150px; border-radius: 200px;"}
-:::
-::::::
-
-::: footer
-Learn more: [Auto-Animate](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/advanced.html#auto-animate)
-:::
-
-## Slide Transitions {.smaller}
-
-The next few slides will transition using the `slide` transition
-
-| Transition | Description |
-|------------------|------------------------------------------------------|
-| `none` | No transition (default, switch instantly) |
-| `fade` | Cross fade |
-| `slide` | Slide horizontally |
-| `convex` | Slide at a convex angle |
-| `concave` | Slide at a concave angle |
-| `zoom` | Scale the incoming slide so it grows in from the center of the screen. |
-
-::: footer
-Learn more: [Slide Transitions](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/advanced.html#slide-transitions)
-:::
-
-## Tabsets {.smaller .scrollable transition="slide"}
-
-::: panel-tabset
-### Plot
-
-```{r}
-library(ggplot2)
-ggplot(mtcars, aes(hp, mpg, color = am)) +
-  geom_point() +
-  geom_smooth(formula = y ~ x, method = "loess")
-```
-
-### Data
-
-```{r}
-knitr::kable(mtcars)
-```
-:::
-
-::: footer
-Learn more: [Tabsets](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/#tabsets)
-:::
-
-## Interactive Slides {.smaller transition="slide"}
-
-Include Jupyter widgets and htmlwidgets in your presentations
-
-```{r}
-#| echo: false
-#| fig-height: 5
-library(leaflet)
-leaflet() %>%
-  addTiles() %>%  # Add default OpenStreetMap map tiles
-  addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
-```
-
-::: footer
-Learn more: [Jupyter widgets](https://{{< meta prerelease-subdomain >}}quarto.org/docs/interactive/widgets/jupyter.html), [htmlwidgets](https://{{< meta prerelease-subdomain >}}quarto.org/docs/interactive/widgets/htmlwidgets.html)
-:::
-
-## Interactive Slides {.smaller transition="slide"}
-
-Turn presentations into applications with Observable and Shiny. Use component layout to position inputs and outputs.
-
-```{r}
-ojs_define(actors = data.frame(
-  x = rnorm(100),
-  y = rnorm(100)
-))
-```
-
-```{ojs}
-//| panel: sidebar
-viewof talentWeight = Inputs.range([-2, 2], { value: 0.7, step: 0.01, label: "talent weight" })
-viewof looksWeight = Inputs.range([-2, 2], { value: 0.7, step: 0.01, label: "looks weight" })
-viewof minimum = Inputs.range([-2, 2], { value: 1, step: 0.01, label: "min fame" })
-```
-
-```{ojs}
-//| panel: fill
-import { plotActors } from './actors.js';
-plotActors(actors, talentWeight, looksWeight, minimum)
-```
-
-::: footer
-Learn more: [Observable](https://{{< meta prerelease-subdomain >}}quarto.org/docs/interactive/ojs/), [Shiny](https://{{< meta prerelease-subdomain >}}quarto.org/docs/interactive/shiny/), [Component Layout](https://{{< meta prerelease-subdomain >}}quarto.org/docs/interactive/layout.html)
-:::
-
-## Preview Links
-
-Navigate to hyperlinks without disrupting the flow of your presentation.
-
-Use the `preview-links` option to open links in an iframe on top of your slides. Try clicking the link below for a demonstration:
-
-::: {style="text-align: center; margin-top: 1em"}
-[Matplotlib: Visualization with Python](https://matplotlib.org/){preview-link="true" style="text-align: center"}
-:::
-
-::: footer
-Learn more: [Preview Links](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/presenting.html#preview-links)
-:::
-
-## Themes
-
-10 Built-in Themes (or [create your own](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/themes.html#creating-themes))
-
-::: {layout-ncol="2"}
-![](images/moon.png)
-
-![](images/sky.png)
-:::
-
-::: footer
-Learn more: [Themes](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/themes.html)
-:::
-
-## Easy Navigation
-
-::: {style="margin-bottom: 0.9em;"}
-Quickly jump to other parts of your presentation
-:::
-
-::: {layout="[1, 20]"}
-![](images/presentation-menu.png){width="41"}
-
-Toggle the slide menu with the menu button (bottom left of slide) to go to other slides and access presentation tools.
-:::
-
-You can also press {{< kbd m >}} to toggle the menu open and closed.
-
-You can also press {{< kbd g >}} to toggle 'Jump To Slide' modal box to quickly go to one of your slide using its number or id.
-
-::: footer
-Learn more: [Navigation](/docs/presentations/revealjs/presenting.qmd#navigation-menu) / [Jump To Slide](/docs/presentations/revealjs/presenting.qmd#jump-to-slide)
-:::
-
-## Jump To Slide
-
-::: {style="margin-bottom: 0.9em;"}
-Quickly jump to other parts of your presentation
-:::
-
-## Chalkboard {chalkboard-buttons="true"}
-
-::: {style="margin-bottom: 0.9em;"}
-Free form drawing and slide annotations
-:::
-
-::: {layout="[1, 20]"}
-![](images/presentation-chalkboard.png){width="41"}
-
-Use the chalkboard button at the bottom left of the slide to toggle the chalkboard.
-:::
-
-::: {layout="[1, 20]"}
-![](images/presentation-notes-canvas.png){width="41"}
-
-Use the notes canvas button at the bottom left of the slide to toggle drawing on top of the current slide.
-:::
-
-You can also press {{< kbd b >}} to toggle the chalkboard or {{< kbd c >}} to toggle the notes canvas.
-
-::: footer
-Learn more: [Chalkboard](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/presenting.html#chalkboard)
-:::
-
-## Point of View
-
-press {{< kbd o >}} to toggle overview mode:
-
-![](images/overview-mode.png){.border}
-
-Hold down the {{< kbd Alt linux=Ctrl >}} and click on any element to zoom towards it---try it now on this slide.
-
-::: footer
-Learn more: [Overview Mode](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/presenting.html#overview-mode), [Slide Zoom](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/presenting.html#slide-zoom)
-:::
-
-## Speaker View
-
-press {{< kbd s >}} (or use the tools in presentation menu ![](../images/navigation-menu-icon.png){style="padding-bottom: 1px; margin: 0" width="0.5em" height="0.5em"}) to open speaker view
-
-![](images/speaker-view.png){fig-align="center" style="border: 3px solid #dee2e6;" width="780"}
-
-::: footer
-Learn more: [Speaker View](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/presenting.html#speaker-view)
-:::
-
-## Scroll View {#scroll-view}
-
-Press {{< kbd r >}} (or use the tools in presentation menu ![](../images/navigation-menu-icon.png){style="padding-bottom: 1px; margin: 0" width="0.5em" height="0.5em"}) to open scroll view
-
-Try it now on this slide --- You'll see a scroll bar on the right and you can scroll down the presentation using your mouse.
-
-Scroll view behavior can be configured using `scroll-view` configuration.
-
-::: footer
-Learn more: [Scroll View](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/presenting.html#scroll-view)
-:::
-
-## Authoring Tools {.smaller}
-
-Live side-by-side preview for any notebook or text editor including Jupyter and VS Code
-
-::::: columns
-::: {.column width="50%"}
-![](images/jupyter-edit.png){.border .border-thick}
-:::
-
-::: {.column width="50%"}
-![](images/jupyter-preview.png){.border .border-thick}
-:::
-:::::
-
-::: footer
-Learn more: [Jupyter](https://{{< meta prerelease-subdomain >}}quarto.org/docs/tools/jupyter-lab.html), [VS Code](https://{{< meta prerelease-subdomain >}}quarto.org/docs/tools/vscode.html), [Text Editors](https://{{< meta prerelease-subdomain >}}quarto.org/docs/tools/text-editors.html)
-:::
-
-## Authoring Tools {.smaller}
-
-RStudio includes an integrated presentation preview pane
-
-![](images/rstudio.png){.border width="900"}
-
-::: footer
-Learn more: [RStudio](https://{{< meta prerelease-subdomain >}}quarto.org/docs/tools/rstudio.html)
-:::
-
-## And More...
-
--   [Touch](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/advanced.html#touch-navigation) optimized (presentations look great on mobile, swipe to navigate slides)
--   [Footer & Logo](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/#footer-logo) (optionally specify custom footer per-slide or hide global footer)
--   [Auto-Slide](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/presenting.html#auto-slide) (step through slides automatically, without any user input)
--   [Multiplex](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/presenting.html#multiplex) (allows your audience to follow the slides of the presentation you are controlling on their own phone, tablet or laptop).
-
-::: footer
-Learn more: [Quarto Presentations](https://{{< meta prerelease-subdomain >}}quarto.org/docs/presentations/revealjs/)
-:::

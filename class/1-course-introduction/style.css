@@ -7,3 +7,10 @@
 .border-thick {
   border-width: 3px;
 }
+
+.v-center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+}
