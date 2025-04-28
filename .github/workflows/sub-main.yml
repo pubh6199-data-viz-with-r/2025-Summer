@@ -69,7 +69,6 @@ jobs:
 
       - name: Install GitHub-only packages
         run: |
-          install.packages("remotes")
           remotes::install_github("jhelvy/renderthis")
           remotes::install_github("gadenbuie/xaringanExtra")
         shell: Rscript {0}
