@@ -333,6 +333,13 @@ Source: [SM Kosslyn: Clear and to the point](https://psycnet.apa.org/record/2007
 
 ## To explore and generate new questions
 
+> "Exploratory Data Analysis, or EDA, is a process to use visualization and transformation to explore your data in a systemic way. EDA is not a formal process with a strict set of rules. More than anything, EDA is a state of mind. During the initial phases of EDA you should feel free to investigate every idea that occurs to you. Some of these ideas will pan out, and some will be dead ends. As your exploration continues, you will home in on a few particularly productive areas that you’ll eventually write up and communicate to others."
+
+::: {style="text-align: right"}
+-from [R for Data Science](https://r4ds.had.co.nz/exploratory-data-analysis.html)
+:::
+
+
 ## To tell a story and evoke emotions
 
 ## Why R? {.smaller}
