@@ -18,7 +18,7 @@ source("_common.R")
 Instructor | TA| Course
 ---|---|---
 <i class="bi-person-fill"></i> Xindi (Cindy) Hu, ScD | <i class="bi-person-fill"></i> Silas Horn | <i class="bi-clock-fill"></i> {{< var weekday >}} {{< var time >}}
-<i class="bi-building-fill"></i> Milken Institute SPH, #423 | <i class="bi-building-fill"></i> TBD | <i class="bi-geo-alt-fill"></i> [{{< var room >}}]({{< var room_url >}})
+<i class="bi-building-fill"></i> Milken Institute SPH, #423 | <i class="bi-building-fill"></i> Milken 4th floor | <i class="bi-geo-alt-fill"></i> [{{< var room >}}]({{< var room_url >}})
 <i class="bi-telephone-fill"></i> +1 (202) 994-7766 | <i class="bi-telephone-fill"></i> NA | <i class="bi-calendar-week-fill"></i> {{< var dates >}}
 <i class="bi-envelope-fill"></i> [{{< var email >}}](mailto:{{< var email >}}) | <i class="bi-envelope-fill"></i> [{{< var ta-email >}}](mailto:{{< var ta-email >}}) |<i class="bi-slack"></i> [Slack]({{< var slack >}}){target="_blank"}| 
 <i class="bi-clock-fill"></i> M 4-5PM ET | <i class="bi-clock-fill"></i> W 2-3PM ET| <img src="images/rubber-duck.png" width="30"> Class mascot
@@ -157,3 +157,4 @@ While the University Library is not a stand in for TAs, you can schedule a consu
 # Class Policies
 
 ## Silas TO-DO
+Class Policy: Expectations for individual contributions and acceptable levels of collaboration for assignments on which students may work together.

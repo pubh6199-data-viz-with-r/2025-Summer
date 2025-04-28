@@ -18,12 +18,13 @@ resources:
 
 ## Outline for today
 
-- Who?
-- How?
-- What?
-- Why?
+-   **Who?**
+-   How?
+-   What?
+-   Why?
 
 ## Meet your instructor {.smaller}
+
 ![](images/XindiHu_Headshot_2024.jpg){width="250" height="250"}
 
 Xindi (Cindy) Hu, ScD
@@ -32,7 +33,7 @@ Assistant Professor, Department of Environmental and Occupational Health
 
 ScD in Environmental Health, Harvard University
 
-## Water, Health, and Opportunity Lab{.fit-text .smaller}
+## Water, Health, and Opportunity Lab {.fit-text .smaller}
 
 ![](images/who-lab-website.png){height="350"}
 
@@ -41,6 +42,7 @@ ScD in Environmental Health, Harvard University
 Environmental Data Science, Drinking Water Quality, Health Equity, Climate Change, Geospatial Analysis, Machine Learning
 
 ## Meet your TA {.smaller}
+
 ![](images/Silas_Horn_Headshot_2024.jpg){width="250" height="250"}
 
 Silas Horn
@@ -49,6 +51,295 @@ MPH Candidate, Environmental Health Science and Policy
 
 ## About you {.center .middle}
 
+## Outline for today
+
+-   Who?
+-   **How?**
+-   What?
+-   Why?
+
+## PUBH 6199 Goals
+
+:::::: columns
+::: {.column width="33%"}
+### Theory
+
+-   Apply fundamental principles & techniques
+:::
+
+::: {.column width="33%"}
+### Design Skills
+
+-   Create, evaluate, and critique visualization designs
+:::
+
+::: {.column width="30%"}
+### Coding Skills
+
+-   Implement static and interactive data visualizations
+:::
+::::::
+
+::: center
+**Develop a substantial visualization project!**
+:::
+
+## Course component
+
+-   **Lectures**: Tuesdays 3:10-5:10 PM
+-   **Lab**: Thursdays 3:10-5:10 PM
+-   **Homework**: Weekly assignments due Mondays
+-   **Final project**: Team of 2-3 people
+
+## What about gradings???
+
+<image src="images/grading-question-mark.jpeg" alt="Gradings" style="width: 100%; height: auto;"/>
+
+## Grading
+
+-   **Class Participation** (attendance, contribution to in-class activities, completion of end-of-class surveys, submission of finished lab notebooks): 10%
+-   **Homework** (weekly assignments): 50%
+-   **Final Project** (team of 2-3 people): 40%
+
+## Prerequisites
+
+-   Programming experience at the level of PUBH 6131 or similar
+-   Willingness to learn new software & tools
+    -   This can be time consuming
+    -   Learning by doing is the best way of acquiring new skills, get on the bike
+
+## Course policies
+
+-   Be respectful and inclusive
+-   Get on the bike
+-   Don't cheat!
+
+## Device policy {.fit-text .smaller}
+
+-   Bring laptop to lecture, lab, and office hour
+-   Please only use it for in-class activities! <image src="images/device-policy.jpeg" alt="Device policy" style="width: 100%; height: auto;"/>
+
+## Generative AI policy {.fit-text .smaller}
+
+::: incremental
+-   Generative AI is another tool in your toolbox, use it but be prepared to be responsible.
+-   Usage of GenAI tools is permitted but please be transparent about it.
+-   Lazy usage of GenAI tools (homework prompt -\> output -\> submission) is **prohibited**.
+-   Include a "How I used GenAI" section in your homework and final project (include prompt, date, model version, and link to chat history).
+:::
+
+## Communication {.fit-text .smaller}
+
+-   Slack: PUBH 6199 channel
+-   Course website https://pubh6199-data-viz-with-r.github.io/
+-   Blackboard
+-   Office hours:
+    -   Cindy: Mondays 4-5 PM
+    -   Silas: Wednesdays 2-3 PM
+-   Email:
+    -   Cindy: xindi.hu\@gwu.edu
+    -   Silas: silas.horn\@gwmail.gwu.edu
+-   Boundaries:
+    -   Please allow 24 hrs for slack/email response
+    -   Replies in the after hours (after 6pm ET) and over the weekends are not guaranteed
+
+## Outline for today
+
+-   Who?
+-   How?
+-   **What?**
+-   Why?
+
+## What is data visualization?
+
+> "The practice of designing and creating graphic or visual representations of a large amount of complex quantitative and qualitative data and information with the help of static, dynamic or interactive visual items."
+
+::: {style="text-align: right"}
+-from [Wikipedia](https://en.wikipedia.org/wiki/Data_and_information_visualization)
+:::
+
+##  {style="font-size: 50%;"}
+
+::::: {columns}
+::: {.column width="50%"}
+Made with {ggplot2} ![](images/example-1.png){style="height:250px;"}
+:::
+
+::: {.column width="50%"}
+Made with {ggplot2} and publication ready ![](images/example-2.webp){style="height:250px;"}
+:::
+:::::
+
+::::: {columns}
+::: {.column width="50%"}
+Made with {gganimate} <img src="images/gganimate-example.gif" style="height:250px;"/>
+:::
+
+::: {.column width="50%"}
+Made with Shiny <iframe src="https://gallery.shinyapps.io/050-kmeans-example/?_gl=1*1glcww7*_ga*ODk5MzUzNTczLjE3MzUzNDQ0ODQ.*_ga_2C0WZ1JHG0*MTc0NTg1NTExNS4zNy4xLjE3NDU4NTUxMjEuMC4wLjA.html" width="100%" height="500px" style="zoom: 0.5;"></iframe>
+:::
+:::::
+
+## A brief history of Data Visualization (Adapted from [EDS 240](https://eds-240-data-viz.github.io/course-materials/lecture-slides/lecture1.2-intro-slides.html#/title-slide)) {.smaller .center}
+
+::: {style="text-align: center;"}
+16,500 years ago, Pleistocene
+
+![](images/pleistocene.png){width="400" height="400"}
+
+Source: [BBC](http://news.bbc.co.uk/2/hi/science/nature/871930.stm)
+:::
+
+## A brief history of Data Visualization {.smaller .center}
+
+::: {style="text-align: center;"}
+\~1150 BC, Ancient Egypt
+
+![](images/turin-papyrus.png){width="400" height="400"}
+
+Source: [Wikipedia](https://en.wikipedia.org/wiki/Turin_Papyrus_Map)
+:::
+
+## A brief history of Data Visualization {.smaller .center}
+
+::: {style="text-align: center;"}
+1400 - 1532 AD, Inca Empire
+
+![](images/inca.png){width="400" height="400"}
+
+Quipus (kee-poos) were recording devices for data collection, census records, calendaring...
+
+Source: [Smithsonian](https://www.si.edu/newsdesk/snapshot/quipu)
+:::
+
+## A brief history of Data Visualization {.smaller .center}
+
+::: {style="text-align: center;"}
+1786, William Playfair
+
+![](images/playfair-bar.png){width="400" height="400"}
+
+Created first bar chart (featuring Scottish trade data, 1780 - 1781), as well as line and pie charts.
+
+Source: [Wikipedia](https://en.wikipedia.org/wiki/William_Playfair)
+:::
+
+## A brief history of Data Visualization {.smaller .center}
+
+::: {style="text-align: center;"}
+1854, John Snow
+
+![](images/snow-map.jpg){width="400" height="400"}
+
+Used a dot map and showed the clusters of cholera cases in the London epidemic of 1854
+
+Source: [Wikipedia](https://en.wikipedia.org/wiki/John_Snow)
+:::
+
+## A brief history of Data Visualization {.smaller .center}
+
+::: {style="text-align: center; font-size: 70%;"}
+1869, Charles Minard
+
+![](images/minard.png){width="400" height="400"}
+
+Created a flow map showing the number of troops lost during Napoleon's 1812 Russian campaign.
+
+Edward Tufte called this the greatest visualization created, displaying 6 types of data in 2D (# of troops, distance traveled, temperature, lat/lon, direction of travel, location relative to specific dates)
+
+Source: [Wikipedia](https://en.wikipedia.org/wiki/Charles_Joseph_Minard)
+:::
+
+## A brief history of Data Visualization {.smaller .center}
+
+::: {style="text-align: center; font-size: 70%;"}
+1900, William Edward Burghardt Du Bois
+
+![](images/dubois.webp){height="400"}
+
+Organized an exhibit at the Paris 1900 Exposition, showcasing photographs, charts, and maps that documented the lives of African Americans at the time.
+
+In 2021, people on Twitter recreated his historicall data visualizations using modern tools.
+
+Source: [Nightingale](https://nightingaledvs.com/the-dubois-challenge/)
+:::
+
+## A brief history of Data Visualization {.smaller .center}
+
+::: {style="text-align: center; font-size: 70%;"}
+Modern day
+
+![](images/modern-day.webp){height="400"}
+
+Source: [Jonathan Schwabish](https://policyviz.com/2022/02/01/the-data-visualization-tools-wars/)
+:::
+
+## What will you learn in this class? {.smaller}
+
+::: incremental
+-   Identify the effective types of data visualization for the data at hand and the intended audience
+
+-   Critique data visualizations and provide constructive feedback
+
+-   Prepare dataset for developing data visualization
+
+-   Create effective, ethical, and aesthetically-pleasing visualizations using R programming language
+
+-   Collaborate with classmates from diverse disciplinary background to carry out a visualization project
+:::
+
+## Outline for today
+
+-   Who?
+-   How?
+-   What?
+-   **Why?**
+
+## In-Class Activity: {.center .middle background-image="images/in-class-activity.png" style="text-align: center"}
+
+::: {style="text-align: center"}
+In small group of 2, discuss your favorite example of data visualization, why do you like it? what functionality does that data visualization serve?
+:::
+
+## Why do we visualize data?
+
+To reveal patterns that are hard to see in raw numbers...
+
+::: {.column width="50%"}
+![](images/anscombe-1.png)
+:::
+
+::: {.column width="50%"}
+![](images/anscombe-3.png){.fragment}
+:::
+
+## To communicate complex ideas quickly and clearly...
+
+| Income Group | Males: Under 65 | Males: 65 or Over | Females: Under 65 | Females: 65 or Over |
+|:--------------|--------------:|--------------:|--------------:|--------------:|
+| 0–\$24,999 | 250 | 200 | 375 | 550 |
+| \$25,000+ | 430 | 300 | 700 | 500 |
+
+Is the effect of age on cholesterol levels the same for all subgroups defined by sex and income?
+
+## To communicate complex ideas quickly and clearly...
+
+![](images/cholesterol-example.png)
+
+
+## To explore and generate new questions
+
+## To tell a story and evoke emotions
+
+## Why R? {.smaller}
+
+::: incremental
+-   Open-source and free
+-   Highly customizable
+-   Script-based and reproducible
+-   Data analysis and visualization in one language
+-   Large open-source community and ecosystem
+:::
 
 ## Pretty Code {auto-animate="true"}
 
@@ -157,8 +448,7 @@ a_{21}& =b_{21}&
 \begin{gather*}
 a_1=b_1+c_1\\
 a_2=b_2+c_2-d_2+e_2
-\end{gather*}
-\begin{align}
+\end{gather*} \begin{align}
 a_{11}& =b_{11}&
   a_{12}& =b_{12}\\
 a_{21}& =b_{21}&
@@ -331,7 +621,7 @@ Learn more: [Auto-Animate](https://{{< meta prerelease-subdomain >}}quarto.org/d
 The next few slides will transition using the `slide` transition
 
 | Transition | Description |
-|---------------|---------------------------------------------------------|
+|------------------|------------------------------------------------------|
 | `none` | No transition (default, switch instantly) |
 | `fade` | Cross fade |
 | `slide` | Slide horizontally |
