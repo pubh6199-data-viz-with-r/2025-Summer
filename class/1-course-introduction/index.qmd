@@ -266,7 +266,7 @@ Source: [Nightingale](https://nightingaledvs.com/the-dubois-challenge/)
 
 ## A brief history of Data Visualization {.smaller .center}
 
-::: {style="text-align: center; font-size: 70%;"}
+::: {style="text-align: center"}
 Modern day
 
 ![](images/modern-day.webp){height="400"}
@@ -313,19 +313,23 @@ To reveal patterns that are hard to see in raw numbers...
 ![](images/anscombe-3.png){.fragment}
 :::
 
-## To communicate complex ideas quickly and clearly...
+## To communicate complex ideas quickly...{.smaller}
+
 
 | Income Group | Males: Under 65 | Males: 65 or Over | Females: Under 65 | Females: 65 or Over |
 |:--------------|--------------:|--------------:|--------------:|--------------:|
 | 0–\$24,999 | 250 | 200 | 375 | 550 |
 | \$25,000+ | 430 | 300 | 700 | 500 |
 
-Is the effect of age on cholesterol levels the same for all subgroups defined by sex and income?
 
-## To communicate complex ideas quickly and clearly...
+::: {style="text-align: center; font-size: 120%;"}
+**Is the effect of age on cholesterol levels the same for all subgroups defined by sex and income?**
+:::
 
-![](images/cholesterol-example.png)
+## To communicate complex ideas quickly...
 
+![](images/cholesterol-example.png){style="width: 100%; display: block; margin: auto;"}
+Source: [SM Kosslyn: Clear and to the point](https://psycnet.apa.org/record/2007-12573-000)
 
 ## To explore and generate new questions
 
