@@ -157,4 +157,6 @@ While the University Library is not a stand in for TAs, you can schedule a consu
 # Class Policies
 
 ## Silas TO-DO
-Class Policy: Expectations for individual contributions and acceptable levels of collaboration for assignments on which students may work together.
+**Class Policy: Expectations for individual contributions and acceptable levels of collaboration for assignments on which students may work together.** Data visualization projects benefit from collaborations. We encourage you to discuss readings, assignments, and topics with your fellow students. However, the weekly homework should be your own work. If you copy another student’s assignment or let someone else copy yours, you are both cheating. If you copy another person’s work from a textbook or journal, or other published work or a website, you must give credit in your written work
+
+
