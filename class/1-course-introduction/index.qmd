@@ -10,10 +10,11 @@ format:
       buttons: false
     preview-links: auto
     logo: images/logo.png
-    css: styles.css
+    css: style.css
     footer: 'PUBH 6199: Visualizing Data with R'
 resources:
   - demo.pdf
+  - images/
 ---
 
 ## Outline for today
@@ -518,3 +519,336 @@ countdown::countdown(
 - <span style="font-weight: bold; color: orange">Introduction to {ggplot2}</span>
 
 
+## Welcome to {ggplot2} {.smaller}
+:::{ .column width="65%"}
+
+- Based on Grammar of Graphics [(Wilkinson 2005)](https://link.springer.com/book/10.1007/0-387-28695-0)
+- Hadley Wickham developed ggplot2 based on Wilkinson's grammar of graphics in 2009
+- Allow you to compose graphs by combining independent components
+- Designed to work iteratively: 
+  - Start with a simple layer that shows the raw data
+  - Add layers of annotations and summary statistics
+  - Each layer can be customized independently
+
+:::
+
+:::{ .column width="35%"}
+![](images/ggplot2.png)
+
+:::{style ="text-align: right; font-size: 70%;"}
+Art by [Allison Horst](https://allisonhorst.com/r-packages-functions)
+:::
+:::
+
+## What is the grammar of graphics? {.smaller}
+>"A graphic maps the data to the aesthetic attribuets (color, shape, size) of geometric objects (points, lines, bars). The plot may also include statistical transformations of the data and information about the plot’s coordinate system. Facetting can be used to plot for different subsets of the data. The combination of these independent components are what make up a graphic."
+
+:::{style ="text-align: right; font-size: 70%;"}
+[Wilkinson (2005)](https://link.springer.com/book/10.1007/0-387-28695-0)
+:::
+
+## {ggplot2} graphic layers {.smaller}
+::: {.column width="50%"}
+First these:
+
+- **data**: in tidy format (Lab 1)
+- **mapping**: how variables are mapped to aesthetic attributes
+- **geom**: the geometric object used to display the data
+
+:::
+
+::: {.column width="50%"}
+:::{.fragment}
+Then these:
+
+- **stat**: statistical transformations, e.g. binning and counting, fitting a linear model
+- **scale**: maps values in data space to values in the aesthetics space, also draw the legend
+- **coord**: normally the Cartesian coordinate system, but can be polar, map, etc.
+- **facet**: display subsets of data as small multiples
+- **theme**: non-data ink, e.g. background color, grid lines, font size, etc.
+:::
+:::
+
+## Airquality dataset {.smaller}
+The `airquality` dataset contains daily air quality measurements in New York, May to September 1973. The data frame has 153 observations and 6 variables:
+
+:::{ .column width="50%"}
+-   **Ozone**: Ozone in parts per billion (ppb)
+-   **Solar.R**: Solar radiation in langleys
+-   **Wind**: Average wind speed in miles per hour (mph)
+-   **Temp**: Maximum daily temperature in degrees Fahrenheit (F)
+-   **Month**: Month of the year (1-12)
+-   **Day**: Day of the month (1-31)
+:::
+
+:::{ .column width="50%"}
+
+```{r}
+#| eval: true
+#| echo: true
+library(tidyverse)
+data(airquality)
+glimpse(airquality)
+```
+:::
+
+## Step 0: Initialize a plot object {.smaller}
+
+Initialize the plot using `ggplot()`. It is empty because we haven't told ggplot how to map the data to the plot yet.
+
+```{r}
+#| eval: true
+#| echo: true
+library(tidyverse)
+data(airquality)
+ggplot(data = airquality)
+```
+
+## Step 1: Map the variables {.smaller}
+
+The `mapping` argument is used to specify how variables in the data are mapped to aesthetic attributes of the plot. The `aes()` function is used to define the mapping.
+
+```{r}
+#| code-line-numbers: "4"
+#| eval: true
+#| echo: true
+library(tidyverse)
+data(airquality)
+ggplot(data = airquality,
+       mapping = aes(x = Temp, y = Ozone)) # x-axis and y-axis
+```
+
+## Step 2: Add points (`geom_point`) {.smaller}
+
+Next, we add a geometric object (**geom**) that represents the data. In this case, we use `geom_point()` to add points to the plot. There are many more geoms (`geom_*()`) built into `{ggplot2}` and extension packages.
+
+
+```{r}
+#| code-line-numbers: "4"
+#| eval: true
+#| echo: true
+library(tidyverse)
+data(airquality)
+ggplot(data = airquality, mapping = aes(x = Temp, y = Ozone)) + # x-axis and y-axis
+  geom_point() # add points
+```
+
+
+## Step 3: Color aesthetic (Month) {.smaller}
+
+If we like to add more information to the plot, we can use the `color` aesthetic to map another variable to the color of the points. In this case, we will use `Month` as the color aesthetic.
+```{r}
+#| code-line-numbers: "1"
+#| eval: true
+#| echo: true
+ggplot(airquality, aes(x = Temp, y = Ozone, color = Month)) +
+  geom_point() +
+  labs(title = "Ozone vs Temperature Colored by Month")
+```
+
+## Step 3: Color aesthetic (Month) {.smaller}
+
+Instead of treating `Month` as a continuous variable, maybe we want to treat `Month` like a categorical variable. 
+
+```{r}
+#| code-line-numbers: "1"
+#| eval: true
+#| echo: true
+ggplot(airquality, aes(x = Temp, y = Ozone, color = as.factor(Month))) +
+  geom_point() +
+  labs(title = "Ozone vs Temperature Colored by Month")
+```
+
+
+## Step 4: Add layers (smoother lines with `geom_smooth`) {.smaller}
+
+We can add a smoother line to the plot using `geom_smooth()`. The default method is linear regression, but we can also use other methods like LOESS (locally weighted scatterplot smoothing).
+
+```{r}
+#| code-line-numbers: "3-4"
+#| eval: true
+#| echo: true
+ggplot(airquality, aes(x = Temp, y = Ozone)) +
+  geom_point() +
+  geom_smooth(method = "loess") +
+  labs(title = "Ozone vs Temperature with LOESS Smoother")
+```
+
+## Global mapping v.s. Local mapping {.smaller}
+
+:::{.column width="50%"}
+**Global** mapping are passed down to each subsequent layer
+```{r}
+#| code-line-numbers: "1"
+#| eval: true
+#| echo: true
+ggplot(airquality, aes(x = Temp, y = Ozone, color = as.factor(Month))) +
+  geom_point() +
+  geom_smooth(method = "loess") 
+```
+
+`color = as.factor(Month)` is passed to both `geom_point()` and `geom_smooth()`, so the points and the line are colored by month.
+
+:::
+
+:::{.column width="50%"}
+**Local** mapping are only used in that layer and don't affect other layers
+```{r}
+#| code-line-numbers: "2"
+#| eval: true
+#| echo: true
+ggplot(airquality, aes(x = Temp, y = Ozone)) +
+  geom_point(aes(color = as.factor(Month))) +
+  geom_smooth(method = "loess") 
+```
+
+`color = as.factor(Month)` is only passed to `geom_point()`, so the points are colored by month, but the line is not colored by month.
+
+:::
+
+
+## Step 5: Facet by month (`facet_wrap`) {.smaller}
+
+We can use `facet_wrap()` to create small multiples of the plot, one for each month. This allows us to see how the relationship between temperature and ozone varies by month.
+
+```{r}
+#| code-line-numbers: "3"
+#| eval: true
+#| echo: true
+ggplot(airquality, aes(x = Temp, y = Ozone)) +
+  geom_point() +
+  facet_wrap(~ Month) +
+  geom_smooth(method = "loess") +
+  labs(title = "Ozone vs Temperature by Month")
+```
+
+## Step 6: Customize the appearance {.smaller}
+
+`{ggplot2}` has a number of built-in themes, which control all non-data display.
+
+:::{ .column width="50%"}
+
+Never use the default theme
+
+```{r}
+#| eval: true
+#| echo: true
+ggplot(airquality, aes(x = Temp, y = Ozone)) +
+  geom_point(aes(color = as.factor(Month))) +
+  geom_smooth(method = "loess") 
+```
+:::
+
+:::{ .column width="50%"}
+
+`theme_classic()` is a good starting point
+
+```{r}
+#| code-line-numbers: "4"
+#| eval: true
+#| echo: true
+ggplot(airquality, aes(x = Temp, y = Ozone)) +
+  geom_point(aes(color = as.factor(Month))) +
+  geom_smooth(method = "loess") +
+  theme_classic() 
+```
+
+:::
+
+## Step 6: Customize the appearance {.smaller}
+
+Almost always the default font size in `ggplot2` are too small. This is because the font size is set to 11 by default, but the size of the figure is set to `r knitr::opts_chunk$get("fig.width")` inches by `r knitr::opts_chunk$get("fig.height")` inches, so when you insert the figure to a Word or Powerpoint, it ends up being too small
+
+```{r fig.width=5, fig.height=3}
+#| code-line-numbers: "4"
+#| eval: true
+#| echo: true
+ggplot(airquality, aes(x = Temp, y = Ozone)) +
+  geom_point(aes(color = as.factor(Month))) +
+  geom_smooth(method = "loess") +
+  theme_classic(base_size = 11) # I set the output figure size to be 5 inches by 3 inches
+```
+
+## Step 6: Customize the appearance {.smaller}
+
+You can explore other pre-built themes in the `{ggthemes}`.
+
+:::{ .column width="33%"}
+
+Theme economist 
+
+```{r fig.width=5, fig.height=5}
+#| code-line-numbers: "5"
+#| eval: true
+#| echo: true
+library(ggthemes)
+ggplot(airquality, aes(x = Temp, y = Ozone)) +
+  geom_point(aes(color = as.factor(Month))) +
+  geom_smooth(method = "loess") +
+  theme_economist() 
+```
+:::
+
+:::{ .column width="33%"}
+Theme 538 
+
+```{r fig.width=5, fig.height=5}
+#| code-line-numbers: "4-5"
+#| eval: true
+#| echo: true
+ggplot(airquality, aes(x = Temp, y = Ozone)) +
+  geom_point(aes(color = as.factor(Month))) +
+  geom_smooth(method = "loess") +
+  scale_color_fivethirtyeight() + 
+  theme_fivethirtyeight(base_size = 15)
+```
+:::
+
+:::{ .column width="33%"}
+Theme Tufte
+```{r fig.width=5, fig.height=5}
+#| code-line-numbers: "4-5"
+#| eval: true
+#| echo: true
+ggplot(airquality, aes(x = Temp, y = Ozone)) +
+  geom_point(aes(color = as.factor(Month))) +
+  geom_smooth(method = "loess") +
+  theme_tufte(base_size = 15) +
+  theme(legend.position = "top")
+```
+:::
+
+
+## Building a data viz is an interative process!{style="font-size: 70%;"}
+
+![](images/evol-ggplot-1.gif){width="700"}
+
+:::{style="text-align: center; font-size: 70%;"}
+Make your own ggplot evolution using the [`{camcorder}`](https://github.com/thebioengineer/camcorder) package 
+:::
+
+##  End-of-Class Survey {background="#033C5A"}
+<br>
+<br>
+<br>
+
+<div class="page-center vertical-center">
+<p class="custom-subtitle bottombr">{{<fa pen-to-square title="edit or fill out survey">}} Fill out the end-of-class survey </p>
+<p class="caption-text">*~ This is the end of Lecture 1 ~*</p>
+</div>
+
+```{r}
+countdown::countdown(
+  minutes = 10,
+  # left = 0, right = 0,
+  # Fanfare when it's over
+  play_sound = TRUE,
+  color_border              = "#FFFFFF",
+  color_text                = "#7aa81e",
+  color_running_background  = "#7aa81e",
+  color_running_text        = "#FFFFFF",
+  color_finished_background = "#ffa07a",
+  color_finished_text       = "#FFFFFF",
+  font_size = "2em",
+  )
+```
