@@ -1,5 +1,5 @@
 :root {
-  --color-highlight: #C8A2C8;
+  --color-highlight: #E1C482;
 }
 
 /* Text */
@@ -40,7 +40,7 @@ tr:last-child {
 
 .btn-slides {
   background-color: var(--color-highlight);
-  color: #fff;
+  color: #002855;
   font-weight: bold;
   font-size: 16px;
   border-radius: 10px; /* Rounded edges */
@@ -57,8 +57,8 @@ tr:last-child {
 }
 
 .btn-notes {
-  background-color: #000000;
-  color: #fff;
+  background-color: #002855;
+  color: var(--color-highlight);
   font-weight: bold;
   font-size: 16px;
   border-radius: 10px; /* Rounded edges */
@@ -75,6 +75,5 @@ tr:last-child {
 }
 
 .sidebar-title {
-  color: #cbcccc;
+  color: #E1C482;/* GW Buff*/
 }
- 

@@ -5,6 +5,7 @@ date: May 20, 2025
 author: Xindi (Cindy) Hu, ScD
 format: 
   revealjs:
+    pdf: true
     slide-number: true
     chalkboard: 
       buttons: false
