@@ -52,6 +52,7 @@ jobs:
             any::tidyverse
             any::rmarkdown
             any::ggplot2
+            any::ggthemes
             any::leaflet
             any::shiny
             any::countdown
