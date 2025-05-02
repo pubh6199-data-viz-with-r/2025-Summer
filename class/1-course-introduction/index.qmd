@@ -45,7 +45,7 @@ Environmental Data Science, Drinking Water Quality, Health Equity, Climate Chang
 
 ## Meet your TA {.smaller}
 
-![](images/Silas_Horn_Headshot_2024.jpg){width="250" height="250"}
+![](images/Silas_Headshot.png){width="250"}
 
 Silas Horn
 
