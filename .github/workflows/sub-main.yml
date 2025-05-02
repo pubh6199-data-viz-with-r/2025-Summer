@@ -67,6 +67,8 @@ jobs:
             any::rvest
             any::viridis
             any::renv
+            any::nycflights13
+            any::gapminder
 
       - name: Install GitHub-only packages
         run: |
