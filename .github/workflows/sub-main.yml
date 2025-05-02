@@ -52,6 +52,7 @@ jobs:
             any::tidyverse
             any::rmarkdown
             any::ggplot2
+            any::ggthemes
             any::leaflet
             any::shiny
             any::countdown
@@ -66,10 +67,11 @@ jobs:
             any::rvest
             any::viridis
             any::renv
+            any::nycflights13
+            any::gapminder
 
       - name: Install GitHub-only packages
         run: |
-          install.packages("remotes")
           remotes::install_github("jhelvy/renderthis")
           remotes::install_github("gadenbuie/xaringanExtra")
         shell: Rscript {0}

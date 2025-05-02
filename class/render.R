@@ -1,17 +1,14 @@
 lesson <- strsplit(here::here(), "/")[[1]]
 lesson <- lesson[length(lesson)]
 
-# Build the slides
-renderthis::to_html("index.Rmd", "index.html")
-renderthis::to_pdf("index.html", paste0(lesson, ".pdf"))
-
-# Compress the PDF to reduce size
-tools::compactPDF(paste0(lesson, ".pdf"), gs_quality = 'ebook')
+# # Build the slides
+# renderthis::to_html("index.qmd", "index.html")
+# renderthis::to_pdf("index.html", paste0(lesson, ".pdf"))
+# 
+# # Compress the PDF to reduce size
+# tools::compactPDF(paste0(lesson, ".pdf"), gs_quality = 'ebook')
 
 files1 <- c( 
-  'data',
-  'practice-solutions.qmd',
-  'practice.qmd',
   'quarto_demo.qmd'
 )
 files2 <- c(
@@ -19,6 +16,7 @@ files2 <- c(
     'practice-solutions.qmd',
     'practice.qmd'
 )
+
 files3 <- files2
 files4 <- files2
 files5 <- files2
@@ -44,5 +42,5 @@ files13 <- c(
 # Create zip files of class notes
 zip::zip(
     zipfile = paste0(lesson, ".zip"),
-    files = c(files13, paste0(lesson, ".Rproj"))
+    files = c(files1, paste0(lesson, ".Rproj"))
 )
