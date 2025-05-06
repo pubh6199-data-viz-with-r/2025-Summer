@@ -1,0 +1,893 @@
+---
+title: "Lecture 2. Visual Vocabulary & Effective Visualizations"
+subtitle: "PUBH 6199: Visualizing Data with R, Summer 2025"
+date: May 27, 2025
+author: Xindi (Cindy) Hu, ScD
+format: 
+  revealjs:
+    pdf: true
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    preview-links: auto
+    logo: images/logo-square.png
+    css: style.css
+    footer: 'PUBH 6199: Visualizing Data with R'
+resources:
+  - images/
+  - data/
+---
+
+## Outline for today
+- **Theory behind effective visualization and graphical integrity**
+- How to map visual vocabulary to data type
+- Design considerations for different types of intended audience
+
+## Good data visualization is optimized for our **visual-memory system** {.smaller}
+
+:::{.column width="30%"}
+- Helps us **understand trends and patterns**
+
+- Makes data **more accessible** to different audiences
+
+- Useful in **decision-making** and **communication**
+:::
+
+:::{.column width="70%"}
+
+![](images/memory-chart.png){style="width: 100%; display: block; margin: auto;"}
+:::
+
+## The power of pre-attentive processing {.smaller}
+:::{style="text-align: center"}
+Count all the 5s in the following image
+:::
+. . .
+
+![](images/fives-1.png){style="width: 70%; display: block; margin: auto;"}
+
+## The power of pre-attentive processing {.smaller}
+:::{style="text-align: center"}
+Count all the 5s in the following image
+:::
+
+. . .
+
+![](images/fives-2.png){style="width: 70%; display: block; margin: auto;"}
+
+## What is **pre-attentive processing**? {.smaller}
+
+- **Rapid, automatic processing of visual information** before conscious attention kicks in.
+- Happens within **<250 milliseconds**.
+- Helps identify key patterns **without effort**.
+
+::: {.column width="70%"}
+
+![](images/datylon-blog-mind-your-data-visualization-system-1-2-green.webp){style="width: 70%; display: block; margin: auto;"}
+:::
+
+::: {.column width="30%"}
+![](images/kahneman_book.jpeg){style="width: 77%; display: block; margin: auto;"}
+:::
+
+## Not all pre-attentive features are created equal {.smaller}
+
+:::{style="text-align: center"}
+Raise your hand when you see the red dot?
+:::
+
+. . .
+
+::: {.column width="30%"}
+![](images/preattentive1.png)
+::: 
+
+::: {.column width="30%"}
+![](images/preattentive2.png){.fragment}
+:::
+
+::: {.column width="30%"}
+![](images/preattentive3.png){.fragment}
+:::
+
+## Classify data types
+
+![](images/data-types.png){style="width: 100%; display: block; margin: auto;"}
+
+## Introducing **visual variable** {.smaller}
+
+>"A **visual variable**, in data visualization, is an aspect of a graphical object that can visually differentiate it from other objects, and can be controlled during the design process."
+
+:::{style="text-align: right; font-size: 0.8em"}
+\- Jacques Bertin, 1967, *Sémiologie Graphique*
+:::
+. . .
+
+:::{.column width="50%"}
+
+![](images/bertin.png){style="width: 100%; display: block; margin: auto;"}
+:::
+
+:::{.column width="50%"}
+
+<br>
+![](images/jacques_bertin.jpg){style="width: 60%; display: block; margin: auto;"}
+:::
+## {background-image="images/in-class-activity.png"}
+
+::: {style="text-align: center;"}
+<br>
+<br>
+In-Class Activity:
+
+Create at least three sketches to visualize these two quantities
+
+::: {style="font-size: 4em;font-family: 'Comic Sans MS', monospace;"}
+42,    23
+:::
+
+Which Bertin's visual variables did you use in your sketches?
+
+:::
+
+```{r}
+countdown::countdown(
+  minutes = 5,
+  bottom = 0,
+  # Fanfare when it's over
+  play_sound = TRUE,
+  color_border              = "#FFFFFF",
+  color_text                = "#7aa81e",
+  color_running_background  = "#7aa81e",
+  color_running_text        = "#FFFFFF",
+  color_finished_background = "#ffa07a",
+  color_finished_text       = "#FFFFFF",
+  font_size = "2em",
+  )
+```
+
+## 45 ways to visualizae two quantities {.smaller}
+![](images/two-numbers.png){style="width: 100%; display: block; margin: auto;"}
+
+:::{style="text-align: center"}
+
+https://rockcontent.com/blog/45-ways-to-communicate-two-quantities/
+
+:::
+
+## Cleveland's three visual operations of pattern perception {.smaller}
+
+🎯 **Detection**: *Recognizing that a geometric object encodes a physical value.*
+
+🧩 **Assembly**: *Grouping detected graphical elements into patterns.*
+
+📏 **Estimation**: *Visually assessing the relative magnitude of two or more values.*
+
+
+::: {.columns}
+
+::: {.column width="33%"}
+![](images/cleveland.jpg){style="width: 50%; display: block; margin: auto;"}
+:::
+
+::: {.column width="33%"}
+![](images/cleveland-book.jpg){style="width: 70%; display: block; margin: auto;"}
+:::
+
+::: {.column width="33%"}
+![](images/cleveland-paper.png){style="width: 72%; display: block; margin: auto;"}
+:::
+
+:::
+
+## Starting with **estimation** because it is the hardest {.smaller}
+
+:::{style="text-align: center"}
+
+Three levels of estimation
+
+| Level | Example |
+|----------|--------------|
+|1. Discrimination |X = Y X != Y|
+|2. Ranking |X < Y X > Y|
+|3. Ratioing |X / Y = ?|
+
+📏 **We want to get as far down this list as possible with efficiency and accuracy**
+:::
+
+## What visual cues are most effective for which type of data? {.smaller}
+
+![](images/rank-visual-cues.jpeg)
+
+:::{style="text-align: center; font-size: 0.8em"}
+
+Source: Yau, N. (2013). Data Points: Visualization That Means Something. Wiley.
+:::
+
+## Introducing the coffee ratings dataset {.smaller}
+
+- These data contain reviews of 1312 arabica and 28 robusta coffee beans from the **Coffee Quality Institute**'s trained reviewers. [(Link to dataset)](https://github.com/rfordatascience/tidytuesday/tree/main/data/2020/2020-07-07)
+- It contains detailed information on coffee samples from different countries, focusing on nine attributes like **aroma, flavor, aftertaste, acidity, body, balance, uniformity, cup cleanliness, sweetness**.
+- **Total cup points** measures the overall coffee quality.
+
+::: {.scroll-output}
+
+```{r}
+#| echo: true
+library(tidyverse)
+library(kableExtra)
+coffee_ratings <- readr::read_csv("data/coffee_ratings.csv")
+glimpse(coffee_ratings)
+```
+
+:::
+
+## Calculate country-level summaries {.smaller}
+
+For each country in the 18 most frequent levels, calculate the average total cup points and the number of coffee bean varieties, lump the other countries into the `Other` category.
+
+::: {.scroll-output style="height: 480px;"}
+
+```{r}
+#| echo: true
+country_summary <- coffee_ratings %>%
+  mutate(country = fct_lump(country_of_origin, 18)) %>%
+  group_by(country) %>%
+  summarize(mean_rating = mean(total_cup_points, na.rm = TRUE),
+            n = n()) %>%
+  arrange(desc(mean_rating)) 
+head(country_summary, 19)
+```
+
+:::
+
+## Let's start from the bottom of the list
+
+1. Position on a common scale
+2. Position on non-aligned scales
+3. Length
+4. Angle
+5. Area
+6. Volume <> Density <> Color saturation
+7. <span style = "color: orange">Color hue </span>
+
+
+## Use color hue to visualize average ratings {style="font-size: 0.8em"} 
+
+:::{style="font-size: 0.8em"}
+
+<span style="color: darkgreen">*Easy: which has higher ratings, Kenya or Indonesia?*</span>
+:::
+
+```{r fig.width=8}
+library(ggplot2)
+country_summary %>%
+  arrange(country) %>%
+  ggplot(aes(x = 100, y = country, fill = mean_rating)) +
+  geom_tile() +
+  # color scheme is red to blue
+  scale_fill_viridis_c(option = "plasma") +
+  theme_minimal() +
+  # hide x axis
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title.x = element_blank()) 
+```
+
+<div style="position: absolute; top: 49%; left: 10%;">
+  <svg width="50" height="30">
+    <defs>
+      <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="10" refY="5" orient="auto">
+        <polygon points="0 0, 10 5, 0 10" fill="black" />
+      </marker>
+    </defs>
+    <line x1="0" y1="15" x2="40" y2="15" stroke="black" stroke-width="2" marker-end="url(#arrowhead)" />
+  </svg>
+</div>
+
+
+<div style="position: absolute; top: 53%; left: 10%;">
+  <svg width="50" height="30">
+    <defs>
+      <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="10" refY="5" orient="auto">
+        <polygon points="0 0, 10 5, 0 10" fill="black" />
+      </marker>
+    </defs>
+    <line x1="0" y1="15" x2="40" y2="15" stroke="black" stroke-width="2" marker-end="url(#arrowhead)" />
+  </svg>
+</div>
+
+## Use color hue to visualize average ratings {style="font-size: 0.8em"} 
+
+:::{style="font-size: 0.8em"}
+
+<span style="color: red">*Hard: which has higher ratings, Indonesia or Costa Rica?*</span>
+:::
+
+```{r fig.width=8}
+country_summary %>%
+  arrange(country) %>%
+  ggplot(aes(x = 100, y = country, fill = mean_rating)) +
+  geom_tile() +
+  # color scheme is red to blue
+  scale_fill_viridis_c(option = "plasma") +
+  theme_minimal() +
+  # hide x axis
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title.x = element_blank()) 
+```
+
+<div style="position: absolute; top: 53%; left: 10%;">
+  <svg width="50" height="30">
+    <defs>
+      <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="10" refY="5" orient="auto">
+        <polygon points="0 0, 10 5, 0 10" fill="black" />
+      </marker>
+    </defs>
+    <line x1="0" y1="15" x2="40" y2="15" stroke="black" stroke-width="2" marker-end="url(#arrowhead)" />
+  </svg>
+</div>
+
+
+<div style="position: absolute; top: 78%; left: 10%;">
+  <svg width="50" height="30">
+    <defs>
+      <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="10" refY="5" orient="auto">
+        <polygon points="0 0, 10 5, 0 10" fill="black" />
+      </marker>
+    </defs>
+    <line x1="0" y1="15" x2="40" y2="15" stroke="black" stroke-width="2" marker-end="url(#arrowhead)" />
+  </svg>
+</div>
+
+## What about now? {.smaller}
+
+```{r fig.width=8}
+country_summary %>%
+  mutate(country = fct_reorder(country, mean_rating)) %>%
+  ggplot(aes(x = 100, y = country, fill = mean_rating)) +
+  geom_tile() +
+  # color scheme is red to blue
+  scale_fill_viridis_c(option = "plasma") +
+  theme_minimal() +
+  # hide x axis
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title.x = element_blank()) 
+```
+Observation: alphabetical ordering of the categorical variable is almost never useful, re-rank as needed.
+
+## Move up one level to color saturation
+
+1. Position on a common scale
+2. Position on non-aligned scales
+3. Length
+4. Angle
+5. Area
+6. <span style = "color: orange">Volume <> Density <> Color saturation</span>
+7. Color hue 
+
+## Use color saturation to visualize average ratings {style="font-size: 0.8em"}
+
+:::{.column width="70%"}
+```{r fig.width=7.5}
+country_summary %>%
+  ggplot(aes(x = 100, y = country, fill = mean_rating)) +
+  geom_tile() +
+  # one color scheme by saturation
+  scale_fill_gradient(low = "white", high = "black", guide = NULL) +
+  theme_minimal(base_size = 14) +
+  # hide x axis
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title.x = element_blank()) 
+```
+:::
+
+. . .
+
+:::{.column width="30%"}
+<div style="position:absolute; top:50%; left:80%; transform:translateY(-50%);">
+No legend?
+
+No problem.
+
+Because color saturation has natural ordering.
+</div>
+:::
+
+## Color saturation is easier to quantify
+
+:::{.column width="70%"}
+
+```{r fig.width=7.5}
+country_summary %>%
+  mutate(country = fct_reorder(country, n)) %>%
+  ggplot(aes(x = 100, y = country, fill = n)) +
+  geom_tile() +
+  # one color scheme by saturation
+  scale_fill_gradient(low = "white", high = "black", limits = c(0, NA),
+                      name = "# of coffee bean\nvarieties") +
+  theme_minimal(base_size = 14) +
+  # hide x axis
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title.x = element_blank()) 
+```
+:::
+
+. . .
+
+:::{.column width="30%"}
+<div style="font-size: 0.8em; position:absolute; top:50%; left:80%; transform:translateY(-50%);">
+
+The ratio between Mexico and United States is...
+
+2 or 3
+
+Moving down to the third level of estimation
+</div>
+:::
+
+## Move up one level to area
+
+1. Position on a common scale
+2. Position on non-aligned scales
+3. Length
+4. Angle
+5. <span style = "color: orange">Area</span>
+6. Volume <> Density <> Color saturation
+7. Color hue 
+
+## This is weird graph but still informative {.smaller-title}
+
+```{r}
+
+ggplot(country_summary,
+       aes(
+         x = 100,
+         y = 100,
+         size = n
+       )) +
+  geom_point(shape = 21,
+             fill = "black") +  # Bubble chart with outlined points
+  scale_size_area() +  # Scale size by area
+  facet_wrap( ~ country) +  # Create small multiples by country
+  labs(size = "Coffee bean varieties\n(scaled for area)") +
+  theme_void() +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.title.y = element_blank()) 
+
+```
+
+## Move up one level to angle
+
+1. Position on a common scale
+2. Position on non-aligned scales
+3. Length
+4. <span style = "color: orange">Angle</span>
+5. Area
+6. Volume <> Density <> Color saturation
+7. Color hue 
+
+## Use angle to visualize coffee bean varieties{.smaller-title}
+
+```{r}
+# Normalize value so that the maximum value is represented by 90 degrees
+
+max_n <- max(country_summary$n)  
+
+# Function to convert value to angle in degrees
+value_to_angle <- function(x) {
+  return(scales::rescale(x, to = c(0, 89), from = c(0, max_n)))
+}
+
+# Plot
+country_summary %>%
+  mutate(country = fct_reorder(country, -n),
+         angle = value_to_angle(n),
+         xend = cos(angle * pi / 180),
+         yend = sin(angle * pi / 180)) %>%
+  arrange(desc(n)) %>%
+  ggplot(aes(group = country)) +
+  geom_segment(aes(x = 0, y = 0, 
+                   xend = xend, yend = yend),
+                   color = "black", linewidth = 1.5)+
+  facet_wrap(~ country) +
+  theme_void() +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.title.y = element_blank()) 
+
+```
+
+
+## Pie charts use angles to encode data {.smaller}
+
+```{r}
+coffee_ratings %>% 
+  filter(!is.na(processing_method)) %>%
+  group_by(processing_method) %>%
+  summarize(n = n()) %>%
+  ggplot(aes(x="", y=n, fill=processing_method)) +
+  geom_bar(stat="identity", width=1, color="white") +
+  coord_polar("y", start=0) +
+  theme_void() # remove background, grid, numeric labels
+```
+
+::: {.center}
+
+For categorical data, no more than 6 colors is best.
+
+(Source: [European Environment Agency](https://www.eea.europa.eu/data-and-maps/daviz/learn-more/chart-dos-and-donts))
+:::
+
+## We are so close! {.smaller}
+
+::: {.column width="40%"}
+1. Position on a common scale
+2. Position on non-aligned scales
+3. <span style = "color: orange">Length</span>
+4. Angle
+5. Area
+6. Volume <> Density <> Color saturation
+7. Color hue 
+:::
+
+::: {.column width="60%"}
+```{r fig.height=10}
+set.seed(42)
+country_summary %>%
+  mutate(noise = runif(19, 0, 5), mean_rating = mean_rating + noise) %>%
+  # Plot using geom_rect
+  ggplot(aes(y = reorder(country, -mean_rating))) +
+  geom_rect(
+    aes(
+      xmin = noise,
+      xmax = mean_rating,
+      ymin = as.numeric(factor(country)) - 0.4,
+      ymax = as.numeric(factor(country)) + 0.4
+    ),
+    fill = "skyblue",
+    color = "black"
+  ) +
+  theme_minimal(base_size = 22) +
+  labs(x = "average ratings", y = "country")
+```
+:::
+
+. . .
+
+<div style="position:absolute; top:75%; left:0%; 
+transform:translateY(-50%); color:orange">
+Wait, I thought there is some difference...
+</div>
+
+## The start-at-zero rule
+
+:::{.column width="50%"}
+```{r fig.width=10, fig.height=10}
+country_summary %>%
+  mutate(country = fct_reorder(country, mean_rating)) %>%
+  ggplot(aes(x = 100, y = country, fill = mean_rating)) +
+  geom_tile() +
+  # color scheme is red to blue
+  scale_fill_viridis_c(option = "plasma") +
+  theme_minimal(base_size = 22) +
+  # hide x axis
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title.x = element_blank()) 
+```
+:::
+
+
+::: {.column width="50%"}
+```{r fig.height=10}
+set.seed(42)
+country_summary %>%
+  mutate(country = fct_reorder(country, mean_rating)) %>%
+  ggplot(aes(y = country)) +
+  geom_rect(
+    aes(
+      xmin = 0,
+      xmax = mean_rating,
+      ymin = as.numeric(factor(country)) - 0.4,
+      ymax = as.numeric(factor(country)) + 0.4
+    ),
+    fill = "skyblue",
+    color = "black"
+  ) +
+  theme_minimal(base_size = 22) +
+  coord_cartesian(xlim = c(80, 86)) +
+  labs(x = "average ratings", y = "country")
+```
+:::
+
+
+## **How to Lie with Statistics (1954)** {.smaller}
+
+* Darrell Huff argues that truncating the y-axis can exaggerate differences and mislead the viewer.
+* It creates a false impression of dramatic change where the actual variation is small.
+
+. . .
+
+![](images/lie_with_stat.png){style="width: 100%; display: block; margin: auto;"}
+
+## **The Visual Display of Quantitative Information (1983)** {.smaller-title}
+
+:::{style="font-size: 0.8em"}
+
+* Edward Tufte prioritizes data density and the detection of subtle patterns.
+* He argues that starting at zero can waste valuable space, obscuring meaningful variations.
+
+
+::: {.column width="45%"}
+**Combined MMR vaccination rate, 1994/95 to 2014/15, England**
+
+![](images/mmr-starts-from-0.png)
+:::
+
+
+::: {.column width="50%"}
+**Take another look, axis doesn't start at zero**
+
+![](images/mmr-not-from-zero.png)
+:::
+:::
+
+
+## Position, but not a common scale {.smaller}
+
+::: {.column width="40%"}
+1. Position on a common scale
+2. <span style = "color: orange">Position on non-aligned scales</span>
+3. Length
+4. Angle
+5. Area
+6. Volume <> Density <> Color saturation
+7. Color hue 
+:::
+
+::: {.column width="60%"}
+```{r fig.height=10.5, fig.width=12}
+country_summary %>%
+  mutate(country = fct_reorder(country, mean_rating)) %>%
+  ggplot(aes(x = mean_rating, y = 1)) +
+  # add a horizontal line at y = 1
+  geom_hline(yintercept = 1) +
+  geom_point(color = "black", size = 3) +
+  facet_wrap(~country) +
+  coord_cartesian(xlim = c(80, 86)) +
+  theme_minimal(base_size = 22) +
+  theme(axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.title.y = element_blank()) +
+  labs(x = "average ratings", y = "country")
+```
+:::
+
+## Position, and a common scale {.smaller}
+
+::: {.column width="40%"}
+1. <span style = "color: orange">Position on a common scale</span>
+2. Position on non-aligned scales
+3. Length
+4. Angle
+5. Area
+6. Volume <> Density <> Color saturation
+7. Color hue 
+:::
+
+::: {.column width="60%"}
+```{r fig.height=10.5}
+country_summary %>%
+  mutate(country = fct_reorder(country, mean_rating)) %>%
+  ggplot(aes(x = mean_rating, y = country)) +
+  # add a horizontal line at y = 1
+  geom_hline(yintercept = 1) +
+  geom_point(color = "black", size = 3) +
+  coord_cartesian(xlim = c(80, 86)) +
+  theme_minimal(base_size = 22) +
+  labs(x = "average ratings", y = "country")
+```
+:::
+
+## Position, and a common scale {.smaller}
+
+::: {.column width="40%"}
+1. <span style = "color: orange">Position on a common scale</span>
+2. Position on non-aligned scales
+3. Length
+4. Angle
+5. Area
+6. Volume <> Density <> Color saturation
+7. Color hue 
+:::
+
+::: {.column width="60%"}
+```{r fig.height=10.5}
+country_summary %>%
+  ggplot(aes(x = mean_rating, y = country)) +
+  # add a horizontal line at y = 1
+  geom_hline(yintercept = 1) +
+  geom_point(color = "black", size = 3) +
+  coord_cartesian(xlim = c(80, 86)) +
+  theme_minimal(base_size = 22) +
+  labs(x = "average ratings", y = "country")
+```
+:::
+
+
+<div style="position:absolute; top:75%; left:0%; 
+transform:translateY(-50%); color:red">
+Re-ranking categorical variables still matters!
+</div>
+
+## Implications for designing effective data visualizations {.smaller-title}
+
+::: {.incremental}
+- Stacked anything is nearly always a mistake
+- Pie charts are always a mistake
+- Scatterplot are the best way to show the relationships between two variables
+- If growth (slope) is important, plot it directly 
+:::
+
+## Stacked anything is nearly always a mistake! {.smaller-title}
+
+```{r}
+ggplot(data = diamonds) + 
+  geom_bar(aes(x = clarity, fill = cut), position = "stack") +
+    labs(x = "Clarity", y = "Count", 
+       title = "Stacked Bar Graph of Diamond Cut by Clarity") +
+  theme_minimal(base_size = 14)
+```
+
+:::{.center}
+
+**Which category has higher count: SI1-Premium or VS2-Premium?**
+:::
+
+## Transform stacked barplot to a parallel coordinate plot {.smaller-title}
+
+```{r} 
+library(GGally)
+p <- diamonds %>%
+  count(cut, clarity) %>%
+  pivot_wider(names_from = clarity, values_from = n, values_fill = 0) %>%
+  GGally::ggparcoord(
+    columns = 2:ncol(.),         # clarity
+    groupColumn = 1,             # cut
+    scale = "globalminmax",     # no normalization
+    showPoints = TRUE,
+    title = "Diamond Cut Profiles by Clarity"
+  ) +
+  xlab('Clarity') +
+  ylab('Count') +
+  theme_minimal(base_size = 14) 
+p
+```
+:::{.center}
+
+**Which category has higher count: SI1-Premium or VS2-Premium?**
+:::
+
+## You lose some information, but just use two charts if needed {.smaller-title}
+
+:::{.column width="50%"}
+```{r, fig.width=5} 
+p     
+```
+:::
+
+:::{.column width="50%"}
+```{r, fig.width=5}
+diamonds %>%
+  count(clarity) %>%
+  pivot_wider(names_from = clarity, values_from = n, values_fill = 0) %>%
+  GGally::ggparcoord(
+    columns = 1:ncol(.),         
+    groupColumn = NULL,             
+    scale = "globalminmax",     # no normalization
+    showPoints = TRUE,
+    title = "Count of Diamond by Clarity"
+  ) +
+  xlab('Clarity') +
+  ylab('Count') +
+  scale_y_continuous(limits = c(0, 14000)) +
+  theme_minimal(base_size = 14)    
+```
+:::
+
+## Why are pie charts never a good idea? {.smaller}
+
+![](images/rank-visual-cues.png)
+
+. . . 
+
+::: {.center}
+**Angle is #4 on the accuracy list, we can do better.**
+:::
+
+
+## Tables are preferable to pie charts for small datasets {.smaller-title}
+
+::: {.column width="50%"}
+
+Don't do this!
+
+```{r, fig.width=5}
+# Sample data
+slices <- c(25, 60, 15)
+labels <- c("A", "B", "C")
+
+# Create pie chart
+pie(slices, labels = labels, main = "Simple Pie Chart")
+```
+:::
+
+:::{.column width = "50%"}
+Do this instead!
+
+| Label | Value |
+|-------|-------|
+| A     | 25    |
+| B     | 60    |
+| C     | 15    |
+:::
+
+
+## If you have a lot of data to show, don't use pie charts {.smaller-title}
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+<span style = "color: red">Don't do this! </span>
+
+```{r fig.height=10}
+pie(country_summary$n,
+    labels = country_summary$country,
+    col = rainbow(nrow(country_summary)))
+```
+
+:::
+
+::: {.column width="50%"}
+
+<span style = "color: red">Or this! </span>
+```{r fig.height=10}
+pie(country_summary$mean_rating[1:5],
+    labels = country_summary$country[1:5],
+    col = rainbow(5))
+```
+
+:::
+
+:::
+
+## All good pie charts are jokes
+
+![](images/pie-pyramid.png)
+
+## Cleveland's three visual operations of pattern perception {.smaller}
+
+🎯 **Detection**: *Recognizing that a geometric object encodes a physical value.*
+
+🧩 **Assembly**: *Grouping detected graphical elements into patterns.*
+
+📏 **Estimation**: *Visually assessing the relative magnitude of two or more values.*
+
+
+## Assembly: Gestalt Psychology
+
+
+

@@ -53,6 +53,7 @@ jobs:
             any::rmarkdown
             any::ggplot2
             any::ggthemes
+            any::GGally
             any::leaflet
             any::shiny
             any::countdown
