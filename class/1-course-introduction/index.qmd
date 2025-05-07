@@ -520,7 +520,7 @@ countdown::countdown(
 - <span style="font-weight: bold; color: orange">Introduction to {ggplot2}</span>
 
 
-## Welcome to {ggplot2} {.smaller}
+## Welcome to `{ggplot2}` {.smaller}
 :::{ .column width="65%"}
 
 - Based on Grammar of Graphics [(Wilkinson 2005)](https://link.springer.com/book/10.1007/0-387-28695-0)

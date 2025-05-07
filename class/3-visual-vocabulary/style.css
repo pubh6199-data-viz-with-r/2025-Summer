@@ -57,3 +57,29 @@ strong {
 .center {
   text-align: center;
 }
+
+.orange-box {
+  border: 2px solid #e67e22;
+  background-color: #fcf3e3;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.citation{
+  font-size: 0.8em;
+  text-align: center;
+}
+
+.takeaway {
+  text-align: center;
+  border: 2px solid #e67e22;
+  background-color: #fcf3e3;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+
