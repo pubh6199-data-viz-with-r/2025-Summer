@@ -6,3 +6,5 @@
 .DS_Store
 _site
 site_libs
+*_files/
+
