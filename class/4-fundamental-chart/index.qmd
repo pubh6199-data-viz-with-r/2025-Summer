@@ -1,0 +1,1000 @@
+---
+title: "Lab 2. Fundamental Chart Types"
+subtitle: "PUBH 6199: Visualizing Data with R, Summer 2025"
+date: May 29, 2025
+author: Xindi (Cindy) Hu, ScD
+format: 
+  revealjs:
+    pdf: true
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    preview-links: auto
+    logo: images/logo-square.png
+    css: style.css
+    footer: 'PUBH 6199: Visualizing Data with R'
+resources:
+  - images/
+---
+
+```{r setup}
+library(palmerpenguins)
+library(tidyverse)
+```
+
+## Outline for today {.smaller}
+
+- **Introducing the datasets**
+
+- Review chart types to visualize basic quantitative information
+
+- Review chart types to visualize trends over time 
+
+- Review chart types to visualize distribution
+
+- Review chart types to visualize relationships
+
+## Introducing the `penguins` dataset from `{palmerpenguins}` {.smaller-title}
+
+Contains body measurements for `r nrow(penguins)` penguins on three islands in the Palmer Archipelago.
+
+:::{.column width=65%}
+![](images/penguin1.png){width=100%}
+:::
+
+:::{.column width=25%}
+![](images/penguin2.jpeg){width=100%}
+:::
+
+::: citation
+
+Artwork by @allison_horst
+:::
+
+## Introducing the `penguins` dataset from `{palmerpenguins}` {.smaller-title}
+
+::: scroll-output
+```{r}
+penguins_clean <- penguins %>% filter(!is.na(species), !is.na(flipper_length_mm), !is.na(body_mass_g))
+
+glimpse(penguins_clean)
+```
+:::
+
+Two penguins dropped out because missing data on important variables `species`, `flipper_length_mm`, and `body_mass_g`.
+
+## Introducing the lyme disease surveillance data {.smaller-title}
+
+> Lyme disease has been a nationally notifiable condition in the U.S. sinde 1991. Local and state health departments collect reports of Lyme disease and shared the anonymized data with the Centers for Disease Control and Prevention (CDC). The CDC developed public use data sets to facilitate public health and reserach acccess to the data.
+
+![](images/lymedisease.png){width=100%}
+
+::: citation
+Download state and local data on Lyme disease **case counts** and **incidence (cases/100k people)** over time [here](https://www.cdc.gov/lyme/data-research/facts-stats/surveillance-data-1.html).
+:::
+
+## Introducing the lyme disease surveillance data {.smaller-title}
+
+::: scroll-output
+```{r}
+lyme_rates <- read_csv("data/2023_CaseIncid-Lyme-Disease-Rates-by-State-or-Locality.csv") %>%
+  janitor::clean_names() %>%
+  mutate(state = str_replace(state, "\x86", "")) %>%
+  rename(rates_per_100k = rates)
+
+lyme_cases <- read_csv("data/2023_CaseIncid-Lyme-Disease-Cases-by-State-or-Locality.csv") %>%
+  janitor::clean_names() %>%
+  pivot_longer(
+    cols = -c(state),
+    names_to = "year",
+    values_to = "cases"
+  ) %>%
+  mutate(
+    state = str_replace(state, "\x86", ""),
+    year = str_replace(year, "x", ""),
+    year = as.numeric(year)) %>%
+  filter(year >= 2010)
+
+lyme <- lyme_cases %>%
+  left_join(lyme_rates, by = c("state", "year"))
+
+glimpse(lyme)
+```
+:::
+
+The dataset contains the number of Lyme disease cases and incidence rates (cases per 100,000 people) for 49 states (missing Hawaii) and DC in the U.S. from 2010 to 2023.
+
+
+## Outline for today {.smaller}
+
+- Introducing the datasets
+
+- **Review chart types to visualize basic quantitative information**
+
+- Review chart types to visualize trends over time 
+
+- Review chart types to visualize distribution
+
+- Review chart types to visualize relationships
+
+
+## Let's start with a simple example, how many penguins are there in each species? {.smaller-title}
+
+::: {.smaller-body}
+
+::: {.column width=50%}
+
+Bar chart is a good choice to visualize counts. 
+
+```{r, fig.width=4, fig.height=2.5}
+#| echo: TRUE
+ggplot(penguins_clean, aes(x = species)) + 
+  geom_bar() +
+  labs(title = "Bar Chart: Count by Species") +
+  theme_minimal()
+```
+
+:::
+
+::: {.column width=50%}
+
+Dot plot improves upon it due to higher data-ink ratio. 
+
+```{r, fig.width=4, fig.height=2.5}
+#| echo: TRUE
+penguins_clean %>%
+  count(species) %>%
+  ggplot(aes(x = species, y = n)) + 
+  geom_point() +
+  geom_linerange(aes(ymin = 0, ymax = n)) +
+  labs(title = "Dot plot: Count by Species") +
+  theme_minimal()
+```
+
+:::
+
+:::
+
+
+## How to visualize the average body mass of each species? {.smaller-title}
+
+::: {.smaller-body}
+
+
+::: {.column width=50%}
+
+The default of `geom_bar()` is column plot, use `coord_flip()` to turn it horizontal.
+
+```{r, fig.width=4, fig.height=2.5}
+#| echo: TRUE
+ggplot(penguins_clean, aes(x = species, y = body_mass_g)) + 
+  stat_summary(fun = mean, geom = "bar") +
+  labs(title = "Mean Body Mass by Species") +
+  coord_flip() +
+  theme_minimal()
+```
+:::
+
+::: {.column width=50%}
+
+Similarly, `coord_flip()` can be applied to dot plot 
+
+```{r, fig.width=4, fig.height=2.5}
+#| echo: TRUE
+penguins_clean %>%
+  group_by(species) %>%
+  summarise(mean_body_mass = mean(body_mass_g, na.rm = TRUE)) %>%
+  ggplot(aes(x = species, y = mean_body_mass)) + 
+  geom_point() +
+  geom_linerange(aes(ymin = 0, ymax = mean_body_mass)) +
+  labs(title = "Mean Body Mass by Species") +
+  coord_flip() +
+  theme_minimal()
+```
+
+
+:::
+
+
+:::
+
+
+## Add labels if the exact values are important {.smaller-title}
+
+::: {.smaller-body}
+Use `geom_text()` to add labels to the bar chart and dot plot.
+
+::: {.column width=50%}
+```{r, fig.width=4, fig.height=2.5}
+#| echo: TRUE
+#| code-line-numbers: "6"
+penguins_clean %>%
+  group_by(species) %>%
+  summarise(mean_body_mass = mean(body_mass_g, na.rm = TRUE)) %>%
+  ggplot(aes(x = species, y = mean_body_mass)) + 
+  geom_col() +
+  geom_text(aes(label = round(mean_body_mass)), hjust = 1.2, color = "white") +
+  labs(title = "Mean Body Mass by Species") +
+  coord_flip() +
+  theme_minimal()
+```
+:::
+
+::: {.column width=50%}
+
+```{r, fig.width=4, fig.height=2.5}
+#| echo: TRUE
+#| code-line-numbers: "7-8"
+penguins_clean %>%
+  group_by(species) %>%
+  summarise(mean_body_mass = mean(body_mass_g, na.rm = TRUE)) %>%
+  ggplot(aes(x = species, y = mean_body_mass)) + 
+  geom_point() +
+  geom_linerange(aes(ymin = 0, ymax = mean_body_mass)) +
+  geom_text(aes(label = round(mean_body_mass)), hjust = -0.2, color = "black") +
+  scale_y_continuous(limits = c(0, 6000)) + # set y-axis limits to give room to labels
+  labs(title = "Mean Body Mass by Species") +
+  coord_flip() +
+  theme_minimal() 
+```
+
+:::
+
+:::
+
+## When to use `geom_col()` vs `geom_bar()`? {.smaller-title}
+
+::: {.smaller-body}
+
+::: {.column width=45%}
+Use `geom_col()` when data is already summarized, e.g., mean body mass by species.
+
+```{r, fig.width=4, fig.height=2.5}
+#| echo: TRUE
+penguins_clean %>%
+  group_by(species) %>%
+  summarise(mean_body_mass = mean(body_mass_g, na.rm = TRUE)) %>%
+  ggplot(aes(x = species, y = mean_body_mass)) + 
+  geom_col() +
+  labs(title = "Mean Body Mass by Species")
+```
+
+:::
+
+::: {.column width=10%}
+:::
+
+::: {.column width=45%}
+Use `geom_bar()` when data is not summarized, e.g., count of species.
+
+```{r, fig.width=4, fig.height=2.5}
+#| echo: TRUE
+ggplot(penguins_clean, aes(x = species, y = body_mass_g)) + 
+  geom_bar(stat = "summary", fun = mean) +
+  labs(title = "Mean Body Mass by Species")
+```
+
+:::
+
+
+:::
+
+## IMPORTANT: Bar plot axis **must** start at zero {.smaller-title}
+
+::: {.smaller-body}
+
+> [Yang et al (2021)](https://psycnet.apa.org/record/2021-19781-001?doi=1) study provided empirical evidence that y-axis truncation leads to viewers to perceive illustrated differences as larger (i.e., a truncation effect).
+
+![](images/truncation.png){width=100%}
+
+:::
+
+## IMPORTANT: Bar plot axis **must** start at zero {.smaller-title}
+
+::: {.smaller-body}
+
+> [Yang et al (2021)](https://psycnet.apa.org/record/2021-19781-001?doi=1) study provided empirical evidence that y-axis truncation leads to viewers to perceive illustrated differences as larger (i.e., a truncation effect).
+
+![](images/truncation2.png)
+
+:::
+
+## But you can cut the y-axis of dot plots! {.smaller-title}
+
+A dot plot has has less ink and draw the eye to the end point rather than the middle of the bars. Cutting the y-axis allows easily differentiating differences in the values.
+
+::: {.column width=33%}
+
+```{r, fig.width=4, fig.height=2.5}
+ggplot(penguins_clean, aes(x = species, y = body_mass_g)) + 
+  stat_summary(fun = mean, geom = "bar") +
+  labs(title = "Mean Body Mass by Species") +
+  coord_flip() +
+  theme_minimal()
+```
+
+:::
+
+::: {.column width=33%}
+
+```{r, fig.width=4, fig.height=2.5}
+penguins_clean %>%
+  group_by(species) %>%
+  summarise(mean_body_mass = mean(body_mass_g, na.rm = TRUE)) %>%
+  ggplot(aes(x = species, y = mean_body_mass)) + 
+  geom_point() +
+  geom_linerange(aes(ymin = 0, ymax = mean_body_mass)) +
+  labs(title = "Mean Body Mass by Species") +
+  coord_flip() +
+  theme_minimal()
+```
+
+:::
+
+::: {.column width=33%}
+
+```{r, fig.width=4, fig.height=2.5}
+penguins_clean %>%
+  group_by(species) %>%
+  summarise(mean_body_mass = mean(body_mass_g, na.rm = TRUE)) %>%
+  ggplot(aes(x = species, y = mean_body_mass)) + 
+  geom_point() +
+  geom_linerange(aes(ymin = 0, ymax = mean_body_mass)) +
+  labs(title = "Mean Body Mass by Species") +
+  scale_y_continuous(limits = c(3500, 5500)) + 
+  coord_flip() +
+  theme_minimal()
+```
+
+:::
+
+. . .
+
+::: takeaway
+
+Bar plots/dot plots shine when comparing counts, but you should be careful when using them to summarize your data. Why?
+
+:::
+
+
+## Be careful when using bar plots/dot plots to summarize continuous data {.smaller-title}
+
+::: {.smaller-body}
+
+![](images/hiding_data.png){width=60%}
+
+::: citation
+Art by Allison Horst
+:::
+
+::: incremental
+- Bar plots hide the distribution of the data
+
+- Bar plot makes readers infer that data are normally distributed with no outliers
+
+:::
+:::
+
+## Outline for today {.smaller}
+
+- Introducing the datasets
+
+- Review chart types to visualize basic quantitative information
+
+- **Review chart types to visualize trends over time** 
+
+- Review chart types to visualize distribution
+
+- Review chart types to visualize relationships
+
+## Line plots show trends over time {.smaller-title}
+
+> Going back to the lyme disease dataset, use line plot to show changes in lyme disease incidence rates (case per 100,000 people) by state, from 2010 to 2023.
+
+::: {.column width=45%}
+
+Basic line graph uses `geom_line()`
+
+```{r, fig.width=4, fig.height=2.5}
+#| echo: TRUE
+lyme %>%
+  ggplot(aes(x = year, y = rates_per_100k, group = state)) +
+  geom_line()
+```
+
+:::
+
+::: {.column width=10%}
+:::
+
+::: {.column width=45%}
+
+A line + point graph uses `geom_point()` to add points to the line graph.
+
+```{r, fig.width=4, fig.height=2.5}
+#| echo: TRUE
+lyme %>%
+  ggplot(aes(x = year, y = rates_per_100k, group = state)) +
+  geom_line()+
+  geom_point()
+```
+
+:::
+
+
+## Improve upon "Spaghetti plots" {.smaller-title}
+
+> A spaghetti plot is a line graph with many lines, which makes it hard to read. We can use `{gghighlight}` to draw attention to the lines of interest.
+
+::: {.column width=45%}
+
+Highlight a specific state or a group of states
+
+```{r, fig.width=4, fig.height=2.5}
+#| echo: TRUE
+lyme %>%
+  ggplot(aes(x = year, y = rates_per_100k, group = state, color = state)) +
+  geom_line() +
+  gghighlight::gghighlight(state %in% c("Michigan", "Florida")) +
+  theme_minimal()
+```
+
+:::
+
+::: {.column width=10%}
+:::
+
+::: {.column width=45%}
+
+Highlight states based on the values of the incidence rate, for example, maximum rate exceeds 5 per 100k.
+
+```{r, fig.width=4, fig.height=2.5}
+#| echo: TRUE
+lyme %>%
+  ggplot(aes(x = year, y = rates_per_100k, group = state, color = state)) +
+  geom_line() +
+  gghighlight::gghighlight(max(rates_per_100k) > 5) +
+  theme_minimal()
+```
+
+:::
+
+## Area chart is similar to line graph, just filled in and stacked {.smaller-title}
+
+::: {.smaller-body}
+
+::: {.column width=45%}
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+lyme |> 
+  filter(state %in% c("Michigan", "Ohio", "Iowa", "North Dakota")) |> 
+  ggplot(aes(x = year, y = rates_per_100k, group = state, color = state)) +
+  geom_line()
+```
+
+:::
+
+
+::: {.column width=10%}
+
+:::
+
+::: {.column width=45%}
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+lyme |> 
+  filter(state %in% c("Michigan", "Ohio", "Iowa", "North Dakota")) |> 
+  ggplot(aes(x = year, y = rates_per_100k, group = state, fill = state)) +
+  geom_area()
+```
+
+:::
+
+Stacked area charts are useful for showing the evolution of a whole and the relative proportions of each group that make up the whole. But it has a few drawbacks: low data-ink ratio, using area rather than position to encode data.
+
+:::
+
+## A variant of area charts: proportional stacked area charts {.smaller-title}
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+#| code-line-numbers: "4-5"
+lyme |> 
+  filter(state %in% c("Michigan", "Ohio", "Iowa", "North Dakota")) |> 
+  ggplot(aes(x = year, y = rates_per_100k, group = state, fill = state)) +
+  geom_area(position = "fill") + # this creates the proportional stacked area chart
+  scale_y_continuous(labels = scales::percent_format(scale = 100))
+
+```
+
+## Which group to put on the bottom? {.smaller-title}
+
+::: smaller-body
+
+It is important to consider which group you want to put it on the bottom of the area chart because it is the only group where your user can easily read the values off the chart.
+
+::: {.column width=45%}
+
+If you want to draw attention to "Michigan", put it on the bottom.
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+#| code-line-numbers: "3"
+lyme |> 
+  filter(state %in% c("Michigan", "Ohio", "Iowa", "North Dakota")) |> 
+  mutate(state = fct_relevel(state, "Michigan", after = Inf)) |>  # move Michigan to end
+  ggplot(aes(x = year, y = rates_per_100k, group = state, fill = state)) +
+  geom_area() +
+  theme_minimal()
+```
+
+
+:::
+
+::: {.column width=10%}
+:::
+
+::: {.column width=45%}
+If all groups are equally important and you are not as interested in showing the whole, use a faceted line plot instead!
+
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+#| code-line-numbers: "6"
+lyme |> 
+  filter(state %in% c("Michigan", "Ohio", "Iowa", "North Dakota")) |> 
+  mutate(state = fct_relevel(state, "Michigan", after = Inf)) |>  # move Michigan to end
+  ggplot(aes(x = year, y = rates_per_100k, group = state, color = state)) +
+  geom_line() +
+  facet_wrap(~ state) +
+  theme_minimal()
+```
+
+
+:::
+
+:::
+
+##  {background="#033C5A"}
+<br>
+<br>
+<br>
+
+<div class="page-center vertical-center">
+<p class="custom-subtitle bottombr">{{<fa bullseye title="let's build skills" >}} Practice makes perfect! </p>
+<p class="caption-text">*~ Head over to lab2 notebook! ~*</p>
+</div>
+
+## Outline for today {.smaller}
+
+- Introducing the datasets
+
+- Review chart types to visualize basic quantitative information
+
+- Review chart types to visualize trends over time 
+
+- **Review chart types to visualize distribution**
+
+- Review chart types to visualize relationships
+
+## Histogram {.smaller}
+
+Histogram cuts a numeric variable into bins and counts the number of observations in each bin.
+
+::: {.column width=45%}
+
+Too many bins!
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+ggplot(penguins_clean, aes(x = body_mass_g, fill = species)) +
+  geom_histogram(binwidth = 30, alpha = 0.7) +
+  labs(title = "Histogram: Body Mass Distribution")
+```
+:::
+
+::: {.column width=10%}
+
+:::
+
+::: {.column width=45%}
+
+A better `binwidth` parameter. The default is to divide data into 30 bins
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+ggplot(penguins_clean, aes(x = body_mass_g, fill = species)) +
+  geom_histogram(binwidth = 200, alpha = 0.7) +
+  labs(title = "Histogram: Body Mass Distribution")
+```
+:::
+
+
+
+## Density plot {.smaller}
+
+Density plot uses the kernel density estimate to show the probability density function of a variable. Area under each density curve sums to 1.
+
+::: {.column width=45%}
+
+A smoothed version of a histogram
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+ggplot(penguins_clean, aes(x = body_mass_g, fill = species)) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Density Plot: Body Mass by Species")
+```
+
+:::
+
+::: {.column width=10%}
+:::
+
+::: {.column width=45%}
+
+Why is the histogram not the same?
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+ggplot(penguins_clean, aes(x = body_mass_g, fill = species)) +
+  geom_histogram(binwidth = 200, alpha = 0.7) +
+  labs(title = "Histogram: Body Mass Distribution")
+```
+
+:::
+
+. . .
+
+::: takeaway
+Density plot does not indicate **sample size**.
+:::
+
+## Box plot {.smaller}
+
+Box plot shows the median, interquartile range (IQR), and outliers of a variable. Boxplot is often used with comparing the same numeric variable over multiple groups.
+
+
+::: {.column width=45%}
+
+![](images/boxplot.webp)
+
+Boxplot shows summary statistics, which may hide the distribution of the data.
+:::
+
+::: {.column width=10%}
+:::
+
+
+::: {.column width=45%}
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+ggplot(penguins_clean, aes(x = species, y = body_mass_g)) +
+  geom_boxplot() +
+  labs(title = "Box Plot: Body Mass by Species")
+```
+
+:::
+
+## Enhance box plot {.smaller}
+
+::: {.column width=45%}
+
+Highlight a group if you have many groups, also flip the coordinate if your categorical variable has long labels.
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+#| code-line-numbers: "5-6"
+lyme |>
+  filter(state %in% c("Michigan", "Ohio", "Iowa", "North Dakota")) |> 
+  ggplot(aes(x = state, y = rates_per_100k)) +
+  geom_boxplot() +
+  gghighlight::gghighlight(state == "Michigan") +
+  coord_flip() +
+  labs(title = "Box Plot: Lyme Disease Incidence by State") +
+  theme_minimal()
+```
+
+:::
+
+::: {.column width=10%}
+
+:::
+
+::: {.column width=45%}
+
+Jitter raw data, but remember to remove outliers
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+#| code-line-numbers: "4-5"
+lyme |>
+  filter(state %in% c("Michigan", "Ohio", "Iowa", "North Dakota")) |> 
+  ggplot(aes(x = state, y = rates_per_100k)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(alpha = 0.5, width = 0.2) +
+  coord_flip() +
+  labs(title = "Box Plot: Lyme Disease Incidence by State") +
+  theme_minimal()
+
+```
+:::
+
+
+## Violin plot {.smaller}
+
+Violin plot shows the density estimate of the variable, similar to a density plot. It is often used with comparing the same numeric variable over multiple groups. It is usually a better alternative than a box plot.
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+
+lyme |>
+  filter(state %in% c("Michigan", "Ohio", "Iowa", "North Dakota")) |> 
+  ggplot(aes(x = state, y = rates_per_100k)) +
+  geom_violin() +
+  coord_flip() +
+  labs(title = "Violin Plot: Lyme Disease Incidence by State") +
+  theme_minimal()
+```
+
+
+## Enhance violin plot {.smaller}
+
+::: {.column width=45%}
+
+If you have many groups, consider ranking them by median values to make your readers' brain hurt less. Recall `law of continuity`.
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+#| code-line-numbers: "3"
+lyme |>
+  filter(state %in% c("Michigan", "Ohio", "Iowa", "North Dakota")) |>
+  mutate(state = fct_reorder(state, rates_per_100k, .fun = median, na.rm = TRUE)) |>
+  ggplot(aes(x = state, y = rates_per_100k)) +
+  geom_violin() +
+  coord_flip() +
+  labs(title = "Violin Plot: Lyme Disease Incidence by State") +
+  theme_minimal() 
+```
+
+:::
+
+::: {.column width=5%}
+
+:::
+
+::: {.column width=50%}
+
+The `{see}` package has `geom_violindot()` function that creates a half-violin half-dot plot, showing both distribution and sample size.
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+#| code-line-numbers: "4"
+lyme |>
+  filter(state %in% c("Michigan", "Ohio", "Iowa", "North Dakota")) |> 
+  ggplot(aes(x = state, y = rates_per_100k)) +
+  see::geom_violindot(size_dots = 2) +
+  coord_flip() +
+  labs(title = "Box Plot: Lyme Disease Incidence by State") +
+  theme_minimal()
+```
+:::
+
+
+## Outline for today {.smaller}
+
+- Introducing the datasets
+
+- Review chart types to visualize basic quantitative information
+
+- Review chart types to visualize trends over time 
+
+- Review chart types to visualize distribution
+
+- **Review chart types to visualize relationships**
+
+## Scatter plot {.smaller}
+>Scatter plot is a good choice to visualize the relationship between two numeric variables. They help us answer questions around the **effect of X on Y**.
+
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+penguins_clean %>%
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(alpha = 0.5) +
+  labs(title = "Effect of Flipper Length on Body Mass") +
+  theme_minimal()
+
+```
+
+
+## Add rug to visualize distribution {.smaller}
+
+>Rug plot uses distribution marks to visualize the distribution of the two numeric variables. Each narrow line represents one data point. It shows the density of the data along the x and y axes.
+
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+#| code-line-numbers: "4"
+penguins_clean %>%
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(alpha = 0.5) +
+  geom_rug() +
+  labs(title = "Effect of Flipper Length on Body Mass") +
+  theme_minimal()
+
+```
+
+
+## Add trend lines {.smaller}
+>Trend lines are used to show the overall trend of the data. Default method for `geom_smooth()` is LOESS (locally estimated scatter plot smoothing), think of it as a moving average.
+
+::::{.columns}
+
+::: {.column width=45%}
+
+LOESS
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+#| code-line-numbers: "4"
+penguins_clean %>%
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth() +
+  labs(title = "Effect of Flipper Length on Body Mass") +
+  theme_minimal()
+
+```
+:::
+
+::: {.column width=10%}
+:::
+
+::: {.column width=45%}
+
+Linear regression
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+#| code-line-numbers: "4"
+penguins_clean %>%
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Effect of Flipper Length on Body Mass") +
+  theme_minimal()
+
+```
+
+:::
+
+::::
+
+## Add a third numeric variable with bubble chart {.smaller-title}
+
+>We can use a bubble chart to show the third numeric variable. The size of the point represents the third variable.
+
+::: {.column width=65%}
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+#| code-line-numbers: "3"
+
+penguins_clean %>%
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(size = bill_length_mm), alpha = 0.4) +
+  labs(title = "Effect of Flipper Length on Body Mass") +
+  theme_minimal()
+
+```
+:::
+
+::: {.column width=10%}
+:::
+
+::: {.column width=25%}
+
+A few caveats:
+
+- The relationship between X and Y will be the primary focus
+
+- It may be difficult to distinguish the size of the bubbles
+
+:::
+
+## Adjust the size of the bubbles {.smaller}
+
+> Use `scale_size()` to adjust the size of the bubbles. Do not use `scale_radius()`.
+
+::: {.column width=45%}
+
+This is good. 
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+#| code-line-numbers: "4"
+penguins_clean %>%
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(size = bill_length_mm), alpha = 0.4) +
+  scale_size(range = c(1, 4), name = "Bill Length (mm)") + # adjust the size of the bubbles
+  labs(title = "Effect of Flipper Length on Body Mass") +
+  theme_minimal()
+
+```
+
+:::
+
+::: {.column width=10%}
+:::
+
+::: {.column width=45%}
+
+This is misleading.
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+#| code-line-numbers: "4"
+penguins_clean %>%
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(size = bill_length_mm), alpha = 0.4) +
+  scale_radius(range = c(1, 4), name = "Bill Length (mm)") + # adjust the size of the bubbles
+  labs(title = "Effect of Flipper Length on Body Mass") +
+  theme_minimal()
+
+```
+:::
+
+## Add a third numeric variable with color {.smaller-title}
+
+>Recall that color hue does not natually have meaning for magnitude, consider using intensity
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+#| code-line-numbers: "3-4"
+penguins_clean %>%
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = bill_length_mm)) +
+  scale_color_gradient(low = "white", high = "royalblue", name = "Bill Length (mm)") + 
+  labs(title = "Effect of Flipper Length on Body Mass") +
+  theme_minimal()
+
+```
+
+##  {background="#033C5A"}
+<br>
+<br>
+<br>
+
+<div class="page-center vertical-center">
+<p class="custom-subtitle bottombr">{{<fa bicycle title="let's get on the bike" >}} Your turn, get on the bike! </p>
+<p class="caption-text">*~ Head over to lab2 notebook! ~*</p>
+</div>
+
+##  End-of-Class Survey {background="#033C5A"}
+<br>
+<br>
+<br>
+
+<div class="page-center vertical-center">
+<p class="custom-subtitle bottombr">{{<fa pen-to-square title="edit or fill out survey">}} Fill out the end-of-class survey </p>
+<p class="caption-text">*~ This is the end of Lab 2 ~*</p>
+</div>
+
+```{r}
+countdown::countdown(
+  minutes = 10,
+  # left = 0, right = 0,
+  # Fanfare when it's over
+  play_sound = TRUE,
+  color_border              = "#FFFFFF",
+  color_text                = "#7aa81e",
+  color_running_background  = "#7aa81e",
+  color_running_text        = "#FFFFFF",
+  color_finished_background = "#ffa07a",
+  color_finished_text       = "#FFFFFF",
+  font_size = "2em",
+  )
+```
