@@ -795,6 +795,183 @@ lyme |>
 
 - **Review chart types to visualize relationships**
 
+## Scatter plot {.smaller}
+>Scatter plot is a good choice to visualize the relationship between two numeric variables. They help us answer questions around the **effect of X on Y**.
+
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+penguins_clean %>%
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(alpha = 0.5) +
+  labs(title = "Effect of Flipper Length on Body Mass") +
+  theme_minimal()
+
+```
+
+
+## Add rug to visualize distribution {.smaller}
+
+>Rug plot uses distribution marks to visualize the distribution of the two numeric variables. Each narrow line represents one data point. It shows the density of the data along the x and y axes.
+
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+#| code-line-numbers: "4"
+penguins_clean %>%
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(alpha = 0.5) +
+  geom_rug() +
+  labs(title = "Effect of Flipper Length on Body Mass") +
+  theme_minimal()
+
+```
+
+
+## Add trend lines {.smaller}
+>Trend lines are used to show the overall trend of the data. Default method for `geom_smooth()` is LOESS (locally estimated scatter plot smoothing), think of it as a moving average.
+
+::::{.columns}
+
+::: {.column width=45%}
+
+LOESS
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+#| code-line-numbers: "4"
+penguins_clean %>%
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth() +
+  labs(title = "Effect of Flipper Length on Body Mass") +
+  theme_minimal()
+
+```
+:::
+
+::: {.column width=10%}
+:::
+
+::: {.column width=45%}
+
+Linear regression
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+#| code-line-numbers: "4"
+penguins_clean %>%
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Effect of Flipper Length on Body Mass") +
+  theme_minimal()
+
+```
+
+:::
+
+::::
+
+## Add a third numeric variable with bubble chart {.smaller-title}
+
+>We can use a bubble chart to show the third numeric variable. The size of the point represents the third variable.
+
+::: {.column width=65%}
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+#| code-line-numbers: "3"
+
+penguins_clean %>%
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(size = bill_length_mm), alpha = 0.4) +
+  labs(title = "Effect of Flipper Length on Body Mass") +
+  theme_minimal()
+
+```
+:::
+
+::: {.column width=10%}
+:::
+
+::: {.column width=25%}
+
+A few caveats:
+
+- The relationship between X and Y will be the primary focus
+
+- It may be difficult to distinguish the size of the bubbles
+
+:::
+
+## Adjust the size of the bubbles {.smaller}
+
+> Use `scale_size()` to adjust the size of the bubbles. Do not use `scale_radius()`.
+
+::: {.column width=45%}
+
+This is good. 
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+#| code-line-numbers: "4"
+penguins_clean %>%
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(size = bill_length_mm), alpha = 0.4) +
+  scale_size(range = c(1, 4), name = "Bill Length (mm)") + # adjust the size of the bubbles
+  labs(title = "Effect of Flipper Length on Body Mass") +
+  theme_minimal()
+
+```
+
+:::
+
+::: {.column width=10%}
+:::
+
+::: {.column width=45%}
+
+This is misleading.
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+#| code-line-numbers: "4"
+penguins_clean %>%
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(size = bill_length_mm), alpha = 0.4) +
+  scale_radius(range = c(1, 4), name = "Bill Length (mm)") + # adjust the size of the bubbles
+  labs(title = "Effect of Flipper Length on Body Mass") +
+  theme_minimal()
+
+```
+:::
+
+## Add a third numeric variable with color {.smaller-title}
+
+>Recall that color hue does not natually have meaning for magnitude, consider using intensity
+
+```{r, fig.width=5.5, fig.height=3}
+#| echo: TRUE
+#| code-line-numbers: "3-4"
+penguins_clean %>%
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = bill_length_mm)) +
+  scale_color_gradient(low = "white", high = "royalblue", name = "Bill Length (mm)") + 
+  labs(title = "Effect of Flipper Length on Body Mass") +
+  theme_minimal()
+
+```
+
+##  {background="#033C5A"}
+<br>
+<br>
+<br>
+
+<div class="page-center vertical-center">
+<p class="custom-subtitle bottombr">{{<fa bicycle title="let's get on the bike" >}} Your turn, get on the bike! </p>
+<p class="caption-text">*~ Head over to lab2 notebook! ~*</p>
+</div>
 
 ##  End-of-Class Survey {background="#033C5A"}
 <br>

@@ -42,6 +42,7 @@ strong {
   margin-right: auto;
 }
 
+
 .scroll-output {
   height: 300px;
   overflow-y: auto;
@@ -84,6 +85,10 @@ strong {
   border-radius: 6px;
   margin-top: 8px;
   margin-bottom: 8px;
+}
+
+blockquote {
+  font-size: 0.8em;
 }
 
 
