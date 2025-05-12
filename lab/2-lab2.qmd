@@ -36,7 +36,7 @@ knitr::opts_chunk$set(
 ## Before your start the lab notebook
 
 - Update the header - put your name in the `author` argument and put today's date in the `date` argument.
-- Click the "Render" button in RStudio and then open the rendered `1-lab1.html` page.
+- Click the "Render" button in RStudio and then open the rendered `2-lab2.html` page.
 - Then go back and try changing the `theme` argument in the header to something else - you can see other available themes [here](https://quarto.org/docs/output-formats/html-themes.html). Notice the difference when you render now!
 
 ## Overview of Lab2
