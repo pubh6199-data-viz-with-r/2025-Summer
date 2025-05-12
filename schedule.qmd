@@ -23,7 +23,7 @@ done <- schedule %>%
       `Assignment` = Assign
   ) %>%
   select(
-      Week, Date = Date_md, Class, Assignment, Lab
+      Week, Date, Class, Assignment, Lab
   ) %>%
   kable(format = 'html', escape = FALSE,
         align = c('c', 'c', 'c', 'l', 'l')) %>%
