@@ -1,0 +1,14 @@
+---
+title: "Specialized Chart Types"
+params:
+  class: "6-specialized-chart"
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r child = here::here("fragments", "class.qmd")}
+```
+
+------------------------------------------------------------------------

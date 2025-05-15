@@ -8,6 +8,6 @@ week,date,theme,n_class,stub_class,name_class,description_class,n_assign,name_as
 4,6/10/25,Interactive,7,r-shiny,Introdcution to R Shiny,R shiny; interactive data visualization,4,,hw4,6/16/25,,,
 4,6/12/25,Project,8,final-project-plan,Final Project - Plan,public data repository; form teams; sketch,,Project prototype,,,4,lab4,6/16/25
 5,6/17/25,Designing,9,maps,Maps,choropleth map; point map; heat map; design decisions,5,,hw5,6/23/25,,,
-5,6/19/25,Real-world,10,recreate-viz,Recreate Visualization from Public Source,research reproducibility; tidycensus,,,,,5,lab5,6/23/25
+5,6/19/25 [No Class],Real-world,10,recreate-viz,Recreate Visualization from Public Source,research reproducibility; tidycensus,,,,,5,lab5,6/23/25
 6,6/24/25,Project,11,final-project-prototype,Final Project - Prototype,1-on-1 feedback; progress update,,,,,,,
 6,6/26/25,Project,12,final-project-present,Final Project - Present,final project presentation; peer feedback,6,Final project,final project,6/26/25,,,

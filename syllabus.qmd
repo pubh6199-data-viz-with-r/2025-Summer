@@ -14,15 +14,15 @@ source("_common.R")
 
 # Course Information
 
-<div style="width:900px">
-Instructor | TA| Course
----|---|---
-<i class="bi-person-fill"></i> Xindi (Cindy) Hu, ScD | <i class="bi-person-fill"></i> Silas Horn | <i class="bi-clock-fill"></i> {{< var weekday >}} {{< var time >}}
-<i class="bi-building-fill"></i> Milken Institute SPH, #423 | <i class="bi-building-fill"></i> Milken 4th floor | <i class="bi-geo-alt-fill"></i> [{{< var room >}}]({{< var room_url >}})
-<i class="bi-telephone-fill"></i> +1 (202) 994-7766 | <i class="bi-telephone-fill"></i> NA | <i class="bi-calendar-week-fill"></i> {{< var dates >}}
-<i class="bi-envelope-fill"></i> [{{< var email >}}](mailto:{{< var email >}}) | <i class="bi-envelope-fill"></i> [{{< var ta-email >}}](mailto:{{< var ta-email >}}) |<i class="bi-slack"></i> [Slack]({{< var slack >}}){target="_blank"}| 
-<i class="bi-clock-fill"></i> M 4-5PM ET | <i class="bi-clock-fill"></i> W 2-3PM ET| <img src="images/rubber-duck.png" width="30"> Class mascot
-</div>
+::: {style="width:900px"}
+| Instructor | TA | TA | Course |
+|------------------|------------------|------------------|------------------|
+| <i class="bi-person-fill"></i> Xindi (Cindy) Hu, ScD | <i class="bi-person-fill"></i> Silas Horn | <i class="bi-person-fill"></i> Sayam Palrecha | <i class="bi-clock-fill"></i> {{< var weekday >}} {{< var time >}} |
+| <i class="bi-building-fill"></i> Milken Institute SPH, #423 | <i class="bi-building-fill"></i> Milken 4th floor | <i class="bi-building-fill"></i> zoom | <i class="bi-geo-alt-fill"></i> [{{< var room >}}]({{< var room_url >}}) |
+| <i class="bi-telephone-fill"></i> +1 (202) 994-7766 | <i class="bi-telephone-fill"></i> NA | <i class="bi-telephone-fill"></i> NA | <i class="bi-calendar-week-fill"></i> {{< var dates >}} |
+| <i class="bi-envelope-fill"></i> [Email Prof. Hu](mailto:{{< var email >}}) | <i class="bi-envelope-fill"></i> [Email Silas](mailto:{{< var ta-email >}}) | <i class="bi-envelope-fill"></i> [Email Sayam](mailto:{{< var ta2-email >}}) | <i class="bi-slack"></i> [Slack]({{< var slack >}}){target="_blank"} |
+| <i class="bi-clock-fill"></i> [By appointment](https://calendly.com/xindi-hu/pubh6199-office-hour) | <i class="bi-clock-fill"></i> W 2-3PM ET | <i class="bi-clock-fill"></i> M 4-5PM ET | <img src="images/rubber-duck.png" width="30"/> Class mascot |
+:::
 
 ## Course Description
 
@@ -47,37 +47,38 @@ All texts and software for this course is freely available on the web. This incl
 
 Go to the Course [Software page](software.qmd) for detailed instructions on how to install the software we'll be using. Here's a quick list:
 
-- R version 4.4.2 or newer. Visit [cloud.r-project.org](https://cloud.r-project.org) to download for your operating system.
-- RStudio version 2024.09.1 or newer. Visit [rstudio.com/products/rstudio/](https://rstudio.com/products/rstudio/). Download the free (“Open Source Edition”) Desktop version for your operating system.
-- We'll be using [Slack]({{< var slack >}}){target="_blank"} for most communication.
+-   R version 4.4.2 or newer. Visit [cloud.r-project.org](https://cloud.r-project.org) to download for your operating system.
+-   RStudio version 2024.09.1 or newer. Visit [rstudio.com/products/rstudio/](https://rstudio.com/products/rstudio/). Download the free (“Open Source Edition”) Desktop version for your operating system.
+-   We'll be using [Slack]({{< var slack >}}){target="_blank"} for most communication.
 
 ## Texts
 
 Readings should be completed **before** coming to class! Most of which will come from these four books, which are mostly available free online. Occasionally we will have reading assignment from articles and books. Those will be posted on Blackboard (copyright permitting).
 
-- Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund. "R for Data Science (2e)" [[free online](https://r4ds.hadley.nz/)]
-- Hadley Wickham, Danielle Navarro, and Thomas Lin Pedersen. "ggplot2: Elegant Graphics for Data Analysis (3e)" [[free online](https://ggplot2-book.org/)]
-- Hadley Wickham. "Mastering Shiny" [[free online](https://mastering-shiny.org/)]
-- Robin Lovelace, Jakub Nowosad, and Janne Muenchow. "Geocomputation with R" [[free online](https://r.geocompx.org/)]
+-   Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund. "R for Data Science (2e)" \[[free online](https://r4ds.hadley.nz/)\]
+-   Hadley Wickham, Danielle Navarro, and Thomas Lin Pedersen. "ggplot2: Elegant Graphics for Data Analysis (3e)" \[[free online](https://ggplot2-book.org/)\]
+-   Hadley Wickham. "Mastering Shiny" \[[free online](https://mastering-shiny.org/)\]
+-   Robin Lovelace, Jakub Nowosad, and Janne Muenchow. "Geocomputation with R" \[[free online](https://r.geocompx.org/)\]
 
 # Assignments
 
 ## Participation & Attendance
-- Attending class **in person** is mandatory. There will be an end-of-class survey at the end of each class.
-- Attending lab **in person** is mandatory. Students are encouraged to preview the R markdown lab notebooks before the lab session, but it is not required they complete them before the lab session. Lab notebooks are due the following Monday. Completion of R markdown notebooks will count towards class participation.
+
+-   Attending class **in person** is mandatory. There will be an end-of-class survey at the end of each class.
+-   Attending lab **in person** is mandatory. Students are encouraged to preview the R markdown lab notebooks before the lab session, but it is not required they complete them before the lab session. Lab notebooks are due the following Monday. Completion of R markdown notebooks will count towards class participation.
 
 ## End-of-class survey
 
 End-of-class survey will be available at the last 10 minutes of each class.
 
-They are **short** (10 minutes) and are designed to test you paid attention in class and to demonstrate where additional study is needed. 
+They are **short** (10 minutes) and are designed to test you paid attention in class and to demonstrate where additional study is needed.
 
 ## Homework
 
 Students will be responsible for two types of assignments throughout the semester:
 
-- **Weekly homework**: Weekly homework will provide an opportunity to practice visualization theory and skills introduced in class. Homework will be a mix of programming, design, and finishing the R markdown notebook. Homework rubric will be provided.
-- **Weekly lab**: Completion of R markdown lab notebooks will count towards class participation.
+-   **Weekly homework**: Weekly homework will provide an opportunity to practice visualization theory and skills introduced in class. Homework will be a mix of programming, design, and finishing the R markdown notebook. Homework rubric will be provided.
+-   **Weekly lab**: Completion of R markdown lab notebooks will count towards class participation.
 
 ## Final Project
 
@@ -91,32 +92,30 @@ View the [final project overview](project/0-overview.qmd) page for more details.
 
 Final grades will be calculated as follows:
 
-<div style="width:650px">
-
-Item                           | Weight | Notes
--------------------------------|--------|-------------------------------------
-Participation / Attendance | 10%     | Include attendance, contribution to in-class activities, completion of end-of-class surveys, and submission of finished lab notebooks
-Homework assignment           | 50 %   | Weekly assignment, lowest dropped
-Final Project: Brainstorm        | 7 %    | Teams of 2-3 students
-Final Project: Prototype   | 7 %   |
-Final Project: Data visualization product   | 15 %   |
-Final Project: Presentation    | 7 %    |
-Final Project: Peer evaluation | 4 % |
-
-</div>
+::: {style="width:650px"}
+| Item | Weight | Notes |
+|--------------------------|---------------|-------------------------------|
+| Participation / Attendance | 10% | Include attendance, contribution to in-class activities, completion of end-of-class surveys, and submission of finished lab notebooks |
+| Homework assignment | 50 % | Weekly assignment, lowest dropped |
+| Final Project: Brainstorm | 7 % | Teams of 2-3 students |
+| Final Project: Prototype | 7 % |  |
+| Final Project: Data visualization product | 15 % |  |
+| Final Project: Presentation | 7 % |  |
+| Final Project: Peer evaluation | 4 % |  |
+:::
 
 ## Grading Scale
 
-<div style="width:400px">
-Grade  | Range       | Grade | Range
--------|-------------|-------|------------
-A      | 93 - 100%   | C     | 73 - 76.99%
-A-     | 90 - 92.99% | C-    | 70 - 72.99%
-B+     | 87 - 89.99% | D+    | 67 - 69.99%
-B      | 83 - 86.99% | D     | 63 - 66.99%
-B-     | 80 - 82.99% | D-    | 60 - 62.99%
-C+     | 77 - 79.99% | F     | < 59.99%
-</div>
+::: {style="width:400px"}
+| Grade | Range       | Grade | Range       |
+|-------|-------------|-------|-------------|
+| A     | 93 - 100%   | C     | 73 - 76.99% |
+| A-    | 90 - 92.99% | C-    | 70 - 72.99% |
+| B+    | 87 - 89.99% | D+    | 67 - 69.99% |
+| B     | 83 - 86.99% | D     | 63 - 66.99% |
+| B-    | 80 - 82.99% | D-    | 60 - 62.99% |
+| C+    | 77 - 79.99% | F     | \< 59.99%   |
+:::
 
 The course instructors may choose to change the scales at their discretion. You are guaranteed that your letter grade will never become worse as a result of changing scales.
 
@@ -134,15 +133,15 @@ All course communication will be managed through [Slack]({{< var slack >}}){targ
 
 **You can use Slack to**:
 
-- Ask general questions.
-- Ask for help with an assignment.
-- Send direct, private messages to each other or the instructors (just like email...but better!)
+-   Ask general questions.
+-   Ask for help with an assignment.
+-   Send direct, private messages to each other or the instructors (just like email...but better!)
 
 > **Asking for help on Slack**: You can post questions on slack and receive quick responses. This also enables other students to see answers to common questions. Be specific - if your code has an error you don't understand, **include the code and the error message** in your question.
 
 ## Office Hours
 
-I will hold regular office hour each Monday 4-5pm.  During this period, you can come to my office (GWSPH 423) and ask me anything. And I mean anything. Most of the time you may just have a question related to class, but I am also happy to discuss anything else with you regarding life, important decisions, career, baking, dance, etc.
+I will hold regular office hour each Monday 4-5pm. During this period, you can come to my office (GWSPH 423) and ask me anything. And I mean anything. Most of the time you may just have a question related to class, but I am also happy to discuss anything else with you regarding life, important decisions, career, baking, dance, etc.
 
 If the office hours don't work with your schedule, you can always schedule a zoom call with me using [this link](https://calendly.com/xindi-hu/). I'm available most days of the week.
 
@@ -157,6 +156,5 @@ While the University Library is not a stand in for TAs, you can schedule a consu
 # Class Policies
 
 ## Silas TO-DO
+
 **Class Policy: Expectations for individual contributions and acceptable levels of collaboration for assignments on which students may work together.** Data visualization projects benefit from collaborations. We encourage you to discuss readings, assignments, and topics with your fellow students. However, the weekly homework should be your own work. If you copy another student’s assignment or let someone else copy yours, you are both cheating. If you copy another person’s work from a textbook or journal, or other published work or a website, you must give credit in your written work
-
-
