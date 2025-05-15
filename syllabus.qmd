@@ -20,8 +20,8 @@ source("_common.R")
 | <i class="bi-person-fill"></i> Xindi (Cindy) Hu, ScD | <i class="bi-person-fill"></i> Silas Horn | <i class="bi-person-fill"></i> Sayam Palrecha | <i class="bi-clock-fill"></i> {{< var weekday >}} {{< var time >}} |
 | <i class="bi-building-fill"></i> Milken Institute SPH, #423 | <i class="bi-building-fill"></i> Milken 4th floor | <i class="bi-building-fill"></i> zoom | <i class="bi-geo-alt-fill"></i> [{{< var room >}}]({{< var room_url >}}) |
 | <i class="bi-telephone-fill"></i> +1 (202) 994-7766 | <i class="bi-telephone-fill"></i> NA | <i class="bi-telephone-fill"></i> NA | <i class="bi-calendar-week-fill"></i> {{< var dates >}} |
-| <i class="bi-envelope-fill"></i> [Email Prof. Hu](mailto:{{< var email >}}) | <i class="bi-envelope-fill"></i> [Email Silas](mailto:{{< var ta-email >}}) | <i class="bi-envelope-fill"></i> [Email Sayam ](mailto:{{< var ta2-email >}}) | <i class="bi-slack"></i> [Slack]({{< var slack >}}){target="_blank"} |
-| <i class="bi-clock-fill"></i> M 4-5PM ET | <i class="bi-clock-fill"></i> W 2-3PM ET | <i class="bi-clock-fill"></i> TBD | <img src="images/rubber-duck.png" width="30"/> Class mascot |
+| <i class="bi-envelope-fill"></i> [Email Prof. Hu](mailto:{{< var email >}}) | <i class="bi-envelope-fill"></i> [Email Silas](mailto:{{< var ta-email >}}) | <i class="bi-envelope-fill"></i> [Email Sayam](mailto:{{< var ta2-email >}}) | <i class="bi-slack"></i> [Slack]({{< var slack >}}){target="_blank"} |
+| <i class="bi-clock-fill"></i> [By appointment](https://calendly.com/xindi-hu/pubh6199-office-hour) | <i class="bi-clock-fill"></i> W 2-3PM ET | <i class="bi-clock-fill"></i> M 4-5PM ET | <img src="images/rubber-duck.png" width="30"/> Class mascot |
 :::
 
 ## Course Description
