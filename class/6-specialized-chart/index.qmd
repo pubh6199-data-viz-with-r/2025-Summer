@@ -1,0 +1,131 @@
+---
+title: "Lab 3. Specialized Chart Types"
+subtitle: "PUBH 6199: Visualizing Data with R, Summer 2025"
+date: June 5, 2025
+author: Xindi (Cindy) Hu, ScD
+format: 
+  revealjs:
+    pdf: true
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    preview-links: auto
+    logo: images/logo-square.png
+    css: style.css
+    footer: 'PUBH 6199: Visualizing Data with R'
+resources:
+  - images/
+---
+
+```{r setup}
+library(tidyverse)
+```
+
+## Outline for today {.smaller}
+
+- **Introducing the datasets**
+
+- Review faceted plots
+
+- Introduce radar charts, Sankey diagrams, and parallel coordinates plot
+
+- Dos and Don'ts when designing visualizations
+
+
+## Forest Fires Dataset {.smaller}
+
+:::{.column width="60%"}
+
+- **Source**: UCI Machine Learning Repository  
+  [https://archive.ics.uci.edu/ml/datasets/forest+fires](https://archive.ics.uci.edu/ml/datasets/forest+fires)
+
+- **Context**: Collected from the Montesinho Natural Park in Portugal, this dataset captures weather conditions and fire activity over 200+ days.
+
+- **Variables**:
+  - `month`, `day`: Temporal context
+  - `temp`, `RH`, `wind`, `rain`: Daily weather
+  - `FFMC`, `DMC`, `DC`, `ISI`: Fire weather indices
+  - `area`: Burned area in hectares
+  
+:::
+
+::: {.column width="40%"}
+![](images/fwi_structure.gif){width=100%}
+
+::: citation
+[Canadian Forest Fire Weather Index (FWI) System](https://cwfis.cfs.nrcan.gc.ca/background/summary/fwi)
+:::
+
+:::
+
+## Forest Fires Dataset {.smaller}
+
+```{r}
+#| echo: TRUE
+library(tidyverse)
+forest <- read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/forest-fires/forestfires.csv")
+glimpse(forest)
+```
+
+## Adult Income Dataset {.smaller}
+
+- **Source**: UCI Machine Learning Repository  
+  [https://archive.ics.uci.edu/ml/datasets/adult](https://archive.ics.uci.edu/ml/datasets/adult)
+
+- **Context**: Extracted from 1994 U.S. Census data to predict whether an individual's income exceeds \$50K/year.
+
+- **Variables**:
+  - Demographics: `age`, `sex`, `race`, `education`, `marital-status`
+  - Employment: `workclass`, `occupation`, `hours-per-week`
+  - Target: `income` (>50K or ≤50K)
+
+- **Use in Class**:
+  - *Sankey diagram*: Show flows like `education → occupation → income`
+  - *Parallel coordinates*: Visualize patterns across age, hours, and income class
+
+## Adult Income Dataset {.smaller}
+
+```{r}
+#| echo: TRUE
+adult <- read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data",
+                  col_names = c("age", "workclass", "fnlwgt", "education", "education_num",
+                                "marital_status", "occupation", "relationship", "race", "sex",
+                                "capital_gain", "capital_loss", "hours_per_week", "native_country", "income"))
+glimpse(adult)
+```
+
+##  {background="#033C5A"}
+<br>
+<br>
+<br>
+
+<div class="page-center vertical-center">
+<p class="custom-subtitle bottombr">{{<fa bicycle title="let's get on the bike" >}} Your turn, get on the bike! </p>
+<p class="caption-text">*~ Head over to lab3 notebook! ~*</p>
+</div>
+
+##  End-of-Class Survey {background="#033C5A"}
+<br>
+<br>
+<br>
+
+<div class="page-center vertical-center">
+<p class="custom-subtitle bottombr">{{<fa pen-to-square title="edit or fill out survey">}} Fill out the end-of-class survey </p>
+<p class="caption-text">*~ This is the end of Lab 3 ~*</p>
+</div>
+
+```{r}
+countdown::countdown(
+  minutes = 10,
+  # left = 0, right = 0,
+  # Fanfare when it's over
+  play_sound = TRUE,
+  color_border              = "#FFFFFF",
+  color_text                = "#7aa81e",
+  color_running_background  = "#7aa81e",
+  color_running_text        = "#FFFFFF",
+  color_finished_background = "#ffa07a",
+  color_finished_text       = "#FFFFFF",
+  font_size = "2em",
+  )
+```
