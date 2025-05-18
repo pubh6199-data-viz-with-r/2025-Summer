@@ -84,8 +84,6 @@ Students will be responsible for two types of assignments throughout the semeste
 
 Throughout the semester, students will work in teams of 2-3 students towards a final project of data visualizations to convey findings around a topic of their choice. Instructor can help point students to datasets they can use for the final project. All members of a group are required to contribute to at least one graph, present during the last class, and complete a peer evaluation.
 
-View the [final project overview](project/0-overview.qmd) page for more details.
-
 # Grading
 
 ## Category Breakdown
