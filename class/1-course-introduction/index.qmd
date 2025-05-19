@@ -43,13 +43,37 @@ ScD in Environmental Health, Harvard University
 
 Environmental Data Science, Drinking Water Quality, Health Equity, Climate Change, Geospatial Analysis, Machine Learning
 
-## Meet your TA {.smaller}
+## Meet your TAs {.smaller}
 
-![](images/Silas_Horn_Headshot_2024.jpg){width="250" height="250"}
+:::{.column width="50%"}
 
+![](images/Silas_Headshot.png){width="250"}
+
+::: citation
 Silas Horn
 
-MPH Candidate, Environmental Health Science and Policy
+MPH Candidate
+
+Environmental Health Science and Policy
+
+GW SPH
+:::
+:::
+
+:::{.column width="50%"}
+
+![](images/sayam-headshot.png){width="250"}
+
+::: citation
+Sayam Palrecha
+
+MS Candidate
+
+Data Science
+
+GW CCAS
+:::
+:::
 
 ## About you {.center .middle}
 
@@ -520,7 +544,7 @@ countdown::countdown(
 - <span style="font-weight: bold; color: orange">Introduction to {ggplot2}</span>
 
 
-## Welcome to {ggplot2} {.smaller}
+## Welcome to `{ggplot2}` {.smaller}
 :::{ .column width="65%"}
 
 - Based on Grammar of Graphics [(Wilkinson 2005)](https://link.springer.com/book/10.1007/0-387-28695-0)

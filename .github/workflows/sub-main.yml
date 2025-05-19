@@ -53,6 +53,9 @@ jobs:
             any::rmarkdown
             any::ggplot2
             any::ggthemes
+            any::GGally
+            any::gghighlight
+            any::see
             any::leaflet
             any::shiny
             any::countdown
@@ -66,9 +69,9 @@ jobs:
             any::quarto
             any::rvest
             any::viridis
-            any::renv
             any::nycflights13
             any::gapminder
+            any::palmerpenguins
 
       - name: Install GitHub-only packages
         run: |

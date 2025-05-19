@@ -1,0 +1,192 @@
+---
+title: "Lab 2"
+author: "Your Name"
+date: "2025-XX-XX"
+params:
+  number: 2
+  purpose: "The purpose of this lab to for you to practice the fundamental chart types we cover in class."
+format: 
+  html:
+    toc: true
+    toc-location: right
+    code-fold: true
+    theme: flatly
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+
+```{r}
+#| label: setup
+#| include: false
+
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.path = "figs/",
+    fig.width = 7.252,
+    fig.height = 4,
+    comment = "#>",
+    fig.retina = 3
+)
+```
+
+## Before your start the lab notebook
+
+- Update the header - put your name in the `author` argument and put today's date in the `date` argument.
+- Click the "Render" button in RStudio and then open the rendered `2-lab2.html` page.
+- Then go back and try changing the `theme` argument in the header to something else - you can see other available themes [here](https://quarto.org/docs/output-formats/html-themes.html). Notice the difference when you render now!
+
+## Overview of Lab2
+
+There are two parts of this lab notebook. We will be using the same example datasets covered in class: `penguins` and `lyme`. In first part, we will practice basic chart types for visualizing quantitative information and trend over time. In the second part, we will practice chart types for visualizing distribution and relationships between two variables.
+
+**Skills practiced**:
+
+- Load, clean, and filter data using dplyr functions (filter(), mutate(), summarise())
+
+- Create bar charts and dot plots to compare counts and averages across categories
+
+- Generate histograms and boxplots to visualize distributions of continuous variables
+
+- Use line charts to show trends over time for different groups
+
+- Build scatterplots to explore relationships between two numeric variables
+
+- Customize plots using ggplot2 elements such as color, facet_wrap(), and geom_smooth()
+
+- Practice reproducible coding and visualization in a Quarto notebook
+
+
+### Load Required Packages and Datasets
+
+```{r}
+
+library(tidyverse)
+library(palmerpenguins)
+penguins_clean <- penguins %>%
+  filter(!is.na(species), !is.na(flipper_length_mm), !is.na(body_mass_g), !is.na(island), !is.na(sex))
+
+lyme_rates <- read_csv("data/2023_CaseIncid-Lyme-Disease-Rates-by-State-or-Locality.csv") %>%
+  janitor::clean_names() %>%
+  mutate(state = str_replace(state, "\x86", "")) %>%
+  rename(rates_per_100k = rates)
+
+lyme_cases <- read_csv("data/2023_CaseIncid-Lyme-Disease-Cases-by-State-or-Locality.csv") %>%
+  janitor::clean_names() %>%
+  pivot_longer(
+    cols = -c(state),
+    names_to = "year",
+    values_to = "cases"
+  ) %>%
+  mutate(
+    state = str_replace(state, "\x86", ""),
+    year = str_replace(year, "x", ""),
+    year = as.numeric(year)) %>%
+  filter(year >= 2010)
+
+lyme <- lyme_cases %>%
+  left_join(lyme_rates, by = c("state", "year"))
+
+```
+
+## Part 1: Visualizing quantitative information and trend over time
+
+### 1.1. How many penguins were observed on each island?
+
+Use a bar chart to show the number of penguins by **island**.
+
+```{r}
+# Your code here
+```
+
+✏️ *Q: Which island had the most penguins observed?*
+
+------------------------------------------------------------------------
+
+### 1.2. Compare penguin counts by sex
+
+Use a dot plot to compare the number of male and female penguins, add labels to show the data
+
+```{r}
+# Your code here
+```
+
+✏️ *Q: Are there more male or female penguins in the dataset?*
+
+------------------------------------------------------------------------
+
+### 1.3. Lyme disease cases over time
+
+Choose four states and plot Lyme **case counts** from 2010–2023 using a **line chart**.
+
+```{r}
+# Your code here
+```
+
+✏️ *Q: Which state shows a rising trend over time?*
+
+------------------------------------------------------------------------
+
+## Part 2: Visualizing distribution and relationships between two numerical values
+
+### 2.1. Compare penguin body mass by island
+
+Use **boxplots** or **violin plots** to compare penguin **body mass** by island. Add individual data points to the plot.
+
+```{r}
+# Your code here
+```
+
+✏️ *Q: Which island has the heaviest penguins?*
+
+------------------------------------------------------------------------
+
+### 2.2. Distribution of Lyme cases across states in 2020
+
+Use a histogram or density plot to explore the variation in state-level case counts.
+
+```{r}
+# Your code here
+```
+
+✏️ *Q: Are most states low-burden or high-burden?*
+
+------------------------------------------------------------------------
+
+### 2.3. Bill dimensions
+
+Create a scatterplot of **bill length vs. bill depth**, colored by species.
+
+```{r}
+# Your code here
+```
+
+✏️ *Q: Which species tends to have longer bills?*
+
+------------------------------------------------------------------------
+
+### 2.4. Add faceting
+
+Facet the same scatterplot by **island**.
+
+```{r}
+# Your code here
+```
+
+✏️ *Q: Do the relationships differ across islands?*
+
+--------------------------------------------------------------------
+
+## Save and Push Your Work
+
+Remember to save your `.qmd` and render the HTML output before committing to GitHub.
+
+```{bash eval = FALSE}
+git add 2-lab2.qmd 2-lab2.html
+git commit -m "Complete Lab 2"
+git push
+```
+
