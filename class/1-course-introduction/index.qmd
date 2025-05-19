@@ -47,7 +47,7 @@ Environmental Data Science, Drinking Water Quality, Health Equity, Climate Chang
 
 :::{.column width="50%"}
 
-![](images/Silas_Headshot.png){width="250"}
+![](images/silas-headshot){width="250"}
 
 ::: citation
 Silas Horn
