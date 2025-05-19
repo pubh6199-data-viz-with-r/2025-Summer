@@ -27,13 +27,15 @@ resources:
 
 ## Meet your instructor {.smaller}
 
-![](images/XindiHu_Headshot_2024.jpg){width="250" height="250"}
+![](images/XindiHu_Headshot_2024.jpg){style="border-radius: 70%; width: 70%; display: block; margin: auto;"}
 
+::: citation
 Xindi (Cindy) Hu, ScD
 
 Assistant Professor, Department of Environmental and Occupational Health
 
 ScD in Environmental Health, Harvard University
+:::
 
 ## Water, Health, and Opportunity Lab {.fit-text .smaller}
 
@@ -47,7 +49,7 @@ Environmental Data Science, Drinking Water Quality, Health Equity, Climate Chang
 
 :::{.column width="50%"}
 
-![](images/silas-headshot){width="250"}
+![](images/silas-headshot.jpg){style="border-radius: 70%; width: 70%; display: block; margin: auto;"}
 
 ::: citation
 Silas Horn
@@ -62,7 +64,7 @@ GW SPH
 
 :::{.column width="50%"}
 
-![](images/sayam-headshot.png){width="250"}
+![](images/sayam-headshot.png){style="border-radius: 70%; width: 70%; display: block; margin: auto;"}
 
 ::: citation
 Sayam Palrecha
@@ -123,9 +125,13 @@ GW CCAS
 
 ## Grading
 
--   **Class Participation** (attendance, contribution to in-class activities, completion of end-of-class surveys, submission of finished lab notebooks): 10%
--   **Homework** (weekly assignments): 50%
--   **Final Project** (team of 2-3 people): 40%
+-   **Class Participation** (attendance, contribution to in-class activities, completion of end-of-class surveys): 10%
+-   **Homework** (5 weekly assignments): 35%
+-   **Lab** (5 weekly lab notebooks): 15%
+-   **Final Project** (team of 2): 40%
+    -   25% for the final data visualization product
+    -   10% for the presentation
+    -   5% for peer evaluation
 
 ## Prerequisites
 
