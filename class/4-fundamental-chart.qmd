@@ -1,0 +1,14 @@
+---
+title: "Fundamental Chart Types"
+params:
+  class: "4-fundamental-chart"
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r child = here::here("fragments", "class.qmd")}
+```
+
+------------------------------------------------------------------------

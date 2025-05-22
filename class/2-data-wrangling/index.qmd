@@ -1,0 +1,760 @@
+---
+title: "Lab 1. Data Wrangling"
+subtitle: "PUBH 6199: Visualizing Data with R, Summer 2025"
+date: May 22, 2025
+author: Xindi (Cindy) Hu, ScD
+format: 
+  revealjs:
+    pdf: true
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    preview-links: auto
+    logo: images/logo-square.png
+    css: style.css
+    footer: 'PUBH 6199: Visualizing Data with R'
+resources:
+  - demo.pdf
+  - images/
+---
+
+## Outline for today
+- **Introduction to GitHub and Git**
+- Data transformation
+- Data tidying
+
+## About **GitHub** {.smaller}
+
+- GitHub is a cloud-based platform for version control and collaboration.
+- Storing your code in a "repository" on GitHub allows you to:
+  - Track changes to your code over time
+  - Collaborate with others on projects, including your "future self"
+  - Share your work with the world
+- Made possible by the open-source software, **Git**
+
+![](images/github-logo.png){width="100"}
+
+## About **Git** {.smaller}
+
+- Git is a version control system that allows you to track changes to files.
+- A typical Git-based workflow includes:
+  - **Clone** a repository from GitHub to your local machine
+  - **Branch** off the main copy of the files that you are working on
+  - **Edit** files independently and safely on your own branch
+  - Let Git **keep track** of the changes you and others make
+  - Let Git intelligently **merge** your changes back into the main copy of the files
+
+![](images/git-logo.png){width="100"}
+
+## How do Git and GitHub work together?{style="font-size: 70%"}
+
+:::{.incremental .smaller}
+- What is a **Git repository**?
+  - A collection of files and their history, can be local (on your computer) or **remote** (on GitHub)
+  - When you make changes (or **commits**) to the files, Git keeps track of the changes
+- Plenty to do in your browser
+  - Create a Git repository, create branches, upload and edit files
+- But, most people work locally, then continue to sync local changes with the **remote** repository on GitHub
+  
+  :::{.column width="50%"}
+  
+  - Use Git commands in the terminal or GitHub Desktop 
+  - **Pull** the latest changes from the remote repository
+  - **Push** back your own changes to the same remote repository
+  
+  :::
+  :::{.column width="50%"}
+  ![](images/push-pull.png)
+  :::
+:::
+
+## {background-image="images/in-class-activity.png"}
+
+::: {.v-center-container style="text-align: center;"}
+In-Class Activity: 
+<br>
+<br>
+GitHub and RStudio tutorial
+:::
+
+## Prerequisites {.smaller}
+
+- You have a [GitHub account](https://github.com/)
+- You have downloaded and installed [Git](https://docs.github.com/en/get-started/git-basics/set-up-git)
+- You have downloaded and installed [RStudio](https://posit.co/download/rstudio-desktop/)
+
+5 minutes to catch up on these if you haven't done so already!
+
+```{r}
+countdown::countdown(
+  minutes = 5,
+  left = 0,
+  bottom = 2,
+  # Fanfare when it's over
+  play_sound = TRUE,
+  color_border              = "#FFFFFF",
+  color_text                = "#7aa81e",
+  color_running_background  = "#7aa81e",
+  color_running_text        = "#FFFFFF",
+  color_finished_background = "#ffa07a",
+  color_finished_text       = "#FFFFFF",
+  font_size = "3em",
+  )
+```
+
+## Create the remote repository on GitHub {style="font-size: 80%"}
+
+- Accept the invitation to join the GitHub Classroom, check your email
+- Accept the assignment titled lab 1, check your email or use this link **https://classroom.github.com/a/XXXX**
+- Navigate to GitHub, under the [class organization](https://github.com/orgs/pubh6199-data-viz-with-r/repositories), you should see a repository named `lab1-<your-github-username>`.
+
+## Clone the repository with RStudio {style="font-size: 80%"}
+
+:::{.incremental}
+
+1. On GitHub, navigate to the **Code** tab of the repository
+2. Click the green <span style="font-weight: bold; color: white; background: green"><> Code</span>button
+3. Clcik the **Copy to clipboard** button to copy the repository URL
+4. Open RStudio on your local environment
+5. Click **File**, **New Project**, **Version Control**, **Git**
+6. Paste the URL you copied from GitHub into the **Repository URL** field and enter TAB to move to the **Project directory name** field
+7. Click **Create Project**
+
+:::
+
+## Edit the lab notebook in RStudio {.smaller}
+
+:::{.incremental}
+
+1. In RStudio, click **Files**, **Open File**, and select **1-lab1.qmd**
+2. Update the header - put your name in the `author` argument and put today's date in the `date` argument.
+3. Save the file, and click **Render** to generate the HTML file.
+:::
+
+## Commit and push the changes to GitHub {style="font-size: 80%"}
+
+:::{.incremental .smaller}
+
+1. In RStudio, click the **Git** tab in the upper right pane
+2. Click **Commit**
+3. In the **Commit** window, check the box next to the file you want to commit (`1-lab1.qmd` and `1-lab1.html`)
+4. Enter a commit message in the **Commit message** field (e.g., "Update lab notebook header")
+5. Click the **Commit** button
+6. Click the **Pull** button to fetch any remote changes
+7. Click the **Push** button to push your changes to GitHub
+8. Navigate to your GitHub repository in your browser and check that the changes have been pushed successfully
+:::
+
+## Congratulations!
+![](images/congrats-git.png)
+
+## Introducing GitHub Flow
+![](images/github-flow.webp)
+
+:::{style="font-size: 50%; text-align: center;"}
+
+Image by [Yan Min Thwin](https://medium.com/@yanminthwin/understanding-github-flow-and-git-flow-957bc6e12220)
+
+:::
+
+## Create local branches with Git {.smaller}
+
+::: {.callout-note title="Tip"}
+You can do these using the Git GUI in RStudio, I am showing you the command line version so you can learn a different method and choose what you prefer.
+:::
+
+1. In RStudio click the **Terminal** tab in the lower left pane, next to the **Console** tab
+
+::: {.callout-note title="Note"}
+If you cannot find the **Terminal** tab, you can also open a terminal window by clicking on the **Tools** menu and selecting **Terminal** > **New Terminal**. If that doesn't work, check if your RStudio is out of date. Click **Help**, About RStudio to check the current version.
+:::
+
+![](images/terminal.png){width="100%"}
+
+## Create local branches with Git {.smaller}
+
+2. In the terminal, type the following command to create a new branch called `feat/clean-data`:
+
+```bash
+git checkout -b feat/clean-data
+```
+
+. . .
+
+3. Type the following command to check that you are on the new branch:
+
+```bash
+git status
+```
+You should see a message that says "On branch feat/clean-data" and "nothing to commit, working tree clean".
+
+You are ready to start making changes to your files!
+
+## Make local changes with Git {.smaller}
+
+In RStudio, open the `1-lab1.qmd` file and make some changes to the text. 
+
+For example, you can add a new section called "Data Wrangling" and write a few sentences about what tidy data is about.
+
+You can also add a new code chunk to the file and write some R code to load the `tidyverse` package and read in a CSV file.
+
+```{r}
+#| eval: false
+#| echo: true
+library(tidyverse)
+raw_data <- read_csv("raw_data.csv")
+```
+
+After you are satisfied with your changes, save the file and knit the `1-lab1.qmd` file to generate the HTML file.
+
+## Commit local changes with Git {.smaller}
+
+1. Determine your file's status.
+
+```bash
+git status
+```
+You should see a message that says **"On branch feat/clean-data"** and **"Changes not staged for commit"**.
+
+2. Add the changes to the staging area.
+
+```bash
+git add .
+```
+
+3. See your file's current status. 
+
+```bash
+git status
+```
+Your files should be listed under **Changes to be committed**.
+
+4. Commit the changes with a message. Replace **<COMMIT-MESSAGE>** with a log message describing the changes.
+
+```bash
+git commit -m "<COMMIT-MESSAGE>"
+```
+
+## Open a pull request on GitHub {.smaller}
+
+1. Push the changes to the remote repository, replace **<BRANCH-NAME>** with the name of your branch, in this case **feat/clean-data**
+
+```bash
+git push origin <BRANCH-NAME>
+```
+2. Navigate to your GitHub repository in your browser
+3. Click the <span style="font-weight: bold; color: white; background: green">Compare & pull requests</span> button, if you don't see it, navigate to the **"Pull requests"** tab and click the <span style="font-weight: bold; color: white; background: green">New pull reques</span> button.
+4. In the **"Open a pull request"** page, enter a title and description for your pull request. You can add a reviewer, for example your teammate on this pull request.
+
+## Merge your pull request on GitHub {.smaller}
+
+::: {.callout-note title="Note"}
+Since this is your repository, you probably don’t have anyone to collaborate with (yet). Go ahead and merge your Pull Request now. Later in the semester you may want your teammate to look over your code before they merge.
+:::
+
+1. On GitHub, navigate to the Pull Request that you just opened.
+2. Scroll down and click the big green Merge Pull Request button.
+3. Click Confirm Merge.
+4. Delete the branch <BRANCH-NAME>.
+
+::: {style="font-size: 70%; text-align: center;"}
+<br>
+<br>
+<br>
+
+Reference: [GitHub and RStudio](https://resources.github.com/github-and-rstudio/)
+:::
+
+##  {#end-break data-menu-title="# End / Break #" background="#033C5A"}
+<br>
+<br>
+<br>
+
+<div class="page-center vertical-center">
+<p class="custom-subtitle bottombr">{{<fa mug-hot title="a mug with steam rising out the top" >}} Take a Break </p>
+<p class="caption-text">*~ This is the end of part 1 ~*</p>
+</div>
+
+```{r}
+countdown::countdown(
+  minutes = 5,
+  # left = 0, right = 0,
+  # Fanfare when it's over
+  play_sound = TRUE,
+  color_border              = "#FFFFFF",
+  color_text                = "#7aa81e",
+  color_running_background  = "#7aa81e",
+  color_running_text        = "#FFFFFF",
+  color_finished_background = "#ffa07a",
+  color_finished_text       = "#FFFFFF",
+  font_size = "2em",
+  )
+```
+
+## Outline for today
+- Introduction to GitHub and Git
+- **Data transformation**
+- Data tidying
+
+## "80% of data scientists' time is spent on data wrangling" {.smaller}
+
+**Data wrangling**: also known as data cleaning or data preparation, is the process of collecting, cleaning, transforming and organizing data from one "raw" form into another format with the intent of making it more appropriate for analysis.
+
+![](images/data-wrangling.png)
+
+:::{style = "font-size: 70%; text-align: center;"}
+Source: [R for Data Science](https://r4ds.had.co.nz/wrangle-intro.html)
+:::
+
+## Manipulate data in R using `dplyr` {.smaller}
+**Commonality**:
+
+- The first argument is always a data frame
+- The subsequent arguments are the columns of the data frame (without quotes)
+- The output is a new data frame
+. . .
+
+**Individuality**:
+
+:::{.column width="30%"}
+Rows
+
+- `filter()`: filter rows
+- `arrange()`: change the order of rows
+- `distinct()`: remove duplicate rows
+:::
+
+:::{.column width="30%"}
+Columns
+
+- `select()`: select columns
+- `rename()`: rename columns
+- `mutate()`: add new columns
+:::
+
+:::{.column width="40%"}
+Groups
+
+- `group_by()`: group rows by one or more columns
+- `summarize()`: summarize data by groups
+- `slice_*()`: extract specific rows 
+- `ungroup()`: remove grouping
+:::
+
+## A word on **pipe**{.smaller}
+
+`%>%` in `{magrittr}` or `|>` in base R 
+
+:::{.incremental}
+
+- Pipe is a tool to combine multiple verbs.
+- It takes the thing on the left and passes it to the function on the right.
+- `x |> f(y)` is equivalent to `f(x, y)`
+- `x |> f(y) |> g(z)` is equivalent to `g(f(x, y), z)`.
+- Pronounces as "then"
+- Add pipe to your code using keyboard shortcut Ctrl/Cmd + Shift + M
+
+```{r}
+#| eval: false
+#| echo: true
+flights |>
+  filter(dest == "IAH") |> 
+  group_by(year, month, day) |> 
+  summarize(
+    arr_delay = mean(arr_delay, na.rm = TRUE)
+  )
+```
+:::
+
+
+## Lots of verbs to remember! 
+
+![](images/cheatsheet.png)
+
+:::{style="text-align: center; font-size: 70%;"}
+
+Refer to this [cheat sheet](https://dplyr.tidyverse.org/#cheat-sheet)
+:::
+
+##  {background="#033C5A"}
+<br>
+<br>
+<br>
+
+<div class="page-center vertical-center">
+<p class="custom-subtitle bottombr">{{<fa bullseye title="let's build skills" >}} Practice makes perfect! </p>
+<p class="caption-text">*~ Head over to lab1 notebook! ~*</p>
+</div>
+
+## Outline for today
+- Introduction to GitHub and Git
+- Data transformation
+- **Data tidying**
+
+## Introduction to **tidy data** {.smaller}
+
+>"Happy families are all alike; every unhappy family is unhappy in its own way."
+
+:::{style = "text-align: right; font-size: 80%"}
+
+\- Leo Tolstoy, *Anna Karenina*
+:::
+
+>"Tidy datasets are all alike, but every messy dataset is messy in its own way."
+
+:::{style= "text-align: right; font-size: 80%"}
+
+\- Hadley Wickham, *Tidy Data*
+:::
+
+![](images/tidy-untidy-data.jpg)
+
+## What is tidy data?
+
+![](images/tidy-data.jpg)
+
+
+:::{style = "font-size: 70%; text-align: center;"}
+
+By [Julia Lowndes and Allison Horst](https://allisonhorst.com/other-r-fun)
+
+:::
+
+## What is an example of untidy data?
+
+![](images/untidy-1.png)
+
+:::{style = "font-size: 70%; text-align: center;"}
+
+Source: [National Center for Ecological Analysis & Synthesis](https://learning.nceas.ucsb.edu/2023-09-ucsb-faculty/session_07.html)
+
+:::
+
+## {.smaller}
+
+:::{.column width="50%"}
+
+Multiple tables, not machine-readable
+
+![](images/untidy-2.png)
+:::
+
+
+:::{.column width="50%"}
+
+:::{.fragment}
+Inconsistent columns
+
+![](images/untidy-3.png)
+:::
+
+:::
+
+
+:::{.column width="50%"}
+:::{.fragment}
+Inconsistent rows
+
+![](images/untidy-4.png)
+:::
+:::
+
+
+:::{.column width="50%"}
+:::{.fragment}
+Marginal sums and statistics
+
+![](images/untidy-5.png)
+:::
+:::
+
+## A single untidy table, `climate_raw` {.smaller}
+
+```{r}
+#| eval: true
+#| echo: false
+library(tibble)
+library(kableExtra)
+n = 10
+climate_raw <- tibble(
+  date = rep(seq(as.Date("2022-07-01"), by = "1 day", length.out = n/2), 2),
+  city = rep(c("Phoenix", "Miami"), each = n/2),
+  zone = rep(c("urban", "coastal"), each = n/2),
+  temp_morning = sample(75:90, n, replace = TRUE),
+  temp_afternoon = sample(95:112, n, replace = TRUE),
+  humid_morning = sample(15:90, n, replace = TRUE),
+  humid_afternoon = sample(10:80, n, replace = TRUE)
+)
+
+knitr::kable(climate_raw, escape = FALSE) %>%
+  kable_styling(full_width = TRUE, font_size = 21) %>%
+  column_spec(1:ncol(climate_raw), width = "5em", extra_css = "word-wrap: break-word; white-space: normal;")
+```
+## {background-image="images/in-class-activity.png"}
+
+::: {style="text-align: center;"}
+<br>
+<br>
+In-Class Activity: 
+
+In pairs, discuss the following:
+
+1. What makes `climate_raw` untidy?
+2. Sketch out on paper what a tidy version of `climate_raw` would look like.
+:::
+
+```{r}
+countdown::countdown(
+  minutes = 5,
+  bottom = 2,
+  # Fanfare when it's over
+  play_sound = TRUE,
+  color_border              = "#FFFFFF",
+  color_text                = "#7aa81e",
+  color_running_background  = "#7aa81e",
+  color_running_text        = "#FFFFFF",
+  color_finished_background = "#ffa07a",
+  color_finished_text       = "#FFFFFF",
+  font_size = "2em",
+  )
+```
+
+## Why do untidy data exist and what to do about it? {.smaller}
+
+- Data is collected in a way that is convenient for the collector, not the analyst
+- Most people aren't familiar with the principles of tidy data unless you are a data professional
+
+. . .
+
+- To tidy data:
+  - Begin by figuring out what are the variables and observations
+  - Talk to the data curator if needed
+  - **pivot** your data into a tidy form
+  
+## `pivot_longer()` {.smaller}
+
+::: {.column width="30%"}
+Suppose we have three patients with `id`s A, B, and C. Each patient has two blood pressure measurements: `bp1` and `bp2`. The data is in wide format:
+
+```{r}
+#| eval: true
+#| echo: true
+df <- tibble::tribble(
+  ~id,  ~bp1, ~bp2,
+   "A",  100,  120,
+   "B",  140,  115,
+   "C",  120,  125
+)
+```
+
+:::
+
+::: {.column width="10%"}
+
+:::
+
+::: {.column width="60%"}
+::: {.fragment}
+We want our new dataset to have three variables: `id` (already exists), `measurement` (the column names), and `value` (the cell values). To achieve this, we pivot `df` longer:
+
+```{r}
+#| eval: true
+#| echo: true
+
+df |> 
+  tidyr::pivot_longer(
+    cols = bp1:bp2,
+    names_to = "measurement",
+    values_to = "value"
+  )
+```
+:::
+:::
+
+## How does `pivot_longer()` work? {.smaller}
+
+::: {.column width = "50%"}
+Repeat `id` twice
+
+![](images/pivot-longer-1.png)
+
+::: {.fragment}
+`bp1` and `bp2` become values in a new column
+
+![](images/pivot-longer-2.png)
+:::
+:::
+
+::: {.column width = "50%"}
+::: {.fragment}
+<br>
+<br>
+<br>
+
+The number of values is preserved and unwound row-by-row.
+
+![](images/pivot-longer-3.png)
+:::
+:::
+
+## `pivot_wider()` {.smaller}
+::: {.column width="30%"}
+Suppose we have two patients with `id`s A and B. We have three blood measurements on patient A and two on patient B. The data is in long format:
+
+```{r}
+#| eval: true
+#| echo: true
+df <- tribble(
+  ~id, ~measurement, ~value,
+  "A",        "bp1",    100,
+  "B",        "bp1",    140,
+  "B",        "bp2",    115, 
+  "A",        "bp2",    120,
+  "A",        "bp3",    105
+)
+```
+
+:::
+
+::: {.column width="10%"}
+
+:::
+
+::: {.column width="60%"}
+::: {.fragment}
+We’ll take the values from the value column and the names from the measurement column:
+```{r}
+#| eval: true
+#| echo: true
+df |> 
+  tidyr::pivot_wider(
+    names_from = measurement,
+    values_from = value
+  )
+```
+`pivot_wider()` can make missing values.
+:::
+:::
+
+## How does `pivot_wider()` work? {.smaller}
+
+:::{.column width = "50%"}
+First, figure out what will be the new column names, taken from `measurement`.
+
+```{r}
+#| eval: true
+#| echo: true
+library(tidyverse)
+df |> 
+  distinct(measurement) |> 
+  pull()
+```
+
+:::{.fragment}
+
+Then, figure out what will be the rows in the output, determined by all the variables that aren't going into the new names or values. Can be one or many.
+
+```{r}
+#| eval: true
+#| echo: true
+df |> 
+  select(-measurement, -value) |> 
+  distinct()
+```
+
+:::
+:::
+
+:::{.column width = "5%"}
+:::
+
+:::{.column width = "45%"}
+:::{.fragment}
+
+<br>
+<br>
+
+`pivot_wider()` then combine the columns and rows to generate an empty data frame, then fill it with `value` in the input.
+
+```{r}
+#| eval: true
+#| echo: true
+df |> 
+  select(-measurement, -value) |> 
+  distinct() |> 
+  mutate(bp1 = NA, bp2 = NA, bp3 = NA)
+```
+
+`pivot_wider()` can make missing values.
+
+:::
+
+:::
+
+## Why do we need `pivot_wider()`? {style="font-size: 70%"}
+
+::: {.column width="50%"}
+Isn't tidy data long?
+
+- Yes — **tidy data often means long format**, especially for:
+  - plotting
+  - filtering
+  - grouping
+- But tidy ≠ always long!
+
+Tidy = Structure
+
+- Each variable in a column, each observation in a row
+- Sometimes wide format **is** tidy — it depends on context.
+:::
+
+::: {.column width="50%"}
+:::{.fragment}
+When do we need `pivot_wider()`?
+
+- ✅ For **modeling**:
+  - `lm(bp1 ~ bp2)` needs one column per variable
+- ✅ For **presentation**:
+  - Easier to read tables with 1 row per subject
+- ✅ For **joining**:
+  - Merge with spatial data or metadata
+- ✅ To **undo a pivot_longer()**
+:::
+:::
+
+##  {background="#033C5A"}
+<br>
+<br>
+<br>
+
+<div class="page-center vertical-center">
+<p class="custom-subtitle bottombr">{{<fa broom title="let's tidy data" >}} Let's tidy `climate_raw` </p>
+<p class="caption-text">*~ Head over to lab1 notebook! ~*</p>
+</div>
+
+
+##  End-of-Class Survey {background="#033C5A"}
+<br>
+<br>
+<br>
+
+<div class="page-center vertical-center">
+<p class="custom-subtitle bottombr">{{<fa pen-to-square title="edit or fill out survey">}} Fill out the end-of-class survey </p>
+<p class="caption-text">*~ This is the end of Lab 1 ~*</p>
+</div>
+
+```{r}
+countdown::countdown(
+  minutes = 10,
+  # left = 0, right = 0,
+  # Fanfare when it's over
+  play_sound = TRUE,
+  color_border              = "#FFFFFF",
+  color_text                = "#7aa81e",
+  color_running_background  = "#7aa81e",
+  color_running_text        = "#FFFFFF",
+  color_finished_background = "#ffa07a",
+  color_finished_text       = "#FFFFFF",
+  font_size = "2em",
+  )
+```
