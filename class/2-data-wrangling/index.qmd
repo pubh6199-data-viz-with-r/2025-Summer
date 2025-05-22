@@ -307,18 +307,16 @@ Source: [R for Data Science](https://r4ds.had.co.nz/wrangle-intro.html)
 :::
 
 ## Manipulate data in R using `dplyr` {.smaller}
-
 **Commonality**:
 
 - The first argument is always a data frame
-- The sebsequent arguments are the columns of the data frame (without quotes)
+- The subsequent arguments are the columns of the data frame (without quotes)
 - The output is a new data frame
-
 . . .
 
 **Individuality**:
 
-:::{.column width="33%"}
+:::{.column width="30%"}
 Rows
 
 - `filter()`: filter rows
@@ -326,7 +324,7 @@ Rows
 - `distinct()`: remove duplicate rows
 :::
 
-:::{.column width="33%"}
+:::{.column width="30%"}
 Columns
 
 - `select()`: select columns
@@ -334,7 +332,7 @@ Columns
 - `mutate()`: add new columns
 :::
 
-:::{.column width="33%"}
+:::{.column width="40%"}
 Groups
 
 - `group_by()`: group rows by one or more columns
