@@ -163,14 +163,12 @@ GW CCAS
 ## Communication {.fit-text .smaller}
 
 -   Slack: PUBH 6199 channel
--   Course website https://pubh6199-data-viz-with-r.github.io/
+-   Course website: [https://pubh6199-data-viz-with-r.github.io/2025-Summer/](https://pubh6199-data-viz-with-r.github.io/2025-Summer/)
 -   Blackboard
 -   Office hours:
-    -   Cindy: Mondays 4-5 PM
-    -   Silas: Wednesdays 2-3 PM
--   Email:
-    -   Cindy: xindi.hu\@gwu.edu
-    -   Silas: silas.horn\@gwmail.gwu.edu
+    -   Sayam: Mondays 4-5 PM
+    -   Silas: Wednesdays 2-3 PM, 
+    -   Cindy: By appointment
 -   Boundaries:
     -   Please allow 24 hrs for slack/email response
     -   Replies in the after hours (after 6pm ET) and over the weekends are not guaranteed
