@@ -73,6 +73,8 @@ jobs:
             any::gapminder
             any::palmerpenguins
             any::fmsb
+            any::ggalluvial
+            
 
       - name: Install GitHub-only packages
         run: |
