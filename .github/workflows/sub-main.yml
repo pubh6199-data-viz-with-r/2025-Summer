@@ -72,6 +72,7 @@ jobs:
             any::nycflights13
             any::gapminder
             any::palmerpenguins
+            any::fmsb
 
       - name: Install GitHub-only packages
         run: |
