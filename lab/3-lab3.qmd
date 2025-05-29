@@ -1,0 +1,216 @@
+---
+title: "Lab 3"
+author: "Your Name"
+date: "2025-XX-XX"
+params:
+  number: 3
+  purpose: "The purpose of this lab to for you to practice the advanced chart types we cover in class."
+format: 
+  html:
+    toc: true
+    toc-location: right
+    code-fold: true
+    theme: flatly
+    self-contained: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+
+```{r}
+#| label: setup
+#| include: false
+
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.path = "figs/",
+    fig.width = 7.252,
+    fig.height = 4,
+    comment = "#>",
+    fig.retina = 3
+)
+```
+
+## Before your start the lab notebook
+
+- Update the header - put your name in the `author` argument and put today's date in the `date` argument.
+- Click the "Render" button in RStudio and then open the rendered `1-lab1.html` page.
+- Then go back and try changing the `theme` argument in the header to something else - you can see other available themes [here](https://quarto.org/docs/output-formats/html-themes.html). Notice the difference when you render now!
+
+## Overview of Lab3
+
+There are two parts of this lab notebook. We will be using the same example datasets covered in class: `forest` and `adult`. In first part, we will practice faceting, which splits a plot into subplots that each display a subset of the data. In the second part, we will practice chart types that are more advanced such as radar chart, sankey diagrams, and parallel coordinates plot.
+
+**Skills practiced**:
+
+
+### Load Required Packages and Datasets
+
+```{r}
+
+library(tidyverse)
+
+forest <- read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/forest-fires/forestfires.csv") %>%
+  mutate(
+    month = tolower(month),
+    day = tolower(day),
+    season = case_when(
+      month %in% c("dec", "jan", "feb") ~ "Winter",
+      month %in% c("mar", "apr", "may") ~ "Spring",
+      month %in% c("jun", "jul", "aug") ~ "Summer",
+      month %in% c("sep", "oct", "nov") ~ "Fall",
+      TRUE ~ "Unknown"
+    ),
+    RH_level = if_else(RH >= median(RH, na.rm = TRUE), "High RH", "Low RH"),
+    season = factor(season, levels = c("Spring", "Summer", "Fall", "Winter")),
+    RH_level = factor(RH_level, levels = c("Low RH", "High RH"))
+  )
+
+glimpse(forest)
+
+adult <- read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data",
+                  col_names = c("age", "workclass", "fnlwgt", "education", "education_num",
+                                "marital_status", "occupation", "relationship", "race", "sex",
+                                "capital_gain", "capital_loss", "hours_per_week", "native_country", "income"))
+glimpse(adult)
+```
+
+## Part 1: Plot faceting
+
+### 1.1. Faceting on a continuous variable
+
+```{r}
+#|echo: TRUE
+#|eval: FALSE
+
+ggplot(forest) +
+  geom_point(aes(x = temp, y = wind)) +
+  facet_wrap(~ area)
+```
+
+✏️ *Q: What do you observe in this plot? How do you fix this?*
+
+```{r}
+# Your code here
+```
+
+
+------------------------------------------------------------------------
+
+### 1.2. What does `.` do?
+
+```{r}
+#|echo: TRUE
+#|eval: FALSE
+
+ggplot(forest) +
+  geom_point(aes(x = temp, y = wind)) +
+  facet_grid(season ~ .)
+
+ggplot(forest) +
+  geom_point(aes(x = temp, y = wind)) +
+  facet_grid(. ~ RH_level)
+```
+
+✏️ *Q: Without running the code, guess what plots does the code above make? Then change `eval: FALSE` to `eval: TRUE`, run the code chunk and look at the output. What does `.` do?*
+
+------------------------------------------------------------------------
+
+### 1.3. Practice with `nrow`, `ncol`, and `scales` (Using Histograms)
+
+How does the distribution of daily temperatures vary by season, and what layout best supports visual comparison?
+
+Create a faceted histogram of temperature (temp) by season using `facet_wrap()`. Try different combinations of `nrow` and `ncol` to test how layout affects interpretability. Also experiment with the `scales` argument. Which combination best supports answering the research question? How would your layout choice change if you had 12 months instead of 4 seasons?
+
+```{r}
+# Your code here
+```
+
+✏️ *Q: Which layout (rows vs columns) makes it easiest to compare shapes of the distributions?*
+
+------------------------------------------------------------------------
+
+## Part 2: Advanced chart types
+
+### 2.1. Radar Chart with `adult` Dataset
+
+Research Question:
+
+>How do income groups differ in their numeric profiles (e.g., education, hours worked, capital gains)?
+
+Your Tasks:
+
+- Group the data by income and summarize variables like education_num, hours_per_week, capital_gain, capital_loss.
+
+- Normalize all variables.
+
+- Use {ggradar} to plot.
+
+- Optional: Create radar charts for subgroups (e.g., income × sex).
+
+```{r}
+# Your code here
+```
+
+✏️ *Summarize your findings based on the radar chart you created*
+
+
+
+### 2.2. Sankey Diagram with `forest` Dataset
+
+Research Question:
+
+>How do seasonal and weather factors flow into different fire size categories?
+
+Your Tasks:
+
+- Create new categorical variables:
+  - `season` from month
+  - `RH_level` as high/low relative humidity
+
+- Collapse `area_group` into 3 fire size bins.
+
+- Build a 3-axis Sankey: `season` → `RH_level` → `area_group`
+
+```{r}
+# Your code here
+```
+
+✏️ *What seasonal transitions lead to larger fires?*
+
+
+### 2.3. Parallel Coordinates Plot
+
+Research Question:
+
+>Can we identify fire weather patterns that differ across fire sizes?
+
+Your Tasks:
+
+- Select variables: `temp`, `wind`, `RH`, `rain`, `FFMC`, `DMC`
+
+- Normalize, color lines by `area_group`
+
+- Use `ggparcoord()` to examine whether patterns differ by fire size
+
+
+```{r}
+# Your code here
+```
+
+✏️ *How do weather patterns differ across fire sizes?*
+
+
+## Save and Push Your Work
+
+Remember to save your `.qmd` and render the HTML output before committing to GitHub.
+
+```{bash eval = FALSE}
+git add 3-lab3.qmd 3-lab3.html
+git commit -m "Complete Lab 3"
+git push
+```
+
