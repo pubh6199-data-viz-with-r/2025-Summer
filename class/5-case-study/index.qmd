@@ -1,0 +1,31 @@
+---
+title: "Lecture 3. Case Study"
+subtitle: "PUBH 6199: Visualizing Data with R, Summer 2025"
+date: June 3, 2025
+author: Elena Jimenez, M.A.
+format: 
+  revealjs:
+    pdf: true
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    preview-links: auto
+    css: style.css
+    footer: 'PUBH 6199: Visualizing Data with R'
+---
+
+## Class today {.smaller}
+
+**Reading assignment**:
+
+- [https://www.storytellingwithdata.com/chart-guide](https://www.storytellingwithdata.com/chart-guide)
+- [https://www.toptal.com/designers/ux/data-visualization-mistakes](https://www.toptal.com/designers/ux/data-visualization-mistakes)
+
+**About your instructor**:
+
+Elena Jimenez (M.A., International Education, George Washington University) is a user-experienced designer at Mathematica with expertise in data visualization, web application designs, facilitating co-design workshops, and conducting user-experience research to increase the efficacy of services and digital platforms. She has worked with foundations, states, and different departments within the federal government to help teams identify problems and develop solutions through co-design workshops, developing prototypes, and feedback sessions. 
+
+
+**Slides**:
+
+Please use the ["Download PDF"](https://pubh6199-data-viz-with-r.github.io/2025-Summer/class/5-case-study/5-case-study.pdf) button to download the slides.
