@@ -865,6 +865,349 @@ When is it better to use individual-level data vs. group-level profiles in a par
 
 - **Dos and Don'ts when designing visualizations**
 
+## DO: Clear, informative titles and labels {.smaller-title}
+
+:::{.column width="50%"}
+✅ DO
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 3
+ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_boxplot() +
+  labs(
+    title = "Miles per Gallon by Number of Cylinders",
+    x = "Number of Cylinders",
+    y = "MPG"
+  ) +
+  theme_minimal()
+```
+
+:::
+
+:::{.column width="50%"}
+❌ Don’t
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 3
+ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_boxplot() +
+  ggtitle("Plot 1") +  # Uninformative
+  theme_gray()         # Cluttered default theme
+```
+
+:::
+
+## DO: Choose the right chart type {.smaller-title}
+
+:::{.column width="50%"}
+✅ DO
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 4
+ggplot(airquality, aes(x = Day, y = Temp)) +
+  geom_line() +
+  facet_wrap(~ Month) +
+  labs(title = "Daily Temperature by Month", x = "Day", y = "Temperature (F)") +
+  theme_minimal()
+```
+
+:::
+
+:::{.column width="50%"}
+❌ Don’t
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 4
+ggplot(airquality, aes(x = Month, y = Temp)) +
+  geom_bar(stat = "identity") +
+  ggtitle("Temp by Month")  # Misleading chart type
+```
+
+*What is this chart showing? Average temperature or total temperature by month?*
+
+:::
+
+## DO: Choose the right chart type {.smaller-title}
+
+:::{.column width="50%"}
+✅ DO
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 4
+ggplot(airquality, aes(x = Day, y = Temp)) +
+  geom_line() +
+  facet_wrap(~ Month) +
+  labs(title = "Daily Temperature by Month", x = "Day", y = "Temperature (F)") +
+  theme_minimal()
+```
+
+:::
+
+:::{.column width="50%"}
+❌ Don’t
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 4
+ggplot(airquality, aes(x = Month, y = Temp)) +
+  geom_bar(stat = "identity", color = 'orange') +
+  ggtitle("Temp by Month")  # Misleading chart type
+```
+
+*It stacks daily temperature on top of each other, which makes no sense*
+
+:::
+
+## DO: Use accessible colors {.smaller-title}
+
+:::{.column width="50%"}
+✅ DO use `viridis` scale
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 3
+ggplot(mtcars, aes(x = wt, y = mpg, color = hp)) +
+  geom_point(size = 3) +
+  scale_color_viridis_c(option = "plasma") +
+  labs(
+    title = "Fuel Efficiency vs Weight of Car",
+    x = "Weight (1000 lbs)",
+    y = "Miles per Gallon",
+    color = "Horsepower"
+  ) +
+  theme_minimal()
+```
+
+:::
+
+:::{.column width="50%"}
+❌ Don’t use rainbow colors
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 3
+ggplot(mtcars, aes(x = wt, y = mpg, color = hp)) +
+  geom_point(size = 3) +
+  scale_color_gradientn(colors = rainbow(7)) +
+  labs(
+    title = "Fuel Efficiency vs Weight of Car",
+    x = "Weight (1000 lbs)",
+    y = "Miles per Gallon",
+    color = "Horsepower"
+  ) +
+  theme_minimal()
+```
+
+:::
+
+
+## DO: Order categorical axes intentionally {.smaller-title}
+
+:::{.column width="50%"}
+✅ DO 
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 4.5
+mtcars %>%
+    rownames_to_column(var = "model") %>%
+    ggplot(aes(x = fct_reorder(model, mpg), y = mpg)) +
+    geom_col(fill = "steelblue") +
+    labs(title = "Fuel Efficiency by Car Model", x = "Car Model (ordered by MPG)", y = "Miles per Gallon") +
+    coord_flip() +
+    theme_minimal()
+```
+
+:::
+
+:::{.column width="50%"}
+❌ Don’t 
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 4.5
+mtcars %>%
+    rownames_to_column(var = "model") %>%
+    ggplot(aes(x = model, y = mpg)) +
+    geom_col(fill = "steelblue") +
+    labs(title = "Fuel Efficiency by Car Model", x = "Car Model (ordered by MPG)", y = "Miles per Gallon") +
+    coord_flip() +
+    theme_minimal()
+```
+
+:::
+
+## DO: Use appropriate scales {.smaller-title}
+
+:::{.column width="50%"}
+✅ DO log-transform right skewed variables
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 4
+#| code-line-numbers: "3,4"
+ggplot(diamonds, aes(x = carat, y = price)) +
+  geom_point(alpha = 0.2, color = "steelblue") +
+  scale_x_log10() +
+  scale_y_log10(labels = scales::dollar_format(accuracy = 1)) +
+  labs(
+    title = "Diamond Price vs Carat (Log-Log Scale)",
+    x = "Carat (log scale)",
+    y = "Price (log scale)") +
+  theme_minimal()
+```
+
+:::
+
+:::{.column width="50%"}
+❌ Don’t mindlessly use raw scale
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 4
+
+ggplot(diamonds, aes(x = carat, y = price)) +
+  geom_point(alpha = 0.2, color = "steelblue") +
+  labs(
+    title = "Diamond Price vs Carat (Raw Scale)",
+    x = "Carat",
+    y = "Price"
+  ) +
+  theme_minimal()
+```
+
+:::
+
+## DO: Add helpful annotations {.smaller-title}
+
+:::{.column width="50%"}
+✅ DO use direct labels
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 3
+label_df <- mtcars %>%
+  group_by(cyl) %>%
+  summarise(hp = mean(hp), mpg = mean(mpg))
+ggplot(mtcars, aes(x = hp, y = mpg, color = factor(cyl))) +
+  geom_point(size = 3, alpha = 0.6) +
+  ggrepel::geom_label_repel(
+    data = label_df,
+    aes(label = paste0(cyl, " cyl"), fill = factor(cyl)),
+    show.legend = FALSE, size = 4, fontface = "bold", color = "black") +
+  labs(title = "Fuel Efficiency vs Horsepower", x = "Horsepower", y = "Miles per Gallon") +
+    guides(color = "none") +
+  theme_minimal()
+```
+
+:::
+
+:::{.column width="50%"}
+❌ Don’t only rely on legends
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 3
+
+ggplot(mtcars, aes(x = hp, y = mpg, color = factor(cyl))) +
+  geom_point(size = 3) +
+  labs(
+    title = "Fuel Efficiency vs Horsepower",
+    x = "Horsepower",
+    y = "Miles per Gallon",
+    color = "Cylinders"
+  ) +
+  theme_minimal()
+```
+
+:::
+
+## DO: Use clear typeface and fonts {.smaller-title}
+
+:::{.column width="50%"}
+✅ DO 
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 3
+library(showtext)
+font_add_google("Lato", "lato")
+showtext_auto()
+ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_boxplot() +
+  theme_minimal(base_family = "lato") +
+  labs(title = "MPG by Cylinders (Lato Font)")
+```
+
+:::
+
+:::{.column width="50%"}
+❌ Don’t have tiny fonts
+
+```{r}
+#| echo: TRUE
+ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_boxplot() +
+  theme(text = element_text(size = 8)) +
+  labs(title = "MPG by Cylinders")
+```
+
+:::
+
+## More on typeface {.smaller}
+
+![](images/typeface-matters.png)
+
+::: citation
+Source: Typography for a better user experience, by [Suvo Ray](https://www.suvoray.com/notes/typography-for-a-better-user-experience)
+:::
+
+## Some general rules {.smaller}
+
+- Use **sans-serif** fonts for digital displays (e.g., Arial, Helvetica, Lato).
+- **Serif** fonts are typically only used for visualization headlines (e.g., Times New Roman, Georgia).
+- Avoid using too many typefaces (just 1-3)
+- Use a typeface with lining figures for numerals
+![](images/font-1.png){ width="50%"}
+- Use a monospaced typeface for numerals
+![](images/font-2.png){ width="50%"}
+
+
+## Create hierarchy with font size, weight, and style {.smaller-title}
+![](images/font-3.png)
+
+::: citation
+Source: The UX Designer's Guide to Typography by [Chaosamran_Studio](https://www.interaction-design.org/literature/article/the-ux-designer-s-guide-to-typography)
+:::
+
+## Pick a typeface from Google Fonts {.smaller}
+
+![](images/google-fonts.gif)
+
+::: citation
+[https://fonts.google.com/](https://fonts.google.com/)
+
+Source: [EDS 240](https://eds-240-data-viz.github.io/course-materials/lecture-slides/lecture6.1-typography-slides.html#/pick-google-fonts)
+:::
 
 
 ##  End-of-Class Survey {background="#033C5A"}
