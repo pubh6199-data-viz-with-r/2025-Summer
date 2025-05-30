@@ -74,6 +74,7 @@ jobs:
             any::palmerpenguins
             any::fmsb
             any::ggalluvial
+            any::showtext
             
 
       - name: Install GitHub-only packages
