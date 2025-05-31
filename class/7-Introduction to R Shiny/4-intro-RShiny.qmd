@@ -1,0 +1,245 @@
+---
+title: "4.Introduction to R Shinny"
+subtitle: "PUBH 6199: Visualizing Data with R, Summer 2025"
+date: June 10, 2025
+author: Xindi (Cindy) Hu, ScD
+format: 
+  revealjs:
+    pdf: true
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    preview-links: auto
+    logo: images/logo.png
+    css: style.css
+    footer: 'PUBH 6199: Visualizing Data with R'
+resources:
+  - demo.pdf
+  - images/
+---
+
+## Outline for today
+
+-   [What is R Shinny]{style="font-weight: bold; color: orange"}
+-   Major Components in R Shiny
+-   Getting Started with Shiny
+-   Write a basic R shiny app.
+
+## About **R Shinny** {.smaller}
+
+-   Shiny is an R package that makes it easy to build interactive web applications (apps) straight from R
+-   Shiny allows users to build dynamic, data-driven web apps without requiring extensive knowledge of web development
+-   To install **R Shinny** run the following command in the console of your RStudio `install.packages("shiny")`
+
+![](images/Shiny.png){width="634"}
+
+## Key Features
+
+-   **Interactive Web Applications**: Shiny makes web apps that respond to user inputs
+-   **Seamless Integration with R**: Users can leverage the full power of R, like data manipulation, statistical modeling, and plotting
+-   **Easy Deployment** using Shiny Cloud
+-   **Extensibility**: Shiny apps can be enhanced with custom HTML, CSS, and JavaScript
+
+## Outline for today
+
+-   What is R Shinny
+-   [Major Components in R Shiny]{style="font-weight: bold; color:orange"}
+-   Getting Started with Shiny
+-   Write a basic R shiny app.
+
+## Basic Structure Shiny Application
+
+-   A typical Shiny application has two main components:
+
+    -   **User Interface (UI)**: Defines the layout and appearance of the app, including input controls (like sliders and text boxes) and output displays (like plots and tables).
+
+    -   **Server Function**: Contains the logic that processes inputs and generates outputs. It reacts to user interactions
+
+## Visual Logic
+
+-   Here we can see the visual logic behind a Shiny application
+
+![](images/Shiny-structure.png){width="727"}
+
+## Outline for today
+
+-   What is R Shinny
+-   Major Components in R Shinny
+-   [Getting Started with Shiny]{style="font-weight: bold; color:orange"}
+-   Write a basic R shiny app
+
+## Installation
+
+-   To install. R Shiny in your R environment use the command in console <br> `install.packages("shiny")`
+-   To call the library use the command <br> `library(shiny)`
+
+## Code Breakdown UI
+
+Calling the library
+
+```{r}
+#| eval: true
+#| echo: true
+
+library(shiny)
+
+```
+
+:::{.fragment}
+The UI to take input
+
+```{r}
+#| eval: true
+#| echo: true
+ui <- fluidPage(
+  titlePanel("Histogram Example"),
+  
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("bins",
+                  "Number of bins:",
+                  min = 5, max = 50, value = 30)
+    ),
+    
+    mainPanel(
+      plotOutput("histPlot")
+    )
+  )
+)
+```
+:::
+
+## Code Breakdown: Server
+
+The Server that takes the inputs and process the logic
+
+```{r}
+#| eval: true
+#| echo: true
+server <- function(input, output) {
+  
+  output$histPlot <- renderPlot({
+    # Generate random data
+    data <- rnorm(500)
+    
+    # Create histogram with user-specified bins
+    hist(data, breaks = input$bins, col = "skyblue",
+         border = "white", main = "Histogram of Random Normal Data",
+         xlab = "Value", ylab = "Frequency")
+  })
+}
+shinyApp(ui = ui, server = server)
+```
+
+## Running the App
+
+-   Save the code to an R script file, e.g., app.R.
+-   In your R console, run
+-   `shiny::runApp("your_file.R")`
+
+## Outline for today
+
+-   What is R Shinny
+-   Major Components in R Shinny
+-   Getting Started with Shiny
+-   [Write a basic R shiny app]{style="font-weight: bold; color:orange"}
+
+## Making your own shiny app with dataset
+
+In this tutorial, we will build an interactive R Shiny application step-by-step. Our app will:
+
+✅ Display a scatter plot using the `mtcars` dataset\
+✅ Allow users to choose x-axis and y-axis variables\
+✅ Enable plot color customization\
+✅ Provide a download option for the plot
+
+---
+## User Interface and getting required libraries
+
+```{r}
+#| echo: true
+#| eval: true
+library(shiny)
+library(ggplot2)
+library(dplyr)
+#library(mtcars)
+```
+
+::: {.fragment}
+<br>
+
+```{r}
+#| echo: true
+#| eval: true
+
+ui <- fluidPage(
+  titlePanel("Interactive Scatter Plot - mtcars"),
+  
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("xvar", "Choose X-axis variable:", choices = names(mtcars), selected = "wt"),
+      selectInput("yvar", "Choose Y-axis variable:", choices = names(mtcars), selected = "mpg"),
+    ),
+    mainPanel(
+      plotOutput("scatterPlot")
+    )
+  )
+)
+```
+:::
+
+
+## Defining Server Logic
+
+```{r}
+#| echo: true
+#| eval: true
+
+server <- function(input, output) {
+  # Reactive expression for the plot
+  scatter_plot <- reactive({
+    ggplot(mtcars, aes_string(x = input$xvar, y = input$yvar)) +
+      geom_point(color = input$color, size = 3) +
+      theme_minimal() +
+      labs(title = paste("Scatter Plot of", input$yvar, "vs", input$xvar),
+           x = input$xvar, y = input$yvar)
+  })
+  # Render the plot
+  output$scatterPlot <- renderPlot({
+    scatter_plot()
+  })
+}
+```
+::: {.fragment}
+Launch the application 
+
+`shinyApp(ui = ui, server = server)`
+:::
+
+
+##  End-of-Class Survey {background="#033C5A"}
+<br>
+<br>
+<br>
+
+<div class="page-center vertical-center">
+<p class="custom-subtitle bottombr">{{<fa pen-to-square title="edit or fill out survey">}} Fill out the end-of-class survey </p>
+<p class="caption-text">*~ This is the end of Lecture 4 ~*</p>
+</div>
+
+```{r}
+countdown::countdown(
+  minutes = 10,
+  # left = 0, right = 0,
+  # Fanfare when it's over
+  play_sound = TRUE,
+  color_border              = "#FFFFFF",
+  color_text                = "#7aa81e",
+  color_running_background  = "#7aa81e",
+  color_running_text        = "#FFFFFF",
+  color_finished_background = "#ffa07a",
+  color_finished_text       = "#FFFFFF",
+  font_size = "2em",
+  )
+```
+
