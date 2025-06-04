@@ -42,3 +42,53 @@ strong {
   margin-right: auto;
 }
 
+
+.scroll-output {
+  height: 300px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+  padding: 0.5em;
+  border: 1px solid #ccc;
+}
+
+.smaller-title {
+  font-size: 0.7em;
+}
+
+.smaller-body {
+  font-size: 0.8em;
+}
+
+.center {
+  text-align: center;
+}
+
+.orange-box {
+  border: 2px solid #e67e22;
+  background-color: #fcf3e3;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.citation{
+  font-size: 0.8em;
+  text-align: center;
+}
+
+.takeaway {
+  text-align: center;
+  border: 2px solid #e67e22;
+  background-color: #fcf3e3;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+blockquote {
+  font-size: 0.8em;
+}
+
+

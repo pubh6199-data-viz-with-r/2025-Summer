@@ -21,9 +21,9 @@ resources:
 ## Outline for today
 
 -   [What is R Shinny]{style="font-weight: bold; color: orange"}
--   Major Components in R Shiny
--   Getting Started with Shiny
--   Write a basic R shiny app.
+-   Write a basic R shiny app
+-   Deploy your Shiny apps with [shinyapps.io](https://www.shinyapps.io/)
+-   AI-powered help: using Shiny Assistant
 
 ## About **R Shinny** {.smaller}
 
@@ -33,47 +33,190 @@ resources:
 
 ![](images/Shiny.png){width="634"}
 
-## Key Features
+## Key Features {.smaller}
 
 -   **Interactive Web Applications**: Shiny makes web apps that respond to user inputs
 -   **Seamless Integration with R**: Users can leverage the full power of R, like data manipulation, statistical modeling, and plotting
 -   **Easy Deployment** using Shiny Cloud
 -   **Extensibility**: Shiny apps can be enhanced with custom HTML, CSS, and JavaScript
 
-## Outline for today
-
--   What is R Shinny
--   [Major Components in R Shiny]{style="font-weight: bold; color:orange"}
--   Getting Started with Shiny
--   Write a basic R shiny app.
-
-## Basic Structure Shiny Application
+## Basic Structure Shiny Application {.smaller}
 
 -   A typical Shiny application has two main components:
 
     -   **User Interface (UI)**: Defines the layout and appearance of the app, including input controls (like sliders and text boxes) and output displays (like plots and tables).
 
     -   **Server Function**: Contains the logic that processes inputs and generates outputs. It reacts to user interactions
+    
+![](images/restaurant.jpg)
 
-## Visual Logic
+## Visual Logic {.smaller}
 
 -   Here we can see the visual logic behind a Shiny application
 
 ![](images/Shiny-structure.png){width="727"}
 
+## `*Input()`, `*Output()` and `render*()` {.smaller}
+
+These three groups of functions are the core of Shiny's reactive programming model:
+
+-   **`*Input()`**: Represents user inputs, such as text input, slider input, or checkbox input. For example, `input$sliderValue` retrieves the value of a slider input with the ID "sliderValue".
+-   **`*Output()`**: Represents outputs that are displayed in the UI, such as plots, tables, or text. For example, `output$histPlot` refers to a plot output with the ID "histPlot".
+-   **`render*()`**: Functions that generate outputs based on inputs. For example, `renderPlot()` creates a plot output, and `renderText()` generates text output. These functions are reactive and will automatically update when the inputs change.
+
+## `*Input()` function syntax {.smaller}
+
+**Shiny input functions**: `sliderInput()`, `selectInput()`, `textInput()`
+`numericInput()`, etc.
+
+**General format**:  
+```{r}
+#| eval: false
+#| echo: true
+inputFunction(inputId, label, value, ...)
+```
+
+-   `inputId`: connects UI and server via `input$inputId`, must be a simple string without spaces, must be unique within the app
+-   `label`: text label for the input control, displayed in the UI
+-   `value`: initial value of the input control, can be a number, character, or logical value. For example:
+
+```{r}
+#| eval: false
+#| echo: true
+# use position for inputId and label
+# use named args for the rest
+sliderInput("min", "Limit (minimum)", value = 50, min = 0, max = 100)
+```
+
+## Different types of UI Inputs {.smaller}
+
+![](images/cheatsheet-inputs.png)
+
+::: citation
+
+[Source: Shiny for R cheatsheet](https://shiny.posit.co/r/articles/start/cheatsheet/)
+:::
+
+## `*Output()` function syntax {.smaller}
+
+**Shiny output functions**: `plotOutput()`, `tableOutput()`, `textOutput()`, etc.
+
+**What `*Output()` function does**:
+
+- Output functions in the **UI** create **placeholders**.
+- These placeholders are **filled by the server** using a matching `render*()` function.
+
+**General format**:
+```{r}
+#| eval: false
+#| echo: true
+outputFunction(outputId)
+```
+
+-   `outputId`: connects UI and server via `output$outputId`, must be a simple string without spaces, must be unique within the app. For example:
+
+```{r}
+#| eval: false
+#| echo: true
+plotOutput("scatterplot")
+```
+
+-   Accessed in server as:
+
+```{r}
+#| eval: false
+#| echo: true
+output$outputId <- renderFunction({...})
+```
+
+## Output <-> Render pairing {.smaller}
+
+```{r}
+#| echo: true
+#| eval: false
+# UI
+plotOutput("my_plot")
+# Server
+output$my_plot <- renderPlot({
+  ggplot(data, aes(...)) + geom_point()
+})
+```
+
+![](images/cheatsheet-rendering.png)
+
+::: citation
+
+[Source: Shiny for R cheatsheet](https://shiny.posit.co/r/articles/start/cheatsheet/)
+:::
+
 ## Outline for today
 
 -   What is R Shinny
--   Major Components in R Shinny
--   [Getting Started with Shiny]{style="font-weight: bold; color:orange"}
--   Write a basic R shiny app
+-   [Write a basic R shiny app]{style="font-weight: bold; color: orange"}
+-   Deploy your Shiny apps with [shinyapps.io](https://www.shinyapps.io/)
+-   AI-powered help: using Shiny Assistant
 
-## Installation
+## Setting up a shiny app {.smaller}
 
--   To install. R Shiny in your R environment use the command in console <br> `install.packages("shiny")`
--   To call the library use the command <br> `library(shiny)`
+::: incremental
+- Create a GitHub repo and clone the repo to our computer
+- Install R Shiny in your R environment : `install.packages("shiny")`
+- Organize repo structure
+  ![](images/repo-structure-details.png){width="80%"}
+:::
 
-## Code Breakdown UI
+## Two options for shiny apps {.smaller}
+
+![](images/one-vs-two.png)
+
+::: {.column width="50%"}
+-   **Single-File App**: All code is in one file, typically named `app.R`. This is suitable for simple applications or creating a [reprex](https://reprex.tidyverse.org/) example.
+:::
+
+::: {.column width="50%"}
+-   **Two-File App**: Code is split into multiple files, usually `ui.R` for the user interface and `server.R` for the server logic. Optionally, `global.R` can be used for data ingestion and wrangling. This is better for larger applications.
+:::
+
+## Create a single-file Shiny app {.smaller}
+
+-   Create a new R script file named `app.R`
+-   The file should contain both the UI and server components
+-   The basic structure of a single-file Shiny app is as follows:
+
+```{r}
+#| eval: FALSE
+#| echo: TRUE
+
+# load packages ----
+library(shiny)
+
+# user interface ----
+ui <- fluidPage()
+
+# server instructions ----
+server <- function(input, output) {}
+
+# combine UI & server into an app ----
+shinyApp(ui = ui, server = server)
+```
+
+::: fragment
+Once you have this structure, RStudio recognize this is a R shiny app and you can run the app by clicking the "Run App" button in RStudio.
+
+![](images/run-app.png)
+:::
+
+## Let's build the app step-by-step {.smaller}
+
+-  We will create a simple Shiny app that displays a histogram of random normal data
+-  The app has a title and subtitle
+-  Users can adjust the number of bins in the histogram using a slider input
+-  The histogram will react to the slider input and update accordingly
+
+![](images/one-file-app.gif)
+
+
+## Code Breakdown UI {.smaller}
 
 Calling the library
 
@@ -86,35 +229,91 @@ library(shiny)
 ```
 
 :::{.fragment}
-The UI to take input
+
+Define the User Interface (UI) of the app, consisting of a title, a subtitle, a slider input, and a plot output
 
 ```{r}
 #| eval: true
 #| echo: true
 ui <- fluidPage(
-  titlePanel("Histogram Example"),
-  
-  sidebarLayout(
-    sidebarPanel(
-      sliderInput("bins",
-                  "Number of bins:",
-                  min = 5, max = 50, value = 30)
-    ),
-    
-    mainPanel(
-      plotOutput("histPlot")
-    )
-  )
+  # app title
+  "Histogram Example",
+  # app subtitle
+  "Choose a number of bins to update the histogram",
+  # slider input
+  sliderInput("bins",
+              "Number of bins:",
+              min = 5, max = 50, value = 30),
+  # histogram output
+  plotOutput("histPlot")
 )
 ```
 :::
 
-## Code Breakdown: Server
+::: fragment
 
-The Server that takes the inputs and process the logic
+Click `Run App`, what do you see? what is different from what you imagined?
+
+:::
+
+## UI Work-in-Progress {.smaller}
+
+::: {.column width = "50%"}
+
+![](images/ui-1.png)
+
+:::
+
+::: {.column width = "50%"}
+
+1. There is no distinction between title and subtitle
+
+2. There is no plot
+
+:::
+
+## Adding hierarchy to the text {.smaller}
+
+::: {.column width = "50%"}
 
 ```{r}
-#| eval: true
+#| echo: TRUE
+ui <- fluidPage(
+  # app title
+  h1("Histogram Example"),
+  # app subtitle
+  h4(strong("Choose a number of bins to update the histogram")),
+  # slider input
+  sliderInput("bins",
+              "Number of bins:",
+              min = 5, max = 50, value = 30),
+  # histogram output
+  plotOutput("histPlot")
+)
+
+```
+
+:::
+
+::: {.column width = "50%"}
+
+![](images/ui-2.png)
+:::
+
+## Plot placeholder is present {.smaller}
+
+When developing with R shiny, it is recommended that you use Google Chrome browser, and learn how to **inspect** html pages by right-clicking on the page and selecting "Inspect" or pressing `Ctrl + Shift + I` (Windows/Linux) or `Cmd + Option + I` (Mac).
+
+![](images/inspect.png)
+
+But the plot is not there yet, we need to add the server logic to create the plot.
+
+## Code Breakdown: Server {.smaller}
+
+Server takes the inputs and create a reactive chart
+
+```{r}
+#| eval: false
 #| echo: true
 server <- function(input, output) {
   
@@ -123,38 +322,218 @@ server <- function(input, output) {
     data <- rnorm(500)
     
     # Create histogram with user-specified bins
+    hist(data, breaks = 30, col = "skyblue",
+         border = "white", main = "Histogram of Random Normal Data",
+         xlab = "Value", ylab = "Frequency")
+  })
+}
+
+shinyApp(ui = ui, server = server)
+
+```
+
+## Running the App {.smaller}
+
+-   Save the code to an R script file, e.g., app.R.
+-   In your R console, run `shiny::runApp("app.R")`
+
+![](images/non-reactive-histogram.gif)
+
+## How to make it reactive? {.smaller}
+
+::: {.column width = "45%"}
+
+This will not react to user input because the number of bins is always 30.
+
+```{r}
+#| eval: false
+#| echo: true
+server <- function(input, output) {
+  output$histPlot <- renderPlot({
+    # Generate random data
+    data <- rnorm(500)
+    # Create histogram with user-specified bins
+    hist(data, breaks = 30, col = "skyblue",
+         border = "white", main = "Histogram of Random Normal Data",
+         xlab = "Value", ylab = "Frequency")
+  })
+}
+
+shinyApp(ui = ui, server = server)
+
+```
+:::
+
+:::{.column width = "10%"}
+:::
+
+::: {.column width = "45%"}
+
+This takes in user input and uses it to create a histogram with the specified number of bins.
+
+```{r}
+#| eval: false
+#| echo: true
+#| code-line-numbers: "6"
+server <- function(input, output) {
+  output$histPlot <- renderPlot({
+    # Generate random data
+    data <- rnorm(500)
+    # Create histogram with user-specified bins
     hist(data, breaks = input$bins, col = "skyblue",
          border = "white", main = "Histogram of Random Normal Data",
          xlab = "Value", ylab = "Frequency")
   })
 }
+
+shinyApp(ui = ui, server = server)
+
+```
+:::
+
+## This is what we have now {.smaller}
+
+::: {.column width = "30%"}
+
+```{r}
+#| echo: true
+#| eval: false
+ui <- fluidPage(
+  # app title
+  h1("Histogram Example"),
+  # app subtitle
+  h4(strong("Choose a number of bins to update the histogram")),
+  # slider input
+  sliderInput("bins",
+              "Number of bins:",
+              min = 5, max = 50, value = 30),
+  # histogram output
+  plotOutput("histPlot")
+)
+
+# Server
+server <- function(input, output) {
+
+  output$histPlot <- renderPlot({
+    # Generate random data
+    data <- rnorm(500)
+
+    # Create histogram with user-specified bins
+    hist(data, breaks = input$bins, col = "skyblue",
+         border = "white", main = "Histogram of Random Normal Data",
+         xlab = "Value", ylab = "Frequency")
+  })
+}
+
+# Run the app
 shinyApp(ui = ui, server = server)
 ```
 
-## Running the App
+:::
 
--   Save the code to an R script file, e.g., app.R.
--   In your R console, run
--   `shiny::runApp("app.R")`
+::: {.column width = "70%"}
 
-## Outline for today
+![](images/unstructured-app.gif)
 
--   What is R Shinny
--   Major Components in R Shinny
--   Getting Started with Shiny
--   [Write a basic R shiny app]{style="font-weight: bold; color:orange"}
+:::
 
-## Making your own shiny app with dataset
+## Adding visual structures {.smaller}
+
+::: {.column width = "30%"}
+
+```{r}
+#| echo: true
+#| eval: false
+ui <- fluidPage(
+  titlePanel("Histogram Example"),
+  h4(strong("Choose a number of bins to update the histogram")),
+  
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("bins",
+                  "Number of bins:",
+                  min = 5, max = 50, value = 30)
+    ),
+
+    mainPanel(
+      plotOutput("histPlot")
+    )
+  )
+)
+
+# Server
+server <- function(input, output) {
+
+  output$histPlot <- renderPlot({
+    # Generate random data
+    data <- rnorm(500)
+
+    # Create histogram with user-specified bins
+    hist(data, breaks = input$bins, col = "skyblue",
+         border = "white", main = "Histogram of Random Normal Data",
+         xlab = "Value", ylab = "Frequency")
+  })
+}
+
+# Run the app
+shinyApp(ui = ui, server = server)
+```
+
+:::
+
+::: {.column width = "70%"}
+
+![](images/one-file-app.gif)
+
+:::
+
+## {background-image="images/in-class-activity.png"}
+
+::: {style="text-align: center;"}
+<br>
+<br>
+<br>
+In-Class Activity:
+
+Add a second slider input so that the app reacts to the number of random data points generated for the histogram.
+
+:::
+
+```{r}
+countdown::countdown(
+  minutes = 10,
+  bottom = 0,
+  # Fanfare when it's over
+  play_sound = TRUE,
+  color_border              = "#FFFFFF",
+  color_text                = "#7aa81e",
+  color_running_background  = "#7aa81e",
+  color_running_text        = "#FFFFFF",
+  color_finished_background = "#ffa07a",
+  color_finished_text       = "#FFFFFF",
+  font_size = "2em",
+  )
+```
+
+## Finished app with two slider inputs {.smaller}
+
+![](images/add-nobs.gif)
+
+
+## Two-file shiny app with a dataset {.smaller}
 
 In this tutorial, we will build an interactive R Shiny application step-by-step. Our app will:
 
-✅ Display a scatter plot using the `mtcars` dataset\
-✅ Allow users to choose x-axis and y-axis variables\
-✅ Enable plot color customization\
-✅ Provide a download option for the plot
+- Display a scatter plot using the `mtcars` dataset
+- Allow users to choose x-axis and y-axis variables
+- Enable plot color customization by a third variable
+- Label points with car names
 
----
-## User Interface and getting required libraries
+. . .
+
+![](images/one-vs-two.png)
+
+## `global.R`: load libraries, clean data {.smaller}
 
 ```{r}
 #| echo: true
@@ -162,10 +541,18 @@ In this tutorial, we will build an interactive R Shiny application step-by-step.
 library(shiny)
 library(ggplot2)
 library(dplyr)
+
+# Data wrangling: Add a car name column and factor variables
+mtcars_clean <- mtcars %>%
+  tibble::rownames_to_column("car") %>%
+  mutate(
+    cyl = as.factor(cyl),
+    gear = as.factor(gear)
+  )
+glimpse(mtcars_clean)
 ```
 
-::: {.fragment}
-<br>
+## `ui.R`: define user interface {.smaller}
 
 ```{r}
 #| echo: true
@@ -178,6 +565,7 @@ ui <- fluidPage(
     sidebarPanel(
       selectInput("xvar", "Choose X-axis variable:", choices = names(mtcars), selected = "wt"),
       selectInput("yvar", "Choose Y-axis variable:", choices = names(mtcars), selected = "mpg"),
+      selectInput("colorvar", "Choose color variable:", choices = names(mtcars), selected = "cyl"),
     ),
     mainPanel(
       plotOutput("scatterPlot")
@@ -185,36 +573,243 @@ ui <- fluidPage(
   )
 )
 ```
+
+![](images/mtcars-ui.png)
+
+## Intermediate step: make ggplot in `scratch.R` {.smaller}
+
+This is not a must but highly recommend, you can test out your ggplot code in a separate R script file, e.g., `scratch.R`, before integrating it into the Shiny app.
+
+. . .
+
+::: {.column width = "50%"}
+
+```{r}
+#| echo: true
+#| eval: false
+ggplot(mtcars_clean, aes(x = wt, y = mpg)) +
+  geom_point(aes(color = cyl)) +
+  ggrepel::geom_text_repel(aes(label = car), vjust = -1, size = 3) +
+  labs(
+    title = "Scatter Plot of MPG vs Weight"
+  ) +
+  theme_minimal()
+```
+
+:::
+
+::: {.column width = "50%"}
+
+```{r fig.width= 5, fig.height=4}
+#| echo: false
+#| eval: true
+ggplot(mtcars_clean, aes(x = wt, y = mpg)) +
+  geom_point(aes(color = cyl)) +
+  ggrepel::geom_text_repel(aes(label = car), vjust = -1, size = 3) +
+  labs(
+    title = "Scatter Plot of MPG vs Weight"
+  ) +
+  theme_minimal()
+```
+
 :::
 
 
-## Defining Server Logic
+## `server.R`: adapt regular ggplot code {.smaller}
+
+::: {.column width = "45%"}
+
+**`scratch.R`**
+
+```{r}
+#| echo: true
+#| eval: false
+
+ggplot(mtcars_clean, aes(x = wt, y = mpg)) +
+  geom_point(aes(color = cyl)) +
+  geom_text(aes(label = car), vjust = -1, size = 3) +
+  labs(
+    title = "Scatter Plot of MPG vs Weight"
+  ) +
+  theme_minimal()
+```
+
+- Regular ggplot code for scatter plot
+- x-axis is wt
+- y-axis is mpg
+- color by cyl
+- label points with car names
+:::
+
+
+::: {.column width = "10%"}
+:::
+
+::: {.column width = "45%"}
+
+**`server.R`**
 
 ```{r}
 #| echo: true
 #| eval: true
-
+#| code-line-numbers: "4,5,8,9"
 server <- function(input, output) {
-  # Reactive expression for the plot
-  scatter_plot <- reactive({
-    ggplot(mtcars, aes_string(x = input$xvar, y = input$yvar)) +
-      geom_point(color = input$color, size = 3) +
+  # Render the plot
+  output$scatterPlot <- renderPlot({
+    ggplot(mtcars_clean, aes_string(x = input$xvar, y = input$yvar)) +
+      geom_point(aes_string(color = input$colorvar), size = 3) +
+      geom_text(aes(label = car), vjust = -1, size = 3) +
       theme_minimal() +
       labs(title = paste("Scatter Plot of", input$yvar, "vs", input$xvar),
            x = input$xvar, y = input$yvar)
   })
-  # Render the plot
-  output$scatterPlot <- renderPlot({
-    scatter_plot()
-  })
 }
 ```
-::: {.fragment}
-Launch the application 
 
-`shinyApp(ui = ui, server = server)`
+- Adapt the ggplot code to use `aes_string()` for dynamic variable selection
+- Use `input$xvar`, `input$yvar`, and `input$colorvar` to make the plot reactive
+
 :::
 
+## Run the two-file Shiny app {.smaller}
+
+No need for `shinyApp(ui = ui, server = server)` when you have two-file app structure:
+
+- Save the `ui.R` and `server.R` files **in the same directory**
+- Shiny automatically stitch them together, and optionally look for `global.R`.
+- In RStudio, click the **Run App** button
+
+![](images/two-file-app.gif)
+
+## Outline for today
+
+-   What is R Shinny
+-   Write a basic R shiny app
+-   [Deploy your Shiny apps with shinyapps.io]{style="font-weight: bold; color: orange"}
+-   AI-powered help: using Shiny Assistant
+
+## Why `shinyapps.io`? {.smaller}
+
+-   **Free**: Free tier available for up to 5 small apps
+-   **Easy to use**: No need to set up a server or manage infrastructure
+-   **Scalable**: Can handle apps of varying sizes and complexities
+-   **Integration with RStudio**: Seamless deployment from RStudio IDE
+
+
+## Getting started with `shinyapps.io` {.smaller}
+
+-   Create an account on [shinyapps.io](https://www.shinyapps.io/)
+  - **Recommended** to log in using GitHub
+-   Install the `rsconnect` package in R: `install.packages("rsconnect")`
+-   Following the instructions on the shinyapps.io to authorize your account
+
+![](images/shinyapps_setup.png)
+
+## Deploy your app to `shinyapps.io` {.smaller}
+
+-   In RStudio, open the app you want to deploy
+-   Click on the **Publish** button in the top right corner of the RStudio IDE
+-   Select the shinyapps.io account you just connected
+-   Fill in the app name and description
+-   Click **Publish** to deploy your app
+-   Once deployed, a browser will open to your application. `https://{your-username}.shinyapps.io/{your-app-directory-name}`
+-   You should see a `rsconnect/` folder within your app directory, which contains the deployment information. **This should be added and committed into version control (i.e. push it to GitHub)**
+
+## `shinyapps.io` dashboard {.smaller}
+
+Dashboard provides an overview of your deployed apps, including: app name and URL, deployment status, usage statistics (e.g., number of active users, CPU usage)
+
+![](images/shinyapps_dashboard.png)
+
+::: citation
+
+Check out [shinyapps.io user guide](https://docs.posit.co/shinyapps.io/guide/index.html) for more information on hosting your app!
+:::
+
+
+## Outline for today
+
+-   What is R Shinny
+-   Write a basic R shiny app
+-   Deploy your Shiny apps with shinyapps.io
+-   [AI-powered help: using Shiny Assistant]{style="font-weight: bold; color: orange"}
+
+## What is Shiny Assistant? {.smaller}
+
+<https://gallery.shinyapps.io/assistant/>
+
+<iframe src="https://gallery.shinyapps.io/assistant/" width="100%" height="1000px" style="zoom: 1;">
+
+</iframe>
+
+## Use Shiny Assistant to recreate the two-file shiny app{.smaller-title}
+
+::: smaller
+
+> **Prompt**: Create a shiny app using the mtcars dataset. Use three files global.R, ui.R, server.R. The app displays an interactive scatter plot that reacts to user input of x-axis, y-axis, and a third variable for color of the points. Show car name as label text next to the points. 
+:::
+
+<iframe src="https://gallery.shinyapps.io/assistant/" width="100%" height="500px" style="zoom: 1;">
+</iframe>
+
+
+## Next, let's build a `shinydashboard` {.smaller}
+
+> The `{shinydashboard}` package provides a framework for building dashboards in R Shiny. It allows you to create visually appealing and interactive apps with a more classic "dashboard" layout, including sidebars, tabs, and boxes. You need both packages: `{shiny}` and `{shinydashboard}`.
+
+![](images/simple-shinydashboard.png)
+
+
+## Use Shiny Assistant to create a `shinydashboard` {.smaller-title}
+
+::: smaller-body
+
+> **Prompt**: Create a shinydashboard using the mtcars dataset. Use three files global.R, ui.R, server.R. The app allows users to filter by mpg and displays three output: an interactive scatter plot that reacts to user input of x-axis, y-axis, and color variable. A heatmap of car performance. And a data table of the filtered dataset. Show car name as label text next to the points in the scatter plot.
+:::
+
+<iframe src="https://gallery.shinyapps.io/assistant/" width="100%" height="500px" style="zoom: 1;">
+</iframe>
+
+## Refine the app locally {.smaller}
+
+- Download the code from Shiny Assistant
+![](images/download.png)
+- Save the files in your local R project directory, remember to organize your repo structure well
+- Open the files in RStudio and run the app locally
+- Make any necessary adjustments to the code
+
+## Your turn in `hw4` {.smaller}
+
+Try one of these built-in datasets to explore with Shiny Assistant
+
+| Dataset | Description |
+|-------------------|-----------------------------------------------------|
+| **`mtcars`** 🚗 | Car performance data (mpg, cylinders, hp) |
+| **`iris`** 🌸 | Iris flower measurements (sepal, petal, species) |
+| **`diamonds`** 💎 | Diamond pricing (carat, cut, price, etc.) |
+| **`faithful`** 🌋 | Old Faithful geyser eruptions (duration, waiting time) |
+| **`airquality`** 🌍 | New York air quality data (Ozone, Temp, Wind) |
+| **`ToothGrowth`** 🦷 | Vitamin C & tooth growth in guinea pigs |
+
+Or upload your own dataset to GitHub and give Shiny Assistant a public URL!
+
+::: orange-box
+
+**Write good prompt, and you will get good code!**
+
+**Describe what change you made to the app on top of what Shiny Assistant generated.**
+:::
+
+## Further resources {.smaller}
+
+**How much time do you have?**
+
+- **10 min**: Print out this [Shiny for R cheatsheet](https://shiny.posit.co/r/articles/start/cheatsheet/)
+- **2.5 hrs**: Follow this [Posit tutorial](https://shiny.posit.co/r/getstarted/shiny-basics/lesson1/)
+- **Lifetime**: Check out resources like the `Shiny Gallery`, `TidyTuesday`, and `Mastering Shiny` book
+- **Unknown**: chatGPT, Gemini, Shiny Assistant (powered by Anthropic), and other AI tools can help you build Shiny apps
+
+![](images/chatgpt-joke.png)
 
 ##  End-of-Class Survey {background="#033C5A"}
 <br>

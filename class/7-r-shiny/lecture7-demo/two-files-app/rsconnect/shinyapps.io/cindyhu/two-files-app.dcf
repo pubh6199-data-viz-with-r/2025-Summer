@@ -1,0 +1,12 @@
+name: two-files-app
+title: two-files-app
+username: cindyhu
+account: cindyhu
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 14880501
+bundleId: 10397019
+url: https://cindyhu.shinyapps.io/two-files-app/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
