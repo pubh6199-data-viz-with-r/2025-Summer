@@ -1,5 +1,5 @@
 ---
-title: "Lecture 4.Introduction to R Shinny"
+title: "Lecture 4.Introduction to R Shiny"
 subtitle: "PUBH 6199: Visualizing Data with R, Summer 2025"
 date: June 10, 2025
 author: Xindi (Cindy) Hu, ScD
@@ -20,16 +20,16 @@ resources:
 
 ## Outline for today
 
--   [What is R Shinny]{style="font-weight: bold; color: orange"}
+-   [What is R Shiny]{style="font-weight: bold; color: orange"}
 -   Write a basic R shiny app
 -   Deploy your Shiny apps with [shinyapps.io](https://www.shinyapps.io/)
 -   AI-powered help: using Shiny Assistant
 
-## About **R Shinny** {.smaller}
+## About **R Shiny** {.smaller}
 
 -   Shiny is an R package that makes it easy to build interactive web applications (apps) straight from R
 -   Shiny allows users to build dynamic, data-driven web apps without requiring extensive knowledge of web development
--   To install **R Shinny** run the following command in the console of your RStudio `install.packages("shiny")`
+-   To install **R Shiny** run the following command in the console of your RStudio `install.packages("shiny")`
 
 ![](images/Shiny.png){width="634"}
 
@@ -151,7 +151,7 @@ output$my_plot <- renderPlot({
 
 ## Outline for today
 
--   What is R Shinny
+-   What is R Shiny
 -   [Write a basic R shiny app]{style="font-weight: bold; color: orange"}
 -   Deploy your Shiny apps with [shinyapps.io](https://www.shinyapps.io/)
 -   AI-powered help: using Shiny Assistant
@@ -683,7 +683,7 @@ No need for `shinyApp(ui = ui, server = server)` when you have two-file app stru
 
 ## Outline for today
 
--   What is R Shinny
+-   What is R Shiny
 -   Write a basic R shiny app
 -   [Deploy your Shiny apps with shinyapps.io]{style="font-weight: bold; color: orange"}
 -   AI-powered help: using Shiny Assistant
@@ -729,7 +729,7 @@ Check out [shinyapps.io user guide](https://docs.posit.co/shinyapps.io/guide/ind
 
 ## Outline for today
 
--   What is R Shinny
+-   What is R Shiny
 -   Write a basic R shiny app
 -   Deploy your Shiny apps with shinyapps.io
 -   [AI-powered help: using Shiny Assistant]{style="font-weight: bold; color: orange"}
