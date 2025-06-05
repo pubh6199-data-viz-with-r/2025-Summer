@@ -21,6 +21,16 @@ resources:
 library(tidyverse)
 ```
 
+## Feedback from grading HW1 & Lab 1 {.smaller}
+
+- Empty html 
+
+- Missing the answer fields, included as plain text 
+
+- GenAI usage, even if you did not use it, you need to answer that section 
+
+- Log transform right skewed variables to show patterns better 
+
 ## Outline for today {.smaller}
 
 - **Introducing the datasets**
