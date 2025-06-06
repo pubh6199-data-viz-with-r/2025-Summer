@@ -1,0 +1,183 @@
+---
+title: "Homework 4"
+author: "Your Name"
+date: "2025-XX-XX"
+params:
+  number: 3
+  purpose: "This assignment gives you hands-on practice with building Shiny apps. You'll learn how to connect inputs and outputs, create interactive plots and tables, and experiment with Shiny Assistant and other GenAI tools to build dashboards."
+format: 
+  html:
+    toc: true
+    toc-location: right
+    theme: flatly
+    self-contained: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+
+```{r}
+#| label: setup
+#| include: false
+
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.path = "figs/",
+    fig.width = 7.252,
+    fig.height = 4,
+    comment = "#>",
+    fig.retina = 3
+)
+```
+
+## Before your start the assignment
+
+- Update the header - put your name in the `author` argument and put today's date in the `date` argument.
+- Click the "Render" button in RStudio and then open the rendered `4-hw4.html` page.
+- Then go back and try changing the `theme` argument in the header to something else - you can see other available themes [here](https://quarto.org/docs/output-formats/html-themes.html). Notice the difference when you render now!
+
+## Overview of HW4
+
+This assignment contains two parts: in part 1, you will be given incomplete code for a R shiny app to explore a dataest from TidyTuesday, and you will complete the code to make the app functional. In part 2, you will use GenAI tools to help you build a Shiny app from scratch, download the code, and make further improvements in your local RStudio environment.
+
+
+**Skills practiced**:
+
+- Writing and connecting UI and server code in Shiny
+
+- Using `input$` and `output$` with inputs and render functions
+
+- Deploy shiny apps to shinyapps.io
+
+- Leveraging GenAI tools to prototype and refine apps
+
+## Part 1: Complete the Shiny App - NSF Grant Terminations
+
+In this exercise, you'll build a Shiny app to explore the NSF grant terminations dataset from the [TidyTuesday project dated May 6, 2025](https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-05-06/readme.md). This dataset offers insights into the grants affected by recent policy changes.
+
+Incomplete app code is provided in the `/part1-app` folder. You should be able to open the `global.R`, `ui.R`, and `server.R` files in RStudio and run the app locally.
+
+## **Q1**: Preprocess the data in `global.R`
+
+The data from TidyTuesday is already clean, however, we may need to preprocess it a bit to make it more suitable for our app. Open the `global.R` file and complete the following tasks:
+
+- convert `grant_number` to character
+- collapse `division column` to only keep the 9 most frequent divisions and a catch-all category called Other
+- collapse `nsf_program_name` column to only keep the 9 most frequent divisions and  and a catch-all category called Other
+
+## **Q2**: Add a drop down menu in `ui.R`
+
+In the `ui.R` file, you will find a comment indicating where to add a drop-down menu for `org_state`. Complete the code to create a drop-down menu that allows users to select the state of the organization. Use the unique values from the `org_state` column in the dataset.
+
+## **Q3**: Create a plot in `server.R`
+
+In the `server.R` file, you will find a comment indicating where to create a plot. Complete the code to create a plot that shows the number of terminations by the selected group variable (either `directorate_abbrev`, `division`, or `nsf_program_name`). Remember to implement the design principles we have covered in this class so far, including choosing the right plot type, sorting the categorical variable, whether or not to start from zero, and meaningful use of colors.
+
+## **Q4**: Create a summary table in `server.R`
+
+In the `server.R` file, you will find a comment indicating where to create a summary table. Complete the code to create a summary table that shows the number of terminations by organization. The table should be reactive and update based on the selected state from the drop-down menu.
+
+## **Q5**: Deploy the app
+
+Once you have completed the app, deploy it to [shinyapps.io](https://www.shinyapps.io/). You can follow the instructions in the [Shiny Deployment Guide](https://shiny.rstudio.com/articles/shinyapps.html) to deploy your app. Make sure to test the app after deployment to ensure everything works as expected.
+
+Include the public URL of your deployed app here:
+
+::: {.callout-note title="Your App URL"}
+Type your app's URL here.
+:::
+
+
+## Part 2: Build a Shiny App with GenAI
+
+In this part, you will use GenAI tools to help you build a Shiny app from scratch. You will use the Shiny Assistant in RStudio to generate the initial code, and then you will refine it further.
+
+## **Q6**: Use Shiny Assistant to generate app code
+
+Navigate to [Shiny Assistant](https://gallery.shinyapps.io/assistant/), choose one of the following options to make a `shinydashboard`:
+
+- Use R built-in dataset such as `iris`, `diamonds`, `faithful`, `airquality`, or `ToothGrowth`. Do not use `mtcars` again because we have explored it in the lecture.
+
+- Use a dataset with a public URL. Anything from TidyTuesday can be a good option, or other public datasets.
+
+- Upload a dataset from your local machine to Google Drive or GitHub and make it publicly accessible. Then use the URL to the dataset in your prompt.
+
+Write a detailed prompt to the Shiny Assistant to generate a Shiny app that includes:
+
+- A dataset of your choice 
+- At least **2 input controls** (e.g., `selectInput`, `sliderInput`, `checkboxInput`)
+- At least **4 outputs**:
+  - 1 plot (`renderPlot`)
+  - 1 table (`renderTable` or `renderDataTable`)
+  - 1 text summary (`renderText` or `renderPrint`)
+  - 1 additional output of your choice (e.g., map, value box, plotly, UI element)
+  
+::: {.callout-note title="Your Answer"}
+Type your prompt here.
+:::
+
+## **Q7**: Download the generated code and refine it in RStudio
+
+Once you have generated the app code using Shiny Assistant, download the code to `/part2-app` folder and open it in RStudio.
+
+Make sure to run the app locally and test it. Then, refine the code by:
+
+- Improve `label` text for readability
+- Enhance plot appearance by adding titles, flip coordinates, revise colors, change themes
+- Add acknowledgements that Shiny
+
+Assistant was used in creating this app
+You are not bound by this list, just some ideas. You are required to make at least 3 improvements to the app.
+
+::: {.callout-note title="Your Answer"}
+Document your improvements to the app here.
+:::
+
+## **Q8**: Deploy the app to shinyapps.io
+
+Once you have refined the app, deploy it to [shinyapps.io](https://www.shinyapps.io/). You can follow the instructions in the [Shiny Deployment Guide](https://shiny.rstudio.com/articles/shinyapps.html) to deploy your app. Make sure to test the app after deployment to ensure everything works as expected.
+Include the public URL of your deployed app here:
+
+::: {.callout-note title="Your App URL"}
+Type your app's URL here.
+:::
+
+
+## BONUS: Compare Large Language Models
+
+In this bonus question, you will compare the performance of different large language models (LLMs) in generating Shiny app code. Shiny Assistant uses Anthropic's Claude. You can use any other LLMs available to you, such as OpenAI's GPT-4o, Google's Gemini, DeepSeek, or others.
+
+Write a prompt to each LLM to generate a Shiny app code that meets the same requirements as in Q6, you can use the same prompt you used for Q6 or start a new one. Then, compare the generated code from different models based on the following criteria:
+
+- **Completeness**: Does the code include all required components (inputs, outputs, etc.)?
+- **Readability**: Is the code well-structured and easy to understand?
+- **Functionality**: Does the app run without errors and produce the expected outputs?
+- **Design**: How well does the app follow design principles we have covered in class?
+
+::: {.callout-note title="Your Answer"}
+Type your comparison here.
+:::
+
+
+## How I used GenAI?
+Describe how GenAI is used in producing this homework, include prompt, date, model version, and link to chat history.
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+## Save and Push Your Work
+
+Remember to save your `.qmd` and render the HTML output before committing to GitHub. You will commit everything in this repo that has changes, including the app code in `/part1-app` and `/part2-app`, `/rsconnect` folder for deployment information, `.qmd` file, and the rendered HTML output.
+
+```{bash eval = FALSE}
+git add .
+git commit -m "Complete Homework 4"
+git push
+```
+
+
+

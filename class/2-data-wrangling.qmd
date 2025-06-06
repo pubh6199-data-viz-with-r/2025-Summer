@@ -1,0 +1,14 @@
+---
+title: "Data Wrangling"
+params:
+  class: "2-data-wrangling"
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r child = here::here("fragments", "class.qmd")}
+```
+
+------------------------------------------------------------------------
