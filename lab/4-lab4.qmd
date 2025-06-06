@@ -1,0 +1,205 @@
+---
+title: "Lab 4"
+author: "Team member 1, Team member 2"
+date: "2025-XX-XX"
+params:
+  number: 4
+  purpose: "The purpose of this lab to for you to develop a team policy and the project plan for the final project."
+format: 
+  html:
+    toc: true
+    toc-location: right
+    code-fold: true
+    theme: flatly
+    self-contained: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+
+```{r}
+#| label: setup
+#| include: false
+
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.path = "figs/",
+    fig.width = 7.252,
+    fig.height = 4,
+    comment = "#>",
+    fig.retina = 3
+)
+```
+
+## Before your start the lab notebook
+
+- Update the header - put your name in the `author` argument and put today's date in the `date` argument.
+- Click the "Render" button in RStudio and then open the rendered `4-lab4.html` page.
+- Then go back and try changing the `theme` argument in the header to something else - you can see other available themes [here](https://quarto.org/docs/output-formats/html-themes.html). Notice the difference when you render now!
+
+## Overview of Lab4
+
+There are two parts of this lab notebook. In first part, you will discuss team policies with your teammate and document them. In the second part, you will develop a project plan to guide the development of your final project.
+
+**Skills practiced**:
+
+- Using GitHub flow for team collaboration
+- Documenting team policies
+- Developing a project plan
+
+
+## Part 1: Team Policies
+
+### 1.1. How and when you will meet? Regular meeting time, location, etc.
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+
+------------------------------------------------------------------------
+
+### 1.2. How you will communicate outside of meetings? Slack, email, etc.
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+------------------------------------------------------------------------
+
+### 1.3. How you will collaborate on implementing the project? GitHub, Google Docs, etc.
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+------------------------------------------------------------------------
+
+### 1.4. How you will review each other's work? code reviews, feedback sessions, etc.
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+------------------------------------------------------------------------
+
+### 1.5. How you will deal with non-performing members?
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+### 1.6 Start a TODO list
+
+::: {.callout-note title="Your Answer"}
+| Item       | Deadline                 | Person responsible     |
+|----------------|-----------------------------|----------|
+| (e.g.) Set up GitHub    | June 13, 2025 | Silas  |
+| add your items here | add your deadlines here | add your names here |
+
+:::
+------------------------------------------------------------------------
+
+## Part 2: Project plan
+
+### 2.1. What is the name of your team? Who are the contributing members?
+
+::: {.callout-note title="Your Answer"}
+**Team Name**: Type your team name here.
+**Contributing Members**: Type the names of your team members here.
+:::
+
+### 2.2. Define the topic, goals, and tasks of your project (300 - 400 words)
+
+::: {.callout-note title="Your Answer"}
+Your answer here
+:::
+
+### 2.3. Describe the data you will use, including:
+
+- Source of the data
+- How you will access the data
+- How you will clean the data
+
+::: {.callout-note title="Your Answer"}
+Your answer here
+:::
+
+### 2.4. Include at least 3 sketches of visualization ideas for your project
+
+First sketch:
+
+![](../images/sketch-1.png){width=50%}
+
+Second sketch:
+
+![](../images/sketch-2.png){width=50%}
+
+Third sketch:
+
+![](../images/sketch-3.png){width=50%}
+
+
+### 2.5. A sketch of your shiny app layout if you choose this option. If you choose the static visualization option, please describe the storytelling flow of how the three data visualizations connect with each other
+
+::: {.callout-note title="Your Answer"}
+Your answer here
+:::
+
+### 2.6. A timeline of your project, including milestones and deadlines
+
+::: {.callout-note title="Your Answer"}
+| Milestone       | Deadline                 | Person responsible     |
+|----------------|-----------------------------|----------|
+| (e.g.) Data collection    | June 20, 2025 | Silas  |
+| add your milestones here | add your deadlines here | add your names here |
+:::
+
+### 2.7. A feature list, including: must-have, good-to-have, optional
+
+::: {.callout-note title="Your Answer"}
+**Must-have features**:
+
+- Feature 1
+- Feature 2
+- Feature 3
+- Feature 4
+- Feature 5
+- ...
+
+**Good-to-have features**:
+
+- Feature 1
+- Feature 2
+- Feature 3
+- ...
+
+**Optional features**:
+
+- Feature 1
+- Feature 2
+- Feature 3
+- ...
+
+:::
+
+### 2.8. A description of team roles and responsibilities
+
+::: {.callout-note title="Your Answer"}
+Your answer here
+:::
+
+
+## Save and Push Your Work
+
+Remember to save your `.qmd` and render the HTML output before committing to GitHub.
+
+```{bash eval = FALSE}
+git add 4-lab4.qmd 4-lab4.html
+git commit -m "Complete Lab 4"
+git push
+```
+

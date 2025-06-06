@@ -356,10 +356,10 @@ Source: [Allison Horst and Julia Lowndes](https://openscapes.org/blog/2022-05-27
 
 | Assignment       | Description                 | Weight     |
 |----------------|-----------------------------|----------|
-| Project proposal    | Outlines your topic, research questions, and initial ideas      | 7%  |
-| Project plan        | Includes your final topic, selected data sources, and visualization plan  | 3% |
-| Project prototype V1 | You will bring this to class on June 24th and meet one-on-one with the teaching team to get feedback | 10%
-| Final data visualization product  | Include at least three polished visualizations that answer your research questions | 15%  |
+| Project proposal    | You did this for HW3. Outlines your topic, research questions, and initial ideas      | 7%  |
+| Project plan        |You are doing this for Lab4. Includes your final topic, selected data sources, and visualization plan  | 3% |
+| Project prototype V1 | You will bring this to class on June 24th and meet one-on-one with the teaching team to get feedback | 7%
+| Final data visualization product  | Include at least three polished visualizations that answer your research questions | 18%  |
 | Final project presentation | You will present your project in a short, engaging walkthrough in class on June 26th | 10% |
 | Peer evaluation for final project | You will complete this in class on June 26th to provide constructive feedback to your peers | 5%|
 
@@ -420,7 +420,7 @@ countdown::countdown(
 
 - **Name** of all students who worked on this project plan
 - **Team name**
-- Define the **topic, goals, and tasks** of your project (1 page)
+- Define the **topic, goals, and tasks** of your project (300 - 400 words)
 - A **description of the data** you will use, including:
   - Source of the data
   - How you will access the data

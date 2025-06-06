@@ -96,9 +96,10 @@ Final grades will be calculated as follows:
 | Participation / Attendance | 10% | Include attendance, contribution to in-class activities, completion of end-of-class surveys |
 | Homework assignment | 35 % | Weekly assignment |
 | Finished lab notebook | 15 % | Weekly lab notebook |
-| Final Project: Data visualization product | 25 % |  |
-| Final Project: Presentation | 10 % |  |
-| Final Project: Peer evaluation | 5 % |  |
+| Final Project: Prototype V1 | 7 % | Due June 24th |
+| Final Project: Data visualization product | 18 % | Due June 26th  |
+| Final Project: Presentation | 10 % | Due June 26th |
+| Final Project: Peer evaluation | 5 % | Due June 26th |
 :::
 
 ## Grading Scale
