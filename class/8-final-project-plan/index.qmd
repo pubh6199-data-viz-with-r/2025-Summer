@@ -354,9 +354,211 @@ Source: [Allison Horst and Julia Lowndes](https://openscapes.org/blog/2022-05-27
 
 ## Grading {.smaller}
 
+| Assignment       | Description                 | Weight     |
+|----------------|-----------------------------|----------|
+| Project proposal    | You did this for HW3. Outlines your topic, research questions, and initial ideas      | 7%  |
+| Project plan        |You are doing this for Lab4. Includes your final topic, selected data sources, and visualization plan  | 3% |
+| Project prototype V1 | You will bring this to class on June 24th and meet one-on-one with the teaching team to get feedback | 7%
+| Final data visualization product  | Include at least three polished visualizations that answer your research questions | 18%  |
+| Final project presentation | You will present your project in a short, engaging walkthrough in class on June 26th | 10% |
+| Peer evaluation for final project | You will complete this in class on June 26th to provide constructive feedback to your peers | 5%|
+
 ## Project schedule {.smaller}
 
+| Week | Due date | Deliverable |
+|------|----------|-------------|
+| 4    | June 9 | Project proposal |
+| 5    | June 16 | Project plan |
+| 6    | June 24 | Project prototype V1 |
+| 6    | June 26 | Final data visualization product |
+| 6    | June 26 | Final project presentation |
+| 6    | June 26 | Peer evaluation for final project |
+
+
 ## Team policies {.smaller}
+
+- How and when you will **meet**: regular meeting time
+- How you will **communicate**: Slack, email, etc.
+- How you will **collaborate on implementation**: GitHub, Google Drive, etc.
+- How you will **review each other's work**: code reviews, feedback sessions, etc.
+- How you will deal with **non-performing members**: discuss openly, involve a neutral party if needed, etc.
+
+## {background-image="images/in-class-activity.png"}
+
+::: {style="text-align: center; font-size: 80%;"}
+<br>
+<br>
+<br>
+In-Class Activity:
+
+1) Fill in the team expectation agreement in `4-lab4.qmd`
+2) Start a TODO list, including:
+
+| Task | Deadline | Person responsible |
+|------|----------|-------------|
+| (e.g.) set up GitHub repo    | June 13 | Silas |
+
+:::
+
+```{r}
+countdown::countdown(
+  minutes = 10,
+  bottom = 0,
+  # Fanfare when it's over
+  play_sound = TRUE,
+  color_border              = "#FFFFFF",
+  color_text                = "#7aa81e",
+  color_running_background  = "#7aa81e",
+  color_running_text        = "#FFFFFF",
+  color_finished_background = "#ffa07a",
+  color_finished_text       = "#FFFFFF",
+  font_size = "2em",
+  )
+```
+
+## Project plan {.smaller}
+
+- **Name** of all students who worked on this project plan
+- **Team name**
+- Define the **topic, goals, and tasks** of your project (300 - 400 words)
+- A **description of the data** you will use, including:
+  - Source of the data
+  - How you will access the data
+  - Any data cleaning or wrangling you anticipate needing to do
+- At least **3 sketches of visualization ideas** for your project
+- A sketch of your **dashboard layout/storytelling flow**
+- A project **timeline with milestones** when you will complete each task
+- A **feature list** (must-have, good-to-have, optional)
+- A description of **team roles and responsibilities**
+
+## Prototype V1 {.smaller}
+
+- **Data scraping and cleaning** complete (using real world datasets, do not use R built-in data)
+- At least **one visualization already implemented**, and draft for 2-3 more visualizations
+- If choosing R shiny app, **rough webpage design and structure** has to be done and implemented (placeholders for visualizations)
+- If choosing the other two options, **clear outline and storytelling flow** of the visualizations
+- A **README.md** file in your GitHub repo that describes your project, how to view it, and any dependencies
+
+## Final data visualization product {.smaller}
+
+Choose one from the following three options:
+
+- **Same Question, Different Audiences (3 static charts)**:
+_Create three visualizations that answer the same question, each designed for a different audience (e.g., general public, policy makers, technical experts)._
+
+- **Same Data, Different Questions (3 static charts)**:
+_Use the same dataset to answer three different but related questions, each with its own focused visualization._
+
+- **Interactive Dashboard (1 app with 3 components)**:
+_Build an interactive dashboard (e.g., with shiny, plotly, or similar tools) that includes at least three visual components for exploring your data dynamically._
+
+::: takeaway
+Accompanying your visualizations, you should also include a **write-up around 500-1000 words** that consists of an introduction, research questions, data sources, data wrangling, data visualizations, findings, and conclusion.
+:::
+
+## Final project presentation {.smaller}
+- **10 minutes** presentation
+- What questions do you set out to answer with your visualizations? Why are they important?
+- Your **data source** and why they are chosen to answer your questions
+- Your intended audience
+- Two to three **visualization design choices** and how they help tell your story
+- Two to three **takeaways** from your visualizations that your audience should remember
+- **Live demo** of your visualizations (if applicable)
+- One to two **challenges** you encountered during this project and how you overcame them
+- One to two **achievements** you are proud of in this project
+- The presentation format is flexible, bring your laptop to present, and submit the presentation and final data visualization product as `HW6`
+
+
+## Evaluation {.smaller}
+
+![](images/evaluation.png){width="100%"}
+
+::: citation
+
+Source: [CS171](https://www.cs171.org/2024/)
+:::
+
+## Evaluation methods {.smaller}
+
+::: {.column width = "50%"}
+
+### What to evaluate?
+
+- **Target**:
+  - choose domain: did you correctly understand users' needs?
+  - define question: are you showing them the right thing?
+- **Design**:
+  - design visual encoding: does the way you show the data work?
+- **Implement**:
+  - implement visualization: does the code work? is it scalable?
+  
+:::
+
+:::{.column width = "50%"}
+
+### How to evaluate?
+
+- **Qualitative**: 
+  - Observational studies ("think aloud")
+  - Expert interviews (design critiques)
+  - Focus groups
+- **Quantitative**:
+  - A/B testing
+  - Surveys
+  - Analytics (e.g., Google Analytics, Shiny Dashboard logs)
+
+:::
+
+## Think aloud study {.smaller}
+
+::: {.column width = "30%"}
+
+- Naive (first time) users
+- No explanations and interference by evaluator
+  - “We are testing the system, not you.”
+  - “Will not answer any questions once started.”
+- Remind subjects to talk about what they are doing
+
+:::
+
+::: {.column width = "70%"}
+
+![](images/think-aloud.webp)
+
+:::
+
+## {background-image="images/in-class-activity.png"}
+
+::: {style="text-align: center; font-size: 80%;"}
+<br>
+<br>
+<br>
+<br>
+In-Class Activity: Think aloud study demo
+
+**ClimaWATCH**
+
+[https://climawatch.climate.mathematica.org/](https://climawatch.climate.mathematica.org/)
+
+_Imagine you're briefing a policymaker about heat risks in vulnerable counties. What would you show them from this tool?_
+
+:::
+
+```{r}
+countdown::countdown(
+  minutes = 10,
+  bottom = 0,
+  # Fanfare when it's over
+  play_sound = TRUE,
+  color_border              = "#FFFFFF",
+  color_text                = "#7aa81e",
+  color_running_background  = "#7aa81e",
+  color_running_text        = "#FFFFFF",
+  color_finished_background = "#ffa07a",
+  color_finished_text       = "#FFFFFF",
+  font_size = "2em",
+  )
+```
 
 ##  End-of-Class Survey {background="#033C5A"}
 <br>
