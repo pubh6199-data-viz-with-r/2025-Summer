@@ -140,9 +140,9 @@ Now let’s explore and build something great!
 
 ::: {.column width = "70%"}
 
-Members:
+Members: Alia Jamil, Nina Wubu
 
-Topic:
+Topic: Climate, natural disasters and health disparities
 
 :::
 
@@ -155,9 +155,9 @@ Topic:
 
 ::: {.column width = "70%"}
 
-Members:
+Members: Amel Attalla, Belen Zemas
 
-Topic:
+Topic: Sexual health and vulnerable populations
 
 :::
 
@@ -170,9 +170,9 @@ Topic:
 
 ::: {.column width = "70%"}
 
-Members:
+Members: Sora Ely, Ashlan Jackson
 
-Topic:
+Topic: Health systems and global health
 
 :::
 
@@ -185,9 +185,9 @@ Topic:
 
 ::: {.column width = "70%"}
 
-Members:
+Members: Riya Belani, Molayo Ifebajo
 
-Topic:
+Topic: Behavioral health and digital platforms
 
 :::
 
@@ -200,9 +200,9 @@ Topic:
 
 ::: {.column width = "70%"}
 
-Members:
+Members: Jordi Fischbach, Ahmed Shah
 
-Topic:
+Topic: To be determined
 
 :::
 
