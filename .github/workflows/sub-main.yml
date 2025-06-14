@@ -57,6 +57,7 @@ jobs:
             any::gghighlight
             any::see
             any::leaflet
+            any::leaflet.extras
             any::shiny
             any::countdown
             any::fontawesome
@@ -75,6 +76,11 @@ jobs:
             any::fmsb
             any::ggalluvial
             any::showtext
+            any::ggmap
+            any::tmap
+            any::tigris
+            any::tidycensus
+            any::spData
             
 
       - name: Install GitHub-only packages
