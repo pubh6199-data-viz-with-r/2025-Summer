@@ -81,6 +81,9 @@ jobs:
             any::tigris
             any::tidycensus
             any::spData
+            any::RColorBrewer
+            any::maps
+            any::sf
             
 
       - name: Install GitHub-only packages
