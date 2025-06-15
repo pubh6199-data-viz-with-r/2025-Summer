@@ -1,0 +1,14 @@
+---
+title: "Visual vocabulary"
+params:
+  class: "3-visual-vocabulary"
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r child = here::here("fragments", "class.qmd")}
+```
+
+------------------------------------------------------------------------

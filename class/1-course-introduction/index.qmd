@@ -1,0 +1,883 @@
+---
+title: "1. Course Introduction"
+subtitle: "PUBH 6199: Visualizing Data with R, Summer 2025"
+date: May 20, 2025
+author: Xindi (Cindy) Hu, ScD
+format: 
+  revealjs:
+    pdf: true
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    preview-links: auto
+    logo: images/logo.png
+    css: style.css
+    footer: 'PUBH 6199: Visualizing Data with R'
+resources:
+  - demo.pdf
+  - images/
+---
+
+## Outline for today
+- <span style="font-weight: bold; color: orange">Who?</span>
+- How?
+- What?
+- Why?
+- Introduction to {ggplot2}
+
+## Meet your instructor {.smaller}
+
+![](images/XindiHu_Headshot_2024.jpg){style="border-radius: 70%; width: 70%; display: block; margin: auto;"}
+
+::: citation
+Xindi (Cindy) Hu, ScD
+
+Assistant Professor, Department of Environmental and Occupational Health
+
+ScD in Environmental Health, Harvard University
+:::
+
+## Water, Health, and Opportunity Lab {.fit-text .smaller}
+
+![](images/who-lab-website.png){height="350"}
+
+**Our Research:**
+
+Environmental Data Science, Drinking Water Quality, Health Equity, Climate Change, Geospatial Analysis, Machine Learning
+
+## Meet your TAs {.smaller}
+
+:::{.column width="50%"}
+
+![](images/silas-headshot.jpg){style="border-radius: 70%; width: 70%; display: block; margin: auto;"}
+
+::: citation
+Silas Horn
+
+MPH Candidate
+
+Environmental Health Science and Policy
+
+GW SPH
+:::
+:::
+
+:::{.column width="50%"}
+
+![](images/sayam-headshot.png){style="border-radius: 70%; width: 70%; display: block; margin: auto;"}
+
+::: citation
+Sayam Palrecha
+
+MS Candidate
+
+Data Science
+
+GW CCAS
+:::
+:::
+
+## About you {.center .middle}
+
+## Outline for today
+- Who?
+- <span style="font-weight: bold; color: orange">How?</span>
+- What?
+- Why?
+- Introduction to {ggplot2}
+
+## PUBH 6199 Goals
+
+:::::: columns
+::: {.column width="33%"}
+### Theory
+
+-   Apply fundamental principles & techniques
+:::
+
+::: {.column width="33%"}
+### Design Skills
+
+-   Create, evaluate, and critique visualization designs
+:::
+
+::: {.column width="30%"}
+### Coding Skills
+
+-   Implement static and interactive data visualizations
+:::
+::::::
+
+::: center
+**Develop a substantial visualization project!**
+:::
+
+## Course component
+
+-   **Lectures**: Tuesdays 3:10-5:10 PM
+-   **Lab**: Thursdays 3:10-5:10 PM
+-   **Homework**: Weekly assignments due Mondays
+-   **Final project**: Team of 2-3 people
+
+## What about gradings???
+
+<image src="images/grading-question-mark.jpeg" alt="Gradings" style="width: 100%; height: auto;"/>
+
+## Grading
+
+-   **Class Participation** (attendance, contribution to in-class activities, completion of end-of-class surveys): 10%
+-   **Homework** (5 weekly assignments): 35%
+-   **Lab** (5 weekly lab notebooks): 15%
+-   **Final Project** (team of 2): 40%
+    -   25% for the final data visualization product
+    -   10% for the presentation
+    -   5% for peer evaluation
+
+## Prerequisites
+
+-   Programming experience at the level of PUBH 6131 or similar
+-   Willingness to learn new software & tools
+    -   This can be time consuming
+    -   Learning by doing is the best way of acquiring new skills, get on the bike
+
+## Course policies
+
+-   Be respectful and inclusive
+-   Get on the bike
+-   Don't cheat!
+
+## Device policy {.fit-text .smaller}
+
+-   Bring laptop to lecture, lab, and office hour
+-   Please only use it for in-class activities! <image src="images/device-policy.jpeg" alt="Device policy" style="width: 100%; height: auto;"/>
+
+## Generative AI policy {.fit-text .smaller}
+
+::: incremental
+-   Generative AI is another tool in your toolbox, use it but be prepared to be responsible.
+-   Usage of GenAI tools is permitted but please be transparent about it.
+-   Lazy usage of GenAI tools (homework prompt -\> output -\> submission) is **prohibited**.
+-   Include a "How I used GenAI" section in your homework and final project (include prompt, date, model version, and link to chat history).
+:::
+
+## Communication {.fit-text .smaller}
+
+-   Slack: PUBH 6199 channel
+-   Course website: [https://pubh6199-data-viz-with-r.github.io/2025-Summer/](https://pubh6199-data-viz-with-r.github.io/2025-Summer/)
+-   Blackboard
+-   Office hours:
+    -   Sayam: Mondays 4-5 PM
+    -   Silas: Wednesdays 2-3 PM, 
+    -   Cindy: By appointment
+-   Boundaries:
+    -   Please allow 24 hrs for slack/email response
+    -   Replies in the after hours (after 6pm ET) and over the weekends are not guaranteed
+
+## Class Mascot {.fit-text .smaller}
+
+::: {.column width="60%"}
+<br>
+<br>
+
+### Rubber Duck Debugging 🐤
+
+::: {.center}
+
+**Explain your problem out loud — as if you're talking to a rubber duck.**
+
+- Slows down your thinking
+- Reveals skipped steps
+- Helps you find mistakes
+- Works even without another person!
+
+:::
+:::
+
+::: {.column width="40%"}
+![](images/mascot.png){height="550"}
+:::
+
+
+## Outline for today
+- Who?
+- How?
+- <span style="font-weight: bold; color: orange">What?</span>
+- Why?
+- Introduction to {ggplot2}
+
+## What is data visualization?
+
+> "The practice of designing and creating graphic or visual representations of a large amount of complex quantitative and qualitative data and information with the help of static, dynamic or interactive visual items."
+
+::: {style="text-align: right"}
+-from [Wikipedia](https://en.wikipedia.org/wiki/Data_and_information_visualization)
+:::
+
+##  {style="font-size: 50%;"}
+
+::::: {columns}
+::: {.column width="50%"}
+Made with {ggplot2} ![](images/example-1.png){style="height:250px;"}
+:::
+
+::: {.column width="50%"}
+Made with {ggplot2} and publication ready ![](images/example-2.webp){style="height:250px;"}
+:::
+:::::
+
+::::: {columns}
+::: {.column width="50%"}
+Made with {gganimate} <img src="images/gganimate-example.gif" style="height:250px;"/>
+:::
+
+::: {.column width="50%"}
+Made with Shiny <iframe src="https://gallery.shinyapps.io/050-kmeans-example/?_gl=1*1glcww7*_ga*ODk5MzUzNTczLjE3MzUzNDQ0ODQ.*_ga_2C0WZ1JHG0*MTc0NTg1NTExNS4zNy4xLjE3NDU4NTUxMjEuMC4wLjA.html" width="100%" height="500px" style="zoom: 0.5;"></iframe>
+:::
+:::::
+
+## A brief history of Data Visualization (Adapted from [EDS 240](https://eds-240-data-viz.github.io/course-materials/lecture-slides/lecture1.2-intro-slides.html#/title-slide)) {.smaller .center}
+
+::: {style="text-align: center;"}
+16,500 years ago, Pleistocene
+
+![](images/pleistocene.png){width="400" height="400"}
+
+Source: [BBC](http://news.bbc.co.uk/2/hi/science/nature/871930.stm)
+:::
+
+## A brief history of Data Visualization {.smaller .center}
+
+::: {style="text-align: center;"}
+\~1150 BC, Ancient Egypt
+
+![](images/turin-papyrus.png){width="400" height="400"}
+
+Source: [Wikipedia](https://en.wikipedia.org/wiki/Turin_Papyrus_Map)
+:::
+
+## A brief history of Data Visualization {.smaller .center}
+
+::: {style="text-align: center;"}
+1400 - 1532 AD, Inca Empire
+
+![](images/inca.png){width="400" height="400"}
+
+Quipus (kee-poos) were recording devices for data collection, census records, calendaring...
+
+Source: [Smithsonian](https://www.si.edu/newsdesk/snapshot/quipu)
+:::
+
+## A brief history of Data Visualization {.smaller .center}
+
+::: {style="text-align: center;"}
+1786, William Playfair
+
+![](images/playfair-bar.png){width="400" height="400"}
+
+Created first bar chart (featuring Scottish trade data, 1780 - 1781), as well as line and pie charts.
+
+Source: [Wikipedia](https://en.wikipedia.org/wiki/William_Playfair)
+:::
+
+## A brief history of Data Visualization {.smaller .center}
+
+::: {style="text-align: center;"}
+1854, John Snow
+
+![](images/snow-map.jpg){width="400" height="400"}
+
+Used a dot map and showed the clusters of cholera cases in the London epidemic of 1854
+
+Source: [Wikipedia](https://en.wikipedia.org/wiki/John_Snow)
+:::
+
+## A brief history of Data Visualization {.smaller .center}
+
+::: {style="text-align: center; font-size: 70%;"}
+1869, Charles Minard
+
+![](images/minard.png){width="400" height="400"}
+
+Created a flow map showing the number of troops lost during Napoleon's 1812 Russian campaign.
+
+Edward Tufte called this the greatest visualization created, displaying 6 types of data in 2D (# of troops, distance traveled, temperature, lat/lon, direction of travel, location relative to specific dates)
+
+Source: [Wikipedia](https://en.wikipedia.org/wiki/Charles_Joseph_Minard)
+:::
+
+## A brief history of Data Visualization {.smaller .center}
+
+::: {style="text-align: center; font-size: 70%;"}
+1900, William Edward Burghardt Du Bois
+
+![](images/dubois.webp){height="400"}
+
+Organized an exhibit at the Paris 1900 Exposition, showcasing photographs, charts, and maps that documented the lives of African Americans at the time.
+
+In 2021, people on Twitter recreated his historicall data visualizations using modern tools.
+
+Source: [Nightingale](https://nightingaledvs.com/the-dubois-challenge/)
+:::
+
+## A brief history of Data Visualization {.smaller .center}
+
+::: {style="text-align: center"}
+Modern day
+
+![](images/modern-day.webp){height="400"}
+
+Source: [Jonathan Schwabish](https://policyviz.com/2022/02/01/the-data-visualization-tools-wars/)
+:::
+
+## What will you learn in this class? {.smaller}
+
+::: incremental
+-   Identify the effective types of data visualization for the data at hand and the intended audience
+
+-   Critique data visualizations and provide constructive feedback
+
+-   Prepare dataset for developing data visualization
+
+-   Create effective, ethical, and aesthetically-pleasing visualizations using R programming language
+
+-   Collaborate with classmates from diverse disciplinary background to carry out a visualization project
+:::
+
+## Outline for today
+- Who?
+- How?
+- What?
+- <span style="font-weight: bold; color: orange">Why?</span>
+- Introduction to {ggplot2}
+
+## {background-image="images/in-class-activity.png"}
+
+::: {.v-center-container style="text-align: center;"}
+<br>
+<br>
+<br>
+In-Class Activity:
+
+In small group of 2, discuss your favorite example of data visualization, why do you like it? what functionality does that data visualization serve?
+:::
+
+```{r}
+countdown::countdown(
+  minutes = 5,
+  bottom = 0,
+  # Fanfare when it's over
+  play_sound = TRUE,
+  color_border              = "#FFFFFF",
+  color_text                = "#7aa81e",
+  color_running_background  = "#7aa81e",
+  color_running_text        = "#FFFFFF",
+  color_finished_background = "#ffa07a",
+  color_finished_text       = "#FFFFFF",
+  font_size = "2em",
+  )
+```
+
+## Why do we visualize data?
+
+To reveal patterns that are hard to see in raw numbers...
+
+::: {.column width="50%"}
+![](images/anscombe-1.png)
+:::
+
+::: {.column width="50%"}
+![](images/anscombe-3.png){.fragment}
+:::
+
+## To communicate complex ideas quickly...{style="font-size: 70%"}
+
+
+| Income Group | Males: Under 65 | Males: 65 or Over | Females: Under 65 | Females: 65 or Over |
+|:--------------|--------------:|--------------:|--------------:|--------------:|
+| 0–\$24,999 | 250 | 200 | 375 | 550 |
+| \$25,000+ | 430 | 300 | 700 | 500 |
+
+
+::: {style="text-align: center; font-size: 120%;"}
+**Is the effect of age on cholesterol levels the same for all subgroups defined by sex and income?**
+:::
+
+## To communicate complex ideas quickly...{style="font-size: 70%"}
+
+![](images/cholesterol-example.png){style="width: 50%; display: block; margin: auto;"}
+
+::: {style="text-align: center"}
+Source: [SM Kosslyn: Clear and to the point](https://psycnet.apa.org/record/2007-12573-000)
+:::
+
+## To explore and generate new questions {style="font-size: 70%"}
+
+::: {style="font-size: 70%"}
+> "Exploratory Data Analysis, or EDA, is a process to use visualization and transformation to explore your data in a systemic way. EDA is not a formal process with a strict set of rules. More than anything, EDA is a state of mind. During the initial phases of EDA you should feel free to investigate every idea that occurs to you. Some of these ideas will pan out, and some will be dead ends. As your exploration continues, you will home in on a few particularly productive areas that you’ll eventually write up and communicate to others."
+:::
+
+::: {style="text-align: right"}
+-from [R for Data Science](https://r4ds.had.co.nz/exploratory-data-analysis.html)
+:::
+
+. . .
+
+:::: columns
+
+::: {.column width="33%"}
+
+```{r}
+#| eval: true
+#| echo: false
+#| fig-align: "center"
+#| out-width: "100%"
+knitr::include_graphics("images/diamond-hist.png")
+```
+
+```{r}
+#| eval: false
+#| echo: true
+ggplot(diamonds, aes(x = carat)) +
+  geom_histogram(binwidth = 0.5)
+```
+:::
+
+::: {.column width="33%"}
+
+```{r}
+#| eval: true
+#| echo: false
+#| fig-align: "center"
+#| out-width: "100%"
+knitr::include_graphics("images/cars-boxplot.png")
+```
+
+```{r}
+#| eval: false
+#| echo: true
+ggplot(mpg, aes(x = fct_reorder(class, hwy, median), y = hwy)) +
+  geom_boxplot()
+```
+:::
+
+::: {.column width="33%"}
+
+```{r}
+#| eval: true
+#| echo: false
+#| fig-align: "center"
+#| out-width: "100%"
+knitr::include_graphics("images/diamonds-freqplot.png")
+```
+
+```{r}
+#| eval: false
+#| echo: true
+ggplot(diamonds, aes(x = price, y = after_stat(density))) + 
+  geom_freqpoly(aes(color = cut), binwidth = 500, linewidth = 0.75)
+```
+:::
+
+::::
+
+## To tell a story and evoke emotions {style="font-size: 70%"}
+
+![](images/climate-stripes.jpg)
+
+::: {style="text-align: right; font-size: 70%;"}
+Source: Ed Hawkins, [Climate Stripes](https://showyourstripes.info/)
+:::
+
+## Why R? {.smaller}
+
+::: {.column width="50%"}
+
+<br>
+<br>
+
+::: incremental
+-   Open-source and free
+-   Highly customizable
+-   Script-based and reproducible
+-   Data analysis and visualization in one language
+-   Large open-source community and ecosystem
+:::
+:::
+
+:::{ .column width="50%"}
+![](images/r-encouragement.png){height="70%"}
+
+::: {style="text-align: right; font-size: 70%;"}
+Art by [Allison Horst](https://allisonhorst.com/everything-else)
+:::
+
+:::
+
+##  {#end-break data-menu-title="# End / Break #" background="#033C5A"}
+<br>
+<br>
+<br>
+<br>
+
+<div class="page-center vertical-center">
+<p class="custom-subtitle bottombr">{{< fa mug-hot title="a mug with steam rising out the top" >}} Take a Break</p>
+<p class="caption-text">*~ This is the end of part 1 ~*</p>
+</div>
+
+```{r}
+countdown::countdown(
+  minutes = 5,
+  # left = 0, right = 0,
+  # Fanfare when it's over
+  play_sound = TRUE,
+  color_border              = "#FFFFFF",
+  color_text                = "#7aa81e",
+  color_running_background  = "#7aa81e",
+  color_running_text        = "#FFFFFF",
+  color_finished_background = "#ffa07a",
+  color_finished_text       = "#FFFFFF",
+  font_size = "2em",
+  )
+```
+
+## Outline for today
+- Who?
+- How?
+- What?
+- Why?
+- <span style="font-weight: bold; color: orange">Introduction to {ggplot2}</span>
+
+
+## Welcome to `{ggplot2}` {.smaller}
+:::{ .column width="65%"}
+
+- Based on Grammar of Graphics [(Wilkinson 2005)](https://link.springer.com/book/10.1007/0-387-28695-0)
+- Hadley Wickham developed ggplot2 based on Wilkinson's grammar of graphics in 2009
+- Allow you to compose graphs by combining independent components
+- Designed to work iteratively: 
+  - Start with a simple layer that shows the raw data
+  - Add layers of annotations and summary statistics
+  - Each layer can be customized independently
+
+:::
+
+:::{ .column width="35%"}
+![](images/ggplot2.png)
+
+:::{style ="text-align: right; font-size: 70%;"}
+Art by [Allison Horst](https://allisonhorst.com/r-packages-functions)
+:::
+:::
+
+## What is the grammar of graphics? {.smaller}
+>"A graphic maps the data to the aesthetic attribuets (color, shape, size) of geometric objects (points, lines, bars). The plot may also include statistical transformations of the data and information about the plot’s coordinate system. Facetting can be used to plot for different subsets of the data. The combination of these independent components are what make up a graphic."
+
+:::{style ="text-align: right; font-size: 70%;"}
+[Wilkinson (2005)](https://link.springer.com/book/10.1007/0-387-28695-0)
+:::
+
+## {ggplot2} graphic layers {.smaller}
+::: {.column width="50%"}
+First these:
+
+- **data**: in tidy format (Lab 1)
+- **mapping**: how variables are mapped to aesthetic attributes
+- **geom**: the geometric object used to display the data
+
+:::
+
+::: {.column width="50%"}
+:::{.fragment}
+Then these:
+
+- **stat**: statistical transformations, e.g. binning and counting, fitting a linear model
+- **scale**: maps values in data space to values in the aesthetics space, also draw the legend
+- **coord**: normally the Cartesian coordinate system, but can be polar, map, etc.
+- **facet**: display subsets of data as small multiples
+- **theme**: non-data ink, e.g. background color, grid lines, font size, etc.
+:::
+:::
+
+## Airquality dataset {.smaller}
+The `airquality` dataset contains daily air quality measurements in New York, May to September 1973. The data frame has 153 observations and 6 variables:
+
+:::{ .column width="50%"}
+-   **Ozone**: Ozone in parts per billion (ppb)
+-   **Solar.R**: Solar radiation in langleys
+-   **Wind**: Average wind speed in miles per hour (mph)
+-   **Temp**: Maximum daily temperature in degrees Fahrenheit (F)
+-   **Month**: Month of the year (1-12)
+-   **Day**: Day of the month (1-31)
+:::
+
+:::{ .column width="50%"}
+
+```{r}
+#| eval: true
+#| echo: true
+library(tidyverse)
+data(airquality)
+glimpse(airquality)
+```
+:::
+
+## Step 0: Initialize a plot object {.smaller}
+
+Initialize the plot using `ggplot()`. It is empty because we haven't told ggplot how to map the data to the plot yet.
+
+```{r}
+#| eval: true
+#| echo: true
+library(tidyverse)
+data(airquality)
+ggplot(data = airquality)
+```
+
+## Step 1: Map the variables {.smaller}
+
+The `mapping` argument is used to specify how variables in the data are mapped to aesthetic attributes of the plot. The `aes()` function is used to define the mapping.
+
+```{r}
+#| code-line-numbers: "4"
+#| eval: true
+#| echo: true
+library(tidyverse)
+data(airquality)
+ggplot(data = airquality,
+       mapping = aes(x = Temp, y = Ozone)) # x-axis and y-axis
+```
+
+## Step 2: Add points (`geom_point`) {.smaller}
+
+Next, we add a geometric object (**geom**) that represents the data. In this case, we use `geom_point()` to add points to the plot. There are many more geoms (`geom_*()`) built into `{ggplot2}` and extension packages.
+
+
+```{r}
+#| code-line-numbers: "4"
+#| eval: true
+#| echo: true
+library(tidyverse)
+data(airquality)
+ggplot(data = airquality, mapping = aes(x = Temp, y = Ozone)) + # x-axis and y-axis
+  geom_point() # add points
+```
+
+
+## Step 3: Color aesthetic (Month) {.smaller}
+
+If we like to add more information to the plot, we can use the `color` aesthetic to map another variable to the color of the points. In this case, we will use `Month` as the color aesthetic.
+```{r}
+#| code-line-numbers: "1"
+#| eval: true
+#| echo: true
+ggplot(airquality, aes(x = Temp, y = Ozone, color = Month)) +
+  geom_point() +
+  labs(title = "Ozone vs Temperature Colored by Month")
+```
+
+## Step 3: Color aesthetic (Month) {.smaller}
+
+Instead of treating `Month` as a continuous variable, maybe we want to treat `Month` like a categorical variable. 
+
+```{r}
+#| code-line-numbers: "1"
+#| eval: true
+#| echo: true
+ggplot(airquality, aes(x = Temp, y = Ozone, color = as.factor(Month))) +
+  geom_point() +
+  labs(title = "Ozone vs Temperature Colored by Month")
+```
+
+
+## Step 4: Add layers (smoother lines with `geom_smooth`) {.smaller}
+
+We can add a smoother line to the plot using `geom_smooth()`. The default method is linear regression, but we can also use other methods like LOESS (locally weighted scatterplot smoothing).
+
+```{r}
+#| code-line-numbers: "3-4"
+#| eval: true
+#| echo: true
+ggplot(airquality, aes(x = Temp, y = Ozone)) +
+  geom_point() +
+  geom_smooth(method = "loess") +
+  labs(title = "Ozone vs Temperature with LOESS Smoother")
+```
+
+## Global mapping v.s. Local mapping {.smaller}
+
+:::{.column width="50%"}
+**Global** mapping are passed down to each subsequent layer
+```{r}
+#| code-line-numbers: "1"
+#| eval: true
+#| echo: true
+ggplot(airquality, aes(x = Temp, y = Ozone, color = as.factor(Month))) +
+  geom_point() +
+  geom_smooth(method = "loess") 
+```
+
+`color = as.factor(Month)` is passed to both `geom_point()` and `geom_smooth()`, so the points and the line are colored by month.
+
+:::
+
+:::{.column width="50%"}
+**Local** mapping are only used in that layer and don't affect other layers
+```{r}
+#| code-line-numbers: "2"
+#| eval: true
+#| echo: true
+ggplot(airquality, aes(x = Temp, y = Ozone)) +
+  geom_point(aes(color = as.factor(Month))) +
+  geom_smooth(method = "loess") 
+```
+
+`color = as.factor(Month)` is only passed to `geom_point()`, so the points are colored by month, but the line is not colored by month.
+
+:::
+
+
+## Step 5: Facet by month (`facet_wrap`) {.smaller}
+
+We can use `facet_wrap()` to create small multiples of the plot, one for each month. This allows us to see how the relationship between temperature and ozone varies by month.
+
+```{r}
+#| code-line-numbers: "3"
+#| eval: true
+#| echo: true
+ggplot(airquality, aes(x = Temp, y = Ozone)) +
+  geom_point() +
+  facet_wrap(~ Month) +
+  geom_smooth(method = "loess") +
+  labs(title = "Ozone vs Temperature by Month")
+```
+
+## Step 6: Customize the appearance {.smaller}
+
+`{ggplot2}` has a number of built-in themes, which control all non-data display.
+
+:::{ .column width="50%"}
+
+Never use the default theme
+
+```{r}
+#| eval: true
+#| echo: true
+ggplot(airquality, aes(x = Temp, y = Ozone)) +
+  geom_point(aes(color = as.factor(Month))) +
+  geom_smooth(method = "loess") 
+```
+:::
+
+:::{ .column width="50%"}
+
+`theme_classic()` is a good starting point
+
+```{r}
+#| code-line-numbers: "4"
+#| eval: true
+#| echo: true
+ggplot(airquality, aes(x = Temp, y = Ozone)) +
+  geom_point(aes(color = as.factor(Month))) +
+  geom_smooth(method = "loess") +
+  theme_classic() 
+```
+
+:::
+
+## Step 6: Customize the appearance {.smaller}
+
+Almost always the default font size in `ggplot2` are too small. This is because the font size is set to 11 by default, but the size of the figure is set to `r knitr::opts_chunk$get("fig.width")` inches by `r knitr::opts_chunk$get("fig.height")` inches, so when you insert the figure to a Word or Powerpoint, it ends up being too small
+
+```{r fig.width=5, fig.height=3}
+#| code-line-numbers: "4"
+#| eval: true
+#| echo: true
+ggplot(airquality, aes(x = Temp, y = Ozone)) +
+  geom_point(aes(color = as.factor(Month))) +
+  geom_smooth(method = "loess") +
+  theme_classic(base_size = 11) # I set the output figure size to be 5 inches by 3 inches
+```
+
+## Step 6: Customize the appearance {.smaller}
+
+You can explore other pre-built themes in the `{ggthemes}`.
+
+:::{ .column width="33%"}
+
+Theme economist 
+
+```{r fig.width=5, fig.height=5}
+#| code-line-numbers: "5"
+#| eval: true
+#| echo: true
+library(ggthemes)
+ggplot(airquality, aes(x = Temp, y = Ozone)) +
+  geom_point(aes(color = as.factor(Month))) +
+  geom_smooth(method = "loess") +
+  theme_economist() 
+```
+:::
+
+:::{ .column width="33%"}
+Theme 538 
+
+```{r fig.width=5, fig.height=5}
+#| code-line-numbers: "4-5"
+#| eval: true
+#| echo: true
+ggplot(airquality, aes(x = Temp, y = Ozone)) +
+  geom_point(aes(color = as.factor(Month))) +
+  geom_smooth(method = "loess") +
+  scale_color_fivethirtyeight() + 
+  theme_fivethirtyeight(base_size = 15)
+```
+:::
+
+:::{ .column width="33%"}
+Theme Tufte
+```{r fig.width=5, fig.height=5}
+#| code-line-numbers: "4-5"
+#| eval: true
+#| echo: true
+ggplot(airquality, aes(x = Temp, y = Ozone)) +
+  geom_point(aes(color = as.factor(Month))) +
+  geom_smooth(method = "loess") +
+  theme_tufte(base_size = 15) +
+  theme(legend.position = "top")
+```
+:::
+
+
+## Building a data viz is an interative process!{style="font-size: 70%;"}
+
+![](images/evol-ggplot-1.gif){width="700"}
+
+:::{style="text-align: center; font-size: 70%;"}
+Make your own ggplot evolution using the [`{camcorder}`](https://github.com/thebioengineer/camcorder) package 
+:::
+
+##  End-of-Class Survey {background="#033C5A"}
+<br>
+<br>
+<br>
+
+<div class="page-center vertical-center">
+<p class="custom-subtitle bottombr">{{<fa pen-to-square title="edit or fill out survey">}} Fill out the end-of-class survey </p>
+<p class="caption-text">*~ This is the end of Lecture 1 ~*</p>
+</div>
+
+```{r}
+countdown::countdown(
+  minutes = 10,
+  # left = 0, right = 0,
+  # Fanfare when it's over
+  play_sound = TRUE,
+  color_border              = "#FFFFFF",
+  color_text                = "#7aa81e",
+  color_running_background  = "#7aa81e",
+  color_running_text        = "#FFFFFF",
+  color_finished_background = "#ffa07a",
+  color_finished_text       = "#FFFFFF",
+  font_size = "2em",
+  )
+```

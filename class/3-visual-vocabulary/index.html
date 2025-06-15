@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<link href="../../images/favicon.ico" rel="icon">
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.31">
+
+  <meta name="author" content="Xindi (Cindy) Hu, ScD">
+  <meta name="dcterms.date" content="2025-05-27">
+  <title>PUBH 6199: Visualizing Data with R – Lecture 2. Visual Vocabulary &amp; Effective Visualizations</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-f563837468303362081e247dddd440d0.css">
+  <link rel="stylesheet" href="style.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <link href="../../site_libs/countdown-0.4.0/countdown.css" rel="stylesheet">
+  <script src="../../site_libs/countdown-0.4.0/countdown.js"></script>
+<meta property="og:title" content="Lecture 2. Visual Vocabulary &amp; Effective Visualizations – PUBH 6199: Visualizing Data with R">
+<meta property="og:description" content="PUBH 6199: Visualizing Data with R, Summer 2025">
+<meta property="og:image" content="https://pubh6199-data-viz-with-r.github.io/2025-Summer/class/3-visual-vocabulary/images/logo.png">
+<meta property="og:site_name" content="https://pubh6199-data-viz-with-r.github.io/">
+<meta property="og:locale" content="es_ES">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Lecture 2. Visual Vocabulary &amp; Effective Visualizations</h1>
+  <p class="subtitle">PUBH 6199: Visualizing Data with R, Summer 2025</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Xindi (Cindy) Hu, ScD 
+</div>
+</div>
+</div>
+
+  <p class="date">2025-05-27</p>
+</section>
+<section id="outline-for-today" class="slide level2">
+<h2>Outline for today</h2>
+<ul>
+<li><strong>How human see data</strong></li>
+<li>Data-Ink Maximization and Graphical Redesign</li>
+<li>Design considerations for different types of intended audience</li>
+</ul>
+</section>
+<section id="good-data-visualization-is-optimized-for-our-visual-memory-system" class="slide level2 smaller">
+<h2>Good data visualization is optimized for our <strong>visual-memory system</strong></h2>
+<div class="column" style="width:30%;">
+<ul>
+<li><p>Helps us <strong>understand trends and patterns</strong></p></li>
+<li><p>Makes data <strong>more accessible</strong> to different audiences</p></li>
+<li><p>Useful in <strong>decision-making</strong> and <strong>communication</strong></p></li>
+</ul>
+</div><div class="column" style="width:70%;">
+<p><img data-src="images/memory-chart.png" style="width: 100%; display: block; margin: auto;"></p>
+</div></section>
+<section id="the-power-of-pre-attentive-processing" class="slide level2 smaller">
+<h2>The power of pre-attentive processing</h2>
+<div style="text-align: center">
+<p>Count all the 5s in the following image</p>
+</div>
+<div class="fragment">
+<p><img data-src="images/fives-1.png" style="width: 70%; display: block; margin: auto;"></p>
+</div>
+</section>
+<section id="the-power-of-pre-attentive-processing-1" class="slide level2 smaller">
+<h2>The power of pre-attentive processing</h2>
+<div style="text-align: center">
+<p>Count all the 5s in the following image</p>
+</div>
+<div class="fragment">
+<p><img data-src="images/fives-2.png" style="width: 70%; display: block; margin: auto;"></p>
+</div>
+</section>
+<section id="what-is-pre-attentive-processing" class="slide level2 smaller">
+<h2>What is <strong>pre-attentive processing</strong>?</h2>
+<ul>
+<li><strong>Rapid, automatic processing of visual information</strong> before conscious attention kicks in.</li>
+<li>Happens within <strong>&lt;250 milliseconds</strong>.</li>
+<li>Helps identify key patterns <strong>without effort</strong>.</li>
+</ul>
+<div class="column" style="width:70%;">
+<p><img data-src="images/datylon-blog-mind-your-data-visualization-system-1-2-green.webp" style="width: 70%; display: block; margin: auto;"></p>
+</div><div class="column" style="width:30%;">
+<p><img data-src="images/kahneman_book.jpeg" style="width: 77%; display: block; margin: auto;"></p>
+</div></section>
+<section id="not-all-pre-attentive-features-are-created-equal" class="slide level2 smaller">
+<h2>Not all pre-attentive features are created equal</h2>
+<div style="text-align: center">
+<p>Raise your hand when you see the red dot?</p>
+</div>
+<div class="fragment">
+<div class="column" style="width:30%;">
+<p><img data-src="images/preattentive1.png"></p>
+</div><div class="column" style="width:30%;">
+<p><img data-src="images/preattentive2.png" class="fragment"></p>
+</div><div class="column" style="width:30%;">
+<p><img data-src="images/preattentive3.png" class="fragment"></p>
+</div></div>
+</section>
+<section id="classify-data-types" class="slide level2">
+<h2>Classify data types</h2>
+
+<img data-src="images/data-types.png" style="width: 100%; display: block; margin: auto;" class="r-stretch"></section>
+<section id="introducing-visual-variable" class="slide level2 smaller">
+<h2>Introducing <strong>visual variable</strong></h2>
+<blockquote>
+<p>“A <strong>visual variable</strong>, in data visualization, is an aspect of a graphical object that can visually differentiate it from other objects, and can be controlled during the design process.”</p>
+</blockquote>
+<div style="text-align: right; font-size: 0.8em">
+<p>- Jacques Bertin, 1967, <em>Sémiologie Graphique</em></p>
+</div>
+<div class="fragment">
+<div class="column" style="width:50%;">
+<p><img data-src="images/bertin.png" style="width: 100%; display: block; margin: auto;"></p>
+</div><div class="column" style="width:50%;">
+<p><br> <img data-src="images/jacques_bertin.jpg" style="width: 60%; display: block; margin: auto;"></p>
+</div></div>
+</section>
+<section id="section" class="slide level2" data-background-image="images/in-class-activity.png">
+<h2></h2>
+<div style="text-align: center;">
+<p><br> <br> In-Class Activity:</p>
+<p>Create at least three sketches to visualize these two quantities</p>
+<div style="font-size: 4em;font-family: 'Comic Sans MS', monospace;">
+<p>42, 23</p>
+</div>
+<p>Which Bertin’s visual variables did you use in your sketches?</p>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="countdown" id="timer_d72edf6d" data-update-every="1" data-play-sound="true" tabindex="0" style="right:0;bottom:0;font-size:2em;">
+<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+</div>
+</div>
+</section>
+<section id="ways-to-visualizae-two-quantities" class="slide level2 smaller">
+<h2>45 ways to visualizae two quantities</h2>
+
+<img data-src="images/two-numbers.png" style="width: 100%; display: block; margin: auto;" class="r-stretch"><div style="text-align: center">
+<p>https://rockcontent.com/blog/45-ways-to-communicate-two-quantities/</p>
+</div>
+</section>
+<section id="clevelands-three-visual-operations-of-pattern-perception" class="slide level2 smaller">
+<h2>Cleveland’s three visual operations of pattern perception</h2>
+<p>🎯 <strong>Detection</strong>: <em>Recognizing that a geometric object encodes a physical value.</em></p>
+<p>🧩 <strong>Assembly</strong>: <em>Grouping detected graphical elements into patterns.</em></p>
+<div class="orange-box">
+<p>📏 <strong>Estimation</strong>: <em>Visually assessing the relative magnitude of two or more values.</em></p>
+</div>
+<div class="columns">
+<div class="column" style="width:33%;">
+<p><img data-src="images/cleveland.jpg" style="width: 50%; display: block; margin: auto;"></p>
+</div><div class="column" style="width:33%;">
+<p><img data-src="images/cleveland-book.jpg" style="width: 70%; display: block; margin: auto;"></p>
+</div><div class="column" style="width:33%;">
+<p><img data-src="images/cleveland-paper.png" style="width: 72%; display: block; margin: auto;"></p>
+</div></div>
+</section>
+<section id="starting-with-estimation-because-it-is-the-hardest" class="slide level2 smaller">
+<h2>Starting with <strong>estimation</strong> because it is the hardest</h2>
+<div style="text-align: center">
+<p>Three levels of estimation</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Level</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1. Discrimination</td>
+<td>X = Y X != Y</td>
+</tr>
+<tr class="even">
+<td>2. Ranking</td>
+<td>X &lt; Y X &gt; Y</td>
+</tr>
+<tr class="odd">
+<td>3. Ratioing</td>
+<td>X / Y = ?</td>
+</tr>
+</tbody>
+</table>
+<p>📏 <strong>We want to get as far down this list as possible with efficiency and accuracy</strong></p>
+</div>
+</section>
+<section id="what-visual-cues-are-most-effective-for-which-type-of-data" class="slide level2 smaller">
+<h2>What visual cues are most effective for which type of data?</h2>
+
+<img data-src="images/rank-visual-cues.jpeg" class="r-stretch"><div style="text-align: center; font-size: 0.8em">
+<p>Source: Yau, N. (2013). Data Points: Visualization That Means Something. Wiley.</p>
+</div>
+</section>
+<section id="introducing-the-coffee-ratings-dataset" class="slide level2 smaller">
+<h2>Introducing the coffee ratings dataset</h2>
+<ul>
+<li>These data contain reviews of 1312 arabica and 28 robusta coffee beans from the <strong>Coffee Quality Institute</strong>’s trained reviewers. <a href="https://github.com/rfordatascience/tidytuesday/tree/main/data/2020/2020-07-07">(Link to dataset)</a></li>
+<li>It contains detailed information on coffee samples from different countries, focusing on nine attributes like <strong>aroma, flavor, aftertaste, acidity, body, balance, uniformity, cup cleanliness, sweetness</strong>.</li>
+<li><strong>Total cup points</strong> measures the overall coffee quality.</li>
+</ul>
+<div class="scroll-output">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb1-3"><a></a>coffee_ratings <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"data/coffee_ratings.csv"</span>)</span>
+<span id="cb1-4"><a></a><span class="fu">glimpse</span>(coffee_ratings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,337
+Columns: 43
+$ total_cup_points      &lt;dbl&gt; 90.58, 89.92, 89.75, 89.00, 88.83, 88.83, 88.75,…
+$ species               &lt;chr&gt; "Arabica", "Arabica", "Arabica", "Arabica", "Ara…
+$ owner                 &lt;chr&gt; "metad plc", "metad plc", "grounds for health ad…
+$ country_of_origin     &lt;chr&gt; "Ethiopia", "Ethiopia", "Guatemala", "Ethiopia",…
+$ farm_name             &lt;chr&gt; "metad plc", "metad plc", "san marcos barrancas …
+$ lot_number            &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ mill                  &lt;chr&gt; "metad plc", "metad plc", NA, "wolensu", "metad …
+$ ico_number            &lt;chr&gt; "2014/2015", "2014/2015", NA, NA, "2014/2015", N…
+$ company               &lt;chr&gt; "metad agricultural developmet plc", "metad agri…
+$ altitude              &lt;chr&gt; "1950-2200", "1950-2200", "1600 - 1800 m", "1800…
+$ region                &lt;chr&gt; "guji-hambela", "guji-hambela", NA, "oromia", "g…
+$ producer              &lt;chr&gt; "METAD PLC", "METAD PLC", NA, "Yidnekachew Dabes…
+$ number_of_bags        &lt;dbl&gt; 300, 300, 5, 320, 300, 100, 100, 300, 300, 50, 3…
+$ bag_weight            &lt;chr&gt; "60 kg", "60 kg", "1", "60 kg", "60 kg", "30 kg"…
+$ in_country_partner    &lt;chr&gt; "METAD Agricultural Development plc", "METAD Agr…
+$ harvest_year          &lt;chr&gt; "2014", "2014", NA, "2014", "2014", "2013", "201…
+$ grading_date          &lt;chr&gt; "April 4th, 2015", "April 4th, 2015", "May 31st,…
+$ owner_1               &lt;chr&gt; "metad plc", "metad plc", "Grounds for Health Ad…
+$ variety               &lt;chr&gt; NA, "Other", "Bourbon", NA, "Other", NA, "Other"…
+$ processing_method     &lt;chr&gt; "Washed / Wet", "Washed / Wet", NA, "Natural / D…
+$ aroma                 &lt;dbl&gt; 8.67, 8.75, 8.42, 8.17, 8.25, 8.58, 8.42, 8.25, …
+$ flavor                &lt;dbl&gt; 8.83, 8.67, 8.50, 8.58, 8.50, 8.42, 8.50, 8.33, …
+$ aftertaste            &lt;dbl&gt; 8.67, 8.50, 8.42, 8.42, 8.25, 8.42, 8.33, 8.50, …
+$ acidity               &lt;dbl&gt; 8.75, 8.58, 8.42, 8.42, 8.50, 8.50, 8.50, 8.42, …
+$ body                  &lt;dbl&gt; 8.50, 8.42, 8.33, 8.50, 8.42, 8.25, 8.25, 8.33, …
+$ balance               &lt;dbl&gt; 8.42, 8.42, 8.42, 8.25, 8.33, 8.33, 8.25, 8.50, …
+$ uniformity            &lt;dbl&gt; 10.00, 10.00, 10.00, 10.00, 10.00, 10.00, 10.00,…
+$ clean_cup             &lt;dbl&gt; 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, …
+$ sweetness             &lt;dbl&gt; 10.00, 10.00, 10.00, 10.00, 10.00, 10.00, 10.00,…
+$ cupper_points         &lt;dbl&gt; 8.75, 8.58, 9.25, 8.67, 8.58, 8.33, 8.50, 9.00, …
+$ moisture              &lt;dbl&gt; 0.12, 0.12, 0.00, 0.11, 0.12, 0.11, 0.11, 0.03, …
+$ category_one_defects  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+$ quakers               &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+$ color                 &lt;chr&gt; "Green", "Green", NA, "Green", "Green", "Bluish-…
+$ category_two_defects  &lt;dbl&gt; 0, 1, 0, 2, 2, 1, 0, 0, 0, 4, 1, 0, 0, 2, 2, 0, …
+$ expiration            &lt;chr&gt; "April 3rd, 2016", "April 3rd, 2016", "May 31st,…
+$ certification_body    &lt;chr&gt; "METAD Agricultural Development plc", "METAD Agr…
+$ certification_address &lt;chr&gt; "309fcf77415a3661ae83e027f7e5f05dad786e44", "309…
+$ certification_contact &lt;chr&gt; "19fef5a731de2db57d16da10287413f5f99bc2dd", "19f…
+$ unit_of_measurement   &lt;chr&gt; "m", "m", "m", "m", "m", "m", "m", "m", "m", "m"…
+$ altitude_low_meters   &lt;dbl&gt; 1950.0, 1950.0, 1600.0, 1800.0, 1950.0, NA, NA, …
+$ altitude_high_meters  &lt;dbl&gt; 2200.0, 2200.0, 1800.0, 2200.0, 2200.0, NA, NA, …
+$ altitude_mean_meters  &lt;dbl&gt; 2075.0, 2075.0, 1700.0, 2000.0, 2075.0, NA, NA, …</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="calculate-country-level-summaries" class="slide level2 smaller">
+<h2>Calculate country-level summaries</h2>
+<p>For each country in the 18 most frequent levels, calculate the average total cup points and the number of coffee bean varieties, lump the other countries into the <code>Other</code> category.</p>
+<div class="scroll-output" style="height: 480px;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>country_summary <span class="ot">&lt;-</span> coffee_ratings <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a></a>  <span class="fu">mutate</span>(<span class="at">country =</span> <span class="fu">fct_lump</span>(country_of_origin, <span class="dv">18</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a></a>  <span class="fu">group_by</span>(country) <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a></a>  <span class="fu">summarize</span>(<span class="at">mean_rating =</span> <span class="fu">mean</span>(total_cup_points, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb3-5"><a></a>            <span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb3-6"><a></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(mean_rating)) </span>
+<span id="cb3-7"><a></a><span class="fu">head</span>(country_summary, <span class="dv">19</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 19 × 3
+   country                      mean_rating     n
+   &lt;fct&gt;                              &lt;dbl&gt; &lt;int&gt;
+ 1 Ethiopia                            85.5    44
+ 2 Kenya                               84.3    25
+ 3 Uganda                              83.5    36
+ 4 Colombia                            83.1   183
+ 5 El Salvador                         83.1    21
+ 6 China                               82.9    16
+ 7 Costa Rica                          82.8    51
+ 8 Thailand                            82.6    32
+ 9 Indonesia                           82.6    20
+10 Brazil                              82.4   132
+11 Tanzania, United Republic Of        82.4    40
+12 Taiwan                              82.0    75
+13 Guatemala                           81.8   181
+14 United States (Hawaii)              81.8    73
+15 Other                               81.7    80
+16 India                               81.1    14
+17 Mexico                              80.9   236
+18 Honduras                            80.9    52
+19 Nicaragua                           80.5    26</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="lets-start-from-the-bottom-of-the-list" class="slide level2">
+<h2>Let’s start from the bottom of the list</h2>
+<ol type="1">
+<li>Position on a common scale</li>
+<li>Position on non-aligned scales</li>
+<li>Length</li>
+<li>Angle</li>
+<li>Area</li>
+<li>Volume &lt;&gt; Density &lt;&gt; Color saturation</li>
+<li><span style="color: orange">Color hue</span></li>
+</ol>
+</section>
+<section id="use-color-hue-to-visualize-average-ratings" class="slide level2" style="font-size: 0.8em">
+<h2>Use color hue to visualize average ratings</h2>
+<div style="font-size: 0.8em">
+<p><span style="color: darkgreen"><em>Easy: which has higher ratings, Kenya or Indonesia?</em></span></p>
+</div>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.png" width="768" class="r-stretch"><div style="position: absolute; top: 49%; left: 10%;">
+<svg width="50" height="30">
+</svg><p><defs> <marker id="arrowhead" markerwidth="10" markerheight="10" refx="10" refy="5" orient="auto"> <polygon points="0 0, 10 5, 0 10" fill="black"> </polygon></marker> </defs> <line x1="0" y1="15" x2="40" y2="15" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"></line></p>
+
+</div>
+<div style="position: absolute; top: 53%; left: 10%;">
+<svg width="50" height="30">
+</svg><p><defs> <marker id="arrowhead" markerwidth="10" markerheight="10" refx="10" refy="5" orient="auto"> <polygon points="0 0, 10 5, 0 10" fill="black"> </polygon></marker> </defs> <line x1="0" y1="15" x2="40" y2="15" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"></line></p>
+
+</div>
+</section>
+<section id="use-color-hue-to-visualize-average-ratings-1" class="slide level2" style="font-size: 0.8em">
+<h2>Use color hue to visualize average ratings</h2>
+<div style="font-size: 0.8em">
+<p><span style="color: red"><em>Hard: which has higher ratings, Indonesia or Costa Rica?</em></span></p>
+</div>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.png" width="768" class="r-stretch"><div style="position: absolute; top: 53%; left: 10%;">
+<svg width="50" height="30">
+</svg><p><defs> <marker id="arrowhead" markerwidth="10" markerheight="10" refx="10" refy="5" orient="auto"> <polygon points="0 0, 10 5, 0 10" fill="black"> </polygon></marker> </defs> <line x1="0" y1="15" x2="40" y2="15" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"></line></p>
+
+</div>
+<div style="position: absolute; top: 78%; left: 10%;">
+<svg width="50" height="30">
+</svg><p><defs> <marker id="arrowhead" markerwidth="10" markerheight="10" refx="10" refy="5" orient="auto"> <polygon points="0 0, 10 5, 0 10" fill="black"> </polygon></marker> </defs> <line x1="0" y1="15" x2="40" y2="15" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"></line></p>
+
+</div>
+</section>
+<section id="what-about-now" class="slide level2 smaller">
+<h2>What about now?</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-6-1.png" width="768" class="r-stretch"><p>Observation: alphabetical ordering of the categorical variable is almost never useful, re-rank as needed.</p>
+</section>
+<section id="move-up-one-level-to-color-saturation" class="slide level2">
+<h2>Move up one level to color saturation</h2>
+<ol type="1">
+<li>Position on a common scale</li>
+<li>Position on non-aligned scales</li>
+<li>Length</li>
+<li>Angle</li>
+<li>Area</li>
+<li><span style="color: orange">Volume &lt;&gt; Density &lt;&gt; Color saturation</span></li>
+<li>Color hue</li>
+</ol>
+</section>
+<section id="use-color-saturation-to-visualize-average-ratings" class="slide level2" style="font-size: 0.8em">
+<h2>Use color saturation to visualize average ratings</h2>
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-7-1.png" width="720"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="column" style="width:30%;">
+<div style="position:absolute; top:50%; left:80%; transform:translateY(-50%);">
+<p>No legend?</p>
+<p>No problem.</p>
+<p>Because color saturation has natural ordering.</p>
+</div>
+</div></div>
+</section>
+<section id="color-saturation-is-easier-to-quantify" class="slide level2">
+<h2>Color saturation is easier to quantify</h2>
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-8-1.png" width="720"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="column" style="width:30%;">
+<div style="font-size: 0.8em; position:absolute; top:50%; left:80%; transform:translateY(-50%);">
+<p>The ratio between Mexico and United States is…</p>
+<p>2 or 3</p>
+<p>Moving down to the third level of estimation</p>
+</div>
+</div></div>
+</section>
+<section id="move-up-one-level-to-area" class="slide level2">
+<h2>Move up one level to area</h2>
+<ol type="1">
+<li>Position on a common scale</li>
+<li>Position on non-aligned scales</li>
+<li>Length</li>
+<li>Angle</li>
+<li><span style="color: orange">Area</span></li>
+<li>Volume &lt;&gt; Density &lt;&gt; Color saturation</li>
+<li>Color hue</li>
+</ol>
+</section>
+<section id="this-is-weird-graph-but-still-informative" class="slide level2 smaller-title">
+<h2>This is weird graph but still informative</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
+<section id="move-up-one-level-to-angle" class="slide level2">
+<h2>Move up one level to angle</h2>
+<ol type="1">
+<li>Position on a common scale</li>
+<li>Position on non-aligned scales</li>
+<li>Length</li>
+<li><span style="color: orange">Angle</span></li>
+<li>Area</li>
+<li>Volume &lt;&gt; Density &lt;&gt; Color saturation</li>
+<li>Color hue</li>
+</ol>
+</section>
+<section id="use-angle-to-visualize-coffee-bean-varieties" class="slide level2 smaller-title">
+<h2>Use angle to visualize coffee bean varieties</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
+<section id="pie-charts-use-angles-to-encode-data" class="slide level2 smaller">
+<h2>Pie charts use angles to encode data</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"><div class="center">
+<p>For categorical data, no more than 6 colors is best.</p>
+<p>(Source: <a href="https://www.eea.europa.eu/data-and-maps/daviz/learn-more/chart-dos-and-donts">European Environment Agency</a>)</p>
+</div>
+</section>
+<section id="we-are-so-close" class="slide level2 smaller">
+<h2>We are so close!</h2>
+<div class="column" style="width:40%;">
+<ol type="1">
+<li>Position on a common scale</li>
+<li>Position on non-aligned scales</li>
+<li><span style="color: orange">Length</span></li>
+<li>Angle</li>
+<li>Area</li>
+<li>Volume &lt;&gt; Density &lt;&gt; Color saturation</li>
+<li>Color hue</li>
+</ol>
+</div><div class="column" style="width:60%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div style="position:absolute; top:75%; left:0%;  transform:translateY(-50%); color:orange">
+<p>Wait, I thought there is some difference…</p>
+</div>
+</div>
+</section>
+<section id="the-start-at-zero-rule" class="slide level2">
+<h2>The start-at-zero rule</h2>
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></section>
+<section id="how-to-lie-with-statistics-1954" class="slide level2 smaller">
+<h2><strong>How to Lie with Statistics (1954)</strong></h2>
+<ul>
+<li>Darrell Huff argues that truncating the y-axis can exaggerate differences and mislead the viewer.</li>
+<li>It creates a false impression of dramatic change where the actual variation is small.</li>
+</ul>
+<div class="fragment">
+<p><img data-src="images/lie_with_stat.png" style="width: 100%; display: block; margin: auto;"></p>
+</div>
+</section>
+<section id="the-visual-display-of-quantitative-information-1983" class="slide level2 smaller-title">
+<h2><strong>The Visual Display of Quantitative Information (1983)</strong></h2>
+<div style="font-size: 0.8em">
+<ul>
+<li>Edward Tufte prioritizes data density and the detection of subtle patterns.</li>
+<li>He argues that starting at zero can waste valuable space, obscuring meaningful variations.</li>
+</ul>
+<div class="column" style="width:45%;">
+<p><strong>Combined MMR vaccination rate, 1994/95 to 2014/15, England</strong></p>
+<p><img data-src="images/mmr-starts-from-0.png"></p>
+</div><div class="column" style="width:50%;">
+<p><strong>Take another look, axis doesn’t start at zero</strong></p>
+<p><img data-src="images/mmr-not-from-zero.png"></p>
+</div></div>
+</section>
+<section id="position-but-not-a-common-scale" class="slide level2 smaller">
+<h2>Position, but not a common scale</h2>
+<div class="column" style="width:40%;">
+<ol type="1">
+<li>Position on a common scale</li>
+<li><span style="color: orange">Position on non-aligned scales</span></li>
+<li>Length</li>
+<li>Angle</li>
+<li>Area</li>
+<li>Volume &lt;&gt; Density &lt;&gt; Color saturation</li>
+<li>Color hue</li>
+</ol>
+</div><div class="column" style="width:60%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-15-1.png" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></section>
+<section id="position-and-a-common-scale" class="slide level2 smaller">
+<h2>Position, and a common scale</h2>
+<div class="column" style="width:40%;">
+<ol type="1">
+<li><span style="color: orange">Position on a common scale</span></li>
+<li>Position on non-aligned scales</li>
+<li>Length</li>
+<li>Angle</li>
+<li>Area</li>
+<li>Volume &lt;&gt; Density &lt;&gt; Color saturation</li>
+<li>Color hue</li>
+</ol>
+</div><div class="column" style="width:60%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-16-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></section>
+<section id="position-and-a-common-scale-1" class="slide level2 smaller">
+<h2>Position, and a common scale</h2>
+<div class="column" style="width:40%;">
+<ol type="1">
+<li><span style="color: orange">Position on a common scale</span></li>
+<li>Position on non-aligned scales</li>
+<li>Length</li>
+<li>Angle</li>
+<li>Area</li>
+<li>Volume &lt;&gt; Density &lt;&gt; Color saturation</li>
+<li>Color hue</li>
+</ol>
+</div><div class="column" style="width:60%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div style="position:absolute; top:75%; left:0%;  transform:translateY(-50%); color:red">
+<p>Re-ranking categorical variables still matters!</p>
+</div>
+</section>
+<section id="implications-for-designing-effective-data-visualizations" class="slide level2 smaller-title">
+<h2>Implications for designing effective data visualizations</h2>
+<ul>
+<li class="fragment">Stacked anything is nearly always a mistake</li>
+<li class="fragment">Pie charts are always a mistake</li>
+<li class="fragment">Scatterplot are the best way to show the relationships between two variables</li>
+<li class="fragment">If growth (slope) is important, plot it directly</li>
+</ul>
+</section>
+<section id="stacked-anything-is-nearly-always-a-mistake" class="slide level2 smaller-title">
+<h2>Stacked anything is nearly always a mistake!</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"><div class="center">
+<p><strong>Which category has higher count: SI1-Premium or VS2-Premium?</strong></p>
+</div>
+</section>
+<section id="transform-stacked-barplot-to-a-parallel-coordinate-plot" class="slide level2 smaller-title">
+<h2>Transform stacked barplot to a parallel coordinate plot</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-19-1.png" width="960" class="r-stretch"><div class="center">
+<p><strong>Which category has higher count: SI1-Premium or VS2-Premium?</strong></p>
+</div>
+</section>
+<section id="you-lose-some-information-but-just-use-two-charts-if-needed" class="slide level2 smaller-title">
+<h2>You lose some information, but just use two charts if needed</h2>
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-20-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-21-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></section>
+<section id="why-are-pie-charts-never-a-good-idea" class="slide level2 smaller">
+<h2>Why are pie charts never a good idea?</h2>
+
+<img data-src="images/rank-visual-cues.png" class="r-stretch"><div class="fragment">
+<div class="center">
+<p><strong>Angle is #4 on the accuracy list, we can do better.</strong></p>
+</div>
+</div>
+</section>
+<section id="if-you-have-a-small-amount-of-data-to-show-dont-use-pie-charts" class="slide level2 smaller-title">
+<h2>If you have a small amount of data to show, don’t use pie charts</h2>
+<div class="column" style="width:50%;">
+<p>Don’t do this!</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-22-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p>Do this instead!</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Label</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>25</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td>60</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td>15</td>
+</tr>
+</tbody>
+</table>
+</div></section>
+<section id="if-you-have-a-lot-of-data-to-show-dont-use-pie-charts" class="slide level2 smaller-title">
+<h2>If you have a lot of data to show, don’t use pie charts</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span style="color: red">Don’t do this!</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-23-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><span style="color: red">Or this!</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-24-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="all-good-pie-charts-are-jokes" class="slide level2">
+<h2>All good pie charts are jokes</h2>
+
+<img data-src="images/pie-pyramid.png" class="r-stretch"></section>
+<section id="if-you-want-to-show-the-relationship-between-two-variables-use-scatterplot" class="slide level2 smaller-title">
+<h2>If you want to show the relationship between two variables, use scatterplot</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-25-1.png" width="960" class="r-stretch"><div class="center">
+<p><strong>What is the relationship between Ozone concentrations and temperature?</strong></p>
+</div>
+</section>
+<section id="if-you-want-to-show-the-relationship-between-two-variables-use-scatterplot-1" class="slide level2 smaller-title">
+<h2>If you want to show the relationship between two variables, use scatterplot</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-26-1.png" width="960" class="r-stretch"></section>
+<section id="if-you-care-about-the-growth-slope-plot-it-directly" class="slide level2 smaller-title">
+<h2>If you care about the growth (slope), plot it directly</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" class="r-stretch"><div class="center">
+<p><strong>Which country has higher population growth: Nigeria or India?</strong></p>
+</div>
+</section>
+<section id="if-you-care-about-the-growth-slope-plot-it-directly-1" class="slide level2 smaller-title">
+<h2>If you care about the growth (slope), plot it directly</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-28-1.png" width="960" class="r-stretch"><div class="center">
+<p><strong>Most countries’ population growth are slowing down, which wasn’t obvious in the previous graph.</strong></p>
+</div>
+</section>
+<section id="clevelands-three-visual-operations-of-pattern-perception-1" class="slide level2 smaller">
+<h2>Cleveland’s three visual operations of pattern perception</h2>
+<p>🎯 <strong>Detection</strong>: <em>Recognizing that a geometric object encodes a physical value.</em></p>
+<div class="orange-box">
+<p>🧩 <strong>Assembly</strong>: <em>Grouping detected graphical elements into patterns.</em></p>
+</div>
+<p>📏 <strong>Estimation</strong>: <em>Visually assessing the relative magnitude of two or more values.</em></p>
+</section>
+<section id="assembly-gestalt-psychology" class="slide level2 smaller">
+<h2>Assembly: Gestalt Psychology</h2>
+<blockquote>
+<p>“Gestalt (German for form, shape, or configuration). Gestalt psychology proposes that the human brain perceives objects as part of a greater whole rather than as isolated elements.”</p>
+</blockquote>
+<div class="fragment">
+<div class="column" style="width:50%;">
+<p>Reification</p>
+<p><img data-src="images/gestalt-1.png"></p>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p>Emergence</p>
+<p><img data-src="images/gestalt-2.png"></p>
+</div>
+</div></div>
+</section>
+<section id="applying-gestalt-principles-to-data-visualization" class="slide level2 smaller">
+<h2>Applying Gestalt principles to data visualization</h2>
+<blockquote>
+<p>“The law of <strong>Prãgnanz</strong>, also known as the law of good Gestalt. People tend to experience things as regular, orderly, symmetrical, and simple.”</p>
+</blockquote>
+<div class="column" style="width:25%;">
+<p>Law of Continuity <img data-src="images/law-of-continuity.png"></p>
+</div><div class="column" style="width:25%;">
+<div class="fragment">
+<p>Law of Similarity</p>
+<p><img data-src="images/law-of-similarity.png"></p>
+</div>
+</div><div class="column" style="width:25%;">
+<div class="fragment">
+<p>Law of Closure <img data-src="images/IBM_logo.png"></p>
+</div>
+</div><div class="column" style="width:25%;">
+<div class="fragment">
+<p>Law of Proximity</p>
+<p><img data-src="images/law-of-proximity.png"></p>
+</div>
+</div></section>
+<section id="bad-visualizations-lack-law-of-continuity" class="slide level2 smaller-title">
+<h2>Bad visualizations lack <strong>law of continuity</strong></h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-29-1.png" width="960" class="r-stretch"><div class="center">
+<p><strong>This hurts our brain.</strong></p>
+</div>
+</section>
+<section id="good-visualizations-leverage-law-of-continuity" class="slide level2 smaller-title">
+<h2>Good visualizations leverage <strong>law of continuity</strong></h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-30-1.png" width="960" class="r-stretch"><div class="center">
+<p><strong>This is much easier.</strong></p>
+</div>
+</section>
+<section id="use-law-of-similarity-to-group-similar-data" class="slide level2 smaller-title">
+<h2>Use <strong>law of similarity</strong> to group similar data</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-31-1.png" width="960" class="r-stretch"></section>
+<section id="some-encodings-are-better-than-others" class="slide level2 smaller-title">
+<h2>Some encodings are better than others</h2>
+
+<img data-src="images/rank-visual-cues.jpeg" class="r-stretch"></section>
+<section id="shape-is-less-effective-than-color-hue-for-nominal-data" class="slide level2 smaller-title">
+<h2>Shape is less effective than color hue for nominal data</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-32-1.png" width="960" class="r-stretch"></section>
+<section id="you-can-combine-both-color-and-shape-to-be-more-effective" class="slide level2 smaller-title">
+<h2>You can combine both color and shape to be more effective</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-33-1.png" width="960" class="r-stretch"></section>
+<section id="use-law-of-closure-to-group-similar-data" class="slide level2 smaller-title">
+<h2>Use <strong>law of closure</strong> to group similar data</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-34-1.png" width="960" class="r-stretch"></section>
+<section id="law-of-proximity-we-see-elements-near-each-other-as-part-of-the-same-object" class="slide level2 smaller-title">
+<h2><strong>Law of proximity</strong>: we see elements near each other as part of the same object</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-35-1.png" width="960" class="r-stretch"></section>
+<section id="still-worse-than-parallel-coordinate-plot" class="slide level2 smaller-title">
+<h2>Still worse than parallel coordinate plot</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-36-1.png" width="960" class="r-stretch"></section>
+<section id="clevelands-three-visual-operations-of-pattern-perception-2" class="slide level2 smaller">
+<h2>Cleveland’s three visual operations of pattern perception</h2>
+<div class="orange-box">
+<p>🎯 <strong>Detection</strong>: <em>Recognizing that a geometric object encodes a physical value.</em></p>
+</div>
+<p>🧩 <strong>Assembly</strong>: <em>Grouping detected graphical elements into patterns.</em></p>
+<p>📏 <strong>Estimation</strong>: <em>Visually assessing the relative magnitude of two or more values.</em></p>
+</section>
+<section id="detection-should-be-trivial-dont-make-it-hard" class="slide level2 smaller-title">
+<h2>Detection should be trivial, don’t make it hard</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-37-1.png" width="960" class="r-stretch"></section>
+<section id="detection-should-be-trivial-dont-make-it-hard-1" class="slide level2 smaller-title">
+<h2>Detection should be trivial, don’t make it hard</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-38-1.png" width="960" class="r-stretch"></section>
+<section id="detection-should-be-trivial-dont-make-it-hard-2" class="slide level2 smaller-title">
+<h2>Detection should be trivial, don’t make it hard</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-39-1.png" width="960" class="r-stretch"></section>
+<section id="end-break" class="slide level2" data-menu-title="# End / Break #" data-background="#033C5A">
+<h2></h2>
+<p><br> <br> <br> <br></p>
+<div class="page-center vertical-center">
+<p class="custom-subtitle bottombr">
+</p><p><i class="fa-solid fa-mug-hot" title="a mug with steam rising out the top" aria-label="mug-hot"></i> Take a Break</p>
+<p></p>
+<p class="caption-text">
+</p><p><em>~ This is the end of part 1 ~</em></p>
+<p></p>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="countdown" id="timer_aca1434b" data-update-every="1" data-play-sound="true" tabindex="0" style="right:0;bottom:0;font-size:2em;">
+<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+</div>
+</div>
+</section>
+<section id="outline-for-today-1" class="slide level2">
+<h2>Outline for today</h2>
+<ul>
+<li>How human see data</li>
+<li><strong>Data-Ink Maximization and Graphical Redesign</strong></li>
+<li>Design considerations for different types of intended audience</li>
+</ul>
+</section>
+<section id="principles-of-graphical-excellence" class="slide level2 smaller">
+<h2>Principles of Graphical Excellence</h2>
+<ul>
+<li class="fragment"><p>Graphical excellence is the well-designed presentation of interesting data - a matter of <em>substance</em>, of <em>statistics</em>, and of <em>design</em>.</p></li>
+<li class="fragment"><p>Graphical excellence consists of complex ideas communicated with clarity, precision, and efficiency.</p></li>
+<li class="fragment"><p>Graphical excellence is that which gives the viewer the greatest number of ideas in the shortest time with the least ink in the smallest space.</p></li>
+</ul>
+
+<img data-src="images/graphical-excellence.png" class="r-stretch"><ul>
+<li class="fragment"><p>Graphical excellence is nearly always multivariate.</p></li>
+<li class="fragment"><p>Graphical excellence requires telling the truth about the data.</p></li>
+</ul>
+</section>
+<section id="lie-factor" class="slide level2 smaller">
+<h2>Lie factor</h2>
+<p><span class="math display">\[
+\text{Lie Factor} = \frac{\text{size of effect shown in graphic}}{\text{size of effect in data}}
+\]</span></p>
+
+<img data-src="images/lie-factor.jpeg" style="width: 100%; display: block; margin: auto;" class="r-stretch"><div class="center">
+<p><strong>Can you calculate the lie factor in this graph?</strong></p>
+</div>
+</section>
+<section id="why-are-3d-graphs-bad" class="slide level2 smaller">
+<h2>Why are 3D graphs bad?</h2>
+
+<img data-src="images/apple-lie-1.jpeg" class="r-stretch"><div style="text-align: center; font-size: 0.8em">
+<p>Source: <a href="https://www.theguardian.com/technology/blog/2008/jan/21/liesdamnliesandstevejobs">the Guardian, 2008</a></p>
+</div>
+</section>
+<section id="how-should-the-data-be-plotted" class="slide level2 smaller">
+<h2>How should the data be plotted?</h2>
+
+<img data-src="images/apple-lie-2.png" class="r-stretch"></section>
+<section id="or-even-better" class="slide level2 smaller">
+<h2>Or even better</h2>
+
+<img data-src="images/apple-lie-3.png" class="r-stretch"></section>
+<section id="maximize-data-ink-ratio" class="slide level2 smaller">
+<h2>Maximize Data-Ink Ratio</h2>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Data-Ink Ratio} &amp;= \frac{\text{Data ink}}{\text{Total ink used in graphic}} \\
+                      &amp;= \text{proportion of a graphic's ink devoted to the} \\
+                      &amp;\quad \text{non-redundant display of data-information} \\
+                      &amp;= 1 - \frac{\text{Redundant ink}}{\text{Total ink used in graphic}}
+\end{aligned}
+\]</span></p>
+</section>
+<section id="avoid-junk-chart" class="slide level2">
+<h2>Avoid junk chart</h2>
+
+<img data-src="images/junk-chart-1.jpeg" class="r-stretch"></section>
+<section id="avoid-junk-chart-1" class="slide level2">
+<h2>Avoid junk chart</h2>
+
+<img data-src="images/junk-chart-2.jpeg" class="r-stretch"></section>
+<section id="avoid-junk-chart-2" class="slide level2">
+<h2>Avoid junk chart</h2>
+
+<img data-src="images/junk-chart-3.jpeg" class="r-stretch"></section>
+<section id="avoid-junk-chart-3" class="slide level2">
+<h2>Avoid junk chart</h2>
+
+<img data-src="images/junk-chart-4.jpeg" class="r-stretch"></section>
+<section id="avoid-junk-chart-4" class="slide level2">
+<h2>Avoid junk chart</h2>
+
+<img data-src="images/junk-chart-5.jpeg" class="r-stretch"></section>
+<section id="avoid-junk-chart-5" class="slide level2">
+<h2>Avoid junk chart</h2>
+
+<img data-src="images/junk-chart-6.jpeg" class="r-stretch"></section>
+<section id="data-density-in-graphical-practice" class="slide level2 smaller">
+<h2>Data density in graphical practice</h2>
+<div class="column" style="width:38%;">
+<p><img data-src="images/data-density-1.png"></p>
+<div class="citation">
+<p>Office of Management and Budget</p>
+<p><em>Social Indicators</em>, 1973</p>
+</div>
+</div><div class="column" style="width:50%;">
+<p><br> <br></p>
+<p><span class="math display">\[
+\text{data density of a graphic} = \frac{\text{number of entries in data matrix}}{\text{area of data graphic}}
+\]</span></p>
+<p><br></p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{data density} &amp;= \frac{\text{2 data points}}{\text{graph covres 26.5 square inch}} \\
+&amp;= 0.15 \text{ numbers per square inch}
+\end{aligned}
+\]</span></p>
+</div></section>
+<section id="data-density-in-graphical-practice-1" class="slide level2 smaller">
+<h2>Data density in graphical practice</h2>
+<div class="column" style="width:45%;">
+<p><img data-src="images/data-density-2.png"></p>
+<div class="citation">
+<p>Jacques Bertin, <em>Semiologie Graphique</em>, 1973</p>
+</div>
+</div><div class="column" style="width:50%;">
+<p><br></p>
+<p><span class="math display">\[
+\text{data density of a graphic} = \frac{\text{number of entries in data matrix}}{\text{area of data graphic}}
+\]</span></p>
+<p><br> <br></p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{data density} &amp;= \frac{\text{240,000 data points}}{\text{graph covres 27 square inch}} \\
+&amp;= 9,000 \text{ numbers per square inch}
+\end{aligned}
+\]</span></p>
+</div></section>
+<section id="how-to-create-high-information-graphics-design" class="slide level2 smaller-title">
+<h2>How to create high-information graphics design?</h2>
+<p>Graphics can be shrunk way down</p>
+<div class="column" style="width:60%;">
+<p>Default size</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-41-1.png" width="720"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<p>Appropriate size</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-42-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></section>
+<section id="small-multiples" class="slide level2 smaller">
+<h2>Small Multiples</h2>
+<blockquote>
+<p>“Small multiples resemble the frames of a movie: a series of graphics, showing the same combination of variables, indexed by changes in another variable.”</p>
+</blockquote>
+<div class="citation">
+<p>Tufte, E. R. (1983). <em>The Visual Display of Quantitative Information</em>. Cheshire, CT: Graphics Press.</p>
+</div>
+
+<img data-src="images/small-multiples.png" class="r-stretch"><div class="citation">
+<p><a href="https://www.pewresearch.org/decoded/2018/12/20/how-pew-research-center-uses-small-multiple-charts/">Pew Research Center</a></p>
+</div>
+</section>
+<section id="well-designed-small-multiples-are" class="slide level2 smaller">
+<h2>Well-designed small multiples are</h2>
+<ul>
+<li class="fragment">inevitably comparative</li>
+<li class="fragment">deftly multivariate</li>
+<li class="fragment">shrunken, high-density graphics</li>
+<li class="fragment">usually based on a large data matrix</li>
+<li class="fragment">draw almost entirely with data-ink</li>
+<li class="fragment">efficient in interpretation</li>
+<li class="fragment">often narrative in content, showing shifts in the relationship between variables as the index variable changes (thereby revealing interaction or multiplicative effects)</li>
+</ul>
+</section>
+<section id="outline-for-today-2" class="slide level2">
+<h2>Outline for today</h2>
+<ul>
+<li>How human see data</li>
+<li>Data-Ink Maximization and Graphical Redesign</li>
+<li><strong>Design considerations for different types of intended audience</strong></li>
+</ul>
+</section>
+<section id="audience-dimensions" class="slide level2 smaller">
+<h2>Audience dimensions</h2>
+<p>Audience may vary by:</p>
+<ul>
+<li><strong>Domain knowledge</strong>: the field of study</li>
+<li><strong>Statistical literacy</strong>: the level of knowledge</li>
+<li><strong>Time constraints</strong>: the time available to read the data</li>
+<li><strong>Cognitive load</strong>: the ability to process large amount of information</li>
+<li><strong>Expectations for interactivity or aesthetics</strong></li>
+</ul>
+</section>
+<section id="tuftes-design-principles" class="slide level2 smaller">
+<h2>Tufte’s design principles</h2>
+<div class="column" style="width:70%;">
+<ul>
+<li>Graphical integrity</li>
+<li>The Lie Factor</li>
+<li>Maximize data-ink ratio</li>
+<li>Avoid chart junk</li>
+</ul>
+</div><div class="column" style="width:30%;">
+<p><img data-src="images/tufte.avif"></p>
+</div><div class="fragment">
+<div class="takeaway">
+<p>Most useful for analytical or technical audience, e.g.&nbsp;scientists, engineers, and data analysts. Less useful for the general public or media campaigns.</p>
+</div>
+</div>
+</section>
+<section id="useful-junk" class="slide level2 smaller">
+<h2>Useful junk</h2>
+<div class="column" style="width:40%;">
+<p><img data-src="images/useful-junk.png"></p>
+</div><div class="column" style="width:60%;">
+<p><img data-src="images/useful-junk-2.png" class="fragment"></p>
+<p><img data-src="images/useful-junk-3.png" class="fragment"></p>
+</div><div class="citation">
+<p><a href="https://sites.stat.columbia.edu/gelman/communication/Bateman2010.pdf">Bateman et al, CHI 2010: Graphs</a></p>
+</div>
+</section>
+<section id="section-1" class="slide level2" data-background-image="images/in-class-activity.png">
+<h2></h2>
+<div style="text-align: center;">
+<p><br> <br></p>
+<p>In-Class Activity:</p>
+<p>Choose one of the three visualizations and answer:</p>
+<ul>
+<li><p>What message is this chart trying to convey?</p></li>
+<li><p>How do the visuals help (or hurt) comprehension?</p></li>
+<li><p>If you removed the embellishments, what would be lost or gained?</p></li>
+</ul>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="countdown" id="timer_2f832317" data-update-every="1" data-play-sound="true" tabindex="0" style="right:0;bottom:0;font-size:2em;">
+<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+</div>
+</div>
+</section>
+<section id="data-accessibility-for-individuals-with-intellectural-or-developmental-disabilities" class="slide level2 smaller-title">
+<h2>Data accessibility for individuals with intellectural or developmental disabilities</h2>
+<video controls="" width="100%">
+<source src="images/idd.mp4" type="video/mp4">
+<p>Your browser does not support the video tag. </p>
+</video></section>
+<section id="data-accessibility-for-individuals-with-color-blindedness" class="slide level2 smaller-title">
+<h2>Data accessibility for individuals with color blindedness</h2>
+<div class="smaller">
+<p>Color blindness affects approximately 1 in 12 men and 1 in 200 women. To ensure your visualizations remain accessible:</p>
+<ul>
+<li><strong>Avoid red-green or red-brown combinations</strong></li>
+<li><strong>Use colorblind-friendly palettes</strong>, such as <code>viridis</code>, <code>Okabe-Ito</code>, or <code>Color Universal Design (CUD)</code></li>
+<li><strong>Add texture, shape, or direct labels</strong> to differentiate groups beyond color</li>
+<li><strong>Test your charts</strong> with tools like <code>colorblindr</code></li>
+<li><strong>Use contrast checkers</strong> to ensure sufficient visual separation</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="takeaway">
+<p>Designing with color blindness in mind improves clarity for everyone.</p>
+</div>
+</div>
+</section>
+<section id="end-of-class-survey" class="slide level2" data-background="#033C5A">
+<h2>End-of-Class Survey</h2>
+<p><br> <br> <br></p>
+<div class="page-center vertical-center">
+<p class="custom-subtitle bottombr">
+<i class="fa-solid fa-pen-to-square" title="edit or fill out survey" aria-label="pen-to-square"></i> Fill out the end-of-class survey
+</p>
+<p class="caption-text">
+<em>~ This is the end of Lecture 2 ~</em>
+</p>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="countdown" id="timer_915273f8" data-update-every="1" data-play-sound="true" tabindex="0" style="right:0;bottom:0;font-size:2em;">
+<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+</div>
+</div>
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="images/logo-square.png" class="slide-logo"></p>
+<div class="footer footer-default">
+<p>PUBH 6199: Visualizing Data with R</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":false},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/pubh6199-data-viz-with-r\.github\.io\/2025-Summer");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

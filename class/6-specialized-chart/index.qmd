@@ -1,0 +1,1247 @@
+---
+title: "Lab 3. Specialized Chart Types"
+subtitle: "PUBH 6199: Visualizing Data with R, Summer 2025"
+date: June 5, 2025
+author: Xindi (Cindy) Hu, ScD
+format: 
+  revealjs:
+    pdf: true
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    preview-links: auto
+    logo: images/logo-square.png
+    css: style.css
+    footer: 'PUBH 6199: Visualizing Data with R'
+resources:
+  - images/
+---
+
+```{r setup}
+library(tidyverse)
+```
+
+## Feedback from grading HW1 & Lab 1 {.smaller}
+
+- Empty html 
+
+- Missing the answer fields, included as plain text 
+
+- GenAI usage, even if you did not use it, you need to answer that section 
+
+- Log transform right skewed variables to show patterns better 
+
+## Outline for today {.smaller}
+
+- **Introducing the datasets**
+
+- Review faceted plots
+
+- Introduce radar charts, Sankey diagrams, and parallel coordinates plot
+
+- Dos and Don'ts when designing visualizations
+
+
+## Forest Fires Dataset {.smaller}
+
+:::{.column width="60%"}
+
+- **Source**: UCI Machine Learning Repository  
+  [https://archive.ics.uci.edu/ml/datasets/forest+fires](https://archive.ics.uci.edu/ml/datasets/forest+fires)
+
+- **Context**: Collected from the Montesinho Natural Park in Portugal, this dataset captures weather conditions and fire activity over 200+ days.
+
+- **Variables**:
+  - `month`, `day`: Temporal context
+  - `temp`, `RH`, `wind`, `rain`: Daily weather
+  - `FFMC`, `DMC`, `DC`, `ISI`: Fire weather indices
+  - `area`: Burned area in hectares
+  
+:::
+
+::: {.column width="40%"}
+![](images/fwi_structure.gif){width=100%}
+
+::: citation
+[Canadian Forest Fire Weather Index (FWI) System](https://cwfis.cfs.nrcan.gc.ca/background/summary/fwi)
+:::
+
+:::
+
+## Forest Fires Dataset {.smaller}
+
+```{r}
+#| echo: TRUE
+library(tidyverse)
+forest <- read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/forest-fires/forestfires.csv")
+glimpse(forest)
+```
+
+## Adult Income Dataset {.smaller}
+
+- **Source**: UCI Machine Learning Repository  
+  [https://archive.ics.uci.edu/ml/datasets/adult](https://archive.ics.uci.edu/ml/datasets/adult)
+
+- **Context**: Extracted from 1994 U.S. Census data to predict whether an individual's income exceeds \$50K/year.
+
+- **Variables**:
+  - Demographics: `age`, `sex`, `race`, `education`, `marital-status`
+  - Employment: `workclass`, `occupation`, `hours-per-week`
+  - Target: `income` (>50K or ≤50K)
+
+- **Use in Class**:
+  - *Sankey diagram*: Show flows like `education → occupation → income`
+  - *Parallel coordinates*: Visualize patterns across age, hours, and income class
+
+## Adult Income Dataset {.smaller}
+
+```{r}
+#| echo: TRUE
+adult <- read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data",
+                  col_names = c("age", "workclass", "fnlwgt", "education", "education_num",
+                                "marital_status", "occupation", "relationship", "race", "sex",
+                                "capital_gain", "capital_loss", "hours_per_week", "native_country", "income"))
+glimpse(adult)
+```
+
+## Outline for today {.smaller}
+
+- Introducing the datasets
+
+- **Review faceted plots**
+
+- Introduce radar charts, Sankey diagrams, and parallel coordinates plot
+
+- Dos and Don'ts when designing visualizations
+
+## Review: Faceted Plots {.smaller}
+
+>In previous lecture/labs, we learned about faceted plots, which allow us to create multiple subplots based on a categorical variable. This is particularly useful for comparing distributions or trends across different groups.
+
+::: {.column width="50%"}
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+# Faceted scatter plot: Temp vs Wind, faceted by month
+ggplot(forest, aes(x = temp, y = wind)) +
+  geom_point(alpha = 0.6, color = "firebrick") +
+  facet_wrap(~ month, ncol = 4) +
+  labs(title = "Temperature vs Wind Speed by Month",
+       x = "Temperature (°C)",
+       y = "Wind Speed (km/h)") +
+  theme_minimal()
+```
+:::
+
+::: {.column width="50%"}
+```{r fig.width=4, fig.height=4}
+#| echo: FALSE
+# Faceted scatter plot: Temp vs Wind, faceted by month
+ggplot(forest, aes(x = temp, y = wind)) +
+  geom_point(alpha = 0.6, color = "firebrick") +
+  facet_wrap(~ month, ncol = 4) +
+  labs(title = "Temperature vs Wind Speed by Month",
+       x = "Temperature (°C)",
+       y = "Wind Speed (km/h)") +
+  theme_minimal()
+```
+:::
+
+
+## Review: Faceted Plots {.smaller}
+
+>Optional: convert month to ordered factor for nicer facet layout
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| code-line-numbers: "1-3"
+forest <- forest %>%
+  mutate(month = factor(month, levels = c("jan", "feb", "mar", "apr", "may", "jun",
+                                          "jul", "aug", "sep", "oct", "nov", "dec")))
+
+ggplot(forest, aes(x = temp, y = wind)) +
+  geom_point(alpha = 0.6, color = "firebrick") +
+  facet_wrap(~ month, ncol = 4) +
+  labs(title = "Temperature vs Wind Speed by Month",
+       x = "Temperature (°C)",
+       y = "Wind Speed (km/h)") +
+  theme_minimal()
+
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r fig.width=4, fig.height=4}
+#| echo: FALSE
+#| code-line-numbers: "1-3"
+forest <- forest %>%
+  mutate(month = factor(month, levels = c("jan", "feb", "mar", "apr", "may", "jun",
+                                          "jul", "aug", "sep", "oct", "nov", "dec")))
+
+ggplot(forest, aes(x = temp, y = wind)) +
+  geom_point(alpha = 0.6, color = "firebrick") +
+  facet_wrap(~ month, ncol = 4) +
+  labs(title = "Temperature vs Wind Speed by Month",
+       x = "Temperature (°C)",
+       y = "Wind Speed (km/h)") +
+  theme_minimal()
+
+```
+
+:::
+
+## Facet plots by combining two variables {.smaller-title}
+
+::: .smaller
+Does dry air (low RH) change the relationship between wind and temperature across seasons? We use `facet_grid()` to create a grid of plots, where each row represents a season and each column represents a relative humidity level.
+:::
+
+::: {.column width="50%" style="font-size: 0.8em;"}
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| code-line-numbers: "19"
+forest <- forest %>%
+  mutate(
+    month = tolower(month),
+    season = case_when(
+      month %in% c("dec", "jan", "feb") ~ "Winter",
+      month %in% c("mar", "apr", "may") ~ "Spring",
+      month %in% c("jun", "jul", "aug") ~ "Summer",
+      month %in% c("sep", "oct", "nov") ~ "Fall",
+      TRUE ~ "Unknown"
+    ),
+    RH_level = if_else(RH >= median(RH, na.rm = TRUE), "High RH", "Low RH"),
+    season = factor(season, levels = c("Spring", "Summer", "Fall", "Winter")),
+    RH_level = factor(RH_level, levels = c("Low RH", "High RH"))
+  )
+
+# Faceted scatter plot: temp vs wind by season and RH level
+ggplot(forest, aes(x = temp, y = wind)) +
+  geom_point(alpha = 0.6, color = "darkorange") +
+  facet_grid(rows = vars(season), cols = vars(RH_level)) +
+  labs(
+    title = "Temperature vs Wind Speed\nby Season and Relative Humidity Level",
+    x = "Temperature (°C)",
+    y = "Wind Speed (km/h)"
+  ) +
+  theme_minimal(base_size = 11)
+```
+
+
+:::
+
+::: {.column width="50%"}
+
+```{r fig.width=5, fig.height=4}
+#| echo: FALSE
+forest <- forest %>%
+  mutate(
+    month = tolower(month),
+    season = case_when(
+      month %in% c("dec", "jan", "feb") ~ "Winter",
+      month %in% c("mar", "apr", "may") ~ "Spring",
+      month %in% c("jun", "jul", "aug") ~ "Summer",
+      month %in% c("sep", "oct", "nov") ~ "Fall",
+      TRUE ~ "Unknown"
+    ),
+    RH_level = if_else(RH >= median(RH, na.rm = TRUE), "High RH", "Low RH"),
+    season = factor(season, levels = c("Spring", "Summer", "Fall", "Winter")),
+    RH_level = factor(RH_level, levels = c("Low RH", "High RH"))
+  )
+
+# Faceted scatter plot: temp vs wind by season and RH level
+ggplot(forest, aes(x = temp, y = wind)) +
+  geom_point(alpha = 0.6, color = "darkorange") +
+  facet_grid(rows = vars(season), cols = vars(RH_level)) +
+  labs(
+    title = "Temperature vs Wind Speed\nby Season and Relative Humidity Level",
+    x = "Temperature (°C)",
+    y = "Wind Speed (km/h)"
+  ) +
+  theme_minimal(base_size = 11)
+```
+
+:::
+
+## Use fixed vs free scales {.smaller-title}
+
+::: .smaller
+Using fixed scales can help in comparing values across different facets, while free scales allow each facet to have its own scale, which can be useful when the data varies widely between groups.
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| code-line-numbers: "7"
+forest <- forest %>%
+  mutate(month = factor(month, levels = c("jan", "feb", "mar", "apr", "may", "jun",
+                                          "jul", "aug", "sep", "oct", "nov", "dec")))
+
+ggplot(forest, aes(x = temp, y = wind)) +
+  geom_point(alpha = 0.6, color = "firebrick") +
+  facet_wrap(~ month, ncol = 4, scales = "free_y") +
+  labs(title = "Temperature vs Wind Speed by Month",
+       x = "Temperature (°C)",
+       y = "Wind Speed (km/h)") +
+  theme_minimal()
+```
+:::
+
+
+::: {.column width="50%"}
+
+```{r fig.width=5, fig.height=4}
+#| echo: FALSE
+forest <- forest %>%
+  mutate(month = factor(month, levels = c("jan", "feb", "mar", "apr", "may", "jun",
+                                          "jul", "aug", "sep", "oct", "nov", "dec")))
+
+ggplot(forest, aes(x = temp, y = wind)) +
+  geom_point(alpha = 0.6, color = "firebrick") +
+  facet_wrap(~ month, ncol = 4, scales = "free_y") +
+  labs(title = "Temperature vs Wind Speed by Month",
+       x = "Temperature (°C)",
+       y = "Wind Speed (km/h)") +
+  theme_minimal()
+```
+
+:::
+
+##  {background="#033C5A"}
+<br>
+<br>
+<br>
+
+<div class="page-center vertical-center">
+<p class="custom-subtitle bottombr">{{<fa bicycle title="let's get on the bike" >}} Your turn, get on the bike! </p>
+<p class="caption-text">*~ Head over to lab3 notebook! ~*</p>
+</div>
+
+## Outline for today {.smaller}
+
+- Introducing the datasets
+
+- Review faceted plots
+
+- **Introduce radar charts, Sankey diagrams, and parallel coordinates plot**
+
+- Dos and Don'ts when designing visualizations
+
+## What is a Radar Chart? {.smaller}
+
+- A radar chart (or spider chart) displays multivariate data on axes starting from the same point.
+- Good for comparing profiles across a few categories or groups.
+- Useful when variables are on the **same scale** or **normalized**.
+
+## Why Use a Radar Chart to explore the `forest` data? {.smaller}
+
+- Compare **weather profiles** for different fire conditions.
+- Visualize **relative intensity** of multiple variables at once (e.g., `temp`, `wind`, `RH`).
+- Spot patterns across fire size categories.
+
+## Step 1: Load and prepare the data {.smaller}
+
+> Forest Fires Dataset
+This dataset contains 517 observations, each representing a single day of recorded weather conditions and fire activity in the Montesinho Natural Park in Portugal. Each observation includes meteorological variables such as temperature, relative humidity (RH), wind speed, and rainfall, as well as fire weather indices (e.g., FFMC, DMC) and the area burned in hectares. The data spans multiple months and is commonly used to study environmental drivers of wildfire risk.
+
+:::scroll-output
+
+```{r}
+library(readr)
+library(dplyr)
+
+forest <- read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/forest-fires/forestfires.csv") %>%
+  mutate(area_group = case_when(
+    area == 0 ~ "No fire",
+    area <= 1 ~ "Small fire",
+    area <= 10 ~ "Medium fire",
+    TRUE ~ "Large fire"
+  ))
+glimpse(forest)
+```
+:::
+
+## Step 2: Summarize and normalize variables {.smaller}
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+
+library(scales)
+library(fmsb)
+# Select and normalize variables
+radar_data <- forest %>%
+    group_by(area_group) %>%
+    summarise(
+        temp = mean(temp),
+        RH = mean(RH),
+        wind = mean(wind),
+        rain = mean(rain)
+    ) %>%
+    # normalize to [0, 1]
+    mutate(across(where(is.numeric), rescale))  
+
+# Convert to fmsb format
+# fmsb expects first two rows to be max and min
+radar_df <- radar_data %>%
+    tibble::column_to_rownames("area_group") %>%
+    as.data.frame()
+
+# fmsb expects first two rows: max then min
+max_row <- rep(1, ncol(radar_df))
+min_row <- rep(0, ncol(radar_df))
+radar_df <- rbind(max = max_row, min = min_row, radar_df)
+
+print(radar_df)
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+
+library(scales)
+library(fmsb)
+# Select and normalize variables
+radar_data <- forest %>%
+  group_by(area_group) %>%
+  summarise(
+    temp = mean(temp),
+    RH = mean(RH),
+    wind = mean(wind),
+    rain = mean(rain)
+  ) %>%
+  mutate(across(where(is.numeric), rescale))  # normalize to [0, 1]
+
+# Convert to fmsb format
+# fmsb expects first two rows to be max and min
+radar_df <- radar_data %>%
+  tibble::column_to_rownames("area_group") %>%
+  as.data.frame()
+
+# fmsb expects first two rows: max then min
+max_row <- rep(1, ncol(radar_df))
+min_row <- rep(0, ncol(radar_df))
+radar_df <- rbind(max = max_row, min = min_row, radar_df)
+
+print(radar_df)
+```
+
+:::
+
+## Step 3: Plot the Radar Chart {.smaller}
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+radarchart(radar_df,
+           axistype = 1,
+           pcol = c("red", "orange", "grey", "darkgreen"),
+           plwd = 2,
+           plty = 1,
+           cglcol = "grey",
+           cglty = 1,
+           axislabcol = "black",
+           caxislabels = seq(0, 1, 0.2),
+           title = "Weather Profiles by Fire Size")
+
+legend("bottomright", 
+       legend = rownames(radar_df[-c(1,2),]), 
+       col = c("red", "orange", "grey", "darkgreen"), 
+       lty = 1, lwd = 2, bty = "n")
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r fig.width=5, fig.height=6}
+#| echo: FALSE
+#| eval: TRUE
+radarchart(radar_df,
+           axistype = 1,
+           pcol = c("red", "orange", "grey", "darkgreen"),
+           plwd = 2,
+           plty = 1,
+           cglcol = "grey",
+           cglty = 1,
+           axislabcol = "black",
+           caxislabels = seq(0, 1, 0.2),
+           title = "Weather Profiles by Fire Size")
+
+legend("bottomright", legend = rownames(radar_df[-c(1,2),]), 
+       col = c("red", "orange", "grey", "darkgreen"), 
+       lty = 1, lwd = 2, bty = "n")
+```
+
+:::
+
+## Make radar chart with `{ggradar}` {.smaller}
+
+Once you have `radar_data` prepared, you can use the `ggradar` package to create a more polished radar chart.
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+remotes::install_github("ricardo-bion/ggradar")
+library(ggradar)
+ggradar(radar_data,
+        grid.min = 0, grid.mid = 0.5, grid.max = 1,
+        group.line.width = 1.2,
+        group.colours = c('red', 'orange', 'grey', 'darkgreen'),
+        group.point.size = 3,
+        font.radar = "Arial",
+        values.radar = c("0", "0.5", "1"),
+        background.circle.colour = "transparent",
+        legend.position = "bottom") +
+    ggtitle("Weather Profiles by Fire Size") +
+    theme(
+        legend.text = element_text(size = 11),
+        legend.key.width = unit(0.5, "cm")
+    )
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r fig.width=4.5, fig.height=5}
+#| echo: FALSE
+#| eval: TRUE
+remotes::install_github("ricardo-bion/ggradar")
+library(ggradar)
+ggradar(radar_data,
+        grid.min = 0, grid.mid = 0.5, grid.max = 1,
+        group.line.width = 1.2,
+        group.colours = c('red', 'orange', 'grey', 'darkgreen'),
+        group.point.size = 3,
+        font.radar = "Arial",
+        values.radar = c("0", "0.5", "1"),
+        background.circle.colour = "transparent",
+        legend.position = "bottom") +
+    ggtitle("Weather Profiles by Fire Size") +
+    theme(
+        legend.text = element_text(size = 11),
+        legend.key.width = unit(0.5, "cm")
+    )
+```
+
+:::
+
+## What is a Sankey diagram? {.smaller}
+
+- A **Sankey diagram** visualizes flows between categories.
+- The width of each flow is proportional to the count or magnitude.
+- Great for showing step-wise processes, transitions, or categorical relationships.
+
+
+## Why Use a Sankey Diagram to explore the `adult` data? {.smaller}
+- Visualize **income distribution** across multiple categorical variables.
+- Visualize **distributional flows** like:
+  - Education → Occupation → Income
+  - Gender → Workclass → Income
+
+## Step 1: Load and Prepare the Data {.smaller}
+
+> Adult Income Dataset
+This dataset contains 32,561 observations, each representing a single adult individual from the 1994 U.S. Census database. Each observation includes demographic and employment-related variables such as age, sex, education, occupation, and work hours, as well as an income label indicating whether the person earns more or less than $50,000 per year. The dataset is commonly used to study social and economic patterns, and to explore factors associated with income inequality.
+
+:::scroll-output
+
+```{r}
+#| echo: TRUE
+# Keep only relevant columns
+adult_sankey <- adult %>%
+  select(sex, education, occupation, income) %>%
+  filter(complete.cases(.))
+
+flow_data <- adult_sankey %>%
+  count(sex, education, occupation, income) %>%
+  ungroup()
+
+glimpse(flow_data)
+```
+:::
+
+## Step 2: Summarize and plot with `{ggalluvial}` {.smaller}
+
+>3-axis Sankey diagrams can quickly become cluttered when categorical variables have too many levels
+
+::: {.column width="50%"}
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+library(ggalluvial)
+library(ggplot2)
+
+# Basic 3-axis Sankey
+ggplot(flow_data,
+       aes(axis1 = sex, axis2 = education, axis3 = occupation, y = n)) +
+    geom_alluvium(aes(fill = sex), width = 1/12) +
+    geom_stratum(width = 1/12, fill = "grey80", color = "black") +
+    geom_text(stat = "stratum", aes(label = after_stat(stratum)), size = 3) +
+    scale_x_discrete(limits = c("Sex", "Education", "Occupation"), expand = c(.05, .05)) +
+    labs(title = "Flow from Sex to Education to Occupation",
+         y = "Number of People") +
+    theme_minimal()+
+    theme(legend.position = "bottom")
+```
+:::
+
+::: {.column width="50%"}
+```{r fig.width=5, fig.height=4.5}
+#| echo: FALSE
+#| eval: TRUE
+library(ggalluvial)
+library(ggplot2)
+
+# Basic 3-axis Sankey
+ggplot(flow_data,
+       aes(axis1 = sex, axis2 = education, axis3 = occupation, y = n)) +
+    geom_alluvium(aes(fill = sex), width = 1/12) +
+    geom_stratum(width = 1/12, fill = "grey80", color = "black") +
+    geom_text(stat = "stratum", aes(label = after_stat(stratum)), size = 3) +
+    scale_x_discrete(limits = c("Sex", "Education", "Occupation"), expand = c(.05, .05)) +
+    labs(title = "Flow from Sex to Education to Occupation",
+         y = "Number of People") +
+    theme_minimal() +
+    theme(legend.position = "bottom")
+```
+:::
+
+## Step 3: regroup categorical data {.smaller}
+
+> Using tools like `forcats::fct_lump()` and binning to reduce the number of flows and make the diagram more readable.
+
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+adult_sankey <- adult_sankey %>%
+    # keep the five most common occupations
+    mutate(occupation = fct_lump(occupation, n = 5)) %>%
+    # group education levels
+    mutate(education_group = case_when(
+    education %in% c("Preschool", "1st-4th", "5th-6th", "7th-8th", "9th", "10th", "11th", "12th") ~ "Less than HS",
+    education == "HS-grad" ~ "HS Graduate",
+    education %in% c("Some-college", "Assoc-acdm", "Assoc-voc") ~ "Some College / Associate",
+    education %in% c("Bachelors") ~ "Bachelor's",
+    education %in% c("Masters", "Doctorate", "Prof-school") ~ "Grad Degree",
+    TRUE ~ "Other"
+  )) %>%
+  mutate(education_group = factor(education_group, levels = c("Less than HS", "HS Graduate", "Some College / Associate", "Bachelor's", "Grad Degree")))
+flow_data <- adult_sankey %>%
+  count(sex, education_group, occupation, income)
+glimpse(flow_data)
+```
+
+## Step 4: replot Sankey diagram {.smaller}
+
+::: {.column width="30%"}
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+# Plot Sankey with 4 axes
+ggplot(flow_data,
+       aes(axis1 = sex, axis2 = education_group, axis3 = occupation, axis4 = income, y = n)) +
+    geom_alluvium(aes(fill = sex), width = 1/12) +
+    geom_stratum(width = 1/12, fill = "grey90", color = "black") +
+    geom_text(stat = "stratum", aes(label = after_stat(stratum)), size = 3) +
+    scale_x_discrete(limits = c("Sex", "Education", "Occupation", "Income"), expand = c(.05, .05)) +
+    labs(title = "Simplified Flow: Sex → Education → Occupation → Income",
+         y = "Number of People") +
+    theme_minimal() +
+    theme(legend.position = "bottom")
+```
+
+:::
+
+::: {.column width="70%"}
+
+```{r fig.width=7, fig.height=6 }
+#| echo: FALSE
+#| eval: TRUE
+# Plot Sankey with 4 axes
+ggplot(flow_data,
+       aes(axis1 = sex, axis2 = education_group, axis3 = occupation, axis4 = income, y = n)) +
+    geom_alluvium(aes(fill = sex), width = 1/12) +
+    geom_stratum(width = 1/12, fill = "grey90", color = "black") +
+    geom_text(stat = "stratum", aes(label = after_stat(stratum)), size = 3) +
+    scale_x_discrete(limits = c("Sex", "Education", "Occupation", "Income"), expand = c(.05, .05)) +
+    labs(title = "Simplified Flow: Sex → Education → Occupation → Income",
+         y = "Number of People") +
+    theme_minimal() +
+    theme(legend.position = "bottom")
+```
+:::
+
+## Step 5: filter out weak links {.smaller}
+
+
+```{r}
+#| echo: TRUE
+flow_data_filtered <- flow_data %>%
+  filter(n >= 0.005 * sum(n))  # Keep flows >= 0.5% of total
+```
+
+```{r fig.width=7, fig.height=6 }
+#| echo: FALSE
+#| eval: TRUE
+# Plot Sankey with 4 axes
+ggplot(flow_data_filtered,
+       aes(axis1 = sex, axis2 = education_group, axis3 = occupation, axis4 = income, y = n)) +
+    geom_alluvium(aes(fill = sex), width = 1/12) +
+    geom_stratum(width = 1/12, fill = "grey90", color = "black") +
+    geom_text(stat = "stratum", aes(label = after_stat(stratum)), size = 3) +
+    scale_x_discrete(limits = c("Sex", "Education", "Occupation", "Income"), expand = c(.05, .05)) +
+    labs(title = "Simplified Flow: Sex → Education → Occupation → Income",
+         y = "Number of People") +
+    theme_minimal() +
+    theme(legend.position = "bottom")
+```
+## What is a Parallel Coordinates Plot (PCP)? {.smaller}
+
+- A visualization for **multivariate data**, especially numeric.
+- Each line represents:
+  - an **individual** (for raw data), or
+  - a **group profile** (for summarized counts).
+- Useful for spotting clusters, trends, and differences between groups.
+
+## Variation 1: Individual-level PCP {.smaller}
+
+>Scaling variable is a crucial step to build a proper parallel coordinates chart. It transforms the raw data to a new scale that is common with other variables, and thus allow to compare them.
+
+```{r}
+#| echo: TRUE
+library(GGally)
+# Prepare numeric individual-level data
+adult_pc <- adult %>%
+  select(age, education_num, hours_per_week, capital_gain, capital_loss, income) %>%
+  filter(complete.cases(.)) %>%
+  mutate(across(where(is.numeric), rescale))  # normalize for comparability
+
+# Sample for readability
+set.seed(123)
+adult_sample <- adult_pc %>%
+  group_by(income) %>%
+  sample_n(250)
+glimpse(adult_sample)
+```
+
+## Variation 1: Individual-level PCP {.smaller}
+```{r fig.height=4, fig.width=7}
+#| echo: TRUE
+# Individual-level parallel coordinate plot
+GGally::ggparcoord(
+  data = adult_sample,
+  columns = 1:5,
+  groupColumn = 6,
+  scale = "globalminmax",
+  showPoints = FALSE,
+  alphaLines = 0.3,
+  title = "Parallel Coordinate Plot (Individual-Level)") +
+  theme_minimal() +
+  labs(x = "Variables", y = "Normalized Value")
+```
+
+## Variation 2: Group-level PCP {.smaller}
+
+>In this variation, we summarize the data to create group profiles, which allows us to visualize the average characteristics of each income group across multiple variables.
+
+```{r}
+#| echo: TRUE
+# Count and reshape for parallel coordinates
+edu_occ_income <- adult_sankey %>%
+  count(income, education_group, occupation) %>%
+  pivot_wider(names_from = occupation, values_from = n, values_fill = 0)%>%
+  mutate(income = factor(income, labels = c("<=50K", ">50K")))
+glimpse(edu_occ_income)
+```
+
+## Variation 2: Group-level PCP {.smaller}
+
+::: {.column width="50%"}
+
+```{r fig.height=4, fig.width=7}
+#| echo: TRUE
+#| eval: FALSE
+# Group-level profile parallel coordinate plot
+income_labels <- c(`1` = "Income <=50K", `2` = "Income >50K")
+GGally::ggparcoord(
+    data = edu_occ_income,
+    columns = 3:ncol(edu_occ_income), # occupation columns
+    groupColumn = 2, #education group
+    scale = "globalminmax",
+    showPoints = TRUE,
+    title = "Group Profile Plot:\nEducation vs. Occupation by Income") +
+    theme_minimal(base_size = 14) +
+    facet_wrap(. ~ income, ncol = 1, labeller = as_labeller(income_labels), scales = "free") +
+    labs(x = "Occupation", y = "Relative Count") +
+    coord_flip() +
+    theme(legend.position = "bottom")+
+    guides(color = guide_legend(nrow = 3)) 
+```
+:::
+
+
+::: {.column width="50%"}
+
+```{r fig.height=8, fig.width=7}
+#| echo: FALSE
+#| eval: TRUE
+# Group-level profile parallel coordinate plot
+income_labels <- c(`1` = "Income <=50K", `2` = "Income >50K")
+GGally::ggparcoord(
+    data = edu_occ_income,
+    columns = 3:ncol(edu_occ_income), # occupation columns
+    groupColumn = 2, #education group
+    scale = "globalminmax",
+    showPoints = TRUE,
+    title = "Group Profile Plot:\nEducation vs. Occupation by Income") +
+    theme_minimal(base_size = 14) +
+    facet_wrap(. ~ income, ncol = 1, labeller = as_labeller(income_labels), scales = "free") +
+    labs(x = "Occupation", y = "Relative Count") +
+    coord_flip() +
+    theme(legend.position = "bottom")+
+    guides(color = guide_legend(nrow = 3)) 
+```
+:::
+
+## Comparing two variations {.smaller}
+
+::: {.column width="50%"}
+
+Individual-level parallel coordinates plot:
+
+- Each line = one person
+- Color by group variable, `income`
+- Use this to explore variable interactions and clusters
+
+:::
+
+::: {.column width="50%"}
+
+Group-level parallel coordinates plot:
+
+- Each line = one education group
+- Use this to compare how different `education` groups are distributed across `occupations`
+- `income` in represented by facets
+:::
+
+. . .
+
+::: takeaway
+*Discussion:*
+
+When is it better to use individual-level data vs. group-level profiles in a parallel coordinate plot?
+:::
+
+##  {background="#033C5A"}
+<br>
+<br>
+<br>
+
+<div class="page-center vertical-center">
+<p class="custom-subtitle bottombr">{{<fa tools title="let's practice" >}} Your turn to make some graphs! </p>
+<p class="caption-text">*~ Head over to lab3 notebook! ~*</p>
+</div>
+
+
+## Outline for today {.smaller}
+
+- Introducing the datasets
+
+- Review faceted plots
+
+- Introduce radar charts, Sankey diagrams, and parallel coordinates plot
+
+- **Dos and Don'ts when designing visualizations**
+
+## DO: Clear, informative titles and labels {.smaller-title}
+
+:::{.column width="50%"}
+✅ DO
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 3
+ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_boxplot() +
+  labs(
+    title = "Miles per Gallon by Number of Cylinders",
+    x = "Number of Cylinders",
+    y = "MPG"
+  ) +
+  theme_minimal()
+```
+
+:::
+
+:::{.column width="50%"}
+❌ Don’t
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 3
+ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_boxplot() +
+  ggtitle("Plot 1") +  # Uninformative
+  theme_gray()         # Cluttered default theme
+```
+
+:::
+
+## DO: Choose the right chart type {.smaller-title}
+
+:::{.column width="50%"}
+✅ DO
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 4
+ggplot(airquality, aes(x = Day, y = Temp)) +
+  geom_line() +
+  facet_wrap(~ Month) +
+  labs(title = "Daily Temperature by Month", x = "Day", y = "Temperature (F)") +
+  theme_minimal()
+```
+
+:::
+
+:::{.column width="50%"}
+❌ Don’t
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 4
+ggplot(airquality, aes(x = Month, y = Temp)) +
+  geom_bar(stat = "identity") +
+  ggtitle("Temp by Month")  # Misleading chart type
+```
+
+*What is this chart showing? Average temperature or total temperature by month?*
+
+:::
+
+## DO: Choose the right chart type {.smaller-title}
+
+:::{.column width="50%"}
+✅ DO
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 4
+ggplot(airquality, aes(x = Day, y = Temp)) +
+  geom_line() +
+  facet_wrap(~ Month) +
+  labs(title = "Daily Temperature by Month", x = "Day", y = "Temperature (F)") +
+  theme_minimal()
+```
+
+:::
+
+:::{.column width="50%"}
+❌ Don’t
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 4
+ggplot(airquality, aes(x = Month, y = Temp)) +
+  geom_bar(stat = "identity", color = 'orange') +
+  ggtitle("Temp by Month")  # Misleading chart type
+```
+
+*It stacks daily temperature on top of each other, which makes no sense*
+
+:::
+
+## DO: Use accessible colors {.smaller-title}
+
+:::{.column width="50%"}
+✅ DO use `viridis` scale
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 3
+ggplot(mtcars, aes(x = wt, y = mpg, color = hp)) +
+  geom_point(size = 3) +
+  scale_color_viridis_c(option = "plasma") +
+  labs(
+    title = "Fuel Efficiency vs Weight of Car",
+    x = "Weight (1000 lbs)",
+    y = "Miles per Gallon",
+    color = "Horsepower"
+  ) +
+  theme_minimal()
+```
+
+:::
+
+:::{.column width="50%"}
+❌ Don’t use rainbow colors
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 3
+ggplot(mtcars, aes(x = wt, y = mpg, color = hp)) +
+  geom_point(size = 3) +
+  scale_color_gradientn(colors = rainbow(7)) +
+  labs(
+    title = "Fuel Efficiency vs Weight of Car",
+    x = "Weight (1000 lbs)",
+    y = "Miles per Gallon",
+    color = "Horsepower"
+  ) +
+  theme_minimal()
+```
+
+:::
+
+
+## DO: Order categorical axes intentionally {.smaller-title}
+
+:::{.column width="50%"}
+✅ DO 
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 4.5
+mtcars %>%
+    rownames_to_column(var = "model") %>%
+    ggplot(aes(x = fct_reorder(model, mpg), y = mpg)) +
+    geom_col(fill = "steelblue") +
+    labs(title = "Fuel Efficiency by Car Model", x = "Car Model (ordered by MPG)", y = "Miles per Gallon") +
+    coord_flip() +
+    theme_minimal()
+```
+
+:::
+
+:::{.column width="50%"}
+❌ Don’t 
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 4.5
+mtcars %>%
+    rownames_to_column(var = "model") %>%
+    ggplot(aes(x = model, y = mpg)) +
+    geom_col(fill = "steelblue") +
+    labs(title = "Fuel Efficiency by Car Model", x = "Car Model (ordered by MPG)", y = "Miles per Gallon") +
+    coord_flip() +
+    theme_minimal()
+```
+
+:::
+
+## DO: Use appropriate scales {.smaller-title}
+
+:::{.column width="50%"}
+✅ DO log-transform right skewed variables
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 4
+#| code-line-numbers: "3,4"
+ggplot(diamonds, aes(x = carat, y = price)) +
+  geom_point(alpha = 0.2, color = "steelblue") +
+  scale_x_log10() +
+  scale_y_log10(labels = scales::dollar_format(accuracy = 1)) +
+  labs(
+    title = "Diamond Price vs Carat (Log-Log Scale)",
+    x = "Carat (log scale)",
+    y = "Price (log scale)") +
+  theme_minimal()
+```
+
+:::
+
+:::{.column width="50%"}
+❌ Don’t mindlessly use raw scale
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 4
+
+ggplot(diamonds, aes(x = carat, y = price)) +
+  geom_point(alpha = 0.2, color = "steelblue") +
+  labs(
+    title = "Diamond Price vs Carat (Raw Scale)",
+    x = "Carat",
+    y = "Price"
+  ) +
+  theme_minimal()
+```
+
+:::
+
+## DO: Add helpful annotations {.smaller-title}
+
+:::{.column width="50%"}
+✅ DO use direct labels
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 3
+label_df <- mtcars %>%
+  group_by(cyl) %>%
+  summarise(hp = mean(hp), mpg = mean(mpg))
+ggplot(mtcars, aes(x = hp, y = mpg, color = factor(cyl))) +
+  geom_point(size = 3, alpha = 0.6) +
+  ggrepel::geom_label_repel(
+    data = label_df,
+    aes(label = paste0(cyl, " cyl"), fill = factor(cyl)),
+    show.legend = FALSE, size = 4, fontface = "bold", color = "black") +
+  labs(title = "Fuel Efficiency vs Horsepower", x = "Horsepower", y = "Miles per Gallon") +
+    guides(color = "none") +
+  theme_minimal()
+```
+
+:::
+
+:::{.column width="50%"}
+❌ Don’t only rely on legends
+
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 3
+
+ggplot(mtcars, aes(x = hp, y = mpg, color = factor(cyl))) +
+  geom_point(size = 3) +
+  labs(
+    title = "Fuel Efficiency vs Horsepower",
+    x = "Horsepower",
+    y = "Miles per Gallon",
+    color = "Cylinders"
+  ) +
+  theme_minimal()
+```
+
+:::
+
+## DO: Use clear typeface and fonts {.smaller-title}
+
+:::{.column width="50%"}
+✅ DO 
+```{r}
+#| echo: TRUE
+#| fig.width: 5
+#| fig.height: 3
+library(showtext)
+font_add_google("Lato", "lato")
+showtext_auto()
+ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_boxplot() +
+  theme_minimal(base_family = "lato") +
+  labs(title = "MPG by Cylinders (Lato Font)")
+```
+
+:::
+
+:::{.column width="50%"}
+❌ Don’t have tiny fonts
+
+```{r}
+#| echo: TRUE
+ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_boxplot() +
+  theme(text = element_text(size = 8)) +
+  labs(title = "MPG by Cylinders")
+```
+
+:::
+
+## More on typeface {.smaller}
+
+![](images/typeface-matters.png)
+
+::: citation
+Source: Typography for a better user experience, by [Suvo Ray](https://www.suvoray.com/notes/typography-for-a-better-user-experience)
+:::
+
+## Some general rules {.smaller}
+
+- Use **sans-serif** fonts for digital displays (e.g., Arial, Helvetica, Lato).
+- **Serif** fonts are typically only used for visualization headlines (e.g., Times New Roman, Georgia).
+- Avoid using too many typefaces (just 1-3)
+- Use a typeface with lining figures for numerals
+![](images/font-1.png){ width="50%"}
+- Use a monospaced typeface for numerals
+![](images/font-2.png){ width="50%"}
+
+
+## Create hierarchy with font size, weight, and style {.smaller-title}
+![](images/font-3.png)
+
+::: citation
+Source: The UX Designer's Guide to Typography by [Chaosamran_Studio](https://www.interaction-design.org/literature/article/the-ux-designer-s-guide-to-typography)
+:::
+
+## Pick a typeface from Google Fonts {.smaller}
+
+![](images/google-fonts.gif)
+
+::: citation
+[https://fonts.google.com/](https://fonts.google.com/)
+
+Source: [EDS 240](https://eds-240-data-viz.github.io/course-materials/lecture-slides/lecture6.1-typography-slides.html#/pick-google-fonts)
+:::
+
+
+##  End-of-Class Survey {background="#033C5A"}
+<br>
+<br>
+<br>
+
+<div class="page-center vertical-center">
+<p class="custom-subtitle bottombr">{{<fa pen-to-square title="edit or fill out survey">}} Fill out the end-of-class survey </p>
+<p class="caption-text">*~ This is the end of Lab 3 ~*</p>
+</div>
+
+```{r}
+countdown::countdown(
+  minutes = 10,
+  # left = 0, right = 0,
+  # Fanfare when it's over
+  play_sound = TRUE,
+  color_border              = "#FFFFFF",
+  color_text                = "#7aa81e",
+  color_running_background  = "#7aa81e",
+  color_running_text        = "#FFFFFF",
+  color_finished_background = "#ffa07a",
+  color_finished_text       = "#FFFFFF",
+  font_size = "2em",
+  )
+```
