@@ -1,0 +1,159 @@
+---
+title: "Lab 5"
+author: "Your Name"
+date: "2025-XX-XX"
+params:
+  number: 5
+  purpose: "The purpose of this lab is to follow a public data tutorial and recreate a water insecurity visualization using Census and spatial data."
+format: 
+  html:
+    toc: true
+    toc-location: right
+    code-fold: true
+    theme: flatly
+    self-contained: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+
+```{r}
+#| label: setup
+#| include: false
+
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.path = "figs/",
+    fig.width = 7.252,
+    fig.height = 4,
+    comment = "#>",
+    fig.retina = 3
+)
+```
+
+## Before your start the lab notebook
+
+- Update the header - put your name in the `author` argument and put today's date in the `date` argument.
+- Click the "Render" button in RStudio and then open the rendered `5-lab5.html` page.
+- Then go back and try changing the `theme` argument in the header to something else - you can see other available themes [here](https://quarto.org/docs/output-formats/html-themes.html). Notice the difference when you render now!
+
+## Lab 5: Mapping Water Insecurity with `tidycensus` and `ggplot2`
+
+
+In this lab, you will recreate a public map visualization of plumbing access across the U.S. using data from the American Community Survey (ACS) via the `tidycensus` package. You will:
+
+- Use `get_acs()` to retrieve county-level data
+- Clean and reshape the data
+- Visualize the spatial distribution of plumbing access using `ggplot2`
+- Create a choropleth map
+- Complete a short design challenge to create your own variation of the map
+
+### Reference Tutorial:
+[Mapping water insecurities in R with tidycensus](https://waterdata.usgs.gov/blog/acs-maps/#visualizing-total-population-vs-percent-lacking-plumbing-across-counties-in-the-western-us)
+
+### Suggested Reading:
+- [R for Data Science (2e), Chapter 11 – Visualize](https://r4ds.hadley.nz/visualize)
+
+---
+
+
+## 1 Load Libraries & Set Up
+
+```{r}
+library(tidyverse)
+library(tidycensus)
+library(sf)
+library(ggthemes)
+library(viridis)
+
+# In .Renviron
+# CENSUS_API_KEY="your census"
+
+census_api_key(Sys.getenv("CENSUS_API_KEY"), install = TRUE, overwrite = TRUE)
+
+```
+
+
+## 2 Acquire the Data
+
+Use get_acs() to retrieve county-level data for the Western states in 2022 and 2023:
+
+- Total population: `B01003_001`
+
+- Households without plumbing: `B25016_003`
+
+```{r}
+# your code here, or use the code from tutorial
+```
+
+## 3 Pivot the data wider and calculate the percent of people without plumbing
+
+Pivot the data wider so that each row contains both population and plumbing information. Check your result using `glimpse()` or `summary()`.
+
+```{r}
+# your code here, or use the code from tutorial
+```
+
+
+## 4 Create a choropleth map showing % without plumbing.
+
+In this tutorial, they use `geom_sf()` to make choropleth map, but you can also use `tmap()` like we covered in the lecture if you prefer.
+
+```{r}
+# your code here, or use the code from tutorial
+```
+
+What does this preview map show? Are there clear spatial patterns?
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+## 5 Refined Choropleth Map
+
+Recreate the polished map from the USGS tutorial. Consider:
+
+- Restricting to western U.S. states (AK, AZ, CA, CO, HI, ID, MT, NM, NV, OR, UT, WA, WY)
+- Adjusting the color scale
+- Adding meaningful titles and captions
+
+```{r}
+# your code here, or use the code from tutorial
+```
+
+What refinements did you add in step 5 compared to step 4? How do these changes improve the visualization?
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+## 6 Create Your Own Map
+
+Use the same dataset and design a different map. Possibilities include:
+
+- Plotting absolute number of people without plumbing
+- Faceting by region or state or urban/rural classification
+- Changing map projection or styling
+
+```{r}
+# your code here
+```
+
+::: {.callout-note title="Your Interpretation"}
+explain what your new visualization shows.
+:::
+
+
+## Save and Push Your Work
+
+Remember to save your `.qmd` and render the HTML output before committing to GitHub.
+
+```{bash eval = FALSE}
+git add 5-lab5.qmd 5-lab5.html
+git commit -m "Final submission for Lab5"
+git push
+```
+
