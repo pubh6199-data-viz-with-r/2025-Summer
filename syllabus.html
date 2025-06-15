@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Syllabus – PUBH 6199: Visualizing Data with R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./images/favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2d96ae179f3cc019036749b16343d4b7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<!-- fontawesome icons -->
+<script src="https://kit.fontawesome.com/1392a7030f.js" crossorigin="anonymous"></script>
+
+
+
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="Syllabus – PUBH 6199: Visualizing Data with R">
+<meta property="og:description" content="Course website for PUBH 6199: Visualizing Data with R at George Washington University, offered in Summer 2025.">
+<meta property="og:image" content="https://pubh6199-data-viz-with-r.github.io/2025-Summer/images/rubber-duck.png">
+<meta property="og:site_name" content="https://pubh6199-data-viz-with-r.github.io/">
+<meta property="og:locale" content="es_ES">
+<meta property="og:image:height" content="700">
+<meta property="og:image:width" content="700">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./syllabus.html">Syllabus</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">PUBH 6199: Visualizing Data with R</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><i class="bi bi-house-door-fill" role="img">
+</i> 
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./syllabus.html" class="sidebar-item-text sidebar-link active"><i class="bi bi-map-fill" role="img">
+</i> 
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./schedule.html" class="sidebar-item-text sidebar-link"><i class="bi bi-table" role="img">
+</i> 
+ <span class="menu-text">Schedule</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./software.html" class="sidebar-item-text sidebar-link"><i class="bi bi-download" role="img">
+</i> 
+ <span class="menu-text">Software</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./faq.html" class="sidebar-item-text sidebar-link"><i class="bi bi-question-square-fill" role="img">
+</i> 
+ <span class="menu-text">FAQ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://pubh6199datav-7n52652.slack.com" class="sidebar-item-text sidebar-link"><i class="bi bi-slack" role="img">
+</i> 
+ <span class="menu-text">Slack</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://calendly.com/xindi-hu/pubh6199-office-hour" class="sidebar-item-text sidebar-link"><i class="bi bi-clock-fill" role="img">
+</i> 
+ <span class="menu-text">Schedule a call w/Prof.&nbsp;Hu</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false"><i class="bi bi-question-circle-fill" role="img">
+</i> 
+ <span class="menu-text">Other</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./about.html" class="sidebar-item-text sidebar-link"><i class="bi bi-question-circle-fill" role="img">
+</i> 
+ <span class="menu-text">About</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./LICENSE.html" class="sidebar-item-text sidebar-link"><i class="bi bi-award-fill" role="img">
+</i> 
+ <span class="menu-text">License</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="mailto:xindi.hu@gwu.edu" class="sidebar-item-text sidebar-link"><i class="bi bi-envelope-fill" role="img">
+</i> 
+ <span class="menu-text">Contact</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://github.com/pubh6199-data-viz-with-r/2025-Summer" class="sidebar-item-text sidebar-link"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text">Source files</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#course-information" id="toc-course-information" class="nav-link active" data-scroll-target="#course-information">Course Information</a>
+  <ul class="collapse">
+  <li><a href="#course-description" id="toc-course-description" class="nav-link" data-scroll-target="#course-description">Course Description</a></li>
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
+  </ul></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#required-texts-materials" id="toc-required-texts-materials" class="nav-link" data-scroll-target="#required-texts-materials">Required Texts &amp; Materials</a>
+  <ul class="collapse">
+  <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">Software</a></li>
+  <li><a href="#texts" id="toc-texts" class="nav-link" data-scroll-target="#texts">Texts</a></li>
+  </ul></li>
+  <li><a href="#assignments" id="toc-assignments" class="nav-link" data-scroll-target="#assignments">Assignments</a>
+  <ul class="collapse">
+  <li><a href="#participation-attendance" id="toc-participation-attendance" class="nav-link" data-scroll-target="#participation-attendance">Participation &amp; Attendance</a></li>
+  <li><a href="#end-of-class-survey" id="toc-end-of-class-survey" class="nav-link" data-scroll-target="#end-of-class-survey">End-of-class survey</a></li>
+  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework">Homework</a></li>
+  <li><a href="#final-project" id="toc-final-project" class="nav-link" data-scroll-target="#final-project">Final Project</a></li>
+  </ul></li>
+  <li><a href="#grading" id="toc-grading" class="nav-link" data-scroll-target="#grading">Grading</a>
+  <ul class="collapse">
+  <li><a href="#category-breakdown" id="toc-category-breakdown" class="nav-link" data-scroll-target="#category-breakdown">Category Breakdown</a></li>
+  <li><a href="#grading-scale" id="toc-grading-scale" class="nav-link" data-scroll-target="#grading-scale">Grading Scale</a></li>
+  <li><a href="#rounding" id="toc-rounding" class="nav-link" data-scroll-target="#rounding">Rounding</a></li>
+  </ul></li>
+  <li><a href="#getting-help" id="toc-getting-help" class="nav-link" data-scroll-target="#getting-help">Getting Help</a>
+  <ul class="collapse">
+  <li><a href="#slack" id="toc-slack" class="nav-link" data-scroll-target="#slack">Slack</a></li>
+  <li><a href="#office-hours" id="toc-office-hours" class="nav-link" data-scroll-target="#office-hours">Office Hours</a></li>
+  <li><a href="#library-services" id="toc-library-services" class="nav-link" data-scroll-target="#library-services">Library Services</a></li>
+  </ul></li>
+  <li><a href="#class-policies" id="toc-class-policies" class="nav-link" data-scroll-target="#class-policies">Class Policies</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/pubh6199-data-viz-with-r/2025-Summer/edit/main/syllabus.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/pubh6199-data-viz-with-r/2025-Summer/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Syllabus</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="course-information" class="level1">
+<h1>Course Information</h1>
+<div style="width:900px">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Instructor</th>
+<th>TA</th>
+<th>TA</th>
+<th>Course</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><i class="bi-person-fill"></i> Xindi (Cindy) Hu, ScD</td>
+<td><i class="bi-person-fill"></i> Silas Horn</td>
+<td><i class="bi-person-fill"></i> Sayam Palrecha</td>
+<td><i class="bi-clock-fill"></i> T/Th 3:10PM - 5:10PM ET</td>
+</tr>
+<tr class="even">
+<td><i class="bi-building-fill"></i> Milken #423 or <a href="https://gwu-edu.zoom.us/my/xindihu">Zoom</a></td>
+<td><i class="bi-building-fill"></i> Milken 4th floor or <a href="https://gwu-edu.zoom.us/j/4975946095">Zoom</a></td>
+<td><i class="bi-building-fill"></i> <a href="https://gwu-edu.zoom.us/my/pub6199">Zoom</a></td>
+<td><i class="bi-geo-alt-fill"></i> <a href="https://it.gwu.edu/classroom-search/milken-400a">Milken 400A</a></td>
+</tr>
+<tr class="odd">
+<td><i class="bi-telephone-fill"></i> +1 (202) 994-7766</td>
+<td><i class="bi-telephone-fill"></i> NA</td>
+<td><i class="bi-telephone-fill"></i> NA</td>
+<td><i class="bi-calendar-week-fill"></i> May. 20 - June 27, 2025</td>
+</tr>
+<tr class="even">
+<td><i class="bi-envelope-fill"></i> <a href="mailto:xindi.hu@gwu.edu">Email Prof.&nbsp;Hu</a></td>
+<td><i class="bi-envelope-fill"></i> <a href="mailto:silas.horn@gwmail.gwu.edu">Email Silas</a></td>
+<td><i class="bi-envelope-fill"></i> <a href="mailto:sayam.palrecha@gwmail.gwu.edu">Email Sayam</a></td>
+<td><i class="bi-slack"></i> <a href="https://pubh6199datav-7n52652.slack.com" target="_blank">Slack</a></td>
+</tr>
+<tr class="odd">
+<td><i class="bi-clock-fill"></i> <a href="https://calendly.com/xindi-hu/pubh6199-office-hour">By appointment</a></td>
+<td><i class="bi-clock-fill"></i> W 2-3PM ET</td>
+<td><i class="bi-clock-fill"></i> M 4-5PM ET</td>
+<td><img src="images/rubber-duck.png" width="30"> Class mascot</td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="course-description" class="level2">
+<h2 class="anchored" data-anchor-id="course-description">Course Description</h2>
+<p>This course will equip students with the skills and knowledge to create impactful and responsible data visualizations using the R programming language. At the end of this class, students will gain proficiency in both fundamental (e.g.&nbsp;bar chart, bubble chart, choropleth maps) as well as advanced graph types (e.g.&nbsp;Sankey diagram, heatmap, parallel coordinates plot, faceted graphs) and know how to create them using R.</p>
+</section>
+<section id="prerequisites" class="level2">
+<h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
+<p>This course is designed for students with proficiency in using the R programming language and working in the RStudio integrated development environment. Students can fulfill this prerequisite by having successfully completed courses such as PUBH 6131, 6144, 6282, 6851, 6854 or 6867. If you are unsure, contact the instructor to discuss your eligibility.</p>
+</section>
+</section>
+<section id="learning-objectives" class="level1">
+<h1>Learning Objectives</h1>
+<p>Upon completion of the course, students will be able to:</p>
+<ul>
+<li>Identify the effective types of data visualization for the data at hand and the intended audience</li>
+<li>Critique data visualizations and provide constructive feedback</li>
+<li>Prepare dataset for developing data visualization</li>
+<li>Create effective, ethical, and aesthetically-pleasing visualizations using R programming language</li>
+<li>Collaborate with classmates from diverse disciplinary background to carry out a visualization project</li>
+</ul>
+</section>
+<section id="required-texts-materials" class="level1">
+<h1>Required Texts &amp; Materials</h1>
+<p>All texts and software for this course is freely available on the web. This includes:</p>
+<section id="software" class="level2">
+<h2 class="anchored" data-anchor-id="software">Software</h2>
+<p>Go to the Course <a href="./software.html">Software page</a> for detailed instructions on how to install the software we’ll be using. Here’s a quick list:</p>
+<ul>
+<li>R version 4.4.2 or newer. Visit <a href="https://cloud.r-project.org">cloud.r-project.org</a> to download for your operating system.</li>
+<li>RStudio version 2024.09.1 or newer. Visit <a href="https://rstudio.com/products/rstudio/">rstudio.com/products/rstudio/</a>. Download the free (“Open Source Edition”) Desktop version for your operating system.</li>
+<li>We’ll be using <a href="https://pubh6199datav-7n52652.slack.com" target="_blank">Slack</a> for most communication.</li>
+</ul>
+</section>
+<section id="texts" class="level2">
+<h2 class="anchored" data-anchor-id="texts">Texts</h2>
+<p>Readings should be completed <strong>before</strong> coming to class! Most of which will come from these four books, which are mostly available free online. Occasionally we will have reading assignment from articles and books. Those will be posted on Blackboard (copyright permitting).</p>
+<ul>
+<li>Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund. “R for Data Science (2e)” [<a href="https://r4ds.hadley.nz/">free online</a>]</li>
+<li>Hadley Wickham, Danielle Navarro, and Thomas Lin Pedersen. “ggplot2: Elegant Graphics for Data Analysis (3e)” [<a href="https://ggplot2-book.org/">free online</a>]</li>
+<li>Hadley Wickham. “Mastering Shiny” [<a href="https://mastering-shiny.org/">free online</a>]</li>
+<li>Robin Lovelace, Jakub Nowosad, and Janne Muenchow. “Geocomputation with R” [<a href="https://r.geocompx.org/">free online</a>]</li>
+</ul>
+</section>
+</section>
+<section id="assignments" class="level1">
+<h1>Assignments</h1>
+<section id="participation-attendance" class="level2">
+<h2 class="anchored" data-anchor-id="participation-attendance">Participation &amp; Attendance</h2>
+<ul>
+<li>Attending class <strong>in person</strong> is mandatory. There will be an end-of-class survey at the end of each class.</li>
+<li>Attending lab <strong>in person</strong> is mandatory. Students are encouraged to preview the R markdown lab notebooks before the lab session, but it is not required they complete them before the lab session. Lab notebooks are due the following Monday. Completion of R markdown notebooks will count towards final grades.</li>
+</ul>
+</section>
+<section id="end-of-class-survey" class="level2">
+<h2 class="anchored" data-anchor-id="end-of-class-survey">End-of-class survey</h2>
+<p>End-of-class survey will be available at the last 10 minutes of each class.</p>
+<p>They are <strong>short</strong> (10 minutes) and are designed to test you paid attention in class and to demonstrate where additional study is needed.</p>
+</section>
+<section id="homework" class="level2">
+<h2 class="anchored" data-anchor-id="homework">Homework</h2>
+<p>Students will be responsible for two types of assignments throughout the semester:</p>
+<ul>
+<li><strong>Weekly homework</strong>: Weekly homework will provide an opportunity to practice visualization theory and skills introduced in class. Homework will be a mix of programming, design, and finishing the R markdown notebook.</li>
+<li><strong>Weekly lab</strong>: Completion of R markdown lab notebooks will count towards final grades.</li>
+</ul>
+</section>
+<section id="final-project" class="level2">
+<h2 class="anchored" data-anchor-id="final-project">Final Project</h2>
+<p>Throughout the semester, students will work in teams of 2-3 students towards a final project of data visualizations to convey findings around a topic of their choice. Instructor can help point students to datasets they can use for the final project. All members of a group are required to contribute to at least one graph, present during the last class, and complete a peer evaluation.</p>
+</section>
+</section>
+<section id="grading" class="level1">
+<h1>Grading</h1>
+<section id="category-breakdown" class="level2">
+<h2 class="anchored" data-anchor-id="category-breakdown">Category Breakdown</h2>
+<p>Final grades will be calculated as follows:</p>
+<div style="width:650px">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Item</th>
+<th>Weight</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Participation / Attendance</td>
+<td>10%</td>
+<td>Include attendance, contribution to in-class activities, completion of end-of-class surveys</td>
+</tr>
+<tr class="even">
+<td>Homework assignment</td>
+<td>35 %</td>
+<td>Weekly assignment</td>
+</tr>
+<tr class="odd">
+<td>Finished lab notebook</td>
+<td>15 %</td>
+<td>Weekly lab notebook</td>
+</tr>
+<tr class="even">
+<td>Final Project: Prototype V1</td>
+<td>7 %</td>
+<td>Due June 24th</td>
+</tr>
+<tr class="odd">
+<td>Final Project: Data visualization product</td>
+<td>18 %</td>
+<td>Due June 26th</td>
+</tr>
+<tr class="even">
+<td>Final Project: Presentation</td>
+<td>10 %</td>
+<td>Due June 26th</td>
+</tr>
+<tr class="odd">
+<td>Final Project: Peer evaluation</td>
+<td>5 %</td>
+<td>Due June 26th</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="grading-scale" class="level2">
+<h2 class="anchored" data-anchor-id="grading-scale">Grading Scale</h2>
+<div style="width:400px">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Grade</th>
+<th>Range</th>
+<th>Grade</th>
+<th>Range</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>93 - 100%</td>
+<td>C</td>
+<td>73 - 76.99%</td>
+</tr>
+<tr class="even">
+<td>A-</td>
+<td>90 - 92.99%</td>
+<td>C-</td>
+<td>70 - 72.99%</td>
+</tr>
+<tr class="odd">
+<td>B+</td>
+<td>87 - 89.99%</td>
+<td>D+</td>
+<td>67 - 69.99%</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td>83 - 86.99%</td>
+<td>D</td>
+<td>63 - 66.99%</td>
+</tr>
+<tr class="odd">
+<td>B-</td>
+<td>80 - 82.99%</td>
+<td>D-</td>
+<td>60 - 62.99%</td>
+</tr>
+<tr class="even">
+<td>C+</td>
+<td>77 - 79.99%</td>
+<td>F</td>
+<td>&lt; 59.99%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The course instructors may choose to change the scales at their discretion. You are guaranteed that your letter grade will never become worse as a result of changing scales.</p>
+</section>
+<section id="rounding" class="level2">
+<h2 class="anchored" data-anchor-id="rounding">Rounding</h2>
+<p><strong>I do not round final grades</strong>. Rather, I grade generously throughout the semester. For example, if you give a homework your best shot and completely fail it, you will likely get a 50% instead of a 0%. The 50% is for trying (if you simply don’t do it, you’ll get a 0%). As a result, I will not modify or round your final score, even if you’re very close to a different letter grade (e.g., a 93.98 is an “A-” and will not be rounded up to an “A”).</p>
+</section>
+</section>
+<section id="getting-help" class="level1">
+<h1>Getting Help</h1>
+<p>This class can be challenging - <strong>do not suffer in silence!</strong> We have lots of ways to get help.</p>
+<section id="slack" class="level2">
+<h2 class="anchored" data-anchor-id="slack">Slack</h2>
+<p>All course communication will be managed through <a href="https://pubh6199datav-7n52652.slack.com" target="_blank">Slack</a>. A link to sign up for the course slack page can be found on the one (and only) announcement on Blackboard.</p>
+<p><strong>You can use Slack to</strong>:</p>
+<ul>
+<li>Ask general questions.</li>
+<li>Ask for help with an assignment.</li>
+<li>Send direct, private messages to each other or the instructors (just like email…but better!)</li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>Asking for help on Slack</strong>: You can post questions on slack and receive quick responses. This also enables other students to see answers to common questions. Be specific - if your code has an error you don’t understand, <strong>include the code and the error message</strong> in your question.</p>
+</blockquote>
+</section>
+<section id="office-hours" class="level2">
+<h2 class="anchored" data-anchor-id="office-hours">Office Hours</h2>
+<p>Our TAs will hold regular office hour each Monday 4-5pm (Sayam, <a href="https://gwu-edu.zoom.us/my/pub6199">Zoom</a>) and each Wednesday 2-3pm (Silas, Milken 4th floor). Please don’t make your TA sit and do emails for two hours - come by and ask for help!</p>
+<p>If the office hours don’t work with your schedule, you can always schedule a zoom call with me using <a href="https://calendly.com/xindi-hu/pubh6199-office-hour">this link</a>. I’m available most days of the week.</p>
+</section>
+<section id="library-services" class="level2">
+<h2 class="anchored" data-anchor-id="library-services">Library Services</h2>
+<p>While the University Library is not a stand in for TAs, you can schedule a consultation for general help with Coding, Programming, Data, Statistical, and GIS. See more at <a href="https://academiccommons.gwu.edu/writing-research-help">academiccommons.gwu.edu/writing-research-help</a></p>
+</section>
+</section>
+<section id="class-policies" class="level1">
+<h1>Class Policies</h1>
+<p><strong>Class Policy: Expectations for individual contributions and acceptable levels of collaboration for assignments on which students may work together.</strong> Data visualization projects benefit from collaborations. We encourage you to discuss readings, assignments, and topics with your fellow students. However, the weekly homework should be your own work. If you copy another student’s assignment or let someone else copy yours, you are both cheating. If you copy another person’s work from a textbook or journal, or other published work or a website, you must give credit in your written work.</p>
+<p><strong>Class Policy: Participation and Discussion.</strong> Participation score is determined by lecture and lab session attendance, contribution to in-class activities, completion of end-of-class surveys, and submission of finished lab notebooks. Completing all end-of-class surveys and lab notebooks will earn students a good participation grade but is not sufficient for full points. Full points for participation require insightful, thoughtful, and well-argued contributions and leadership in class that demonstrate a high level of mastery of the course material. In accordance with University policy on excused absences (e.g., religious observances, documented family and medical emergencies, University-scheduled events for athletes), we recognize there are reasons a student may not be able to attend a class. In those situations, students should email the instructor and GTA in advance of the class they cannot make to notify them of the conflict in writing.</p>
+<p><strong>Class Policy: Late Work.</strong> Assignments, lab notebooks, and the final project must be submitted by the due date; unexcused late assignments will not be accepted. If there are extenuating circumstances and a student needs to request an extension on an assignment, the student would need to email the instructor and GTA at least 24 hours prior to the due date. Please allow 24 hours for instructors to reply to your email during weekdays and 72 hours during weekends. No late assignments will be accepted without advance permission. It is the instructor’s choice to grant an extension or not.</p>
+<p><strong>Class Policy: Make-up Final Project.</strong> If you have a serious problem or schedule conflict that will prevent you from presenting the final project, notify the instructor and GTA by email as soon as possible, no later than 72 hours before the scheduled date.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/pubh6199-data-viz-with-r\.github\.io\/2025-Summer");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2025 Dr.&nbsp;Xindi Hu</p>
+</div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ <a href="https://pubh6199-data-viz-with-r.github.io/LICENSE.html">LICENSE: CC-BY-SA <i class="fab fa-creative-commons"></i><i class="fab fa-creative-commons-by"></i><i class="fab fa-creative-commons-sa"></i></a>
+  </li>  
+</ul>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/pubh6199-data-viz-with-r/2025-Summer/edit/main/syllabus.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/pubh6199-data-viz-with-r/2025-Summer/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>GWU Milken Institute SPH</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

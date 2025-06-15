@@ -1,0 +1,14 @@
+---
+title: "Case Study"
+params:
+  class: "5-case-study"
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r child = here::here("fragments", "class.qmd")}
+```
+
+------------------------------------------------------------------------

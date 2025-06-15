@@ -1,0 +1,13 @@
+---
+title: "Getting Started"
+params:
+  class: "1-course-introduction"
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r child = here::here("fragments", "class.qmd")}
+```
+---

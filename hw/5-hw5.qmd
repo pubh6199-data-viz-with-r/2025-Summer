@@ -1,0 +1,194 @@
+---
+title: "Homework 5"
+author: "Your Name"
+date: "2025-XX-XX"
+params:
+  number: 5
+  purpose: "In this assignement, you will practice making static and interactive maps, you will also gain experience with key spatial analysis packages in R."
+format: 
+  html:
+    toc: true
+    toc-location: right
+    theme: flatly
+    self-contained: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+
+```{r}
+#| label: setup
+#| include: false
+
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.path = "figs/",
+    fig.width = 7.252,
+    fig.height = 4,
+    comment = "#>",
+    fig.retina = 3
+)
+```
+
+## Before your start the assignment
+
+- Update the header - put your name in the `author` argument and put today's date in the `date` argument.
+- Click the "Render" button in RStudio and then open the rendered `5-hw5.html` page.
+- Then go back and try changing the `theme` argument in the header to something else - you can see other available themes [here](https://quarto.org/docs/output-formats/html-themes.html). Notice the difference when you render now!
+
+## Overview of HW5
+
+In this assignment, we will revisit the `midwest` dataset from Homework 1 and explore how geography adds context and insight. Recall that in Homework 1, you created scatterplots to explore the relationships between education level and poverty level among Midwest counties in 2000. In this homework, you will see how maps can help you explore the geographical context of those relationships. You will practice creating static maps (point, choropleth, faceted) and interactive maps, while learning to join attribute data with geographic shapes. You will also practice using `{tidycensus}` to access census data from the 2020 Census and compare it with the 2000 Census data.
+
+
+**Skills practiced**:
+
+- Joining tabular data to geographic shapefiles using `sf` and `tigris`
+- Creating static maps: choropleth, point, and faceted maps using `tmap`
+- Creating interactive maps using `leaflet` with tooltips and legends
+- Comparing census data over time using `tidycensus`
+- Visualizing and interpreting regional variation in socioeconomic indicators
+- Using centroids to create point maps from polygon data
+- Designing maps with clear legends, color scales, and map layouts
+
+## Setup
+
+Load the necessary libraries and datasets. You will need to install the following packages if you haven't already:
+
+```{r}
+library(tidyverse)
+library(tmap)
+library(sf)
+library(tigris)
+library(tidycensus)
+library(leaflet)
+
+options(tigris_use_cache = TRUE)
+data(midwest, package = "ggplot2")
+```
+
+## **Q1**: Explore the Dataset (Review from HW1)
+
+Briefly describe what each row in the `midwest` dataset represents. Identify three public health variables and three geographic identifiers in the dataset. Then, list 2–3 research questions you could explore using maps.
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+
+## **Q2**: Prepare Spatial Data
+
+Use `tigris::counties(cb = TRUE, year = 2020)` to download county shapefiles for the entire U.S. Filter for the five Midwest states in the `midwest` dataset. Join with the `midwest` dataset using state acronym and county names.
+
+> hint: you may need to pay attention to the lower case/upper case in county names when you perform the join, use `tolower()` or `toupper()` to standardize the case. When you join a sf object and the `midwest` dataset, you may need to use `left_join()` from the `dplyr` package, and put the sf object as the first argument and the `midwest` dataset as the second argument. Read the documentation on `?left_join` for how to join tables based on multiple columns and what to do when column names are different.
+
+```{r}
+# your code here
+```
+
+
+## **Q3**: Choropleth Map — % Below Poverty
+
+Make a choropleth map using `tmap` to show `percbelowpoverty`. Use a sequential palette and a clear legend title. What patterns do you observe across states?
+
+```{r}
+# your code here
+```
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+
+## **Q4**: Point Map — Total Population by County
+
+Create a point map using county centroids. Use the `midwest_sf` object and convert it to a point layer using `st_centroid()`. Plot the result using `tm_dots()`, and encode `poptotal` with either color or size.
+
+> 🔍 Hint: `midwest_pts <- st_centroid(midwest_sf)`. Use either size or color to encode `poptotal`. What does this show about population distribution?
+
+```{r}
+# your code here
+```
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+
+## **Q5**: Faceted Map — College Education by State
+
+Make a faceted choropleth map of `percollege`, using `tm_facets(by = "state")`. What differences do you observe across states? Does education attainment appear higher in some states compared to others?
+
+```{r}
+# your code here
+```
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+
+## **Q6**: Compare Poverty and College Education Together
+
+Create **two maps** comparing `percbelowpoverty` and `percollege`. What insights do you gain by viewing these variables in parallel?
+
+```{r}
+# your code here
+```
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+
+## **Q7**: Compare with Decennial Census (tidycensus)
+
+Use the `tidycensus` package to retrieve **total population by county** from the 2020 Decennial Census. Join it to `midwest_sf` and compare it with the `poptotal` values in the original `midwest` dataset (which reflects 2000 population). Map the **absolute or percent difference** between 2000 and 2020 populations.
+
+> 🔍 Hint: use `get_decennial()` with `variable = "P001001"` and `year = 2020`, and set `geometry = FALSE`.
+
+What counties saw the most growth or decline in population over time?
+
+```{r}
+# your code here
+```
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+
+## BONUS: Interactive Map — Leaflet
+
+Make an interactive map using `leaflet`. Color counties by `percbelowpoverty`, and add a tooltip with county name and both poverty and education rates. Include a legend.
+
+```{r}
+# your code here
+```
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+## How I used GenAI?
+Describe how GenAI is used in producing this homework, include prompt, date, model version, and link to chat history.
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+## Save and Push Your Work
+
+Remember to save your `.qmd` and render the HTML output before committing to GitHub:
+
+```{bash eval = FALSE}
+git add .
+git commit -m "Complete Homework 5"
+git push
+```
+
+
+

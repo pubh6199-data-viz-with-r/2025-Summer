@@ -1,0 +1,14 @@
+---
+title: "Maps"
+params:
+  class: "9-maps"
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r child = here::here("fragments", "class.qmd")}
+```
+
+------------------------------------------------------------------------
