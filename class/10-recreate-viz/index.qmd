@@ -42,7 +42,7 @@ You can store your API key in a `.Renviron` file in your repository's root direc
 
 ::: {.column width="50%"}
 
-![](images/renviron.png)
+![](images/Renviron.png)
 
 :::
 
