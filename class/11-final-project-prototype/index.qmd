@@ -1,0 +1,42 @@
+---
+title: "Lecture 6. Final Project Prototype"
+subtitle: "PUBH 6199: Visualizing Data with R, Summer 2025"
+date: June 24, 2025
+author: Xindi (Cindy) Hu, ScD
+format: 
+  revealjs:
+    pdf: true
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    preview-links: auto
+    logo: images/logo.png
+    css: style.css
+    footer: 'PUBH 6199: Visualizing Data with R'
+resources:
+  - images/
+---
+
+## Prototype V1 {.smaller}
+
+- **Data scraping and cleaning** complete (using real world datasets, do not use R built-in data)
+- At least **one visualization already implemented**, and draft for 2-3 more visualizations
+- If choosing R shiny app, **rough webpage design and structure** has to be done and implemented (placeholders for visualizations)
+- If choosing the other two options, **clear outline and storytelling flow** of the visualizations
+- A **README.md** file in your GitHub repo that describes your project, how to view it, and any dependencies
+
+## One-on-one consultation time {.smaller}
+
+| Team | Members | Time slot|
+|------|----------|-------------|
+| Homer   | Alia Jamil, Nina Wubu | 3:10 - 3:30 pm |
+| Marge    | Amel Attalla, Belen Zemas | 3:35 - 3:55 pm|
+| Bart    | Sora Ely, Ashlan Jackson | 4:00 - 4:20 pm |
+| Lisa    | Riya Belani, Molayo Ifebajo | 4:25 - 4:45 pm |
+| Maggie    | Jordi Fischbach, Ahmed Shah | 4:50 - 5:10 pm |
+
+::: takeaway
+
+Please reach out to the teaching team if the assigned time slot does not work for you. We will try to accommodate your schedule.
+
+:::
