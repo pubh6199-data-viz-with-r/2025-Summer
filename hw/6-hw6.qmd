@@ -1,0 +1,104 @@
+---
+title: "Final Project: [YOUR TITLE HERE]"
+author: "[YOUR NAMES]"
+date: "2025-XX-XX"
+params:
+  number: 6
+  purpose: "Final project for PUBH 6199: Visualizing Data with R"
+format: 
+  html:
+    toc: true
+    toc-location: right
+    code-fold: true
+    theme: flatly
+    self-contained: true
+execute:
+  echo: true
+  warning: false
+  message: false
+output-dir: docs
+---
+
+
+```{r}
+#| label: setup
+#| include: false
+
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.path = "figs/",
+    fig.width = 7.252,
+    fig.height = 4,
+    comment = "#>",
+    fig.retina = 3
+)
+```
+
+## Introduction
+
+_Briefly introduce your topic and research question._
+
+## Data
+
+_Describe your data source(s), including where it came from, the key variables, and any pre-processing steps._
+
+```{r}
+#| eval: false
+# Load libraries and data
+library(tidyverse)
+
+data <- read_csv("data/my_data.csv")
+glimpse(data)
+```   
+
+## Visualizatiob 1: [Title Here]
+
+_Describe what this plot shows, and why it's important._
+
+```{r}
+# your code here
+```
+
+## Visualization 2: [Title Here]
+
+_Describe what this plot shows, and why it's important._
+
+```{r}
+# your code here
+```
+
+## Visualization 3: [Title Here]
+
+_Describe what this plot shows, and why it's important._
+
+```{r}
+# your code here
+```
+
+## OR Shiny app: [Title Here]
+
+_If you choose to create a Shiny app, describe the app's purpose and functionality. Save your code inside the shiny-app/ folder, replace the URL below with your app's URL_
+
+[Click here to open the interactive Shiny app](https://cindyhu.shinyapps.io/two-files-app/)
+
+## Interpretation
+
+_Summarize your key findings. What do your visualizations reveal?_
+
+## Limitations
+
+_Discuss any data quality or design limitations._
+
+## Conclusion
+
+_Wrap up your project with a takeaway message or next steps._
+
+## References
+
+_Include any references to data sources, packages, or literature you used. If your visualization design is inspired by someone else's work, cite those too._
+
+1. Reference 1
+2. Reference 2
+3. Reference 3
+
