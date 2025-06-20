@@ -1,0 +1,14 @@
+---
+title: "Final Project Showcase"
+params:
+  class: "12-final-project-present"
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r child = here::here("fragments", "class.qmd")}
+```
+
+------------------------------------------------------------------------
