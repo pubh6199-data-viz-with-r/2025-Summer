@@ -262,10 +262,6 @@ Team XXX
 
 :::
 
-. . .
+## Please fill out the course evaluation!
 
-::: takeaway
-
-Please fill out the course evaluation!
-
-:::
+![](images/smarteval.png)
