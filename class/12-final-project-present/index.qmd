@@ -60,47 +60,42 @@ Accompanying your visualizations, you should also include a **write-up around 50
     <tr>
       <td>Homer</td>
       <td>Alia Jamil, Nina Wubu</td>
-      <td>3:30 - 3:40 pm</td>
+      <td>3:20 - 3:30 pm</td>
     </tr>
     <tr>
       <td>Marge</td>
       <td>Amel Attalla, Belen Zemas</td>
-      <td>3:45 - 3:55 pm</td>
-    </tr>
-    <tr style="background-color: #fff3cd;">
-      <td>Take a quick break</td>
-      <td>All</td>
-      <td>3:55 - 4:00 pm</td>
+      <td>3:35 - 3:45 pm</td>
     </tr>
     <tr>
       <td>Bart</td>
       <td>Sora Ely, Ashlan Jackson</td>
-      <td>4:00 - 4:10 pm</td>
+      <td>3:50 - 4:00 pm</td>
     </tr>
     <tr>
       <td>Lisa</td>
       <td>Riya Belani, Molayo Ifebajo</td>
-      <td>4:15 - 4:25 pm</td>
+      <td>4:05 - 4:15 pm</td>
     </tr>
     <tr>
       <td>Maggie</td>
       <td>Jordi Fischbach, Ahmed Shah</td>
-      <td>4:30 - 4:40 pm</td>
+      <td>4:20 - 4:30 pm</td>
     </tr>
     <tr style="background-color: #fff3cd;">
       <td>Fill out peer evaluations</td>
       <td>All</td>
-      <td>4:40 - 4:50 pm</td>
+      <td>4:30 - 4:40 pm</td>
     </tr>
     <tr style="background-color: #fff3cd;">
       <td>Tally peer evaluations</td>
       <td>Teaching team</td>
-      <td>4:50 - 5:00 pm</td>
+      <td>4:40 - 4:50 pm</td>
     </tr>
     <tr style="background-color: #fff3cd;">
       <td>Announce award winners!</td>
       <td>All</td>
-      <td>5:00 - 5:10 pm</td>
+      <td>4:50 - 5:00 pm</td>
     </tr>
   </tbody>
 </table>
@@ -262,10 +257,6 @@ Team XXX
 
 :::
 
-. . .
+## Please fill out the course evaluation!
 
-::: takeaway
-
-Please fill out the course evaluation!
-
-:::
+![](images/smarteval.png)

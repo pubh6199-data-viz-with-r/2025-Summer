@@ -1,6 +1,6 @@
 ---
-title: "Lecture 6. Final Project Prototype"
-subtitle: "PUBH 6199: Visualizing Data with R, Summer 2025"
+title: "Final Project Prototype"
+subtitle: "Class meet on zoom"
 date: June 24, 2025
 author: Xindi (Cindy) Hu, ScD
 format: 
