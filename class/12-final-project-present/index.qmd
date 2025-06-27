@@ -119,10 +119,10 @@ _For piping it all together with grace and clarity._
 
 ::: {.column width="50%"}
 
-Team XXX
+Team Lisa
 
-- 
-- 
+- Molayo Ifebajo
+- Riya Belani
 
 :::
 
@@ -139,10 +139,10 @@ _For untangling the mess and tidying like a pro._
 
 ::: {.column width="50%"}
 
-Team XXX
+Team Bart
 
-- 
-- 
+- Sora Ely
+- Ashlan Jackson
 :::
 
 ::: {.column width="50%"}
@@ -160,10 +160,10 @@ _For plotting like an artist and letting the data speak._
 
 ::: {.column width="50%"}
 
-Team XXX
+Team Maggie
 
-- 
-- 
+- Jordi Fischbach
+- Ahmed Shah
 :::
 
 ::: {.column width="50%"}
@@ -181,10 +181,10 @@ _For making your data shine with interactivity and style._
 
 ::: {.column width="50%"}
 
-Team XXX
+Team Maggie
 
-- 
-- 
+- Jordi Fischbach
+- Ahmed Shah
 :::
 
 ::: {.column width="50%"}
@@ -201,10 +201,10 @@ _For seamless communication of complex work through a polished and reproducible 
 
 ::: {.column width="50%"}
 
-Team XXX
+Team Marge
 
-- 
-- 
+- Amel Attalla
+- Belen Zemas
 :::
 
 ::: {.column width="50%"}
@@ -223,10 +223,10 @@ _For showing that collaboration is the most powerful package of all._
 
 ::: {.column width="50%"}
 
-Team XXX
+Team Homer
 
-- 
-- 
+- Alia Jamil
+- Nina Wubu
 :::
 
 ::: {.column width="50%"}
