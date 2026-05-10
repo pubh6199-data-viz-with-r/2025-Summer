@@ -1,0 +1,185 @@
+---
+title: "Homework 3"
+author: "Your Name"
+date: "2025-XX-XX"
+params:
+  number: 3
+  purpose: "The purpose of this assignment is to brainstorm and propose a potential direction for your final project. The teaching team will use your submission to form pairs for the actual project based on shared interests or complementary ideas."
+format: 
+  html:
+    toc: true
+    toc-location: right
+    theme: flatly
+    self-contained: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+
+```{r}
+#| label: setup
+#| include: false
+
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.path = "figs/",
+    fig.width = 7.252,
+    fig.height = 4,
+    comment = "#>",
+    fig.retina = 3
+)
+```
+
+## Before your start the assignment
+
+- Update the header - put your name in the `author` argument and put today's date in the `date` argument.
+- Click the "Render" button in RStudio and then open the rendered `3-hw3.html` page.
+- Then go back and try changing the `theme` argument in the header to something else - you can see other available themes [here](https://quarto.org/docs/output-formats/html-themes.html). Notice the difference when you render now!
+
+## Overview of HW3
+
+This assignment is your first step toward building your final project for PUBH 6199: Visualizing Data with R. In the final project, you'll take a dataset, explore it, and tell a compelling and insightful story using **at least three different visualizations** (static or interactive). 
+
+
+**Skills practiced**:
+
+- Practice formulating clear, data-driven research questions
+
+- Identify and evaluate potential data sources for visualization projects
+
+- Plan appropriate visual encodings for different types of information
+
+- Anticipate patterns and insights that can be revealed through exploratory data analysis
+
+- Communicate project ideas clearly and concisely in written form 
+
+
+## Q1: Final Project Format Options
+
+Your final project must include **at least three visualizations** that work together to explore your topic. You’ll eventually work in teams of two, but for now, please brainstorm your individual idea and indicate which of the following formats you're most interested in:
+
+You’ll have three format options:
+
+1. **Same Question, Different Audiences (3 static charts):**  
+   Create three visualizations that answer the **same question**, each designed for a **different audience** (e.g., general public, policy makers, technical experts).
+
+2. **Same Data, Different Questions (3 static charts):**  
+   Use the **same dataset** to answer **three different but related questions**, each with its own focused visualization.
+
+3. **Interactive Dashboard (1 app with 3 components):**  
+   Build an **interactive dashboard** (e.g., with `shiny`, `plotly`, or similar tools) that includes at least **three visual components** for exploring your data dynamically.
+
+Please indicate which of the three options you’re most drawn to in your submission.
+
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+
+
+## Q2: Project Idea
+
+Briefly describe your idea for a data visualization project. What topic are you interested in exploring? Why is it interesting and important? Feel free to use examples, images, etc to motivate your idea.
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+## Q3: Research Questions
+
+List 1–3 specific questions you hope to answer using data. Good research questions are:
+
+- Clear and focused  
+- Answerable with the data you can access  
+- Likely to benefit from visual analysis
+
+Example:  
+- How has air quality changed over time in major U.S. cities?  
+- What factors are associated with higher rates of water insecurity across communities in the U.S.?
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+
+## Q4: Potential Data Sources
+
+What dataset(s) do you plan to use? If you haven't chosen one yet, describe the kind of data you’ll look for.
+
+Include (if known):
+
+- Dataset name
+- URL or source
+- What the dataset contains
+- Why you think it’s suitable
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+## Q5: Anticipated Visualizations
+
+What types of charts do you expect to include in your project, and why do you choose this chart type? Try to name at least three types that might help you answer your research questions.
+
+Example:
+
+- Line plot of changes over time  
+- Choropleth map of regional differences  
+- Bar chart comparing groups
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+## Q6: Anticipated Findings or Insights
+
+What patterns, stories, or surprises do you hope the data will reveal? It’s okay to speculate here — your goal is to show curiosity and a sense of direction.
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+## BONUS: Create an sketch
+
+Try sketching one of your anticipated visualizations on paper! This helps you think through the structure, encoding, and message of your chart before jumping into code.
+
+- Choose one of the visualizations you described in your plan
+
+- Use pencil and paper (not code) to draw a rough version of what the chart could look like
+
+- Take a photo and include it in your .qmd file using the code below:
+
+```{r} 
+#| echo: false
+knitr::include_graphics("../images/your-sketch.png")
+```
+
+If needed, add explanatory text below the image.
+
+::: {.callout-note title="Your Answer"}
+Type your answer here.
+:::
+
+## How I used GenAI?
+Describe how GenAI is used in producing this homework, include prompt, date, model version, and link to chat history.
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+## Save and Push Your Work
+
+Remember to save your `.qmd` and render the HTML output before committing to GitHub.
+
+```{bash eval = FALSE}
+git add 3-hw3.qmd 3-hw3.html your-sketch.png
+git commit -m "Complete Homework 3"
+git push
+```
+
+
+

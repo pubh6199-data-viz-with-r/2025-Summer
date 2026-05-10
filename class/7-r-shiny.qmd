@@ -1,0 +1,14 @@
+---
+title: "Introduction to R Shiny"
+params:
+  class: "7-r-shiny"
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r child = here::here("fragments", "class.qmd")}
+```
+
+------------------------------------------------------------------------

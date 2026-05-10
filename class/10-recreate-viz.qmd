@@ -1,0 +1,14 @@
+---
+title: "Recreate visualization from public source"
+params:
+  class: "10-recreate-viz"
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r child = here::here("fragments", "class.qmd")}
+```
+
+------------------------------------------------------------------------

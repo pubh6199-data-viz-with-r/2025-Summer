@@ -1,0 +1,172 @@
+---
+title: "Homework 1"
+author: "Your Name"
+date: "2025-XX-XX"
+params:
+  number: 1
+  purpose: "The purpose of this assignment is to introduce you to exploratory data visualization using the `midwest` dataset, focusing on interpreting patterns in poverty, education, and population demographics with `ggplot2`."
+format: 
+  html:
+    toc: true
+    toc-location: right
+    theme: flatly
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+
+```{r}
+#| label: setup
+#| include: false
+
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.path = "figs/",
+    fig.width = 7.252,
+    fig.height = 4,
+    comment = "#>",
+    fig.retina = 3
+)
+```
+
+## Before your start the assignment
+
+- Update the header - put your name in the `author` argument and put today's date in the `date` argument.
+- Click the "Render" button in RStudio and then open the rendered `1-hw1.html` page.
+- Then go back and try changing the `theme` argument in the header to something else - you can see other available themes [here](https://quarto.org/docs/output-formats/html-themes.html). Notice the difference when you render now!
+
+## Overview of HW1
+
+In this assignment, you will explore the `midwest` dataset using `ggplot2` to uncover patterns in population, education, and poverty across counties in the U.S. Midwest.
+
+**Skills practiced**:
+
+- Exploratory data visualization
+- Mapping variables to aesthetics (`aes`)
+- Practice different components of `ggplot2` including `geom_*()`, `scale_*()`, `facet_wrap()`
+- Draw public health insights from data
+
+
+### Load Required Packages
+
+```{r}
+library(ggplot2)
+library(dplyr)
+```
+
+### Load the Data
+```{r}
+data(midwest)
+# tip: type ?midwest in your console to see the data dictionary
+```
+
+## Q1: Explore the dataset
+
+Using `glimpse()` or `summary()` to explore the structure of the dataset. What are the variables in the dataset? What interesting public health questions can you ask based on the variables in the dataset? Write down at least 3 questions you can ask based on the variables in the dataset:
+
+::: {.callout-note title="Your Answer"}
+- Research question 1:
+- Research question 2:
+- Research question 3:
+:::
+
+```{r}
+#your code here
+```
+
+## Q2: Population vs. poverty
+
+Create a scatterplot with:
+
+- `poptotal` on the x-axis
+- `percbelowpoverty` on the y-axis
+- Color the points by `state`
+
+```{r}
+#your code here
+```
+
+What do you notice about the relationship between county population size and poverty? Do some states stand out?
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+## Q3: Education vs. poverty
+
+- Make a scatterplot of `percollege` (x) vs `percbelowpoverty` (y).
+- Add a smoother using `geom_smooth()`.
+
+```{r}
+# your code here
+```
+
+What does this tell you about the relationship between education and poverty?
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+## Q4: Facet by metro/non-metro
+
+- Recreate the scatterplot of `percollege` (x) vs `percbelowpoverty` (y).
+- Subset the data by metro and non-metro counties using `facet_wrap()`.
+
+```{r}
+# your code here
+```
+
+How does the relationship between education and poverty differ between metro and non-metro counties?
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+## Q5: Compare poverty rates by state
+
+```{r}
+# your code here
+```
+
+What differences do you observe in the poverty rate distributions across states? Which states appear to have more consistent or more variable poverty rates?
+
+::: {.callout-note title="Your Answer"}
+Type your response here.
+:::
+
+## Q6: Make a visualization to answer one of the research questions you wrote down for Q1.
+
+::: {.callout-note title="Your Research Question"}
+Type your research question here.
+:::
+
+```{r}
+# your code here
+```
+
+::: {.callout-note title="Your Answer"}
+Type your answer to your research question based on the visualization here.
+:::
+
+## BONUS: Improve your visualization and record the evolution of your work
+
+- Read the blogpost by Cedric Scherer [here](https://www.cedricscherer.com/2019/05/17/the-evolution-of-a-ggplot-ep.-1/)
+- Take your visualization from Q6 and improve it. You can change the geometric object, color scheme, add labels, or any other changes you think will make it better.
+- Record the evolution of your work using the `{camcorder}` package and save a gif called `my-ggplot-evol.gif`.
+
+```{r} 
+#your code here
+```
+
+Insert the gif here:
+
+::: {.callout-note title="Your Answer"}
+![](my-ggplot-evol.gif)
+:::
+
+
+
+

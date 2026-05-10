@@ -1,0 +1,588 @@
+---
+title: "Lab 4. Final Project Plan"
+subtitle: "PUBH 6199: Visualizing Data with R, Summer 2025"
+date: June 12, 2025
+author: Xindi (Cindy) Hu, ScD
+format: 
+  revealjs:
+    pdf: true
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    preview-links: auto
+    logo: images/logo.png
+    css: style.css
+    footer: 'PUBH 6199: Visualizing Data with R'
+resources:
+  - images/
+---
+
+## Outline for today
+
+- **Overview of common public data repository for developing data visualization projects**
+- Form final project teams
+- GitHub flow for project collaboration
+- Project Kick-off
+
+## Where to start {.smaller}
+
+- The world is full of data—but finding the *right* dataset takes intention.
+- Good datasets are:
+  - Publicly accessible
+  - Clean or well-documented
+  - Relevant to your story
+- GW Library has a [research guide](https://libguides.gwu.edu/) that can help you get started.
+
+
+## Large, searchable databases {.smaller}
+
+- [**Google Dataset Search**](https://datasetsearch.research.google.com/)  
+  _Like Google, but just for datasets._
+- [**Kaggle Datasets**](https://www.kaggle.com/datasets)  
+  _Great for curated and crowd-sourced datasets across domains._
+- [**UCI Machine Learning Repository**](https://archive.ics.uci.edu/ml/index.php)  
+  _Classic datasets for machine learning and data science._
+- [**Harvard Dataverse**](https://library.harvard.edu/services-tools/harvard-dataverse)
+  _A repository for sharing and archiving research data, open to all researchers regardless of Harvard affiliation._
+- [**ICPSR**](https://www.icpsr.umich.edu/web/pages/)  
+  _Inter-university Consortium for Political and Social Research, an international consortium of more than 810 academic institutions and research organizations, with a focus on social science data._
+
+  
+## Government & intergovernmental data {.smaller-title}
+
+::: smaller
+- [**Data.gov**](https://data.gov/) _U.S. government datasets across topics._
+- [**US Census Data**](https://data.census.gov/) _Demographic, economic, and geographic data from the U.S. Census Bureau._
+- [**EU Open Data Portal**](https://data.europa.eu/en) _Datasets from the European Union institutions and bodies._
+- [**World Bank Data**](https://data.worldbank.org/) _Global development indicators and statistics._
+- [**UN Data**](https://data.un.org/) _United Nations datasets on various global issues._
+- [**OECD Data**](https://data.oecd.org/) _Economic and social data from OECD countries._
+- [**China Data Archive**](https://library.shanghai.nyu.edu/datasets) _A collection of datasets related to China, including social, economic, and environmental data._
+- [**openAFRICA**](https://open.africa/) _A platform for sharing open data from Africa, including government, NGO, and private sector datasets._
+:::
+
+## Curated & community data sources {.smaller}
+
+- [**Tidy Tuesday**](https://github.com/rfordatascience/tidytuesday)
+  _Weekly data challenges with R, great for practice._
+- [**Makeover Monday**](https://makeovermonday.co.uk/)
+  _Weekly data visualization challenges with a focus on redesigning existing visualizations._
+- [**Tableau: Free Public Datasets**](https://www.tableau.com/learn/articles/free-public-data-sets)  
+  _Explore and download public visualizations and underlying data._
+- [**Data for Good at Meta**](https://dataforgood.facebook.com/dfg/tools)
+  _Meta's Data for Good program provides access to datasets for social good projects._
+- [**AWS Data Exchange**](https://aws.amazon.com/data-exchange/)  
+  _Amazon Web Services' marketplace for data, including free and paid datasets across various domains._
+---
+
+## R packages with built-in data {.smaller}
+
+- `fivethirtyeight` – Datasets from FiveThirtyEight journalism
+- `gapminder` – Development stats across countries
+- `babynames` – U.S. baby name trends (SSA)
+- `nycflights13` – Flight data from NYC airports in 2013
+- `dslabs`, `DAAG`, `MASS` – Rich with demo data
+
+---
+
+
+## Spatial & environmental data {.smaller}
+
+- [**EnviroAtlas**](https://www.epa.gov/enviroatlas)  
+  _EPA EnviroAtlas, a collection of spatial data on environmental and human health._
+- [**National Centers for Environmental Information**](https://www.ncei.noaa.gov/access)  
+  _NOAA's National Centers for Environmental Information, providing access to climate and weather data._
+- [**USGS Earth Explorer**](https://earthexplorer.usgs.gov/)
+  _U.S. Geological Survey's Earth Explorer, a tool for searching and downloading satellite imagery, aerial photography, digital elevation model data, land cover data, and many others._
+- [**SEDAC (Columbia Univ.)**](https://www.earthdata.nasa.gov/centers/sedac-daac)
+  _Socioeconomic data and applications center, synthesizes earth science and socioeconomic into gridded data_
+
+
+---
+
+## Public health & healthcare data {.smaller}
+- [**CDC Data & Statistics**](https://data.cdc.gov/)  
+  _Public health datasets from the Centers for Disease Control and Prevention._
+- [**National Environmental Public Health Tracking Network**](https://ephtracking.cdc.gov/)  
+  _CDC's Environmental Public Health Tracking Network, providing data on environmental hazards and health effects._
+- [**WHO Global Health Observatory**](https://www.who.int/data/gho)
+  _World Health Organization's data on global health indicators._
+- [**HealthData.gov**](https://healthdata.gov/)
+  _U.S. health datasets, including Medicare, Medicaid, and public health data._
+- [**NCHS Data**](https://www.cdc.gov/nchs/index.htm)
+  _National Center for Health Statistics datasets on health statistics in the U.S._
+  
+
+## Pro Tips
+
+- Start with your story → then find data
+- Prioritize quality over size
+- Double check data license and usage rights
+- Document your data source in your project
+
+::: takeaway
+
+Now let’s explore and build something great!
+:::
+
+## Outline for today
+
+- Overview of common public data repository for developing data visualization projects
+- **Form final project teams**
+- GitHub flow for project collaboration
+- Project Kick-off
+
+## Introducing the five fantastic teams!
+
+![](images/simpsons.webp)
+
+## Team Homer {.smaller}
+
+::: {.column width = "70%"}
+
+Members: Alia Jamil, Nina Wubu
+
+Topic: Climate, natural disasters and health disparities
+
+:::
+
+::: {.column width = "30%"}
+
+![](images/homer.png)
+:::
+
+## Team Marge {.smaller}
+
+::: {.column width = "70%"}
+
+Members: Amel Attalla, Belen Zemas
+
+Topic: Sexual health and vulnerable populations
+
+:::
+
+::: {.column width = "30%"}
+
+![](images/marge.png)
+:::
+
+## Team Bart {.smaller}
+
+::: {.column width = "70%"}
+
+Members: Sora Ely, Ashlan Jackson
+
+Topic: Health systems and global health
+
+:::
+
+::: {.column width = "30%"}
+
+![](images/bart.png)
+:::
+
+## Team Lisa {.smaller}
+
+::: {.column width = "70%"}
+
+Members: Riya Belani, Molayo Ifebajo
+
+Topic: Behavioral health and digital platforms
+
+:::
+
+::: {.column width = "30%"}
+
+![](images/lisa.png)
+:::
+
+## Team Maggie {.smaller}
+
+::: {.column width = "70%"}
+
+Members: Jordi Fischbach, Ahmed Shah
+
+Topic: To be determined
+
+:::
+
+::: {.column width = "30%"}
+
+![](images/maggie.png)
+:::
+
+## Outline for today
+
+- Overview of common public data repository for developing data visualization projects
+- Form final project teams
+- **GitHub flow for project collaboration**
+- Project Kick-off
+
+## Introducing GitHub Flow
+![](images/github-flow.webp)
+
+:::{style="font-size: 50%; text-align: center;"}
+
+Image by [Yan Min Thwin](https://medium.com/@yanminthwin/understanding-github-flow-and-git-flow-957bc6e12220)
+
+:::
+
+## Create local branches with Git {.smaller}
+
+::: {.callout-note title="Tip"}
+You can do these using the Git GUI in RStudio, I am showing you the command line version so you can learn a different method and choose what you prefer.
+:::
+
+1. In RStudio click the **Terminal** tab in the lower left pane, next to the **Console** tab
+
+::: {.callout-note title="Note"}
+If you cannot find the **Terminal** tab, you can also open a terminal window by clicking on the **Tools** menu and selecting **Terminal** > **New Terminal**. If that doesn't work, check if your RStudio is out of date. Click **Help**, About RStudio to check the current version.
+:::
+
+![](images/terminal.png){width="100%"}
+
+## Create local branches with Git {.smaller}
+
+2. In the terminal, type the following command to create a new branch called `feat/clean-data`:
+
+```bash
+git checkout -b feat/clean-data
+```
+
+. . .
+
+3. Type the following command to check that you are on the new branch:
+
+```bash
+git status
+```
+You should see a message that says "On branch feat/clean-data" and "nothing to commit, working tree clean".
+
+You are ready to start making changes to your files!
+
+## Make local changes with Git {.smaller}
+
+In RStudio, open the `4-lab4.qmd` file and make some changes to the text. 
+
+For example, you can add a new section called "Data Wrangling" and write a few sentences about what tidy data is about.
+
+You can also add a new code chunk to the file and write some R code to load the `tidyverse` package and read in a CSV file.
+
+```{r}
+#| eval: false
+#| echo: true
+library(tidyverse)
+raw_data <- read_csv("raw_data.csv")
+```
+
+After you are satisfied with your changes, save the file and knit the `4-lab4.qmd` file to generate the HTML file.
+
+## Commit local changes with Git {.smaller}
+
+1. Determine your file's status.
+
+```bash
+git status
+```
+You should see a message that says **"On branch feat/clean-data"** and **"Changes not staged for commit"**.
+
+2. Add the changes to the staging area.
+
+```bash
+git add .
+```
+
+3. See your file's current status. 
+
+```bash
+git status
+```
+Your files should be listed under **Changes to be committed**.
+
+4. Commit the changes with a message. Replace **<COMMIT-MESSAGE>** with a log message describing the changes.
+
+```bash
+git commit -m "<COMMIT-MESSAGE>"
+```
+
+## Open a pull request on GitHub {.smaller}
+
+1. Push the changes to the remote repository, replace **<BRANCH-NAME>** with the name of your branch, in this case **feat/clean-data**
+
+```bash
+git push origin <BRANCH-NAME>
+```
+2. Navigate to your GitHub repository in your browser
+3. Click the <span style="font-weight: bold; color: white; background: green">Compare & pull requests</span> button, if you don't see it, navigate to the **"Pull requests"** tab and click the <span style="font-weight: bold; color: white; background: green">New pull reques</span> button.
+4. In the **"Open a pull request"** page, enter a title and description for your pull request. You can add a reviewer, for example your teammate on this pull request.
+
+## Merge your pull request on GitHub {.smaller}
+
+::: {.callout-note title="Note"}
+Since this is your repository, you probably don’t have anyone to collaborate with (yet). Go ahead and merge your Pull Request now. Later in the semester you may want your teammate to look over your code before they merge.
+:::
+
+1. On GitHub, navigate to the Pull Request that you just opened.
+2. Scroll down and click the big green Merge Pull Request button.
+3. Click Confirm Merge.
+4. Delete the branch <BRANCH-NAME>.
+
+::: {style="font-size: 70%; text-align: center;"}
+<br>
+<br>
+<br>
+
+Reference: [GitHub and RStudio](https://resources.github.com/github-and-rstudio/)
+:::
+
+## Congratulations {.smaller}
+
+You have become a better collaborator!
+
+![](images/congrats-github.png)
+
+:::citation
+Source: [Allison Horst and Julia Lowndes](https://openscapes.org/blog/2022-05-27-github-illustrated-series/)
+:::
+
+## Outline for today
+
+- Overview of common public data repository for developing data visualization projects
+- Form final project teams
+- GitHub flow for project collaboration
+- **Project Kick-off**
+
+## Grading {.smaller}
+
+| Assignment       | Description                 | Weight     |
+|----------------|-----------------------------|----------|
+| Project proposal    | You did this for HW3. Outlines your topic, research questions, and initial ideas      | 7%  |
+| Project plan        |You are doing this for Lab4. Includes your final topic, selected data sources, and visualization plan  | 3% |
+| Project prototype V1 | You will bring this to class on June 24th and meet one-on-one with the teaching team to get feedback | 7%
+| Final data visualization product  | Include at least three polished visualizations that answer your research questions | 18%  |
+| Final project presentation | You will present your project in a short, engaging walkthrough in class on June 26th | 10% |
+| Peer evaluation for final project | You will complete this in class on June 26th to provide constructive feedback to your peers | 5%|
+
+## Project schedule {.smaller}
+
+| Week | Due date | Deliverable |
+|------|----------|-------------|
+| 4    | June 9 | Project proposal |
+| 5    | June 16 | Project plan |
+| 6    | June 24 | Project prototype V1 |
+| 6    | June 26 | Final data visualization product |
+| 6    | June 26 | Final project presentation |
+| 6    | June 26 | Peer evaluation for final project |
+
+
+## Team policies {.smaller}
+
+- How and when you will **meet**: regular meeting time
+- How you will **communicate**: Slack, email, etc.
+- How you will **collaborate on implementation**: GitHub, Google Drive, etc.
+- How you will **review each other's work**: code reviews, feedback sessions, etc.
+- How you will deal with **non-performing members**: discuss openly, involve a neutral party if needed, etc.
+
+## {background-image="images/in-class-activity.png"}
+
+::: {style="text-align: center; font-size: 80%;"}
+<br>
+<br>
+<br>
+In-Class Activity:
+
+1) Fill in the team expectation agreement in `4-lab4.qmd`
+2) Start a TODO list, including:
+
+| Task | Deadline | Person responsible |
+|------|----------|-------------|
+| (e.g.) set up GitHub repo    | June 13 | Silas |
+
+:::
+
+```{r}
+countdown::countdown(
+  minutes = 10,
+  bottom = 0,
+  # Fanfare when it's over
+  play_sound = TRUE,
+  color_border              = "#FFFFFF",
+  color_text                = "#7aa81e",
+  color_running_background  = "#7aa81e",
+  color_running_text        = "#FFFFFF",
+  color_finished_background = "#ffa07a",
+  color_finished_text       = "#FFFFFF",
+  font_size = "2em",
+  )
+```
+
+## Project plan {.smaller}
+
+- **Name** of all students who worked on this project plan
+- **Team name**
+- Define the **topic, goals, and tasks** of your project (300 - 400 words)
+- A **description of the data** you will use, including:
+  - Source of the data
+  - How you will access the data
+  - Any data cleaning or wrangling you anticipate needing to do
+- At least **3 sketches of visualization ideas** for your project
+- A sketch of your **dashboard layout/storytelling flow**
+- A project **timeline with milestones** when you will complete each task
+- A **feature list** (must-have, good-to-have, optional)
+- A description of **team roles and responsibilities**
+
+## Prototype V1 {.smaller}
+
+- **Data scraping and cleaning** complete (using real world datasets, do not use R built-in data)
+- At least **one visualization already implemented**, and draft for 2-3 more visualizations
+- If choosing R shiny app, **rough webpage design and structure** has to be done and implemented (placeholders for visualizations)
+- If choosing the other two options, **clear outline and storytelling flow** of the visualizations
+- A **README.md** file in your GitHub repo that describes your project, how to view it, and any dependencies
+
+## Final data visualization product {.smaller}
+
+Choose one from the following three options:
+
+- **Same Question, Different Audiences (3 static charts)**:
+_Create three visualizations that answer the same question, each designed for a different audience (e.g., general public, policy makers, technical experts)._
+
+- **Same Data, Different Questions (3 static charts)**:
+_Use the same dataset to answer three different but related questions, each with its own focused visualization._
+
+- **Interactive Dashboard (1 app with 3 components)**:
+_Build an interactive dashboard (e.g., with shiny, plotly, or similar tools) that includes at least three visual components for exploring your data dynamically._
+
+::: takeaway
+Accompanying your visualizations, you should also include a **write-up around 500-1000 words** that consists of an introduction, research questions, data sources, data wrangling, data visualizations, findings, and conclusion.
+:::
+
+## Final project presentation {.smaller}
+- **10 minutes** presentation
+- What questions do you set out to answer with your visualizations? Why are they important?
+- Your **data source** and why they are chosen to answer your questions
+- Your intended audience
+- Two to three **visualization design choices** and how they help tell your story
+- Two to three **takeaways** from your visualizations that your audience should remember
+- **Live demo** of your visualizations (if applicable)
+- One to two **challenges** you encountered during this project and how you overcame them
+- One to two **achievements** you are proud of in this project
+- The presentation format is flexible, bring your laptop to present, and submit the presentation and final data visualization product as `HW6`
+
+
+## Evaluation {.smaller}
+
+![](images/evaluation.png){width="100%"}
+
+::: citation
+
+Source: [CS171](https://www.cs171.org/2024/)
+:::
+
+## Evaluation methods {.smaller}
+
+::: {.column width = "50%"}
+
+### What to evaluate?
+
+- **Target**:
+  - choose domain: did you correctly understand users' needs?
+  - define question: are you showing them the right thing?
+- **Design**:
+  - design visual encoding: does the way you show the data work?
+- **Implement**:
+  - implement visualization: does the code work? is it scalable?
+  
+:::
+
+:::{.column width = "50%"}
+
+### How to evaluate?
+
+- **Qualitative**: 
+  - Observational studies ("think aloud")
+  - Expert interviews (design critiques)
+  - Focus groups
+- **Quantitative**:
+  - A/B testing
+  - Surveys
+  - Analytics (e.g., Google Analytics, Shiny Dashboard logs)
+
+:::
+
+## Think aloud study {.smaller}
+
+::: {.column width = "30%"}
+
+- Naive (first time) users
+- No explanations and interference by evaluator
+  - “We are testing the system, not you.”
+  - “Will not answer any questions once started.”
+- Remind subjects to talk about what they are doing
+
+:::
+
+::: {.column width = "70%"}
+
+![](images/think-aloud.webp)
+
+:::
+
+## {background-image="images/in-class-activity.png"}
+
+::: {style="text-align: center; font-size: 80%;"}
+<br>
+<br>
+<br>
+<br>
+In-Class Activity: Think aloud study demo
+
+**ClimaWATCH**
+
+[https://climawatch.climate.mathematica.org/](https://climawatch.climate.mathematica.org/)
+
+_Imagine you're briefing a policymaker about heat risks in vulnerable counties. What would you show them from this tool?_
+
+:::
+
+```{r}
+countdown::countdown(
+  minutes = 10,
+  bottom = 0,
+  # Fanfare when it's over
+  play_sound = TRUE,
+  color_border              = "#FFFFFF",
+  color_text                = "#7aa81e",
+  color_running_background  = "#7aa81e",
+  color_running_text        = "#FFFFFF",
+  color_finished_background = "#ffa07a",
+  color_finished_text       = "#FFFFFF",
+  font_size = "2em",
+  )
+```
+
+##  End-of-Class Survey {background="#033C5A"}
+<br>
+<br>
+<br>
+
+<div class="page-center vertical-center">
+<p class="custom-subtitle bottombr">{{<fa pen-to-square title="edit or fill out survey">}} Fill out the end-of-class survey </p>
+<p class="caption-text">*~ This is the end of Lab 4 ~*</p>
+</div>
+
+```{r}
+countdown::countdown(
+  minutes = 10,
+  # left = 0, right = 0,
+  # Fanfare when it's over
+  play_sound = TRUE,
+  color_border              = "#FFFFFF",
+  color_text                = "#7aa81e",
+  color_running_background  = "#7aa81e",
+  color_running_text        = "#FFFFFF",
+  color_finished_background = "#ffa07a",
+  color_finished_text       = "#FFFFFF",
+  font_size = "2em",
+  )
+```
+

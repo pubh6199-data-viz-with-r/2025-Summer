@@ -1,0 +1,751 @@
+---
+title: "Lecture 5. Maps"
+subtitle: "PUBH 6199: Visualizing Data with R, Summer 2025"
+date: June 17, 2025
+author: Xindi (Cindy) Hu, ScD
+format: 
+  revealjs:
+    pdf: true
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    preview-links: auto
+    logo: images/logo.png
+    css: style.css
+    footer: 'PUBH 6199: Visualizing Data with R'
+resources:
+  - images/
+---
+
+## Outline for today {.smaller}
+
+- **Types of maps for spatial data**
+- Map design considerations (color, projection, legend)
+- R packages for mapping
+- Static maps with `tmap`
+- Interactive maps with `leaflet`
+- Accessing spatial data with `tigris` and `tidycensus`
+
+
+## Types of Maps for Spatial Data
+
+### 1. Choropleth Map
+- Display the spatial distribution of a variable across divided geographical areas
+- Best for **normalized** data (e.g., rates)
+- Variable encoding: **color** (intensity or hue)
+
+---
+
+## Example: Choropleth {.smaller}
+
+```{r}
+#| echo: true
+#| eval: true
+library(tmap)
+data("World")
+tm_shape(World) + 
+  tm_polygons("HPI", palette = "viridis", title = "Happy Planet Index")
+```
+
+---
+
+### 2. Point Map
+- Each point represents a location
+- Can show locations of events, facilities, cases
+- Variable encoding: **color**, **shape**, **size**
+
+---
+
+## Example: Point Map {.smaller}
+
+```{r}
+#| echo: true
+#| eval: true
+library(tidyverse)
+library(spData)
+library(tmap)
+data(urban_agglomerations)
+urb_2030 <- urban_agglomerations |> filter(year == 2030) 
+tm_shape(World) +
+  tm_polygons() +
+  tm_shape(urb_2030) +
+  tm_symbols(fill = "black", col = "white", size = "population_millions",
+             size.legend = tm_legend(title = "Urban Population in 2030\n(millions)"))
+```
+
+---
+
+### 3. Heat Map (Density) {.smaller}
+
+- Visualizes concentration of events
+- Uses kernel density estimation or hex bins
+- Variable encoding: **color** (intensity)
+
+---
+
+## Example: Heat map with `leaflet.extras` {.smaller-title}
+
+::: smaller
+
+```{r}
+#| echo: false
+# url <- "https://data.cityofchicago.org/api/views/7ac4-d9tk/rows.csv?accessType=DOWNLOAD"
+# thefts <- read_csv(url)
+# 
+# # Filter for valid coordinates
+# thefts_coords <- thefts %>%
+#   filter(!is.na(Location)) %>%
+#   extract(Location, into = c("lon", "lat"), regex = "POINT \\((-?\\d+\\.\\d+) (-?\\d+\\.\\d+)\\)", convert = TRUE)
+# 
+# # take a sample of 10000 obs
+# thefts_coords_sample <- thefts_coords %>%
+#   sample_n(10000)
+# write_csv(thefts_coords_sample, "data/thefts_coords.csv")
+```
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+#| eval: false
+library(leaflet)
+library(leaflet.extras)
+thefts_coords <- read_csv("data/thefts_coords.csv")
+thefts_sf <- st_as_sf(thefts_coords, coords = c("lon", "lat"), crs = 4326)
+leaflet(thefts_sf) %>%
+  addProviderTiles("OpenStreetMap") %>%
+  addHeatmap(blur = 15, max = 0.05, radius = 10) %>%
+  setView(lng = -87.6298, lat = 41.8781, zoom = 11)
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: false
+#| eval: true
+library(sf)
+library(leaflet)
+library(leaflet.extras)
+thefts_coords <- read_csv("data/thefts_coords.csv")
+thefts_sf <- st_as_sf(thefts_coords, coords = c("lon", "lat"), crs = 4326)
+leaflet(thefts_sf) %>%
+  addProviderTiles("OpenStreetMap") %>%
+  addHeatmap(blur = 15, max = 0.05, radius = 10) %>%
+  setView(lng = -87.6298, lat = 41.8781, zoom = 11)
+```
+
+:::
+
+:::
+
+---
+
+### 4. Faceted Map
+- Create small multiples to compare across categories
+- Great for time series or group comparisons
+
+---
+
+## Example: Faceted Map {.smaller}
+
+```{r}
+#| echo: true
+#| code-line-numbers: "11"
+library(tidyverse)
+library(spData)
+library(tmap)
+data(urban_agglomerations)
+urb_1970_2030 <- urban_agglomerations |> filter(year %in% c(1970, 1990, 2010, 2030))
+tm_shape(World) +
+  tm_polygons() +
+  tm_shape(urb_1970_2030) +
+  tm_symbols(fill = "black", col = "white", size = "population_millions",
+             size.legend = tm_legend(title = "Urban Population\n(millions)")) +
+  tm_facets(by = "year", ncol = 2)
+```
+
+---
+
+### 5. Interactive Map {.smaller}
+- Enable zooming, hovering, filtering
+- Useful for dashboards, web apps
+
+---
+
+## Example: Interactive Map
+
+```{r}
+# Install necessary packages if you haven't already
+# install.packages(c("leaflet", "sf", "RColorBrewer", "spData", "maps"))
+
+# Load the required libraries
+library(leaflet)       # For creating interactive maps
+library(sf)            # For handling spatial data
+library(RColorBrewer)  # For color palettes
+library(spData)        # For the 'World' dataset
+library(maps)          # Not strictly needed for World, but kept for general mapping context
+
+# --- 1. Prepare Spatial Data (World Countries) ---
+# Use the built-in 'World' dataset from the 'spData' package
+# This dataset already contains spatial features (polygons) for countries.
+
+# Remove Antarctica for better visualization in most cases, as it can skew the map.
+# If you need Antarctica, you can remove this line.
+world_sf <- World %>%
+  filter(name != "Antarctica") %>%
+  replace_na(list(pop_est = 0)) # Ensure no NA values in population estimate
+
+# --- 3. Define Color Palette for Choropleth ---
+# Choose a color palette from RColorBrewer
+# 'YlOrRd' is a sequential palette suitable for choropleth maps, often used for population
+#
+# IMPORTANT: For skewed data like population, a log transformation helps to
+# create more meaningful visual distinctions across the range of values.
+# We add 1 to pop_est before taking the log to handle potential zero values gracefully.
+#
+# Manually specify breaks for the log-transformed domain. These breaks correspond
+# to approximate population thresholds (e.g., 1M, 10M, 50M, 100M, 500M).
+population_breaks <- c(0, 1e6, 1e7, 5e7, 1e8, 5e8, Inf) # Original population values
+
+color_palette <- colorBin(
+  palette = "YlOrRd", # Yellow-Orange-Red palette
+  domain = world_sf$pop_est, # Use the log-transformed 'pop_est' for domain
+  bins = population_breaks # Use manually specified breaks for the bins
+)
+
+# --- 4. Create the Leaflet Map ---
+# Initialize a Leaflet map object using the world_sf data
+leaflet(world_sf) %>%
+
+  # Add default OpenStreetMap tiles as the base map layer
+  addTiles() %>%
+
+  # Add the choropleth polygons for countries
+  addPolygons(
+    # Fill color based on the 'pop_est' value
+    fillColor = ~color_palette(pop_est),
+    weight = 1,                              # Border weight
+    opacity = 1,                             # Border opacity
+    color = "white",                         # Border color
+    dashArray = "3",                         # Dashed border style
+    fillOpacity = 0.7,                       # Fill opacity
+
+    # Add highlight options for interactive hover effect
+    highlightOptions = highlightOptions(
+      weight = 3,                            # Thicker border on hover
+      color = "#666",                        # Darker border color on hover
+      dashArray = "",                        # Solid border on hover
+      fillOpacity = 0.9,                     # Slightly more opaque fill on hover
+      bringToFront = TRUE                    # Bring highlighted polygon to front
+    ),
+
+    # Add tooltips (labels in Leaflet.js terminology)
+    # These will appear when you hover over a country.
+    # Display the original population value, not the log-transformed one.
+    label = ~paste0(
+      "<strong>Country:</strong> ", name, "<br/>", # Use 'name' for country names
+      "<strong>Population:</strong> ", formatC(pop_est, format = "f", big.mark = ",", digits = 0) # Format population for readability
+    ) %>%
+      lapply(htmltools::HTML), # Convert labels to HTML for rich formatting
+    labelOptions = labelOptions(
+      style = list("font-weight" = "normal", padding = "3px 8px"),
+      textsize = "15px",
+      direction = "auto"
+    )
+  ) %>%
+
+  # Add a legend to explain the color scale
+  addLegend(
+    pal = color_palette,                   # Use the defined color palette
+    values = ~pop_est,            # Based on the 'pop_est' metric
+    opacity = 0.7,                         # Legend opacity
+    title = "Population",# Title of the legend, reflecting custom log bins
+    position = "bottomright"               # Position of the legend
+  )
+```
+
+## Outline for today {.smaller}
+
+- Types of maps for spatial data
+- **Map design considerations (color, scale, projection, legend)**
+- R packages for mapping
+- Static maps with `tmap`
+- Interactive maps with `leaflet`
+- Accessing spatial data with `tigris` and `tidycensus`
+
+
+## Color Choices for Maps {.smaller}
+
+- **Sequential** palettes for ordered values
+- **Diverging** palettes for above/below mean
+- **Qualitative** for categories
+
+![](images/palette-types.png)
+
+::: citation
+Source: [Which color scale to use when visualizing data](https://www.datawrapper.de/blog/which-color-scale-to-use-in-data-vis), by Lisa Charlottte Muth.
+:::
+
+---
+
+## Categorical scales {.smaller}
+
+- Use distinct **hues** for different categories
+- Limit to **no more than 7 hues**
+
+![](images/categorical-scales.png)
+
+::: citation
+
+Source: [Analyzing US Census Data](https://walker-data.com/census-r/index.html), by Kyle Walker
+
+:::
+---
+
+## Sequential Scales {.smaller}
+
+- Map value to color on a continuum, based on both **intensity** and **hue**
+- Use for ordered data (e.g., population, income)
+
+![](images/sequential-scales.png)
+
+::: citation
+
+Source: [Analyzing US Census Data](https://walker-data.com/census-r/index.html), by Kyle Walker
+
+:::
+---
+
+## Diverging Scales {.smaller}
+- Use for data with a **meaningful midpoint** (e.g., above/below average)
+- Two contrasting colors with a **neutral midpoint** (e.g., white/light gray)
+
+![](images/diverging-scales.png)
+
+::: citation
+Source: [2020 U.S. Election Mapped](https://vividmaps.com/us-election-2020/), by Vivid Maps
+:::
+
+---
+
+## Avoid Misleading Colors {.smaller}
+
+- Don’t use rainbow: not perceptually uniform
+
+```{r fig.width=10, fig.hight=1}
+library(ggplot2)
+
+df <- data.frame(x = 1:100, y = 1)
+
+p1 <- ggplot(df, aes(x, y, fill = x)) +
+  geom_tile() +
+  scale_fill_gradientn(colors = rainbow(7)) +
+  theme_void() +
+  ggtitle("Rainbow (Perceptually Nonlinear)")
+
+# versus
+p2 <- ggplot(df, aes(x, y, fill = x)) +
+  geom_tile() +
+  scale_fill_viridis_c() +
+  theme_void() +
+  ggtitle("Viridis (Perceptually Uniform)")
+
+cowplot::plot_grid(p1, p2, ncol = 1, align = "v")
+```
+
+- Consider accessibility (color-blind safe palettes)
+- Avoid encoding meaning with non-intuitive colors
+
+---
+
+## Map Projections {.smaller}
+
+- A projection distorts shape, area, distance, or direction
+- Use equal-area projections for choropleths
+
+<center>
+<iframe width="700" height="394" src="https://www.youtube.com/embed/kIID5FDi2JQ?start=52" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
+
+---
+
+## Common Projections in R {.smaller}
+
+| Use Case              | Recommended Projection | EPSG Code |
+|------------------------|------------------------|-----------|
+| Equal-area choropleths | Albers Equal Area      | 5070      |
+| Interactive maps       | Web Mercator           | 3857      |
+| Global perspective     | Robinson or Winkel Tripel | 54030 / 54042 |
+| Local detail (U.S.)    | NAD83 / State Plane     | varies    |
+
+Use `st_transform()` to convert:
+
+```r
+my_data <- sf::st_transform(my_data, crs = 5070)
+```
+
+::: takeaway
+
+In `tmap`:
+
+- In static mode: all layers are reprojected to match the first layer.
+- In interactive mode: all layers are projected to EPSG:3857.
+
+:::
+---
+
+
+## Outline for today {.smaller}
+
+- Types of maps for spatial data
+- Map design considerations (color, scale, projection, legend)
+- **R packages for mapping**
+- Static maps with `tmap`
+- Interactive maps with `leaflet`
+- Accessing spatial data with `tigris` and `tidycensus`
+
+
+## R Ecosystem for Mapping {.smaller}
+
+- **Data handling**: `sf`, `sp`
+- **Thematic mapping**: `tmap`, `ggplot2`, `cartography`
+- **Basemaps & interactivity**: `leaflet`, `mapview`, `ggmap`
+- **Shapefiles**: `rgdal`, `rmapshaper`
+- **Data access**: `tigris`, `tidycensus`
+
+---
+
+## `{sf}`: simple features {.smaller}
+
+The `{sf}` package is the **standard way to work with vector spatial data in R**. It replaces older tools like `{sp}` with a **simple, tidy-friendly** interface.
+
+**Key Features of `{sf}`**
+
+- Stores **geometry + attributes** in a single `data.frame`-like object
+- Built on **simple features** standard (ISO 19125-1)
+- Fully compatible with **`dplyr`**, **`ggplot2`**, **`tmap`**
+- Uses `sfc` column to store spatial information (e.g., points, polygons)
+
+![](images/sf_example.png)
+
+---
+
+## Outline for today {.smaller}
+
+- Types of maps for spatial data
+- Map design considerations (color, scale, projection, legend)
+- R packages for mapping
+- **Static maps with `tmap`**
+- Interactive maps with `leaflet`
+- Accessing spatial data with `tigris` and `tidycensus`
+
+
+## Static Mapping with `tmap` {.smaller}
+
+- Similar to `ggplot2`, based on **"the grammar of graphics"**
+- Supports both static and interactive modes
+- Excellent for quick, polished maps, sensible defaults
+
+```{r}
+#| echo: true
+#| message: false
+library(tmap)
+tmap_mode("plot")
+nc <- st_read("data/nc.shp", quiet = TRUE) # nc is an `sf` object
+tm_shape(nc) + # defines input data
+  tm_polygons("BIR74", palette = "Greens") + # mapping data to aesthetics
+  tm_layout(title = "Births in NC, 1974")
+```
+
+---
+
+## How `{tmap}` works? {.smaller}
+
+> `{tmap}` adopts an intuitive approach to map-making: the addition operator + adds a new layer, followed by tm_\*():
+
+- `tm_fill()`: shaded areas for (multi)polygons
+- `tm_borders()`: border outlines for (multi)polygons
+- `tm_polygons()`: both, shaded areas and border outlines for (multi)polygons
+- `tm_lines()`: lines for (multi)linestrings
+- `tm_symbols()`: symbols for (multi)points, (multi)linestrings, and (multi)polygons
+- `tm_raster()`: colored cells of raster data (there is also tm_rgb() for rasters with three layers)
+- `tm_text()`: text information for (multi)points, (multi)linestrings, and (multi)polygons
+
+---
+
+## Adding layers in `{tmap}` {.smaller}
+
+- `tm_polygons()`: for choropleth maps
+- `tm_symbols()`: for point data, size and color can represent different variables
+
+```{r}
+#| echo: true
+# Create the map: choropleth + bubbles
+tm_shape(nc) +
+  tm_polygons("BIR74", palette = "brewer.blues", title = "Births in 1974") +
+  tm_symbols(size = "SID74", col = "red", alpha = 0.5, border.col = "white",
+             title.size = "SID Cases (1974)") 
+```
+---
+
+## Scale {.smaller}
+
+> Scales control how the values are represented on the map and in the legend, and can have a major impact on how spatial variability is portrayed 
+
+```r
+tm_shape(nz) + tm_polygons(fill = "Median_income")
+tm_shape(nz) + tm_polygons(fill = "Median_income",
+                        fill.scale = tm_scale(breaks = c(0, 30000, 40000, 50000)))
+tm_shape(nz) + tm_polygons(fill = "Median_income",
+                           fill.scale = tm_scale(n = 10))
+tm_shape(nz) + tm_polygons(fill = "Median_income",
+                           fill.scale = tm_scale(values = "BuGn"))
+
+```
+
+![](images/tmpal-1.png)
+                        
+---
+
+## Style options for classifying map data {.smaller}
+
+`tm_scale_intervals(style = "pretty")`:
+
+::: {.column width = "40%"}
+
+- **"pretty"**: Rounded, evenly spaced breaks **(default)**.
+- **"equal"**: Equal-width bins; poor fit for skewed data — may hide variation.
+- **"quantile"**: Equal count per bin; be careful with wide bin ranges.
+- **"jenks"**: Optimizes natural groupings; can be slow with large datasets.
+- **"log10_pretty"**: Log-scaled breaks; only appropriate for right-skewed, positive values.
+
+:::
+
+::: {.column width = "60%"}
+
+![](images/break-styles-1.png)
+
+:::
+---
+
+## Switch to interactive `{tmap}` {.smaller}
+
+> A unique feature of `{tmap}` is its ability to create static and interactive maps using the same code. Maps can be viewed interactively at any point by switching to view mode, using the command `tmap_mode("view")`
+
+```{r}
+#| echo: true
+tmap_mode("view")
+tm_shape(nc) + 
+  tm_polygons("BIR74", palette = "brewer.reds")
+```
+
+---
+
+## Outline for today {.smaller}
+
+- Types of maps for spatial data
+- Map design considerations (color, scale, projection, legend)
+- R packages for mapping
+- Static maps with `tmap`
+- **Interactive maps with `leaflet`**
+- Accessing spatial data with `tigris` and `tidycensus`
+
+
+## Interactive Mapping with `{leaflet}` in R {.smaller}
+
+- `{leaflet}` is the most widely used interactive mapping package in R.
+- It provides a relatively low-level interface to the Leaflet.js JavaScript library [leafletjs.com](leafletjs.com).
+- Maps start with leaflet() and use pipeable layers like addTiles(), addCircles(), and addPolygons().
+
+---
+
+## Example `leaflet` Map {.smaller}
+
+```{r}
+#| echo: true
+pal <- colorNumeric("RdYlBu", domain = cycle_hire$nbikes)
+# cycle_hire is an `sf` object with columns: name, nbikes, geometry, built-in data from spData
+leaflet(cycle_hire) |>
+  addProviderTiles(providers$CartoDB.Positron) |>
+  addCircles(col = ~pal(nbikes), opacity = 0.9) |>
+  # lnd is a London boroughs shapefile
+  addPolygons(data = lnd, fill = FALSE) |> 
+  addLegend(pal = pal, values = ~nbikes) |>
+  setView(lng = -0.1, lat = 51.5, zoom = 12) |>
+  addMiniMap()
+```
+
+
+## Outline for today {.smaller}
+
+- Types of maps for spatial data
+- Map design considerations (color, scale, projection, legend)
+- R packages for mapping
+- Static maps with `tmap`
+- Interactive maps with `leaflet`
+- **Accessing spatial data with `tigris` and `tidycensus`**
+
+
+## Getting Data with `tigris` {.smaller}
+
+> The `{tigris}` package provides access to U.S. Census Bureau geographic data. Shapefiles downloaded using {tigris} will be loaded as a simple features (sf) object with geometries.
+
+::: {.column width="30%"}
+
+![](images/tigris.png)
+
+:::
+
+::: {.column width="70%"}
+
+- A **shapefile** is a vector data file format commonly used for geospatial analysis.
+
+- Shapefiles contain information for spatially describing features (e.g. points, lines, polygons), as well as any associated attribute information.
+
+- You can find / download shapefiles online (e.g. from the US Census Bureau), or depending on the tools available, access them via packages (like we’re doing today).
+
+:::
+
+## Getting U.S. County Shapefiles {.smaller}
+
+::: {.column width="50%"}
+
+**Entire US**
+
+```{r}
+#| echo: true
+#| message: false
+library(tigris)
+library(sf)
+counties <- counties(state = NULL, cb = TRUE, progress_bar = FALSE) 
+# Use `cb = TRUE` for simplified geometries
+glimpse(counties)
+```
+
+:::
+
+::: {.column width="50%"}
+
+**One state**
+
+```{r}
+#| echo: true
+#| message: false
+library(tigris)
+library(sf)
+counties_md <- counties(state = "Maryland", cb = TRUE, progress_bar = FALSE) 
+# Use `cb = TRUE` for simplified geometries
+glimpse(counties_md)
+```
+
+:::
+
+---
+
+## Getting Census Data with `tidycensus` {.smaller}
+
+```{r}
+#| echo: true
+library(tidycensus)
+invisible(
+  census_api_key(Sys.getenv("CENSUS_API_KEY"), install = TRUE, overwrite = TRUE)
+)
+options(tigris_use_cache = TRUE)
+income_md <- get_acs(geography = "county", 
+  state = "MD",
+  variables = "B19013_001", 
+  geometry = FALSE,
+  show_progress = FALSE)
+```
+
+::: takeaway
+
+Lab 5 has a tutorial on how to get started with `{tidycensus}` packages. Follow it carefully. Remember to add your `.Renviron` to `.gitignore` so that you do not share your API keys. 
+
+:::
+
+---
+
+## Plotting Census Data {.smaller}
+
+```{r}
+#| echo: true
+tmap_mode("plot")
+income_md <- counties_md |> 
+  left_join(income_md, by = c("GEOID" = "GEOID")) # join the income data to the counties
+tm_shape(income_md) + 
+  tm_polygons("estimate", palette = "Blues", title = "Median Income")
+```
+
+## {background-image="images/in-class-activity.png"}
+
+::: {style="text-align: center; font-size: 80%;"}
+<br>
+<br>
+
+**Your turn in HW 5:**
+
+- Choose a U.S. state
+
+- Download county shapefiles with `tigris` or `tidycensus`
+
+- Plot a choropleth using `tmap`
+
+- Add labels and legends
+
+:::
+
+```{r}
+countdown::countdown(
+  minutes = 15,
+  bottom = 0,
+  # Fanfare when it's over
+  play_sound = TRUE,
+  color_border              = "#FFFFFF",
+  color_text                = "#7aa81e",
+  color_running_background  = "#7aa81e",
+  color_running_text        = "#FFFFFF",
+  color_finished_background = "#ffa07a",
+  color_finished_text       = "#FFFFFF",
+  font_size = "2em",
+  )
+```
+
+## Summary {.smaller}
+
+- Choose the right map for the data and audience
+- Make thoughtful color and projection choices
+- Use `tmap` for quick static/interactive maps
+- Use `leaflet` for rich interactivity
+- Access geographic data via `tigris` and `tidycensus`
+
+---
+
+##  End-of-Class Survey {background="#033C5A"}
+<br>
+<br>
+<br>
+
+<div class="page-center vertical-center">
+<p class="custom-subtitle bottombr">{{<fa pen-to-square title="edit or fill out survey">}} Fill out the end-of-class survey </p>
+<p class="caption-text">*~ This is the end of Lecture 5 ~*</p>
+</div>
+
+```{r}
+countdown::countdown(
+  minutes = 10,
+  # left = 0, right = 0,
+  # Fanfare when it's over
+  play_sound = TRUE,
+  color_border              = "#FFFFFF",
+  color_text                = "#7aa81e",
+  color_running_background  = "#7aa81e",
+  color_running_text        = "#FFFFFF",
+  color_finished_background = "#ffa07a",
+  color_finished_text       = "#FFFFFF",
+  font_size = "2em",
+  )
+```
+

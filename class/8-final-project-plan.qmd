@@ -1,0 +1,14 @@
+---
+title: "Final Project Plan"
+params:
+  class: "8-final-project-plan"
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r child = here::here("fragments", "class.qmd")}
+```
+
+------------------------------------------------------------------------
